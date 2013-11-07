@@ -4,11 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UnitTestProject1
+namespace Model
 {
-    class Location
+    public class Suggestion : Match
     {
-        public string Address { get; set; }
-        public string City { get; set; }
     }
 }

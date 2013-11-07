@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UnitTestProject1
+namespace Model
 {
-    class User
+    public abstract class User
     {
         #region Properties
         public string Username { get; set; }
@@ -18,7 +18,7 @@ namespace UnitTestProject1
         #endregion
 
         #region Constructors
-        User(string username, string password, string name = null, Location location = null, string email = null)
+        public User(string username, string password, string name = null, Location location = null, string email = null)
         {
             this.Username = username;
             this.Password = password;
