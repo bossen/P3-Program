@@ -10,6 +10,9 @@ namespace Model
     {
         #region Properties
         public List<Preference> Preferences { get; set; }
+        public List<Suggestion> Suggestions { get; set; }
+        public List<VolunteerProject> VolunteerProjects { get; set; }
+
         #endregion
 
         #region Constructors
