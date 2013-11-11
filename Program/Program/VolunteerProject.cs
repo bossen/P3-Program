@@ -9,18 +9,23 @@ namespace Model
     public class VolunteerProject
     {
         #region Properties
-        public string Name { get; set; }
+        public string Title { get; set; }
         public Location Location { get; set; }
         public DateTime Time { get; set; }
         public List<Preference> Topics { get; set; }
-        public List<Volunteer> Volunteers { get; set; } //Participants better name?
+        public List<Match> VolunteersMatches { get; set; } //Participants better name?
         public Organization Owner { get; set; }
         public string Description { get; set; }
         #endregion
 
         #region Constructors
-        public VolunteerProject(string name, Location location, DateTime time, List<Preference> topics, Organization owner, string description = "")
+        public VolunteerProject(string title, Location location, DateTime time, List<Preference> topics, Organization owner, string description)
         {
+            this.Title = title;
+            this.Location = location;
+            this.Topics = topics;
+            this.Owner = owner;
+            this.Description = description;
         }
         #endregion
 

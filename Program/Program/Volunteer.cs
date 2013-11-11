@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace Model
 {
+    ///<summary>
+    /// A volunteer is the users which will be able to participate as volunteers and join volunteer events.
+    /// He is able to change his preferences, to receive the most relevant invitations to volunteering events.
+    /// </summary>
     public class Volunteer : User
     {
         #region Properties
@@ -16,7 +20,7 @@ namespace Model
         #endregion
 
         #region Constructors
-        Volunteer(string username, string password, string name = null, Location location = null, string email = null)
+        public Volunteer(string username, string password, string name = null, Location location = null, string email = null)
             :base(username, password, name, location, email)
         {
 

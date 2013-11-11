@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Model
 {
+    /// <summary>
+    /// Summary description for User
+    /// </summary>
     public abstract class User
     {
         #region Properties

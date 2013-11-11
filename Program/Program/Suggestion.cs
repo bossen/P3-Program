@@ -8,5 +8,12 @@ namespace Model
 {
     public class Suggestion : Match
     {
+        public VolunteerProject Project { get; set; }
+
+        public Suggestion(Volunteer receiver, VolunteerProject project)
+            : base(null, receiver, false)
+        {
+            this.Project = project;
+        }
     }
 }

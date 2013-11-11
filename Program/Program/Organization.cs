@@ -9,21 +9,25 @@ namespace Model
     public class Organization : User
     {
         #region Properties
-        public List<VolunteerProject> VolunteerProjects { get; set; }
+        private List<VolunteerProject> _volunteerProjects = new List<VolunteerProject>();
         #endregion
         
         #region Constructors
-        Organization(string username, string password, string name = null, Location location = null, string email = null)
+        public Organization(string username, string password, string name = null, Location location = null, string email = null)
             :base(username, password, name, location, email)
-        {
-
-        }
+        { }
         #endregion
 
         #region Methods
-        void CreateProject()
+        public void CreateProject(string title, Location location, DateTime time, List<Preference> topics, string description = "")
         {
-            throw new NotImplementedException();
+            VolunteerProject newProject = new VolunteerProject(title, location, time, topics, this, description);
+            _volunteerProjects.Add(newProject);
+        }
+
+        public List<VolunteerProject> getProjects()
+        {
+            return _volunteerProjects;
         }
         #endregion
     }

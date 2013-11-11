@@ -20,8 +20,15 @@ namespace UnitTestProject1
         {
             Class1 o = new Class1(0);
             Assert.AreEqual(0, o.MyProperty, "Super mega awesome!");
-            Assert.AreEqual(2, o.MyProperty, "Super mega awesome!");
-            Assert.AreEqual(3, o.MyProperty, "Super mega awesome!");
+        }
+
+        [TestMethod]
+        public void TEST()
+        {
+            Organization o = new Organization("organization", "password");
+            Volunteer v = new Volunteer("username", "password");
+            o.CreateProject("name", new Location("address", "city"), DateTime.Now, new System.Collections.Generic.List<Preference>() { Preference.Church, Preference.Festival }, "none");
+
         }
     }
 }

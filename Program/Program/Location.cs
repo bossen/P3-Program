@@ -10,5 +10,11 @@ namespace Model
     {
         public string Address { get; set; }
         public string City { get; set; }
+
+        public Location(string address, string city)
+        {
+            this.Address = address;
+            this.City = city;
+        }
     }
 }
