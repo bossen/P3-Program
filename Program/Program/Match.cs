@@ -9,29 +9,32 @@ namespace Model
     public abstract class Match
     {
         #region Properties
-        public User Sender { get; set; }
-        public User Receiver { get; set; }
+        public Volunteer Volunteer { get; set; }
         public bool? Accepted { get; set; }
         public DateTime Expire { get; set; }
+        public VolunteerProject Project { get; set; }
         #endregion
 
         #region Constructors
-        public Match(User sender, User receiver, bool? accepted = null)
+        public Match(Volunteer volunteer, VolunteerProject project, DateTime expire, bool? accepted = null)
         {
-            this.Sender = sender;
-            this.Receiver = receiver;
+            this.Volunteer = volunteer;
             this.Accepted = accepted;
-        }
-
-        public Match(User sender, User receiver, DateTime expire, bool? accepted = null)
-            :this(sender, receiver, accepted)
-        {
             this.Expire = expire;
         }
+
+        public Match(Volunteer volunteer, VolunteerProject project, bool? accepted = null)
+            :this(volunteer, project, project.Time, accepted)
+        { }
         #endregion
 
         #region Methods
         void AcceptMatch(bool choice)
+        {
+            throw new NotImplementedException();
+        }
+
+        void DeleteMatch()
         {
             throw new NotImplementedException();
         }

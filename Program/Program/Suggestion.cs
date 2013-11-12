@@ -8,10 +8,9 @@ namespace Model
 {
     public class Suggestion : Match
     {
-        public VolunteerProject Project { get; set; }
 
-        public Suggestion(Volunteer receiver, VolunteerProject project)
-            : base(null, receiver, false)
+        public Suggestion(Volunteer volunteer, VolunteerProject project)
+            : base(volunteer, project, project.Time.AddDays(-1), null)
         {
             this.Project = project;
         }

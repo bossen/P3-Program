@@ -6,20 +6,18 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    public class WorkRequest : Match
+    class Invite : Match
     {
+        #region Properties
+        #endregion
 
         #region Constructors
-        public WorkRequest(Volunteer volunteer, VolunteerProject project)
+        public Invite(Volunteer volunteer, VolunteerProject project)
             : base(volunteer, project)
         { }
         #endregion
 
         #region Methods
-        void AcceptVolunteer(bool choice)
-        {
-            throw new NotImplementedException();
-        }
         #endregion
     }
 }

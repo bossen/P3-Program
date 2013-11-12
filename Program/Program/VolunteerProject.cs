@@ -9,13 +9,14 @@ namespace Model
     public class VolunteerProject
     {
         #region Properties
+        public Organization Owner { get; set; }
+        public List<Match> Matches { get; set; }
         public string Title { get; set; }
         public Location Location { get; set; }
         public DateTime Time { get; set; }
         public List<Preference> Topics { get; set; }
-        public List<Match> VolunteersMatches { get; set; } //Participants better name?
-        public Organization Owner { get; set; }
         public string Description { get; set; }
+        public bool Signup { get; private set; }
         #endregion
 
         #region Constructors
@@ -32,7 +33,7 @@ namespace Model
         #region Methods
         void RequestWork(Volunteer volunteer)
         {
-            throw new NotImplementedException();
+            volunteer.AddInvite(this);
         }
 
         void CloseProject()
@@ -42,12 +43,27 @@ namespace Model
 
         void CancelProject()
         {
-            throw new NotImplementedException();
+            Signup = false;
+            foreach (Match match in Matches)
+            {
+                match.Volunteer.RemoveProject(this);
+            }
         }
 
         void OpenProjectSignup()
         {
-            throw new NotImplementedException();
+            Signup = true;
+        }
+
+        public List<Volunteer> FindParticipants()
+        {
+            List<Volunteer> participants = new List<Volunteer>();
+            foreach (Match match in Matches)
+	        {
+                if(match.Accepted == true)
+                    participants.Add(match.Volunteer);
+	        }
+            return participants;
         }
         #endregion
     }
