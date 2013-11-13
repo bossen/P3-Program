@@ -33,7 +33,8 @@ namespace Model
         #region Methods
         void RequestWork(Volunteer volunteer)
         {
-            volunteer.AddInvite(this);
+            Invite newInvite = new Invite(volunteer, this);
+            volunteer.AddMatch(newInvite);
         }
 
         void CloseProject()

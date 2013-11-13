@@ -14,9 +14,7 @@ namespace Model
     {
         #region Properties
         public List<Preference> Preferences { get; set; }
-        private List<Suggestion> _suggestions = new List<Suggestion>();
-        private List<WorkRequest> _workRequests = new List<WorkRequest>();
-        private List<Invite> _invites = new List<Invite>();
+        private List<Match> _matches = new List<Match>();
         #endregion
 
         #region Constructors
@@ -28,46 +26,26 @@ namespace Model
         #endregion
 
         #region Methods
-        public void AddSuggestion(VolunteerProject project)
+        public void AddMatch(Match match)
         {
-            Suggestion newSuggestion = new Suggestion(this, project);
-            _suggestions.Add(newSuggestion);
-        }
-
-        public void AddInvite(VolunteerProject project)
-        {
-            Invite newInvite = new Invite(this, project);
-            _invites.Add(newInvite);
+            _matches.Add(match);
         }
 
         public void AddWorkRequest(VolunteerProject project)
         {
             WorkRequest newWorkRequest = new WorkRequest(this, project);
-            _workRequests.Add(newWorkRequest);
-        }
-
-        private List<Match> GetAllMatches()
-        {
-            List<Match> matches = new List<Match>();
-            matches.AddRange(_suggestions);
-            matches.AddRange(_workRequests);
-            matches.AddRange(_invites);
-
-            return matches;
+            _matches.Add(newWorkRequest);
         }
 
         private List<VolunteerProject> FindProjects(bool? input)
         {
-            List<Match> matches = GetAllMatches();
-
             List<VolunteerProject> projects = new List<VolunteerProject>();
 
-            foreach (Match match in matches)
+            foreach (Match match in _matches)
             {
                 if (match.Accepted == input)
                     projects.Add(match.Project);
             }
-
             return projects;
         }
 
@@ -83,20 +61,10 @@ namespace Model
 
         public void RemoveProject(VolunteerProject project)
         {
-            foreach (Invite invite in _invites)
+            foreach (Match match in _matches)
             {
-                if (invite.Project == project)
-                    _invites.Remove(invite);
-            }
-            foreach (WorkRequest workRequest in _workRequests)
-            {
-                if (workRequest.Project == project)
-                    _workRequests.Remove(workRequest);
-            }
-            foreach (Suggestion suggestion in _suggestions)
-            {
-                if (suggestion.Project == project)
-                    _suggestions.Remove(suggestion);
+                if (match.Project == project)
+                    _matches.Remove(match);
             }
         }
         #endregion

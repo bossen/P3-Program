@@ -10,7 +10,7 @@ namespace Model
     {
 
         public Suggestion(Volunteer volunteer, VolunteerProject project)
-            : base(volunteer, project, project.Time.AddDays(-1), null)
+            : base(volunteer, project, DateTime.Now.AddDays(1), null) //Instead of add days 1, volunteer.settings.suggestiontime
         {
             this.Project = project;
         }
