@@ -42,6 +42,7 @@
     <Compile Include="Class1.cs" />
     <Compile Include="Invite.cs" />
     <Compile Include="Location.cs" />
+    <Compile Include="Mail.cs" />
     <Compile Include="Match.cs" />
     <Compile Include="Organization.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
