@@ -3,50 +3,50 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Net.Mail;
 
 namespace Model
 {
     class Mail
     {
+        #region Fields
+        //private string _senderMail;
+        #endregion
+
         #region Properties
+        public string senderMail 
+        {
+            get { return "VoluntaryMail@gmail.com"; }
+            //set { _senderMail = value; }
+        }
+        private string receiverMail { get; set; }
+        private string subject { get; set; }
+        private string body { get; set; }
+
+        private string mailCredentials { get { return "nrkfeBD6gTVybBWmJB9dF6DD"; } }
         #endregion
 
         #region Constructors
+        public Mail(string receiverMail, string subject, string body)
+        {
+            this.receiverMail = receiverMail;
+            this.subject = subject;
+            this.body = body;
+        }
         #endregion
 
         #region Methods
-        private void SendMail(/*object sender, EventArgs e*/)
+        public void SendMail()
         {
-            throw new NotImplementedException();
-
-            /*// inspiration fra: http://tutplusplus.blogspot.dk/2010/09/c-tutorial-mail-sender-send-e-mails.html
-            try
+            // inspiration fra: http://tutplusplus.blogspot.dk/2010/09/c-tutorial-mail-sender-send-e-mails.html
             {
-                string senderMail = "kostplantjekliste@gmail.com";
-                string recieverMail = txtMailTjekRecieverMail.Text;
-                
-                MailMessage mail = new MailMessage(
-                    senderMail,    //sender
-                    recieverMail,  //modtager
-                    CurrentUser.Name + (CurrentUser.Name.EndsWith("s") ? "' tjekliste" : "s tjekliste"),   //emne (Navn's tjekliste)
-                    txtTjeklisteOutput.Text); //tekst
-
                 SmtpClient client = new SmtpClient("smtp.gmail.com");
                 client.Port = 587;
-                client.Credentials = new System.Net.NetworkCredential(senderMail, "SW2A219AAU");
+                client.Credentials = new System.Net.NetworkCredential(senderMail, mailCredentials);
                 client.EnableSsl = true;
-                client.Send(mail);
-                MessageBox.Show("Mailen blev sendt.", "Succes!", MessageBoxButtons.OK);
-                txtMailTjekRecieverMail.Text = "";
+                MailMessage hej = new MailMessage(this.senderMail, this.receiverMail, this.subject, this.body);
+                client.Send(hej);
             }
-            catch (System.Net.Mail.SmtpException)
-            {
-                MessageBox.Show("Ugyldige informationer. Prøv igen.");
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Der skete en fejl; mailen blev ikke sendt.");
-            }*/
         }
 #endregion
     }

@@ -14,5 +14,12 @@ namespace Model
         {
             MyProperty = myProperty;
         }
+
+        public void SendTestMail()
+        {
+            Mail mail = new Mail("ds308e13@cs.aau.dk", "[ROBOT] Mail system test", "Det virker, hilsen jeres robot overlord");
+            mail.SendMail();
+        }
+
     }
 }
