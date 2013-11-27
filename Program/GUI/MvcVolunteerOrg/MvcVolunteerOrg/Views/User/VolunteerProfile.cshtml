@@ -1,0 +1,41 @@
+﻿@model MvcVolunteerOrg.Models.SearchModel
+
+@{
+    ViewBag.Title = "VolunteerProfile";
+    ViewBag.Message = "You currently have no events.";
+}
+
+<article>
+
+    <p>Information about your profile.</p>
+    <p>Name</p>
+    <p>Etcetera</p>
+<h4>Try any of the following:</h4>
+
+    <a href="http://localhost:2601/User/VolunteerProfile">
+        <span class ="header5">Find Suggestions</span>
+    </a><br />
+    <span class ="paragraph">Look for suggestions in our database.</span><br />
+
+    <a href="http://localhost:2601/User/VolunteerProfile">
+        <span class ="header5">Invites</span>
+    </a><br />
+    <span class ="paragraph">Check your inbox for invites to events.</span><br />
+
+</article>
+
+<aside>
+    <h3>Search here</h3><br />
+        <a href="http://www.google.com/">
+            <span class ="header5">Search</span>
+        </a>
+    
+    @Html.TextBoxFor(m => m.SearchKey)
+    <br /><br />
+    <form>
+        <fieldset>
+            <legend>Event Feed:</legend>
+                @ViewBag.Message
+        </fieldset>
+    </form>
+</aside>
