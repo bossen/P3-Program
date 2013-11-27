@@ -26,6 +26,9 @@ namespace Model
             this.Username = username;
             this.Password = password;
             this.Creation = DateTime.Now;
+            this.Name = name;
+            this.Location = location;
+            this.Email = email;
         }
         #endregion
     }

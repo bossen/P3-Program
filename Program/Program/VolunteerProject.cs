@@ -20,13 +20,15 @@ namespace Model
         #endregion
 
         #region Constructors
-        public VolunteerProject(string title, Location location, DateTime time, List<Preference> topics, Organization owner, string description)
+        public VolunteerProject(string title, Location location, DateTime time, List<Preference> topics, Organization owner, string description, bool signup)
         {
             this.Title = title;
             this.Location = location;
+            this.Time = time;
             this.Topics = topics;
             this.Owner = owner;
             this.Description = description;
+            this.Signup = signup;
         }
         #endregion
 

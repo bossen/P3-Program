@@ -19,6 +19,7 @@ namespace Model
         public Match(Volunteer volunteer, VolunteerProject project, DateTime expire, bool? accepted = null)
         {
             this.Volunteer = volunteer;
+            this.Project = project;
             this.Accepted = accepted;
             this.Expire = expire;
         }
@@ -29,14 +30,15 @@ namespace Model
         #endregion
 
         #region Methods
-        void AcceptMatch(bool choice)
+        public void AcceptMatch()
         {
-            throw new NotImplementedException();
+            this.Accepted = true;
         }
 
-        void DeleteMatch()
+        public void DeleteMatch()
         {
-            throw new NotImplementedException();
+            this.Project = null;
+            this.Volunteer = null;
         }
         #endregion
     }
