@@ -7,47 +7,58 @@ using System.Net.Mail;
 
 namespace Model
 {
-    class Mail
+    public class Mail
     {
         #region Fields
         //private string _senderMail;
         #endregion
 
         #region Properties
+        private SmtpClient Client;
         public string senderMail 
         {
             get { return "VoluntaryMail@gmail.com"; }
             //set { _senderMail = value; }
         }
-        private string receiverMail { get; set; }
-        private string subject { get; set; }
-        private string body { get; set; }
-
         private string mailCredentials { get { return "nrkfeBD6gTVybBWmJB9dF6DD"; } }
+
         #endregion
 
         #region Constructors
-        public Mail(string receiverMail, string subject, string body)
+        public Mail()
         {
-            this.receiverMail = receiverMail;
-            this.subject = subject;
-            this.body = body;
+            // inspiration from: http://tutplusplus.blogspot.dk/2010/09/c-tutorial-mail-sender-send-e-mails.html
+            this.Client = new SmtpClient("smtp.gmail.com");
+            this.Client.Port = 587;
+            this.Client.Credentials = new System.Net.NetworkCredential(senderMail, mailCredentials);
+            this.Client.EnableSsl = true;
         }
         #endregion
 
         #region Methods
-        public void SendMail()
+        public void SendMail(string receiverMail, string subject, string body)
         {
-            // inspiration fra: http://tutplusplus.blogspot.dk/2010/09/c-tutorial-mail-sender-send-e-mails.html
             {
-                SmtpClient client = new SmtpClient("smtp.gmail.com");
-                client.Port = 587;
-                client.Credentials = new System.Net.NetworkCredential(senderMail, mailCredentials);
-                client.EnableSsl = true;
-                MailMessage hej = new MailMessage(this.senderMail, this.receiverMail, this.subject, this.body);
-                client.Send(hej);
+                if (!IsValidEmail(receiverMail))
+                    throw new ArgumentException("Not a valid email!");
+                MailMessage hej = new MailMessage(this.senderMail, receiverMail, subject, body);
+                this.Client.Send(hej);
             }
         }
-#endregion
+
+        //From Cogwheel at http://stackoverflow.com/questions/1365407/c-sharp-code-to-validate-email-address
+        private bool IsValidEmail(string email)
+        {
+            try
+            {
+                var addr = new MailAddress(email);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        #endregion
     }
 }

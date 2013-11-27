@@ -14,14 +14,13 @@ namespace Model
     {
         #region Properties
         public List<Preference> Preferences { get; set; }
-        private List<Match> _matches = new List<Match>();
+        public List<Match> _matches = new List<Match>();
         #endregion
 
         #region Constructors
         public Volunteer(string username, string password, string name = null, Location location = null, string email = null)
             :base(username, password, name, location, email)
         {
-
         }
         #endregion
 
@@ -30,33 +29,33 @@ namespace Model
         {
             _matches.Add(match);
         }
-
+        
         public void AddWorkRequest(VolunteerProject project)
         {
             WorkRequest newWorkRequest = new WorkRequest(this, project);
             _matches.Add(newWorkRequest);
         }
 
-        private List<VolunteerProject> FindProjects(bool? input)
+        private List<Match> GetMatches(bool? input)
         {
-            List<VolunteerProject> projects = new List<VolunteerProject>();
+            List<Match> matches = new List<Match>();
 
             foreach (Match match in _matches)
             {
                 if (match.Accepted == input)
-                    projects.Add(match.Project);
+                    matches.Add(match);
             }
-            return projects;
+            return matches;
         }
 
-        public List<VolunteerProject> FindAcceptedProjects()
+        public List<Match> GetAcceptedMatches()
         {
-            return FindProjects(true);
+            return GetMatches(true);
         }
 
-        public List<VolunteerProject> FindPendingProjects()
+        public List<Match> GetPendingMatches()
         {
-            return FindProjects(null);
+            return GetMatches(null);
         }
 
         public void RemoveProject(VolunteerProject project)
@@ -64,7 +63,10 @@ namespace Model
             foreach (Match match in _matches)
             {
                 if (match.Project == project)
+                {
                     _matches.Remove(match);
+                    break;
+                }
             }
         }
         #endregion

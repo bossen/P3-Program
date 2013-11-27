@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    class Invite : Match
+    public class Invite : Match
     {
         #region Properties
         #endregion
