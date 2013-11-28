@@ -18,8 +18,8 @@ namespace Model
         #endregion
 
         #region Constructors
-        public Volunteer(string username, string password, string name = null, Location location = null, string email = null)
-            :base(username, password, name, location, email)
+        public Volunteer(int userId, string name = null, Location location = null, string email = null)
+            :base(userId, name, location, email)
         {
         }
         #endregion

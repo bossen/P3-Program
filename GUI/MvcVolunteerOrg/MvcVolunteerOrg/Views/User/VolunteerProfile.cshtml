@@ -1,4 +1,4 @@
-﻿@model MvcVolunteerOrg.Models.SearchModel
+﻿@model Model.User
 
 @{
     ViewBag.Title = "VolunteerProfile";
@@ -7,8 +7,32 @@
 
 <article>
 
-    <p>Information about your profile.</p>
-    <p>Name</p>
+    <table>
+        <tr>
+            <td>
+                @Html.LabelFor(m => m.Name)
+            </td>
+            <td>
+                @Html.EditorFor(m => m.Name)
+            </td>
+            
+        </tr>
+        <tr>
+            <td>
+                @Html.LabelFor(m => m.Location.Address)
+                @Html.EditorFor(m => m.Location.Address)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.LabelFor(m => m.Location.City)
+                @Html.EditorFor(m => m.Location.City)
+            </td>
+        </tr>
+
+    </table>
+    
+    <p>Name1</p>
     <p>Etcetera</p>
 <h4>Try any of the following:</h4>
 
@@ -30,7 +54,7 @@
             <span class ="header5">Search</span>
         </a>
     
-    @Html.TextBoxFor(m => m.SearchKey)
+    
     <br /><br />
     <form>
         <fieldset>

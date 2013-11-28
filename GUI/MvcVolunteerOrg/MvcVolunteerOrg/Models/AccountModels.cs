@@ -70,12 +70,6 @@ namespace MvcVolunteerOrg.Models
         public bool RememberMe { get; set; }
     }
 
-    public class SearchModel
-    {
-        [Required]
-        [Display(Name = "SearchKey")]
-        public string SearchKey { get; set; }
-    }
 
     public class RegisterModel
     {

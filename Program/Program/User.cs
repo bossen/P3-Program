@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,19 +13,33 @@ namespace Model
     public abstract class User
     {
         #region Properties
-        public string Username { get; set; }
-        public string Password { get; set; } // NEED HASHING
+        [Key]
+        [Required()]
+        public int UserId { get; set; }
+
+        [Required(ErrorMessage="Name is required.")]
+        [Display(Name="Name")]
         public string Name { get; set; }
+
+        [Required()]
+        [Display(Name="Creation Date")]
         public DateTime Creation { get; set; }
+
+        [Required(ErrorMessage="A location is required")]
+        [Display(Name="Location")]
         public Location Location { get; set; }
+
+        [DataType(DataType.EmailAddress)]
+        [Display(Name="Email")]
         public string Email { get; set; }
+
+
         #endregion
 
         #region Constructors
-        public User(string username, string password, string name = null, Location location = null, string email = null)
+        public User(int userId, string name = null, Location location = null, string email = null)
         {
-            this.Username = username;
-            this.Password = password;
+            this.UserId = userId;
             this.Creation = DateTime.Now;
             this.Name = name;
             this.Location = location;
