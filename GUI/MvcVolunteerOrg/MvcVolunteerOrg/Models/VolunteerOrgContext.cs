@@ -5,12 +5,13 @@ using System.Web;
 using Model;
 using System.Data.Entity;
 
-namespace VolunteerOrganizator.Models
+namespace MvcVolunteerOrg.Models
 {
-    public class VolunteerOrganizatorContext : DbContext
+    public class VolunteerOrgContext : DbContext
     {
         // Initialize Database from different classes.
         DbSet<User> Users { get; set; }
         DbSet<Organization> Organizations { get; set; }
+        
     }
 }
