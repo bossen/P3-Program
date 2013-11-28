@@ -15,7 +15,11 @@ namespace Model
         #region Properties
         [Key]
         [Required()]
-        public int UserId { get; set; }
+        private int UserId { get; set; }
+
+        public string Username { get; set; }
+
+        public string Password { get; set; }//NEED HASHING
 
         [Required(ErrorMessage="Name is required.")]
         [Display(Name="Name")]
@@ -37,9 +41,10 @@ namespace Model
         #endregion
 
         #region Constructors
-        public User(int userId, string name = null, Location location = null, string email = null)
+        public User(string username, string password, string name = null, Location location = null, string email = null)
         {
-            this.UserId = userId;
+            this.Username = username;
+            this.Password = password;
             this.Creation = DateTime.Now;
             this.Name = name;
             this.Location = location;
