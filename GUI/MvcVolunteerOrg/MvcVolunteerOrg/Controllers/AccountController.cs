@@ -10,6 +10,7 @@ using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
 using MvcVolunteerOrg.Filters;
 using MvcVolunteerOrg.Models;
+using Model;
 
 namespace MvcVolunteerOrg.Controllers
 {

@@ -25,6 +25,7 @@
                                 <li>@Html.ActionLink("Home", "Index", "Home")</li>
                                 <li>@Html.ActionLink("About", "About", "Home")</li>
                                 <li>@Html.ActionLink("My Profile", "VolunteerProfile", "User")</li>
+                                <li>@Html.ActionLink("Dashboard", "Dashboard", "User")</li>
                              }   
 
                              @if (HttpContext.Current.User.Identity.IsAuthenticated == false)
