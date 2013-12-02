@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,6 +10,10 @@ namespace Model
     public class VolunteerProject
     {
         #region Properties
+        [Key]
+        [Required()]
+        private int VolunteerProjectId { get; set; }
+
         public Organization Owner { get; set; }
         public List<Match> Matches { get; set; }
         public string Title { get; set; }

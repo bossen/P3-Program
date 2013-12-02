@@ -12,6 +12,6 @@ namespace MvcVolunteerOrg.Models
         // Initialize Database from different classes.
         DbSet<User> Users { get; set; }
         DbSet<Organization> Organizations { get; set; }
-        
+        DbSet<VolunteerProject> VolunteerProjects { get; set; }
     }
 }

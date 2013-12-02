@@ -17,6 +17,8 @@ namespace Model
         [Required()]
         private int UserId { get; set; }
 
+        public int VolunteerProjectId { get; set; }
+
         public string Username { get; set; }
 
         public string Password { get; set; }//NEED HASHING
@@ -37,6 +39,8 @@ namespace Model
         [Display(Name="Email")]
         public string Email { get; set; }
 
+
+        
 
         #endregion
 
