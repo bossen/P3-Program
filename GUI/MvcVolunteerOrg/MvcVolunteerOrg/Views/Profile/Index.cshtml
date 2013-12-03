@@ -1,8 +1,5 @@
 ﻿@model IEnumerable<Model.User>
 
-@* THIS IS FOR TESTING *@
-
-
 
 @{
     ViewBag.Title = "Index";
@@ -18,17 +15,7 @@
     <fieldset>
         <legend>Profile</legend>
 
-        @Html.DisplayNameFor(model => model.Name)
-        @Html.DisplayNameFor(model => model.Email)
-
-        @*@foreach(var item in Model){
-            
-        @Html.DisplayFor(modelItem => item.Username)
-        @Html.DisplayFor(modelItem => item.Email)
-
-        }
         
-        This is a problem*@
 
     </fieldset>
 }

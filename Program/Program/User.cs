@@ -37,10 +37,7 @@ namespace Model
 
         [DataType(DataType.EmailAddress)]
         [Display(Name="Email")]
-        public string Email { get; set; }
-
-
-        
+        public string Email { get; set; }    
 
         #endregion
 

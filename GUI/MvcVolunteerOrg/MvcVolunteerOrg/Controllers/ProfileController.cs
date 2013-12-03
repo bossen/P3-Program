@@ -11,10 +11,10 @@ namespace MvcVolunteerOrg.Controllers
     {
         //
         // GET: /Profile/
-
+        
         public ActionResult Index()
         {
-            return View();
+            return Index();
         }
 
         // GET: /Profile/Edit/5
@@ -24,7 +24,24 @@ namespace MvcVolunteerOrg.Controllers
             return View();
         }
 
+        [AllowAnonymous]
+        public ActionResult Create()
+        {
+            return View();
+        }
 
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(User user)
+        {
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("Index", "Profile");
+            }
+
+            return View(user);
+        }
         
     }
 }

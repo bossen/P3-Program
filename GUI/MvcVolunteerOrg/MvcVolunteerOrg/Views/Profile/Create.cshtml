@@ -1,13 +1,11 @@
 ﻿@model Model.User
 
-@* THIS IS FOR TESTING *@
-
-
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Create";
 }
 
-<h2>Edit</h2>
+<h2>Create</h2>
+
 
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
@@ -16,7 +14,7 @@
     <fieldset>
         <legend>Profile</legend>
 
-                <div class="editor-label">
+        <div class="editor-label">
             @Html.LabelFor(model => model.Name)
         </div>
         <div class="editor-field">
@@ -61,12 +59,4 @@
         </p>
             
     </fieldset>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
 }
