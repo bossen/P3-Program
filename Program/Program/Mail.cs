@@ -39,15 +39,17 @@ namespace Model
         public void SendMail(string receiverMail, string subject, string body)
         {
             {
-                if (!IsValidEmail(receiverMail))
+                if (!ValidateEmail(receiverMail))
                     throw new ArgumentException("Not a valid email!");
-                MailMessage hej = new MailMessage(this.senderMail, receiverMail, subject, body);
-                this.Client.Send(hej);
+                MailMessage message = new MailMessage(this.senderMail, receiverMail, subject, body);
+                this.Client.Send(message);
             }
         }
+        #endregion
 
+        #region Helpers
         //From Cogwheel at http://stackoverflow.com/questions/1365407/c-sharp-code-to-validate-email-address
-        private bool IsValidEmail(string email)
+        private bool ValidateEmail(string email)
         {
             try
             {
