@@ -10,11 +10,12 @@ namespace MvcVolunteerOrg.Models
     public class VolunteerOrgContext : DbContext
     {
         // Initialize Database from different classes.
-        DbSet<User> Users { get; set; }
+        DbSet<Volunteer> Volunteers { get; set; }
+        DbSet<Admin> Admins { get; set; }
         DbSet<Organization> Organizations { get; set; }
         DbSet<VolunteerProject> VolunteerProjects { get; set; }
         DbSet<Match> Matches { get; set; }
-
+        
         
     }
 }
