@@ -72,6 +72,20 @@ namespace MvcVolunteerOrg.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (model.IsAdmin == true)
+                {
+                    try
+                    {
+                        WebSecurity.CreateUserAndAccount(model.Username, model.Password);
+                        WebSecurity.Login(model.Username, model.Password);
+                        return RedirectToAction("CreateOrNot", "Profile");  //Redirect to Create under Profile
+                    }
+                    catch (MembershipCreateUserException e)
+                    {
+                        ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
+                    }
+
+                }
                 // Attempt to register the user
                 try
                 {
@@ -194,7 +208,6 @@ namespace MvcVolunteerOrg.Controllers
             // If we got this far, something failed, redisplay form
             return View(model);
         }*/
-
 
     }
 }

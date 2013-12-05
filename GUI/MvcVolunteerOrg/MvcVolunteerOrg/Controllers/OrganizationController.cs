@@ -7,22 +7,21 @@ using Model;
 
 namespace MvcVolunteerOrg.Controllers
 {
-    public class ProfileController : Controller
+    public class OrganizationController : Controller
     {
         //
-        // GET: /Profile/
-        
+        // GET: /Organization/
+
         public ActionResult Index()
         {
             return View();
         }
 
-        // GET: /Profile/Edit/5
-
         public ActionResult Edit()
         {
             return View();
         }
+
 
         [AllowAnonymous]
         public ActionResult Create()
@@ -33,21 +32,14 @@ namespace MvcVolunteerOrg.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Volunteer volunteer)
+        public ActionResult Create(Organization organization)
         {
             if (ModelState.IsValid)
             {
-                return RedirectToAction("Index", "Profile");
+                return RedirectToAction("Index", "Organization");
             }
 
-            return View(volunteer);
+            return View(organization);
         }
-
-        public ActionResult CreateOrNot()
-        {
-            
-            return View();
-        }
-        
     }
 }
