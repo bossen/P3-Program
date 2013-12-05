@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 
 namespace Model
 {
     public class Location
     {
+        [Key]
+        public int Id { get; set; }
         public string Address { get; set; }
         public string City { get; set; }
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,6 +14,8 @@ namespace Model
     public class Volunteer : User
     {
         #region Properties
+        [Key]
+        public int Id { get; set; }
         public List<Preference> Preferences { get; set; }
         public List<Match> _matches = new List<Match>();
         #endregion

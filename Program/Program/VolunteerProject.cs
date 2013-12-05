@@ -12,7 +12,7 @@ namespace Model
         #region Properties
         [Key]
         [Required()]
-        private int VolunteerProjectId { get; set; }
+        public int Id { get; set; }
 
         public Organization Owner { get; set; }
         public List<Match> Matches { get; set; }
@@ -25,6 +25,9 @@ namespace Model
         #endregion
 
         #region Constructors
+        public VolunteerProject()
+        { }
+
         public VolunteerProject(string title, Location location, DateTime time, List<Preference> topics, Organization owner, string description, bool signup)
         {
             this.Title = title;

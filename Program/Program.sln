@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Program\Model.csproj", "{9433356B-DD7F-42C2-BA9A-616C3DC68C12}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject1", "UnitTestProject1\UnitTestProject1.csproj", "{B2DF4719-8519-4950-9925-BE7DE6B27865}"
@@ -8,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcVolunteerOrg", "..\GUI\MvcVolunteerOrg\MvcVolunteerOrg\MvcVolunteerOrg.csproj", "{EC18CBD7-36E1-47D4-80AC-95CAD8447F0B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcVolunteerOrg.Tests", "..\GUI\MvcVolunteerOrg\MvcVolunteerOrg.Tests\MvcVolunteerOrg.Tests.csproj", "{8CD0A80F-9ABC-4C03-AA96-E35FEB09DE63}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApplication1", "ConsoleApplication1\ConsoleApplication1.csproj", "{9E011CC0-D708-4622-8562-269CF18052E6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,6 +35,10 @@ Global
 		{8CD0A80F-9ABC-4C03-AA96-E35FEB09DE63}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8CD0A80F-9ABC-4C03-AA96-E35FEB09DE63}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8CD0A80F-9ABC-4C03-AA96-E35FEB09DE63}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E011CC0-D708-4622-8562-269CF18052E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E011CC0-D708-4622-8562-269CF18052E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E011CC0-D708-4622-8562-269CF18052E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E011CC0-D708-4622-8562-269CF18052E6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

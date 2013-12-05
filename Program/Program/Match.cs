@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 
 namespace Model
@@ -9,6 +10,8 @@ namespace Model
     public abstract class Match
     {
         #region Properties
+        [Key]
+        public int Id { get; set; }
         public Volunteer Volunteer { get; set; }
         public bool? Accepted { get; set; }
         public DateTime Expire { get; set; }

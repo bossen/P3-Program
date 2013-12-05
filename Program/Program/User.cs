@@ -15,7 +15,7 @@ namespace Model
         #region Properties
         [Key]
         [Required()]
-        private int UserId { get; set; }
+        public int Id { get; set; }
 
         public int VolunteerProjectId { get; set; }
 

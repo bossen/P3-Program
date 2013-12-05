@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 
 namespace Model
 {
     public class WorkRequest : Match
     {
+        [Key]
+        public int Id { get; set; }
 
         #region Constructors
         public WorkRequest(Volunteer volunteer, VolunteerProject project)

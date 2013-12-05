@@ -51,7 +51,7 @@ namespace MvcVolunteerOrg.Controllers
                 }
                 catch (MembershipCreateUserException e)
                 {
-                    ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
+                    //ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
                 }
             }
 

@@ -11,8 +11,7 @@ namespace Model
     {
         #region Properties
         [Key]
-        [Required()]
-        public int OrganizationId { get; set; }
+        public int Id { get; set; }
 
         [Required(ErrorMessage="Name is required")]
         [Display(Name="Name")]
@@ -42,6 +41,9 @@ namespace Model
             this.Location = location;
             this.Email = email;
         }
+
+        public Organization()
+        { }
         #endregion
 
         #region Methods

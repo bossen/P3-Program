@@ -1,13 +1,8 @@
-﻿@{
-    ViewBag.Title = "Welcome";
-    ViewBag.Message = ".";
-}
-@section featured {
+﻿@section featured {
     <section class="featured">
         <div class="content-wrapper">
             <hgroup class="title">
-                <h1>@ViewBag.Title.</h1><br />
-                @*<h2>@ViewBag.Message</h2>*@
+                <h1>@ViewBag.Title</h1>
             </hgroup>
             <p>
                 Do you want to help out in volunteer projects in your community, yet are having trouble finding them?
@@ -22,6 +17,19 @@
                 <br />
                 <a href ="http://localhost:2601/Account/Register">Register</a> your account or organization today.
             </p>
+            <h2>The following are active projects</h2>
+            @foreach (Model.VolunteerProject project in ViewBag.VolunteerProjects)
+            {
+                <div class="volunteerproject">
+                    <a>@project.Title</a>
+                    <a>@project.Owner.Name</a>
+                    <a>@project.Time</a>
+                    @foreach (Model.Preference topic in project.Topics)
+                    {
+                        <a>@topic.ToString()</a>
+                    }
+                </div>
+            }
         </div>
     </section>
 }
