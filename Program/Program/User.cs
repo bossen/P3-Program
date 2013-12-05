@@ -52,6 +52,9 @@ namespace Model
         #endregion
 
         #region Constructors
+        public User()
+        { }
+
         public User(string username, string password, string name = null, Location location = null, string email = null)
         {
             this.Username = username;

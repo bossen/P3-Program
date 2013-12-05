@@ -21,6 +21,8 @@ namespace Model
         #endregion
 
         #region Constructors
+        public Volunteer()
+        {}
         public Volunteer(string username, string password, string name = null, Location location = null, string email = null)
             :base(username, password, name, location, email)
         {
