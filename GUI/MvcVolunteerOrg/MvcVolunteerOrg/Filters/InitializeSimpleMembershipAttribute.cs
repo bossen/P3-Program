@@ -5,9 +5,11 @@ using System.Threading;
 using System.Web.Mvc;
 using WebMatrix.WebData;
 using MvcVolunteerOrg.Models;
+using Model;
 
 namespace MvcVolunteerOrg.Filters
 {
+    
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
     public sealed class InitializeSimpleMembershipAttribute : ActionFilterAttribute
     {

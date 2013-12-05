@@ -1,4 +1,4 @@
-﻿@model MvcVolunteerOrg.Models.RegisterModel
+﻿@model Model.RegisterModel
 @{
     ViewBag.Title = "Register";
 }
@@ -14,8 +14,8 @@
         <legend>Volunteer Registration Form</legend>
         <ol>
             <li>
-                @Html.LabelFor(m => m.UserName)
-                @Html.TextBoxFor(m => m.UserName)
+                @Html.LabelFor(m => m.Username)
+                @Html.TextBoxFor(m => m.Username)
             </li>
             <li>
                 @Html.LabelFor(m => m.Password)
