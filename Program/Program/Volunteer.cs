@@ -21,10 +21,13 @@ namespace Model
         #endregion
 
         #region Constructors
-        public Volunteer(string username, string password, string name = null, Location location = null, string email = null)
-            :base(username, password, name, location, email)
+        public Volunteer(string username, int userid, string name = null, Location location = null, string email = null)
+            :base(username, userid, name, location, email)
         {
         }
+
+        public Volunteer()
+        { }
         #endregion
 
         #region Methods

@@ -72,25 +72,21 @@ namespace MvcVolunteerOrg.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (model.IsAdmin == true)
-                {
-                    try
-                    {
-                        WebSecurity.CreateUserAndAccount(model.Username, model.Password);
-                        WebSecurity.Login(model.Username, model.Password);
-                        return RedirectToAction("CreateOrNot", "Profile");  //Redirect to Create under Profile
-                    }
-                    catch (MembershipCreateUserException e)
-                    {
-                        ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
-                    }
-
-                }
                 // Attempt to register the user
                 try
                 {
                     WebSecurity.CreateUserAndAccount(model.Username, model.Password);
                     WebSecurity.Login(model.Username, model.Password);
+                    if (model.IsAdmin)
+                    {
+                        Admin newUser = new Admin(model.Username, WebSecurity.CurrentUserId);
+                    }
+                    else 
+                    {
+                        Volunteer newUser = new Volunteer(model.Username, WebSecurity.CurrentUserId);
+                        
+                    }
+                    
                     return RedirectToAction("Create", "Profile");  //Redirect to Create under Profile
                 }
                 catch (MembershipCreateUserException e)

@@ -22,16 +22,13 @@ namespace Model
         [Required()]
         public int Id { get; set; }
 
+        public int UserId { get; set; }
+
         public int VolunteerProjectId { get; set; }
 
         [Required]
         [Display(Name = "User name")]
         public string Username { get; set; }
-
-        [Required]
-        [DataType(DataType.Password)]
-        [Display(Name = "Password")]
-        public string Password { get; set; }//NEED HASHING
 
         [Required(ErrorMessage="Name is required.")]
         [Display(Name="Name")]
@@ -52,15 +49,19 @@ namespace Model
         #endregion
 
         #region Constructors
-        public User(string username, string password, string name = null, Location location = null, string email = null)
+        public User(string username, int userid, string name = null, Location location = null, string email = null)
         {
             this.Username = username;
-            this.Password = password;
+            this.UserId = userid;
             this.Creation = DateTime.Now;
             this.Name = name;
             this.Location = location;
             this.Email = email;
         }
+
+        public User()
+        { }
+
         #endregion
     }
 
