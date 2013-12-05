@@ -1,24 +1,27 @@
-﻿@model IEnumerable<Model.User>
+﻿@model Model.Volunteer
 
-
-@{
-    ViewBag.Title = "Index";
-}
 
 <h2>Index</h2>
 
-
-@using (Html.BeginForm()) {
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
 
     <fieldset>
         <legend>Profile</legend>
 
         
+        <div class="view-field">
+            @Html.ValueFor(m => m.Username)
+        </div>
+        
+
+        @Html.DisplayFor(m => m.Name)
+        @Html.DisplayFor(m => m.Email)
+        @Html.DisplayFor(m => m.Creation)
+        @Html.DisplayFor(m => m.Location.Address)
+        @Html.DisplayFor(m => m.Location.City)
+        @Html.DisplayFor(m => m.Username)
 
     </fieldset>
-}
+
 
 <input id="Button1" type="button" value="button" name="Test" onclick="javascript: window.open('/Profile/Edit',
                                        'Customer Search',

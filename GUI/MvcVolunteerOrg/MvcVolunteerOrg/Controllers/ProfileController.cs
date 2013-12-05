@@ -14,7 +14,7 @@ namespace MvcVolunteerOrg.Controllers
         
         public ActionResult Index()
         {
-            return Index();
+            return View();
         }
 
         // GET: /Profile/Edit/5
@@ -33,14 +33,14 @@ namespace MvcVolunteerOrg.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(User user)
+        public ActionResult Create(Volunteer volunteer)
         {
             if (ModelState.IsValid)
             {
                 return RedirectToAction("Index", "Profile");
             }
 
-            return View(user);
+            return View(volunteer);
         }
         
     }
