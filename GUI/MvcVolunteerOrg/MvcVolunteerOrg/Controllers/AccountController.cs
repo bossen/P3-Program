@@ -9,6 +9,7 @@ using DotNetOpenAuth.AspNet;
 using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
 using MvcVolunteerOrg.Filters;
+using MvcVolunteerOrg.Models;
 using Model;
 
 namespace MvcVolunteerOrg.Controllers
@@ -72,25 +73,26 @@ namespace MvcVolunteerOrg.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (model.IsAdmin == true)
-                {
-                    try
-                    {
-                        WebSecurity.CreateUserAndAccount(model.Username, model.Password);
-                        WebSecurity.Login(model.Username, model.Password);
-                        return RedirectToAction("CreateOrNot", "Profile");  //Redirect to Create under Profile
-                    }
-                    catch (MembershipCreateUserException e)
-                    {
-                        ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
-                    }
-
-                }
                 // Attempt to register the user
                 try
                 {
                     WebSecurity.CreateUserAndAccount(model.Username, model.Password);
                     WebSecurity.Login(model.Username, model.Password);
+                    using (var db = new VolunteerOrgContext())
+                    {
+                        if (model.IsAdmin)
+                        {
+                            Admin newAdmin = new Admin(model.Username, WebSecurity.CurrentUserId);
+                            db.Admins.Add(newAdmin);
+                        }
+                        else 
+                        {
+                            Volunteer newVolunteer = new Volunteer(model.Username, WebSecurity.CurrentUserId);
+                            db.Volunteers.Add(newVolunteer);
+                        
+                        }
+                    }
+                    
                     return RedirectToAction("Create", "Profile");  //Redirect to Create under Profile
                 }
                 catch (MembershipCreateUserException e)

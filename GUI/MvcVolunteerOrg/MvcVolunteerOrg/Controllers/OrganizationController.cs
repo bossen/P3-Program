@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Model;
+using MvcVolunteerOrg.Models;
 
 namespace MvcVolunteerOrg.Controllers
 {
@@ -36,6 +37,12 @@ namespace MvcVolunteerOrg.Controllers
         {
             if (ModelState.IsValid)
             {
+                using (var db = new VolunteerOrgContext())
+                {
+                    db.Organizations.Add(organization);
+                    db.SaveChanges();
+                }
+            
                 return RedirectToAction("Index", "Organization");
             }
 

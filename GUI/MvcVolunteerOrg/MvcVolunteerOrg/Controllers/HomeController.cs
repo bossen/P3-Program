@@ -16,6 +16,23 @@ namespace MvcVolunteerOrg.Controllers
     {
         public ActionResult Index()
         {
+            //Adding dummy objects to database
+            using (var db = new VolunteerOrgContext()
+            {
+                db.Database.ExecuteSqlCommand("delete from VolunteerProjects");
+                
+                Organization o1 = new Organization("Green", new Location("Lundvej 2", "Aalborg"), "contact@green.com");
+                Organization o2 = new Organization("Blue", new Location("Strandsevej 53", "Aalborg"), "contact@blue.com");
+                Organization o3 = new Organization("Red", new Location("Råbærvej 101", "Aalborg"), "contact@red.com");
+            
+                db.Organizations.Add(o1);
+                db.Organizations.Add(o2);
+                db.Organizations.Add(o3);
+
+                db.SaveChanges();
+            }
+
+
             string name = WebSecurity.IsAuthenticated ? WebSecurity.CurrentUserName : "guest";
             ViewBag.Title = "Welcome " + name + ".";
 
@@ -27,6 +44,7 @@ namespace MvcVolunteerOrg.Controllers
             VolunteerProject p5 = new VolunteerProject("Project 5", new Location("location", "city"), DateTime.Now.AddDays(1), new List<Preference>() { Preference.Festival }, o, "omg omg omg", true);
             using (var db = new VolunteerOrgContext())
             {
+<<<<<<< HEAD
                 db.Database.ExecuteSqlCommand("delete from VolunteerProjects");
                 db.VolunteerProjects.Add(p1);
                 db.VolunteerProjects.Add(p2);
@@ -53,6 +71,9 @@ namespace MvcVolunteerOrg.Controllers
                     ViewBag.Authenticated = false;
                     ViewBag.Projects = db.VolunteerProjects.ToList().OrderBy(b => b.Time).Take(5);
                 }
+=======
+                ViewBag.VolunteerProjects = db.VolunteerProjects.ToList().OrderBy(b => b.Time);
+>>>>>>> b2c3b1559d0f274bf3114dec070731db594bf478
             }
 
             return View();
