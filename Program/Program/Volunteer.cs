@@ -22,10 +22,15 @@ namespace Model
 
         #region Constructors
 <<<<<<< HEAD
+<<<<<<< HEAD
         public Volunteer()
         {}
         public Volunteer(string username, string password, string name = null, Location location = null, string email = null)
             :base(username, password, name, location, email)
+=======
+        public Volunteer(string username, int userid, string name = null, Location location = null, string email = null)
+            :base(username, userid, name, location, email)
+>>>>>>> b2c3b1559d0f274bf3114dec070731db594bf478
 =======
         public Volunteer(string username, int userid, string name = null, Location location = null, string email = null)
             :base(username, userid, name, location, email)

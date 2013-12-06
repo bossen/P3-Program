@@ -45,6 +45,7 @@ namespace MvcVolunteerOrg.Controllers
             using (var db = new VolunteerOrgContext())
             {
 <<<<<<< HEAD
+<<<<<<< HEAD
                 db.Database.ExecuteSqlCommand("delete from VolunteerProjects");
                 db.VolunteerProjects.Add(p1);
                 db.VolunteerProjects.Add(p2);
@@ -72,6 +73,8 @@ namespace MvcVolunteerOrg.Controllers
                     ViewBag.Projects = db.VolunteerProjects.ToList().OrderBy(b => b.Time).Take(5);
                 }
 =======
+=======
+>>>>>>> b2c3b1559d0f274bf3114dec070731db594bf478
                 ViewBag.VolunteerProjects = db.VolunteerProjects.ToList().OrderBy(b => b.Time);
 >>>>>>> b2c3b1559d0f274bf3114dec070731db594bf478
             }
