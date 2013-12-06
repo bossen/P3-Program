@@ -83,12 +83,12 @@ namespace MvcVolunteerOrg.Controllers
                         if (model.IsAdmin)
                         {
                             Admin newAdmin = new Admin(model.Username, WebSecurity.CurrentUserId);
-                            db.Admins.add(newAdmin);
+                            db.Admins.Add(newAdmin);
                         }
                         else 
                         {
                             Volunteer newVolunteer = new Volunteer(model.Username, WebSecurity.CurrentUserId);
-                            db.Volunteers.add(newVolunteer);
+                            db.Volunteers.Add(newVolunteer);
                         
                         }
                     }
