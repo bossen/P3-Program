@@ -84,16 +84,17 @@ namespace MvcVolunteerOrg.Controllers
                         {
                             Admin newAdmin = new Admin(model.Username, WebSecurity.CurrentUserId);
                             db.Admins.Add(newAdmin);
+                            return RedirectToAction("CreateOrNot", "Profile");
                         }
                         else 
                         {
                             Volunteer newVolunteer = new Volunteer(model.Username, WebSecurity.CurrentUserId);
                             db.Volunteers.Add(newVolunteer);
-                        
+                            return RedirectToAction("Create", "Profile");
                         }
                     }
                     
-                    return RedirectToAction("Create", "Profile");  //Redirect to Create under Profile
+                    
                 }
                 catch (MembershipCreateUserException e)
                 {
