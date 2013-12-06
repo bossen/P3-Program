@@ -9,6 +9,7 @@ using DotNetOpenAuth.AspNet;
 using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
 using MvcVolunteerOrg.Filters;
+using MvcVolunteerOrg.Models;
 using Model;
 
 namespace MvcVolunteerOrg.Controllers
@@ -77,14 +78,19 @@ namespace MvcVolunteerOrg.Controllers
                 {
                     WebSecurity.CreateUserAndAccount(model.Username, model.Password);
                     WebSecurity.Login(model.Username, model.Password);
-                    if (model.IsAdmin)
+                    using (var db = new VolunteerOrgContext())
                     {
-                        Admin newUser = new Admin(model.Username, WebSecurity.CurrentUserId);
-                    }
-                    else 
-                    {
-                        Volunteer newUser = new Volunteer(model.Username, WebSecurity.CurrentUserId);
+                        if (model.IsAdmin)
+                        {
+                            Admin newAdmin = new Admin(model.Username, WebSecurity.CurrentUserId);
+                            db.Admins.add(newAdmin);
+                        }
+                        else 
+                        {
+                            Volunteer newVolunteer = new Volunteer(model.Username, WebSecurity.CurrentUserId);
+                            db.Volunteers.add(newVolunteer);
                         
+                        }
                     }
                     
                     return RedirectToAction("Create", "Profile");  //Redirect to Create under Profile
