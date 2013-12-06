@@ -24,8 +24,6 @@ namespace Model
 
         public int UserId { get; set; }
 
-        public int VolunteerProjectId { get; set; }
-
         [Required]
         [Display(Name = "User name")]
         public string Username { get; set; }
@@ -38,7 +36,6 @@ namespace Model
         [Display(Name="Creation Date")]
         public DateTime Creation { get; set; }
 
-        [Required(ErrorMessage="A location is required")]
         [Display(Name="Location")]
         public Location Location { get; set; }
 
@@ -49,30 +46,17 @@ namespace Model
         #endregion
 
         #region Constructors
-<<<<<<< HEAD
-<<<<<<< HEAD
         public User()
         { }
 
-        public User(string username, string password, string name = null, Location location = null, string email = null)
-=======
-        public User(string username, int userid, string name = null, Location location = null, string email = null)
->>>>>>> b2c3b1559d0f274bf3114dec070731db594bf478
-=======
-        public User(string username, int userid, string name = null, Location location = null, string email = null)
->>>>>>> b2c3b1559d0f274bf3114dec070731db594bf478
+        public User(int userid, string name = null, Location location = null, string email = null)
         {
-            this.Username = username;
             this.UserId = userid;
             this.Creation = DateTime.Now;
             this.Name = name;
             this.Location = location;
             this.Email = email;
         }
-
-        public User()
-        { }
-
         #endregion
     }
 

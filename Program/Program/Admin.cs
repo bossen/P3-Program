@@ -16,8 +16,8 @@ namespace Model
         #endregion
 
         #region Constructors
-        public Admin(string username, int userid, string name = null, Location location = null, string email = null)
-            : base(username, userid, name, location, email)
+        public Admin(int userid, string name = null, Location location = null, string email = null)
+            : base(userid, name, location, email)
         { }
         #endregion
 
