@@ -67,7 +67,7 @@ namespace MvcVolunteerOrg.Models
                         Location = new Location("Project Street 1", "Project city"),
                         Time = DateTime.Today,
                         Topics = new List<Preference>() {Preference.Culture, Preference.Sport},
-                        //Matches needed-----
+                        //Matches needed----- ???
                     });
 
                 context.VolunteerProjects.Add(
