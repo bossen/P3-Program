@@ -22,15 +22,16 @@ namespace MvcVolunteerOrg.Models
                 };
                 context.Organizations.Add(o1);
 
-            context.Organizations.Add(
-                new Organization()
+                
+                Organization o2 = new Organization()
                 {
                     Name = "Blue Plus",
                     Id = 2,
                     Email = "BluePlus@blueplus.dk",
                     Creation = DateTime.Now,
                     Location = new Location("Blue Road 42", "Blue City")
-                });
+                };
+            context.Organizations.Add(o2);
 
             context.Volunteers.Add(
                 new Volunteer()
@@ -60,7 +61,7 @@ namespace MvcVolunteerOrg.Models
             context.VolunteerProjects.Add(
                 new VolunteerProject()
                 {
-                    
+                    Owner = o1,
                     Id = 1,
                     Description = "This is about helping YOUNG people",
                     Title = "Helping YOUNG People",
@@ -73,7 +74,7 @@ namespace MvcVolunteerOrg.Models
             context.VolunteerProjects.Add(
                 new VolunteerProject()
                 {
-                    
+                    Owner = o1,
                     Id = 2,
                     Description = "This is about helping OLD people",
                     Title = "Helping OLD People",
@@ -86,7 +87,7 @@ namespace MvcVolunteerOrg.Models
             context.VolunteerProjects.Add(
                 new VolunteerProject()
                 {
-                    
+                    Owner = o1,
                     Id = 3,
                     Description = "This is about helping Music!!!",
                     Title = "Helping Music",
@@ -99,7 +100,7 @@ namespace MvcVolunteerOrg.Models
             context.VolunteerProjects.Add(
                 new VolunteerProject()
                 {
-                    
+                    Owner = o2,
                     Id = 4,
                     Description = "PARTY PARTY",
                     Title = "Helping at a church",
@@ -112,7 +113,7 @@ namespace MvcVolunteerOrg.Models
             context.VolunteerProjects.Add(
                 new VolunteerProject()
                 {
-                    
+                    Owner = o2,
                     Id = 5,
                     Description = "Placeholder",
                     Title = "Placeholder",
