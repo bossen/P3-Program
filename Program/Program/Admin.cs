@@ -26,16 +26,12 @@ namespace Model
         #endregion
 
         #region Methods
-        /*public void CreateOrganization(string name, Location location, string email)
+        public Organization CreateOrganization(string name, Location location, string email)
         {
-            using (var db = new VolunteerOrgContext())
-            {
-                Organization newOrganization = new Organization(name, location, email);
-                this.Association = newOrganization;
-                db.Organizations.Add(newOrganization);
-                db.SaveChanges();
-            }
-        }*/
+            Organization newOrganization = new Organization(name, location, email);
+            this.Association = newOrganization;
+            return newOrganization;
+        }
 
         public void AssociateOrganization(Organization organization)
         {
