@@ -59,15 +59,76 @@ namespace MvcVolunteerOrg.Models
             context.VolunteerProjects.Add(
                 new VolunteerProject()
                 {
-                    //Owner = "", -------- Owner?
+                    Owner = new Organization(),
                     Id = 1,
-                    Description = "This is about helping Young people",
-                    Title = "Helping Young People",
+                    Description = "This is about helping YOUNG people",
+                    Title = "Helping YOUNG People",
                     Location = new Location("Project Street 1", "Project city"),
                     Time = DateTime.Today,
                     //Topics = "",  -------List of Topics?
                     //Matches = "", -------List of Matches?
                 });
+            
+            context.VolunteerProjects.Add(
+                new VolunteerProject()
+                {
+                    //Owner = "", -------- Owner?
+                    Id = 2,
+                    Description = "This is about helping OLD people",
+                    Title = "Helping OLD People",
+                    Location = new Location("Project Street 2", "Project city"),
+                    Time = DateTime.Today,
+                    //Topics = "",  -------List of Topics?
+                    //Matches = "", -------List of Matches?
+                });
+
+            context.VolunteerProjects.Add(
+                new VolunteerProject()
+                {
+                    //Owner = "", -------- Owner?
+                    Id = 3,
+                    Description = "This is about helping Music!!!",
+                    Title = "Helping Music",
+                    Location = new Location("Project Street 3", "Project city"),
+                    Time = DateTime.Today,
+                    //Topics = "",  -------List of Topics?
+                    //Matches = "", -------List of Matches?
+                });
+
+            context.VolunteerProjects.Add(
+                new VolunteerProject()
+                {
+                    //Owner = "", -------- Owner?
+                    Id = 4,
+                    Description = "PARTY PARTY",
+                    Title = "Helping at a church",
+                    Location = new Location("Project Street 4", "Project city"),
+                    Time = DateTime.Today,
+                    //Topics = "",  -------List of Topics?
+                    //Matches = "", -------List of Matches?
+                });
+
+            context.VolunteerProjects.Add(
+                new VolunteerProject()
+                {
+                    //Owner = "", -------- Owner?
+                    Id = 5,
+                    Description = "Placeholder",
+                    Title = "Placeholder",
+                    Location = new Location("Project Street 5", "Project city"),
+                    Time = DateTime.Today,
+                    //Topics = "",  -------List of Topics?
+                    //Matches = "", -------List of Matches?
+                });
+
+
+
+
+
+
+
+
+
 
             context.Admins.Add(
                 new Admin()
@@ -75,11 +136,28 @@ namespace MvcVolunteerOrg.Models
                     Id = 1,
                     UserId = 1,
                     Name = "Patrick",
-                    Username = "Admin",
-                    Email = "Admin@admin.dk",
+                    Username = "AdminPat",
+                    Email = "Adminpat@admin.dk",
                     Creation = DateTime.Now,
                     Location = new Location("Admin Path 7", "Admin Universe")
                 });
+
+            context.Admins.Add(
+                new Admin()
+                {
+                    Id = 2,
+                    UserId = 2,
+                    Name = "Mike",
+                    Username = "AdminMike",
+                    Email = "Adminmike@admin.dk",
+                    Creation = DateTime.Now,
+                    Location = new Location("Admin Path 8", "Admin Universe")
+                });
+
+
+
+
+
             context.SaveChanges();
         }
     }
