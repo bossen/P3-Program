@@ -19,15 +19,22 @@ namespace Model
     {
         #region Properties
         [Key]
-        [Required()]
+        [Required]
         public int Id { get; set; }
 
         public int UserId { get; set; }
 
+        [Required]
+        [Display(Name = "User name")]
+        public string UserName { get; set; }
+
+        [Display(Name = "Admin?")]
+        public bool IsAdmin { get; set; }
+
         [Display(Name="Name")]
         public string Name { get; set; }
 
-        [Required()]
+        [Required]
         [Display(Name="Creation Date")]
         public DateTime Creation { get; set; }
 
@@ -59,15 +66,27 @@ namespace Model
     {
         [Required]
         [Display(Name = "User name")]
+        public string UserName { get; set; }
+    }
+
+
+
+
+
+
+    /*public class LoginModel
+    {
+        [Required]
+        [Display(Name = "User name")]
         public string Username { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
-    }
+    }*/
 
-    public class RegisterModel
+    /*public class RegisterModel
     {
         [Required]
         [Display(Name = "User name")]
@@ -86,7 +105,7 @@ namespace Model
 
         [Display(Name = "Admin?")]
         public bool IsAdmin { get; set; }
-    }
+    }*/
 
     /*public class LocalPasswordModel
     {
@@ -107,7 +126,7 @@ namespace Model
         public string ConfirmPassword { get; set; }
     }*/
 
-    public class UsersContext : DbContext
+    /*public class UsersContext : DbContext
     {
         public UsersContext()
             : base("DefaultConnection")
@@ -124,7 +143,7 @@ namespace Model
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int UserId { get; set; }
         public string Username { get; set; }
-    }
+    }*/
 
 
 }

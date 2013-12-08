@@ -27,12 +27,12 @@
             {
                 <div class="volunteerproject">
                     <a>@project.Title</a>
-                    <a>@project.Owner.Name</a>
+                    @*<a>@project.Owner.Name</a>*@
                     <a>@project.Time</a>
-                    @foreach (Model.Preference topic in project.Topics)
+                    @*@foreach (Model.Preference topic in project.Topics)
                     {
                         <a>@topic.ToString()</a>
-                    }
+                    }*@
                 </div>
             }
         </div>
