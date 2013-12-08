@@ -10,6 +10,9 @@ namespace Model
     {
         Festival,
         Church,
-        placeholder
+        Culture,
+        Nature,
+        Sport,
+        Political
     };
 }
