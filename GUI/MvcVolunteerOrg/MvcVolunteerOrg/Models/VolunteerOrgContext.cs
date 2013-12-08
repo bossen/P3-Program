@@ -15,7 +15,5 @@ namespace MvcVolunteerOrg.Models
         public DbSet<Organization> Organizations { get; set; }
         public DbSet<VolunteerProject> VolunteerProjects { get; set; }
         public DbSet<Match> Matches { get; set; }
-        
-        
     }
 }

@@ -24,11 +24,6 @@ namespace Model
 
         public int UserId { get; set; }
 
-        [Required]
-        [Display(Name = "User name")]
-        public string Username { get; set; }
-
-        [Required(ErrorMessage="Name is required.")]
         [Display(Name="Name")]
         public string Name { get; set; }
 

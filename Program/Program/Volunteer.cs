@@ -14,8 +14,6 @@ namespace Model
     public class Volunteer : User
     {
         #region Properties
-        [Key]
-        public int Id { get; set; }
         public List<Preference> Preferences { get; set; }
         public List<Match> _matches = new List<Match>();
         #endregion

@@ -9,9 +9,6 @@ namespace Model
 {
     public class WorkRequest : Match
     {
-        [Key]
-        public int Id { get; set; }
-
         #region Constructors
         public WorkRequest(Volunteer volunteer, VolunteerProject project)
             : base(volunteer, project)

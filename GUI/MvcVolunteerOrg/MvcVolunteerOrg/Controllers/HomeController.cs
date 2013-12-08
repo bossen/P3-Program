@@ -16,67 +16,66 @@ namespace MvcVolunteerOrg.Controllers
     {
         public ActionResult Index()
         {
-            //Adding dummy objects to database
-            using (var db = new VolunteerOrgContext()
-            {
-                db.Database.ExecuteSqlCommand("delete from VolunteerProjects");
-                
-                Organization o1 = new Organization("Green", new Location("Lundvej 2", "Aalborg"), "contact@green.com");
-                Organization o2 = new Organization("Blue", new Location("Strandsevej 53", "Aalborg"), "contact@blue.com");
-                Organization o3 = new Organization("Red", new Location("Råbærvej 101", "Aalborg"), "contact@red.com");
-            
-                db.Organizations.Add(o1);
-                db.Organizations.Add(o2);
-                db.Organizations.Add(o3);
+        //    //Adding dummy objects to database
+        //    using (var db = new VolunteerOrgContext())
+        //    {
+        //        db.Database.ExecuteSqlCommand("delete from VolunteerProjects");
 
-                db.SaveChanges();
-            }
+        //        Organization o1 = new Organization("Green", new Location("Lundvej 2", "Aalborg"), "contact@green.com");
+        //        Organization o2 = new Organization("Blue", new Location("Strandsevej 53", "Aalborg"), "contact@blue.com");
+        //        Organization o3 = new Organization("Red", new Location("Råbærvej 101", "CPH"), "contact@red.com");
+
+        //        VolunteerProject p1 = new VolunteerProject("Project 1", new Location("location", "city"), DateTime.Now.AddDays(5), new List<Preference>() { Preference.Festival }, o1, "omg omg omg", true);
+        //        VolunteerProject p2 = new VolunteerProject("Project 2", new Location("location", "city"), DateTime.Now.AddDays(3), new List<Preference>() { Preference.Festival }, o2, "omg omg omg", true);
+        //        VolunteerProject p3 = new VolunteerProject("Project 3", new Location("location", "city"), DateTime.Now.AddDays(2), new List<Preference>() { Preference.placeholder, Preference.Church }, o2, "omg omg omg", true);
+        //        VolunteerProject p4 = new VolunteerProject("Project 4", new Location("location", "city"), DateTime.Now.AddDays(10), new List<Preference>() { Preference.Festival }, o3, "omg omg omg", true);
+        //        VolunteerProject p5 = new VolunteerProject("Project 5", new Location("location", "city"), DateTime.Now.AddDays(1), new List<Preference>() { Preference.Festival }, o2, "omg omg omg", true);
+
+        //        db.Organizations.Add(o1);
+        //        db.Organizations.Add(o2);
+        //        db.Organizations.Add(o3);
+
+        //        db.VolunteerProjects.Add(p2);
+        //        db.VolunteerProjects.Add(p3);
+        //        db.VolunteerProjects.Add(p4);
+        //        db.VolunteerProjects.Add(p5);
+        //        db.VolunteerProjects.Add(p1);
+
+        //        db.SaveChanges();
+        //    }
 
 
             string name = WebSecurity.IsAuthenticated ? WebSecurity.CurrentUserName : "guest";
             ViewBag.Title = "Welcome " + name + ".";
 
-            Organization o = new Organization("greeny", new Location("a", "c"), "mail@mail.mail");
-            VolunteerProject p1 = new VolunteerProject("Project 1", new Location("location", "city"), DateTime.Now.AddDays(5), new List<Preference>() { Preference.Festival }, o, "omg omg omg", true);
-            VolunteerProject p2 = new VolunteerProject("Project 2", new Location("location", "city"), DateTime.Now.AddDays(3), new List<Preference>() { Preference.Festival }, o, "omg omg omg", true);
-            VolunteerProject p3 = new VolunteerProject("Project 3", new Location("location", "city"), DateTime.Now.AddDays(2), new List<Preference>() { Preference.placeholder, Preference.Church }, o, "omg omg omg", true);
-            VolunteerProject p4 = new VolunteerProject("Project 4", new Location("location", "city"), DateTime.Now.AddDays(10), new List<Preference>() { Preference.Festival }, o, "omg omg omg", true);
-            VolunteerProject p5 = new VolunteerProject("Project 5", new Location("location", "city"), DateTime.Now.AddDays(1), new List<Preference>() { Preference.Festival }, o, "omg omg omg", true);
             using (var db = new VolunteerOrgContext())
             {
-<<<<<<< HEAD
-<<<<<<< HEAD
-                db.Database.ExecuteSqlCommand("delete from VolunteerProjects");
-                db.VolunteerProjects.Add(p1);
-                db.VolunteerProjects.Add(p2);
-                db.VolunteerProjects.Add(p3);
-                db.VolunteerProjects.Add(p4);
-                db.VolunteerProjects.Add(p5);
                 if (WebSecurity.IsAuthenticated)
                 {
                     ViewBag.Authenticated = true;
-                    /*Volunteer currentUser = (Volunteer)db.Volunteers.ToList().Where(v => v.UserId == WebSecurity.CurrentUserId);
-                    var SuggestedProjects = (from p in currentUser.GetPendingMatches()
-                                            orderby p.Expire
-                                            select p).Take(5);
+                    Volunteer currentUser = db.Volunteers.Where(v => v.UserId == WebSecurity.CurrentUserId).First();
 
-                    ViewBag.Projects = SuggestedProjects;*/
-                    ViewBag.Projects = db.VolunteerProjects.ToList().OrderBy(b => b.Time).Take(5);
+                    Debug.WriteLine(currentUser.Id);
+                    if (currentUser.GetPendingMatches()[0] != null)
+                    {
+                        var SuggestedProjects = (from p in currentUser.GetPendingMatches()
+                                                 orderby p.Expire
+                                                 select p).Take(5);
+
+                        ViewBag.Projects = SuggestedProjects;
+                    }
                     foreach (User u in db.Volunteers)
                     {
                         Debug.WriteLine(u.Name);
                     }
+                    ViewBag.Projects = db.VolunteerProjects.ToList().OrderBy(b => b.Time).Take(5);
                 }
                 else
                 {
                     ViewBag.Authenticated = false;
+                    var test = db.VolunteerProjects.ToList();
                     ViewBag.Projects = db.VolunteerProjects.ToList().OrderBy(b => b.Time).Take(5);
                 }
-=======
-=======
->>>>>>> b2c3b1559d0f274bf3114dec070731db594bf478
-                ViewBag.VolunteerProjects = db.VolunteerProjects.ToList().OrderBy(b => b.Time);
->>>>>>> b2c3b1559d0f274bf3114dec070731db594bf478
             }
 
             return View();

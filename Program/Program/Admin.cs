@@ -10,8 +10,6 @@ namespace Model
     public class Admin : User
     {
         #region Properties
-        [Key]
-        public int Id { get; set; }
         private List<VolunteerProject> _volunteerProjects = new List<VolunteerProject>();
         #endregion
 
