@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
+using System.Data.Entity;
+using MvcVolunteerOrg.Models;
 
 namespace Model
 {
@@ -26,9 +28,20 @@ namespace Model
         #endregion
 
         #region Methods
-        public void CreateAssociation (Organization association)
+        public void CreateOrganization(string name, Location location, string email)
         {
-            this.Association = association;
+            using (var db = new VolunteerOrgContext())
+            {
+                Organization newOrganization = new Organization(name, location, email);
+                this.Association = newOrganization;
+                db.Organizations.Add(newOrganization);
+                db.SaveChanges();
+            }
+        }
+
+        public void AssociateOrganization(Organization organization)
+        {
+            this.Association = organization;
         }
         #endregion
     }
