@@ -18,7 +18,6 @@ namespace MvcVolunteerOrg.Models
                     Email = "GreenPlus@greenplus.dk",
                     Creation = DateTime.Now,
                     Location = new Location("Green Road 42", "Green City")
-                    
                 };
                 context.Organizations.Add(o1);
 
@@ -141,7 +140,8 @@ namespace MvcVolunteerOrg.Models
                     Username = "AdminPat",
                     Email = "Adminpat@admin.dk",
                     Creation = DateTime.Now,
-                    Location = new Location("Admin Path 7", "Admin Universe")
+                    Location = new Location("Admin Path 7", "Admin Universe"),
+                    Association = o1
                 });
 
             context.Admins.Add(
@@ -153,7 +153,8 @@ namespace MvcVolunteerOrg.Models
                     Username = "AdminMike",
                     Email = "Adminmike@admin.dk",
                     Creation = DateTime.Now,
-                    Location = new Location("Admin Path 8", "Admin Universe")
+                    Location = new Location("Admin Path 8", "Admin Universe"),
+                    Association = o2
                 });
 
 
