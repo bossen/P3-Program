@@ -13,12 +13,15 @@ namespace Model
         [Key]
         public int Id { get; set; }
         private List<VolunteerProject> _volunteerProjects = new List<VolunteerProject>();
+        public Organization Association { get; set; }
         #endregion
 
         #region Constructors
-        public Admin(int userid, string name = null, Location location = null, string email = null)
+        public Admin(int userid, Organization assocation, string name = null, Location location = null, string email = null)
             : base(userid, name, location, email)
-        { }
+        {
+            this.Association = assocation;
+        }
 
         public Admin()
         { }
