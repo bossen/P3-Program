@@ -82,18 +82,12 @@ namespace MvcVolunteerOrg.Controllers
                     {
                         if (model.IsAdmin)
                         {
-                            Admin newAdmin = new Admin(WebSecurity.CurrentUserId);
-                            db.Admins.Add(newAdmin);
                             return RedirectToAction("CreateOrNot", "Profile");
                         }
                         else 
                         {
-                            Volunteer newVolunteer = new Volunteer(WebSecurity.CurrentUserId);
-                            db.Volunteers.Add(newVolunteer);
-
                             return RedirectToAction("Create", "Profile");
                         }
-                        db.SaveChanges();
                     }
                     
                     
