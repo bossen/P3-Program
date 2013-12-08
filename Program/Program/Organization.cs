@@ -28,6 +28,7 @@ namespace Model
         [DataType(DataType.EmailAddress)]
         [Display(Name = "Email")]
         public string Email { get; set; }
+        public event EventHandler NewProjectHandler;
 
 
         private List<VolunteerProject> _volunteerProjects = new List<VolunteerProject>();
@@ -40,6 +41,12 @@ namespace Model
             this.Creation = DateTime.Now;
             this.Location = location;
             this.Email = email;
+
+            using (var db = new VolunteerOrgContext())
+            {
+                db.Organizations.Add(this);
+                db.SaveChanges();
+            }
         }
 
         public Organization()

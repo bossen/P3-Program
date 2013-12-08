@@ -24,10 +24,17 @@ namespace Model
 
         public Volunteer(int userid, string name = null, Location location = null, string email = null)
             :base(userid, name, location, email)
-        { }
+        {
+            using (var db = new VolunteerOrgContext())
+            {
+                db.Volunteers.Add(this);
+                db.SaveChanges();
+            }
+        }
         #endregion
 
         #region Methods
+
         public void AddMatch(Match match)
         {
             _matches.Add(match);
@@ -37,6 +44,12 @@ namespace Model
         {
             WorkRequest newWorkRequest = new WorkRequest(this, project);
             _matches.Add(newWorkRequest);
+        }
+
+        public void AddSuggestion(VolunteerProject project)
+        {
+            Suggestion newSuggestion = new Suggestion(this, project);
+            _matches.Add(newSuggestion);
         }
 
         private List<Match> GetMatches(bool? input)

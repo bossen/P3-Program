@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using MvcVolunteerOrg.Models;
+using WebMatrix.WebData;
+using System.Data.Entity;
 using Model;
 
 namespace MvcVolunteerOrg.Controllers
@@ -27,6 +30,17 @@ namespace MvcVolunteerOrg.Controllers
         [AllowAnonymous]
         public ActionResult Create()
         {
+            using (var db = new VolunteerOrgContext())
+            {
+                Volunteer newVolunteer = new Volunteer(WebSecurity.CurrentUserId);
+                db.Volunteers.Add(newVolunteer);
+                db.SaveChanges();
+            }
+
+            using (var db = new VolunteerOrgContext())
+            {
+                var test = db.Volunteers;
+            }
             return View();
         }
 
@@ -45,6 +59,12 @@ namespace MvcVolunteerOrg.Controllers
 
         public ActionResult CreateOrNot()
         {
+            using (var db = new VolunteerOrgContext())
+            {
+                Admin newAdmin = new Admin(WebSecurity.CurrentUserId);
+                db.Admins.Add(newAdmin);
+                db.SaveChanges();
+            }
             
             return View();
         }

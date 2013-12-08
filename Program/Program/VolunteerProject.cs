@@ -37,6 +37,20 @@ namespace Model
             this.Owner = owner;
             this.Description = description;
             this.Signup = signup;
+
+            using (var db = new VolunteerOrgContext())
+            {
+                foreach (Volunteer volunteer in db.Volunteers)
+                {
+                    if (CheckVolunteerMatch(volunteer))
+                    {
+                        volunteer.AddSuggestion(this);
+                    }
+                }
+
+                db.VolunteerProjects.Add(this);
+                db.SaveChanges();
+            }
         }
         #endregion
 
@@ -75,6 +89,11 @@ namespace Model
                     participants.Add(match.Volunteer);
 	        }
             return participants;
+        }
+
+        private bool CheckVolunteerMatch(Volunteer volunteer)
+        {
+            return volunteer.Preferences.Intersect(this.Topics).Count() > 0 ? true : false;
         }
         #endregion
     }

@@ -7,7 +7,7 @@ using Model;
 
 namespace MvcVolunteerOrg.Models
 {
-    public class VolunteerOrgContextInitializer : DropCreateDatabaseAlways<VolunteerOrgContext>
+    public class VolunteerOrgContextInitializer : CreateDatabaseIfNotExists<VolunteerOrgContext>
     {
         protected override void Seed(VolunteerOrgContext context)
         {

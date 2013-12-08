@@ -57,6 +57,7 @@
     <Compile Include="User.cs" />
     <Compile Include="Preference.cs" />
     <Compile Include="Volunteer.cs" />
+    <Compile Include="VolunteerOrgContext.cs" />
     <Compile Include="VolunteerProject.cs" />
     <Compile Include="WorkRequest.cs" />
   </ItemGroup>

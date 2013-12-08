@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.ComponentModel.DataAnnotations;
-using System.Threading.Tasks;
 using System.Data.Entity;
-//using MvcVolunteerOrg.Models;
+using System.Diagnostics;
+using Model;
+using System.Data.Entity.Validation;
 
 namespace Model
 {
@@ -28,9 +27,15 @@ namespace Model
         #region Methods
         public Organization CreateOrganization(string name, Location location, string email)
         {
-            Organization newOrganization = new Organization(name, location, email);
-            this.Association = newOrganization;
-            return newOrganization;
+            using (var db  = new VolunteerOrgContext())
+            {
+                Organization newOrganization = new Organization(name, location, email);
+                this.Association = newOrganization;
+
+                db.Organizations.Add(newOrganization);
+                db.SaveChanges();
+                return newOrganization;
+            }
         }
 
         public void AssociateOrganization(Organization organization)
