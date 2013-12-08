@@ -11,8 +11,7 @@ namespace MvcVolunteerOrg.Models
     {
         protected override void Seed(VolunteerOrgContext context)
         {
-            context.Organizations.Add(
-                new Organization()
+                Organization o1 = new Organization()
                 {
                     Name = "Green Plus",
                     Id = 1,
@@ -20,7 +19,8 @@ namespace MvcVolunteerOrg.Models
                     Creation = DateTime.Now,
                     Location = new Location("Green Road 42", "Green City")
                     
-                });
+                };
+                context.Organizations.Add(o1);
 
             context.Organizations.Add(
                 new Organization()
