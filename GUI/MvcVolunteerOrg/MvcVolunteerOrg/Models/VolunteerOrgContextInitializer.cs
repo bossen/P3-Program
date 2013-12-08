@@ -19,6 +19,7 @@ namespace MvcVolunteerOrg.Models
                     Email = "GreenPlus@greenplus.dk",
                     Creation = DateTime.Now,
                     Location = new Location("Green Road 42", "Green City")
+                    
                 });
 
             context.Organizations.Add(
@@ -59,7 +60,7 @@ namespace MvcVolunteerOrg.Models
             context.VolunteerProjects.Add(
                 new VolunteerProject()
                 {
-                    Owner = new Organization(),
+                    
                     Id = 1,
                     Description = "This is about helping YOUNG people",
                     Title = "Helping YOUNG People",
@@ -72,7 +73,7 @@ namespace MvcVolunteerOrg.Models
             context.VolunteerProjects.Add(
                 new VolunteerProject()
                 {
-                    //Owner = "", -------- Owner?
+                    
                     Id = 2,
                     Description = "This is about helping OLD people",
                     Title = "Helping OLD People",
@@ -85,7 +86,7 @@ namespace MvcVolunteerOrg.Models
             context.VolunteerProjects.Add(
                 new VolunteerProject()
                 {
-                    //Owner = "", -------- Owner?
+                    
                     Id = 3,
                     Description = "This is about helping Music!!!",
                     Title = "Helping Music",
@@ -98,7 +99,7 @@ namespace MvcVolunteerOrg.Models
             context.VolunteerProjects.Add(
                 new VolunteerProject()
                 {
-                    //Owner = "", -------- Owner?
+                    
                     Id = 4,
                     Description = "PARTY PARTY",
                     Title = "Helping at a church",
@@ -111,7 +112,7 @@ namespace MvcVolunteerOrg.Models
             context.VolunteerProjects.Add(
                 new VolunteerProject()
                 {
-                    //Owner = "", -------- Owner?
+                    
                     Id = 5,
                     Description = "Placeholder",
                     Title = "Placeholder",
