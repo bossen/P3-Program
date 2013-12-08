@@ -19,6 +19,9 @@ namespace Model
         public Admin(int userid, string name = null, Location location = null, string email = null)
             : base(userid, name, location, email)
         { }
+
+        public Admin()
+        { }
         #endregion
 
         #region Methods
