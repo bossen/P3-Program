@@ -5,7 +5,7 @@ using System.Text;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 using System.Data.Entity;
-using MvcVolunteerOrg.Models;
+//using MvcVolunteerOrg.Models;
 
 namespace Model
 {
@@ -26,7 +26,7 @@ namespace Model
         #endregion
 
         #region Methods
-        public void CreateOrganization(string name, Location location, string email)
+        /*public void CreateOrganization(string name, Location location, string email)
         {
             using (var db = new VolunteerOrgContext())
             {
@@ -35,7 +35,7 @@ namespace Model
                 db.Organizations.Add(newOrganization);
                 db.SaveChanges();
             }
-        }
+        }*/
 
         public void AssociateOrganization(Organization organization)
         {

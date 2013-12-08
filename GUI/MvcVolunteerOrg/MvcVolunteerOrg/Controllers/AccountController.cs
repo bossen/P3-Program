@@ -82,24 +82,16 @@ namespace MvcVolunteerOrg.Controllers
                     {
                         if (model.IsAdmin)
                         {
-<<<<<<< HEAD
                             Admin newAdmin = new Admin(WebSecurity.CurrentUserId);
-=======
-                            Admin newAdmin = new Admin(WebSecurity.CurrentUserId, model.Username);
->>>>>>> 069dddf5b635ddbbe4c430125a92cd7e5c9607cc
                             db.Admins.Add(newAdmin);
                             return RedirectToAction("CreateOrNot", "Profile");
                         }
                         else 
                         {
-<<<<<<< HEAD
                             Volunteer newVolunteer = new Volunteer(WebSecurity.CurrentUserId);
                             db.Volunteers.Add(newVolunteer);
-=======
-                            Volunteer newVolunteer = new Volunteer(WebSecurity.CurrentUserId, model.Username);
-                            db.Volunteers.Add(newVolunteer);
+
                             return RedirectToAction("Create", "Profile");
->>>>>>> 069dddf5b635ddbbe4c430125a92cd7e5c9607cc
                         }
                         db.SaveChanges();
                     }

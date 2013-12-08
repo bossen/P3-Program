@@ -36,7 +36,6 @@ namespace MvcVolunteerOrg.Models
                     new Volunteer()
                     {
                         Name = "Lukas",
-                        Username = "Lukas",
                         Creation = DateTime.Now,
                         Email = "Lukas@Volunteer.dk",
                         Id = 1,
@@ -48,7 +47,6 @@ namespace MvcVolunteerOrg.Models
                     new Volunteer()
                     {
                         Name = "Jannek",
-                        Username = "Jannek",
                         Creation = DateTime.Now,
                         Email = "Jannek@Volunteer.dk",
                         Id = 2,
@@ -137,7 +135,6 @@ namespace MvcVolunteerOrg.Models
                     Id = 1,
                     UserId = 1,
                     Name = "Patrick",
-                    Username = "AdminPat",
                     Email = "Adminpat@admin.dk",
                     Creation = DateTime.Now,
                     Location = new Location("Admin Path 7", "Admin Universe"),
@@ -150,7 +147,6 @@ namespace MvcVolunteerOrg.Models
                     Id = 2,
                     UserId = 2,
                     Name = "Mike",
-                    Username = "AdminMike",
                     Email = "Adminmike@admin.dk",
                     Creation = DateTime.Now,
                     Location = new Location("Admin Path 8", "Admin Universe"),
