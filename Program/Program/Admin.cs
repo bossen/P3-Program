@@ -17,17 +17,19 @@ namespace Model
         #endregion
 
         #region Constructors
-        public Admin(int userid, Organization assocation, string name = null, Location location = null, string email = null)
+        public Admin(int userid, string name = null, Location location = null, string email = null)
             : base(userid, name, location, email)
-        {
-            this.Association = assocation;
-        }
+        { }
 
         public Admin()
         { }
         #endregion
 
         #region Methods
+        public void CreateAssociation (Organization association)
+        {
+            this.Association = association;
+        }
         #endregion
     }
 }
