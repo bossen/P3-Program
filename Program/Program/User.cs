@@ -15,11 +15,14 @@ namespace Model
     /// <summary>
     /// Summary description for User
     /// </summary>
+    /// 
+    [Table("UserProfile")]
     public abstract class User
     {
         #region Properties
         [Key]
         [Required]
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         public int UserId { get; set; }
@@ -27,6 +30,11 @@ namespace Model
         [Required]
         [Display(Name = "User name")]
         public string UserName { get; set; }
+
+        [Required]
+        [DataType(DataType.Password)]
+        [Display(Name = "Password")]
+        public string Password { get; set; }
 
         [Display(Name = "Admin?")]
         public bool IsAdmin { get; set; }
@@ -67,9 +75,25 @@ namespace Model
         [Required]
         [Display(Name = "User name")]
         public string UserName { get; set; }
+
+        [Required]
+        [Display(Name = "Password")]
+        public string Password { get; set; }
     }
 
+    public class RegisterModel
+    {
+        [Required]
+        [Display(Name = "User name")]
+        public string UserName { get; set; }
 
+        [Required]
+        [Display(Name = "Password")]
+        public string Password { get; set; }
+
+        [Display(Name = "Admin?")]
+        public bool IsAdmin { get; set; }
+    }
 
 
 
