@@ -20,7 +20,7 @@ namespace UnitTestProject1
             preferences.Add(Preference.Church);
             preferences.Add(Preference.Festival);
 
-            Volunteer v = new Volunteer(username, password, name, l, mail);
+            Volunteer v = new Volunteer(1, name, l, mail);
             Organization o = new Organization();
             VolunteerProject vp = new VolunteerProject(title, l, time, preferences, o, description, true);
 

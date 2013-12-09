@@ -42,11 +42,11 @@ namespace Model
             this.Location = location;
             this.Email = email;
 
-            using (var db = new VolunteerOrgContext())
+            /*using (var db = new VolunteerOrgContext())
             {
                 db.Organizations.Add(this);
                 db.SaveChanges();
-            }
+            }*/
         }
 
         public Organization()

@@ -12,22 +12,21 @@ namespace UnitTestProject1
         [TestMethod]
         public void AdminConstructors()
         {
-            string username = "username", password = "password", name = "name", address = "address", city = "city", mail = "mail";
+            int userid = 1;
+            string name = "name", address = "address", city = "city", mail = "mail";
             Location l = new Location(address, city);
-            Admin a1 = new Admin(username, password, name, l, mail);
+            Admin a1 = new Admin(userid, username, name, l, mail);
+            Assert.AreEqual(userid, a1.UserId);
             Assert.AreEqual(DateTime.Now.Second, a1.Creation.Second);
-            Assert.AreEqual(username, a1.Username);
-            Assert.AreEqual(password, a1.Password);
             Assert.AreEqual(name, a1.Name);
             Assert.AreEqual(l.Address, a1.Location.Address);
             Assert.AreEqual(l.City, a1.Location.City);
             Assert.AreEqual(mail, a1.Email);
 
             //Test minimum constructor parameters
-            Volunteer a2 = new Volunteer(username, password);
+            Volunteer a2 = new Volunteer(userid, username);
             Assert.AreEqual(DateTime.Now.Second, a2.Creation.Second);
-            Assert.AreEqual(username, a2.Username);
-            Assert.AreEqual(password, a2.Password);
+            Assert.AreEqual(userid, a1.UserId);
         }
     }
 }

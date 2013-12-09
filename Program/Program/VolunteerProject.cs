@@ -40,13 +40,7 @@ namespace Model
 
             using (var db = new VolunteerOrgContext())
             {
-                foreach (Volunteer volunteer in db.Volunteers)
-                {
-                    if (CheckVolunteerMatch(volunteer))
-                    {
-                        volunteer.AddSuggestion(this);
-                    }
-                }
+                SuggestVolunteers();
 
                 db.VolunteerProjects.Add(this);
                 db.SaveChanges();
@@ -91,9 +85,24 @@ namespace Model
             return participants;
         }
 
-        private bool CheckVolunteerMatch(Volunteer volunteer)
+        private bool CheckVolunteerSuggest(Volunteer volunteer)
         {
             return volunteer.Preferences.Intersect(this.Topics).Count() > 0 ? true : false;
+        }
+
+        private void SuggestVolunteers()
+        {
+            using (var db = new VolunteerOrgContext())
+            {
+                foreach (Volunteer volunteer in db.Volunteers)
+                {
+                    if (CheckVolunteerSuggest(volunteer))
+                    {
+                        Suggestion newSuggestion = volunteer.AddSuggestion(this);
+                        Matches.Add(newSuggestion);
+                    }
+                }
+            }
         }
         #endregion
     }
