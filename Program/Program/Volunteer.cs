@@ -75,6 +75,11 @@ namespace Model
             return GetMatches(null);
         }
 
+        public List<Match> SortMatches()
+        {
+            return GetPendingMatches().OrderBy<Match, int>(x => x.Score).ToList<Match>();
+        }
+
         public void RemoveProject(VolunteerProject project)
         {
             foreach (Match match in _matches)
