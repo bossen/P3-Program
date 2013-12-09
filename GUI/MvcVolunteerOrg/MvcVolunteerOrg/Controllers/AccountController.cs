@@ -34,7 +34,7 @@ namespace MvcVolunteerOrg.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(LoginModel model, string returnUrl)
         {
-            if (ModelState.IsValid && WebSecurity.Login(model.Username, model.Password))
+            if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password))
             {
                 return RedirectToLocal(returnUrl);
             }

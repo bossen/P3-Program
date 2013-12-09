@@ -12,28 +12,28 @@ namespace UnitTestProject1
         [TestMethod]
         public void VolunteerConstructors()
         {
+            int userid = 1;
             string username = "username", password = "password", name = "name", address = "address", city = "city", mail = "mail";
             Location l = new Location(address, city);
 
-            Volunteer v1 = new Volunteer(username, password, name, l, mail);
+            Volunteer v1 = new Volunteer(userid, username, name, l, mail);
             Assert.AreEqual(DateTime.Now.Second, v1.Creation.Second);
-            Assert.AreEqual(username, v1.Username);
-            Assert.AreEqual(password, v1.Password);
+            Assert.AreEqual(userid, v1.UserId);
             Assert.AreEqual(name, v1.Name);
             Assert.AreEqual(l.Address, v1.Location.Address);
             Assert.AreEqual(l.City, v1.Location.City);
             Assert.AreEqual(mail, v1.Email);
 
             //Test minimum constructor parameters
-            Volunteer v2 = new Volunteer(username, password);
+            Volunteer v2 = new Volunteer(userid, username);
             Assert.AreEqual(DateTime.Now.Second, v2.Creation.Second);
-            Assert.AreEqual(username, v2.Username);
-            Assert.AreEqual(password, v2.Password);
+            Assert.AreEqual(userid, v1.UserId);
         }
 
         [TestMethod]
         public void VolunteerMethods()
         {
+            int userid = 1;
             string username = "username", password = "password", name = "name", address = "address", city = "city", mail = "mail";
             string title = "title", description = "description";
             Location l = new Location(address, city);
@@ -43,7 +43,7 @@ namespace UnitTestProject1
             preferences.Add(Preference.Festival);
 
             Organization o = new Organization();
-            Volunteer v = new Volunteer(username, password, name, new Location(address, city), mail);
+            Volunteer v = new Volunteer(userid, name, new Location(address, city), mail);
             VolunteerProject vp = new VolunteerProject(title, l, time, preferences, o, description, true);
 
             //Test workrequests

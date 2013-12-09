@@ -59,8 +59,9 @@ namespace Model
         public User()
         { }
 
-        public User(int userid, string name = null, Location location = null, string email = null)
+        public User(int userid, string username, string name = null, Location location = null, string email = null)
         {
+            this.UserName = username;
             this.UserId = userid;
             this.Creation = DateTime.Now;
             this.Name = name;

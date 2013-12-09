@@ -12,6 +12,7 @@ namespace UnitTestProject1
         [TestMethod]
         public void WorkRequestConstructors()
         {
+            int userid = 1;
             string username = "username", password = "password", name = "name", address = "address", city = "city", mail = "mail";
             string title = "title", description = "description";
             Location l = new Location(address, city);
@@ -20,7 +21,7 @@ namespace UnitTestProject1
             preferences.Add(Preference.Church);
             preferences.Add(Preference.Festival);
 
-            Volunteer v = new Volunteer(username, password, name, l, mail);
+            Volunteer v = new Volunteer(userid, username, name, l, mail);
             Organization o = new Organization();
             VolunteerProject vp = new VolunteerProject(title, l, time, preferences, o, description, true);
 
@@ -35,6 +36,7 @@ namespace UnitTestProject1
         [TestMethod]
         public void WorkRequestMethods()
         {
+            int userid = 1;
             string username = "username", password = "password", name = "name", address = "address", city = "city", mail = "mail";
             string title = "title", description = "description";
             Location l = new Location(address, city);
@@ -43,7 +45,7 @@ namespace UnitTestProject1
             preferences.Add(Preference.Church);
             preferences.Add(Preference.Festival);
 
-            Volunteer v = new Volunteer(username, password, name, l, mail);
+            Volunteer v = new Volunteer(userid, name, l, mail);
             Organization o = new Organization();
             VolunteerProject vp = new VolunteerProject(title, l, time, preferences, o, description, true);
 
