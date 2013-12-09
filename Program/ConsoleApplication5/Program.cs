@@ -42,6 +42,7 @@ namespace ConsoleApplication5
         {
             using (var db = new AnimalContext())
             {
+                db.Database.ExecuteSqlCommand("delete from Creatures");
                 Cat c1 = new Cat() { Age = 2, Name = "snowy", MiavSound = "MIAAUVVV" };
                 Dog d1 = new Dog() { Age = 13, Name = "Futte", WuffSound = "woof" };
                 Person p1 = new Person() { Age = 2, Name = "jack", Pets = new List<Creature>() { c1, d1 } };
