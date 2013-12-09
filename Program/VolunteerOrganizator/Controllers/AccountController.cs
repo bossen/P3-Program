@@ -15,7 +15,6 @@ using Model;
 namespace VolunteerOrganizator.Controllers
 {
     [Authorize]
-    //[InitializeSimpleMembership]
     public class AccountController : Controller
     {
         //
@@ -73,32 +72,37 @@ namespace VolunteerOrganizator.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult Register(Volunteer vmodel,Admin amodel, VolunteerOrganizatorContext context)
+        public ActionResult Register(RegisterModel model)
         {
             if (ModelState.IsValid)
             {
-                // Attempt to register the user
-                if (amodel.IsAdmin == true)
-                {
-                    Model.Admin newAdmin = new Admin()
-                    {
-                        UserName = amodel.UserName
-                    };
-                    context.Admins.Add(newAdmin);
-                    return RedirectToAction("Index", "Home");
-                }
 
-                else 
-                {
-                    Model.Volunteer newVolunteer = new Volunteer()
+                    try
                     {
-                        UserName = vmodel.UserName
-                    };
-                    context.Volunteers.Add(newVolunteer);
-                    return RedirectToAction("Index", "Home");
-                }
+                            // Attempt to register the user
+                            if (model.IsAdmin == true)
+                            {
+                                WebSecurity.CreateUserAndAccount(model.UserName, model.Password, model.IsAdmin == true);
+                                WebSecurity.Login(model.UserName, model.Password);
+                                return RedirectToAction("Index", "Home");
+                            }
+
+                            else
+                            {
+                                WebSecurity.CreateUserAndAccount(model.UserName, model.Password, model.IsAdmin == false);
+                                WebSecurity.Login(model.UserName, model.Password);
+                                return RedirectToAction("Index", "Home");
+                            }
+                        
+                    }
+
+                    catch (MembershipCreateUserException e)
+                    {
+                        ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
+                    }
                 
                 
+           
                 /*try
                 {
                     

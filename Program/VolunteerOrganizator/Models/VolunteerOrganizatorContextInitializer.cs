@@ -7,7 +7,7 @@ using Model;
 
 namespace VolunteerOrganizator.Models
 {
-    public class VolunteerOrganizatorContextInitializer : DropCreateDatabaseAlways<VolunteerOrganizatorContext>
+    public class VolunteerOrganizatorContextInitializer : DropCreateDatabaseIfModelChanges<VolunteerOrganizatorContext>
     {
         protected override void Seed(VolunteerOrganizatorContext context)
         {
@@ -36,25 +36,29 @@ namespace VolunteerOrganizator.Models
                 new Volunteer()
                 {
                     UserName = "Lukas",
+                    Password = "123456",
                     Name = "Lukas",
                     Creation = DateTime.Now,
                     Email = "Lukas@Volunteer.dk",
                     Id = 1,
                     Location = new Location("Volunteer Street 1", "Volunteertown"),
                     UserId = 1,
-                    Preferences = new List<Preference>() { Preference.Church, Preference.Festival, Preference.Sport }
+                    Preferences = new List<Preference>() { Preference.Church, Preference.Festival, Preference.Sport },
+                    IsAdmin = false
                 });
             context.Volunteers.Add(
                 new Volunteer()
                 {
                     UserName = "Jannek",
+                    Password = "123456",
                     Name = "Jannek",
                     Creation = DateTime.Now,
                     Email = "Jannek@Volunteer.dk",
                     Id = 2,
                     Location = new Location("Volunteer Street 2", "Volunteertown"),
                     UserId = 2,
-                    Preferences = new List<Preference>() { Preference.Festival, Preference.Political }
+                    Preferences = new List<Preference>() { Preference.Festival, Preference.Political },
+                    IsAdmin = false
                 });
 
             context.VolunteerProjects.Add(
@@ -129,26 +133,30 @@ namespace VolunteerOrganizator.Models
                 new Admin()
                 {
                     UserName = "Patrick",
+                    Password = "123456",
                     Id = 1,
                     UserId = 1,
                     Name = "Patrick",
                     Email = "Adminpat@admin.dk",
                     Creation = DateTime.Now,
                     Location = new Location("Admin Path 7", "Admin Universe"),
-                    Association = o1
+                    Association = o1,
+                    IsAdmin = true
                 });
 
             context.Admins.Add(
                 new Admin()
                 {
                     UserName = "Mike",
+                    Password = "123456",
                     Id = 2,
                     UserId = 2,
                     Name = "Mike",
                     Email = "Adminmike@admin.dk",
                     Creation = DateTime.Now,
                     Location = new Location("Admin Path 8", "Admin Universe"),
-                    Association = o2
+                    Association = o2,
+                    IsAdmin = true
                 });
 
 

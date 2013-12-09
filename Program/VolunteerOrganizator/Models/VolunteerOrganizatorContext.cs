@@ -9,6 +9,10 @@ namespace VolunteerOrganizator.Models
 {
     public class VolunteerOrganizatorContext : DbContext
     {
+        public VolunteerOrganizatorContext()
+            : base("DefaultConnection")
+        { }
+
         // Initialize Database from different classes.
         public DbSet<Volunteer> Volunteers { get; set; }
         public DbSet<Admin> Admins { get; set; }
