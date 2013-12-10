@@ -16,15 +16,23 @@ namespace Model
     /// Summary description for User
     /// </summary>
     /// 
-    [Table("UserProfile")]
     public abstract class User
     {
+        #region Properties
+        public int ID { get; set; }
+        public string UserName { get; set; }
+        public string Password { get; set; }
+        public bool IsAdmin { get; set; }
+        public string Name { get; set; }
+        public DateTime Creation { get; set; }
+        public Location Location { get; set; }
+        public string Email { get; set; }
+        #endregion
+        /* olds test
         #region Properties
         [Key]
         [Required]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
-
         public int UserId { get; set; }
 
         [Required]
@@ -54,15 +62,16 @@ namespace Model
         public string Email { get; set; }    
 
         #endregion
+         */
+        //NEED TO BE REMOVED
 
         #region Constructors
         public User()
         { }
 
-        public User(int userid, string username, string name = null, Location location = null, string email = null)
+        public User(string username, string name = null, Location location = null, string email = null)
         {
             this.UserName = username;
-            this.UserId = userid;
             this.Creation = DateTime.Now;
             this.Name = name;
             this.Location = location;

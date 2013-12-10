@@ -38,13 +38,7 @@ namespace Model
             this.Description = description;
             this.Signup = signup;
 
-            using (var db = new VolunteerOrgContext())
-            {
-                SuggestVolunteers();
-
-                db.VolunteerProjects.Add(this);
-                db.SaveChanges();
-            }
+            //SuggestVolunteers();
         }
         #endregion
 
@@ -78,10 +72,10 @@ namespace Model
         {
             List<Volunteer> participants = new List<Volunteer>();
             foreach (Match match in Matches)
-	        {
-                if(match.Accepted == true)
+            {
+                if (match.Accepted == true)
                     participants.Add(match.Volunteer);
-	        }
+            }
             return participants;
         }
 

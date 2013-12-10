@@ -22,15 +22,9 @@ namespace Model
         public Volunteer()
         { }
 
-        public Volunteer(int userid, string username, string name = null, Location location = null, string email = null)
-            :base(userid, username, name, location, email)
-        {
-            using (var db = new VolunteerOrgContext())
-            {
-                db.Volunteers.Add(this);
-                db.SaveChanges();
-            }
-        }
+        public Volunteer(string username, string name = null, Location location = null, string email = null)
+            : base(username, name, location, email)
+        { }
         #endregion
 
         #region Methods
@@ -39,7 +33,7 @@ namespace Model
         {
             _matches.Add(match);
         }
-        
+
         public void AddWorkRequest(VolunteerProject project)
         {
             WorkRequest newWorkRequest = new WorkRequest(this, project);

@@ -28,7 +28,6 @@ namespace Model
         [DataType(DataType.EmailAddress)]
         [Display(Name = "Email")]
         public string Email { get; set; }
-        public event EventHandler NewProjectHandler;
 
 
         private List<VolunteerProject> _volunteerProjects = new List<VolunteerProject>();

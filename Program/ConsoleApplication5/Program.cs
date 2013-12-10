@@ -7,7 +7,7 @@ using System.Data.Entity;
 
 namespace ConsoleApplication5
 {
-    class Program
+    public class Program
     {
         public class Creature
         {
@@ -40,40 +40,26 @@ namespace ConsoleApplication5
 
         static void Main(string[] args)
         {
-            using (var db = new AnimalContext())
+            Console.WriteLine("person");
+            var personname = Console.ReadLine();
+            Console.WriteLine("cat");
+            var catname = Console.ReadLine();
+            Console.WriteLine("dog");
+            var dogname = Console.ReadLine();
+            Cat c1 = new Cat() { Age = 2, Name = catname, MiavSound = "MIAAUVVV" };
+            Dog d1 = new Dog() { Age = 13, Name = dogname, WuffSound = "woof" };
+            Person p1 = new Person() { Age = 2, Name = personname, Pets = new List<Creature>() { c1, d1 } };
+
+            foreach (Creature p in p1.Pets)
             {
-                db.Database.ExecuteSqlCommand("delete from Creatures");
-                Cat c1 = new Cat() { Age = 2, Name = "snowy", MiavSound = "MIAAUVVV" };
-                Dog d1 = new Dog() { Age = 13, Name = "Futte", WuffSound = "woof" };
-                Person p1 = new Person() { Age = 2, Name = "jack", Pets = new List<Creature>() { c1, d1 } };
-
-                foreach (Creature p in p1.Pets)
-                {
-                    Console.WriteLine(p.Name);
-                }
-
-                db.Cats.Add(c1);
-                db.Dogs.Add(d1);
-                db.People.Add(p1);
-                db.SaveChanges();
-
-                foreach (Person p in db.People)
-                {
-                    foreach (Creature c in p.Pets)
-                    {
-                        Console.WriteLine(c.Name);
-                    }
-                }
+                Console.WriteLine(p.Name);
             }
 
-            using (var db = new AnimalContext())
+            foreach (Person p in db.People)
             {
-                foreach (Person p in db.People)
+                foreach (Creature c in p.Pets)
                 {
-                    foreach (Creature c in p.Pets)
-                    {
-                        Console.WriteLine(c.Name);
-                    }
+                    Console.WriteLine(c.Name);
                 }
             }
         }
