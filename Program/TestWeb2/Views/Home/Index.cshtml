@@ -1,11 +1,11 @@
 ﻿@section featured {
+    @if (!ViewBag.Authenticated)
+    {
     <section class="featured">
         <div class="content-wrapper">
             <hgroup class="title">
                 <h1>@ViewBag.Title</h1>
             </hgroup>
-            @if (!ViewBag.Authenticated)
-            {
                 <p>
                     Do you want to help out in volunteer projects in your community, yet are having trouble finding them?
                     Or are there so many projects to choose from that you can hardly pick among them? Are you
@@ -19,10 +19,10 @@
                     <br />
                     <a href="http://localhost:2601/Account/Register">Register</a> your account or organization today.
                 </p>
-            }
 
         </div>
     </section>
+    }
 }
 <div>
     <h3>Your invites:</h3>
