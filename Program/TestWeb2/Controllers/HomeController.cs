@@ -60,6 +60,11 @@ namespace TestWeb2.Controllers
             return View();
         }
 
+        public ViewResult Project(VolunteerProject project)
+        {
+            return View(project);
+        }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your app description page.";
