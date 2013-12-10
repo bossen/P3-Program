@@ -84,9 +84,11 @@ namespace Model
             return participants;
         }
 
+        //Checks if the project matches the user's preferences.
+        //Always returns true if the user has no set preferences.
         private bool CheckVolunteerSuggest(Volunteer volunteer)
         {
-            if (volunteer.Preferences.Intersect(this.Topics).Count() > 0)
+            if (volunteer.Preferences.Intersect(this.Topics).Count() > 0 && volunteer.Preferences.Count != 0)
                 return false;
             return true;
         }
