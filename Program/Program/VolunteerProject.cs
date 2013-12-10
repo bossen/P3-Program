@@ -9,10 +9,6 @@ namespace Model
 {
     public class VolunteerProject
     {
-        #region Private Variables
-        private int _Score;
-        #endregion
-
         #region Properties
         [Key]
         [Required()]
