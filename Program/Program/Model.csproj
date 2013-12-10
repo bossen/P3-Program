@@ -47,7 +47,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Admin.cs" />
-    <Compile Include="CalculateDistance.cs" />
     <Compile Include="Invite.cs" />
     <Compile Include="Location.cs" />
     <Compile Include="Mail.cs" />
