@@ -86,8 +86,8 @@ namespace Model
         private bool CheckVolunteerSuggest(Volunteer volunteer)
         {
             if (volunteer.Preferences.Intersect(this.Topics).Count() > 0)
-                return false; //Return score
-            return true; //50 minus distance
+                return false;
+            return true;
         }
 
         private void SuggestVolunteers()

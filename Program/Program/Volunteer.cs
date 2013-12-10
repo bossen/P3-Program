@@ -69,7 +69,8 @@ namespace Model
             return GetMatches(null);
         }
 
-        public List<Match> SortMatches()
+        //Returns all pending matches sorted by revelance (score)
+        public List<Match> GetSortMatches()
         {
             return GetPendingMatches().OrderBy<Match, int>(x => x.Score).ToList<Match>();
         }
