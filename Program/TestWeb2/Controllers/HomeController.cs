@@ -22,24 +22,30 @@ namespace TestWeb2.Controllers
             Organization o1 = new Organization("green", new Location("address", "city"), "mail@mail.dk");
             VolunteerProject vp1 = o1.CreateProject("title", new Location("address", "city"), DateTime.Now.AddDays(2), new List<Preference>() { Preference.Church }, "description");
             Suggestion s1 = v1.AddSuggestion(vp1);
+
+            Volunteer ole = db.Volunteers.ToList().Where(v => v.UserName == "ole").FirstOrDefault();
+            ole.AddSuggestion(vp1);
+            Invite i1 = new Invite(ole, vp1);
+            ole.AddMatch(i1);
+
             db.Organizations.Add(o1);
             db.Volunteers.Add(v1);
             db.SaveChanges();
 
+            ViewBag.Authenticated = WebSecurity.IsAuthenticated;
 
-            Volunteer currentUser = db.Volunteers.ToList().Where(v => v.UserName == WebSecurity.CurrentUserName).FirstOrDefault();
-
-            ViewBag.Message = currentUser.Name;
-            //ViewBag.Suggestions = v1.GetSortMatches().Take(5);
-            ViewBag.Suggestions = currentUser.GetSortMatches().Take(5);
-
-            return View();
-        }
-
-        public ActionResult DashBoard()
-        {
-            Volunteer currentUser = db.Volunteers.ToList().Where(v => v.Name == "jack").FirstOrDefault();
-            ViewBag.Suggestions = currentUser.GetSortMatches();
+            if (WebSecurity.IsAuthenticated)
+            {
+                Volunteer currentUser = db.Volunteers.ToList().Where(v => v.UserName == WebSecurity.CurrentUserName).FirstOrDefault();
+                ViewBag.Title = "Welcome " + currentUser.Name;
+                ViewBag.Invites = currentUser.GetInvites();
+                ViewBag.Suggestions = currentUser.GetSortMatches();
+            }
+            else
+            {
+                ViewBag.Title = "Welcome";
+                ViewBag.Suggestions = db.VolunteerProjects.OrderBy(p => p.Time).Take(5);
+            }
 
             return View();
         }
