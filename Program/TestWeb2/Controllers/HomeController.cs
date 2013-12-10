@@ -23,10 +23,10 @@ namespace TestWeb2.Controllers
             VolunteerProject vp1 = o1.CreateProject("title", new Location("address", "city"), DateTime.Now.AddDays(2), new List<Preference>() { Preference.Church }, "description");
             Suggestion s1 = v1.AddSuggestion(vp1);
 
-            Volunteer ole = db.Volunteers.ToList().Where(v => v.UserName == "ole").FirstOrDefault();
-            ole.AddSuggestion(vp1);
-            Invite i1 = new Invite(ole, vp1);
-            ole.AddMatch(i1);
+            //Volunteer ole = db.Volunteers.ToList().Where(v => v.UserName == "ole").FirstOrDefault();
+            //ole.AddSuggestion(vp1);
+            //Invite i1 = new Invite(ole, vp1);
+            //ole.AddMatch(i1);
 
             db.Organizations.Add(o1);
             db.Volunteers.Add(v1);
