@@ -42,7 +42,7 @@ namespace Model
 
         public void SetScore()
         {
-            this.Score = Score;
+            this.Score = Score - (int)this.Project.Calculate(Project, Volunteer);
         }
 
         public void DeleteMatch()
