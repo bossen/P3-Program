@@ -37,7 +37,7 @@ namespace TestWeb2.Controllers
             if (WebSecurity.IsAuthenticated)
             {
                 Volunteer currentUser = db.Volunteers.ToList().Where(v => v.UserName == WebSecurity.CurrentUserName).FirstOrDefault();
-                ViewBag.Title = "Welcome " + currentUser.Name;
+                ViewBag.Title = "";
                 ViewBag.Invites = currentUser.GetInvites();
                 ViewBag.Suggestions = currentUser.GetSortMatches();
             }
@@ -47,6 +47,13 @@ namespace TestWeb2.Controllers
                 ViewBag.Suggestions = db.VolunteerProjects.OrderBy(p => p.Time).Take(5);
             }
 
+            return View();
+        }
+
+        public ActionResult Projects()
+        {
+            ViewBag.Title = "List of Volunteer Projects";
+            ViewBag.Projects = db.VolunteerProjects;
             return View();
         }
 
