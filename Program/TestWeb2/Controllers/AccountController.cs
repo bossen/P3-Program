@@ -84,10 +84,24 @@ namespace TestWeb2.Controllers
                 {
                     WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
                     WebSecurity.Login(model.UserName, model.Password);
+<<<<<<< HEAD
+<<<<<<< HEAD
+                    if (model.IsAdmin)
+                    {
+                        return RedirectToAction("CreateOrNot", "Home/Organization");
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
+=======
+=======
+>>>>>>> 4f54b626bacc9ddcd027f97ce972db807ed140d4
                     Volunteer newVolunteer = new Volunteer(model.UserName);
                     db.Volunteers.Add(newVolunteer);
                     db.SaveChanges();
                     return RedirectToAction("Index", "Home");
+>>>>>>> 4f54b626bacc9ddcd027f97ce972db807ed140d4
                 }
                 catch (MembershipCreateUserException e)
                 {

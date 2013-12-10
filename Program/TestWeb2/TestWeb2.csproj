@@ -308,6 +308,19 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\Home\DashBoard.cshtml" />
+    <Content Include="Views\Home\Organization\Create.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Home\Organization\CreateOrNot.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Home\Organization\Dashboard.cshtml" />
+    <Content Include="Views\Home\Organization\Edit.cshtml" />
+    <Content Include="Views\Home\Organization\Index.cshtml" />
+    <Content Include="Views\Home\Profile\Create.cshtml" />
+    <Content Include="Views\Home\Profile\Dashboard.cshtml" />
+    <Content Include="Views\Home\Profile\Edit.cshtml" />
+    <Content Include="Views\Home\Profile\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
