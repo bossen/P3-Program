@@ -51,7 +51,7 @@ namespace Model
             return newSuggestion;
         }
 
-        private List<Match> GetMatches(bool? input)
+        private IEnumerable<Match> GetMatches(bool? input)
         {
             List<Match> matches = new List<Match>();
 
@@ -63,18 +63,18 @@ namespace Model
             return matches;
         }
 
-        public List<Match> GetAcceptedMatches()
+        public IEnumerable<Match> GetAcceptedMatches()
         {
             return GetMatches(true);
         }
 
-        public List<Match> GetPendingMatches()
+        public IEnumerable<Match> GetPendingMatches()
         {
             return GetMatches(null);
         }
 
         //Returns all pending matches sorted by revelance (score)
-        public List<Match> GetSortMatches()
+        public IEnumerable<Match> GetSortMatches()
         {
             return GetPendingMatches().OrderBy<Match, int>(x => x.Score).ToList<Match>();
         }
@@ -89,6 +89,11 @@ namespace Model
                     break;
                 }
             }
+        }
+
+        public IEnumerable<Invite> GetInvites()
+        {
+            return _matches.OfType<Invite>();
         }
         #endregion
     }
