@@ -38,7 +38,9 @@ namespace TestWeb2.Controllers
             {
                 Volunteer currentUser = db.Volunteers.ToList().Where(v => v.UserName == WebSecurity.CurrentUserName).FirstOrDefault();
                 ViewBag.Title = "";
-                ViewBag.Invites = currentUser.GetInvites();
+
+                if (currentUser.GetInvites() != null)
+                    ViewBag.Invites = currentUser.GetInvites();
                 ViewBag.Suggestions = currentUser.GetSortMatches();
             }
             else

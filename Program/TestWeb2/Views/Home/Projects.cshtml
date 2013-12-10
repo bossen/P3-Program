@@ -2,3 +2,14 @@
     <h1>@ViewBag.Title.</h1>
     <h2>@ViewBag.Message</h2>
 </hgroup>
+<ul>
+    @foreach (Model.VolunteerProject project in ViewBag.Projects)
+    {
+        <li>
+            @project.Title
+            @project.Time
+            @project.Owner.Name
+        </li>
+    }
+
+</ul>

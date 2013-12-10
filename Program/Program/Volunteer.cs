@@ -15,20 +15,16 @@ namespace Model
     {
         #region Properties
         public List<Preference> Preferences { get; set; }
-        public List<Match> _matches;
+        public List<Match> _matches = new List<Match>();
         #endregion
 
         #region Constructors
         public Volunteer()
-        {
-            _matches = new List<Match>();
-        }
+        { }
 
         public Volunteer(string username, string name = null, Location location = null, string email = null)
             : base(username, name, location, email)
-        {
-            _matches = new List<Match>();
-        }
+        { }
         #endregion
 
         #region Methods
@@ -76,7 +72,7 @@ namespace Model
         //Returns all pending matches sorted by revelance (score)
         public IEnumerable<Match> GetSortMatches()
         {
-            return GetPendingMatches().OrderBy<Match, int>(x => x.Score).ToList<Match>();
+            return GetPendingMatches().Where(x => x.Score > 0).OrderBy<Match, int>(x => x.Score);
         }
 
         public void RemoveProject(VolunteerProject project)
