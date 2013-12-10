@@ -15,19 +15,21 @@ namespace TestWeb2.Controllers
 
         public ActionResult Index()
         {
-            Volunteer currentUser = db.Volunteers.ToList().Where(v => v.Name == "jack").FirstOrDefault();
             
 
             Volunteer v1 = new Volunteer("jack", "jack", new Location("råbaaavejen 22", "rødeskovkildelyst"), "nice@mail.dk");
             Organization o1 = new Organization("green", new Location("address", "city"), "mail@mail.dk");
-            o1.CreateProject("title", new Location("address", "city"), DateTime.Now.AddDays(2), new List<Preference>() { Preference.Church }, "description");
+            VolunteerProject vp1 = o1.CreateProject("title", new Location("address", "city"), DateTime.Now.AddDays(2), new List<Preference>() { Preference.Church }, "description");
+            Suggestion s1 = v1.AddSuggestion(vp1);
             db.Organizations.Add(o1);
             db.Volunteers.Add(v1);
             db.SaveChanges();
 
 
+            Volunteer currentUser = db.Volunteers.ToList().Where(v => v.Name == "jack").FirstOrDefault();
 
             ViewBag.Message = currentUser.Name;
+            //ViewBag.Suggestions = v1.GetSortMatches().Take(5);
             ViewBag.Suggestions = currentUser.GetSortMatches().Take(5);
 
             return View();

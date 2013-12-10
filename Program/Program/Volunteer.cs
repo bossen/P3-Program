@@ -15,16 +15,20 @@ namespace Model
     {
         #region Properties
         public List<Preference> Preferences { get; set; }
-        public List<Match> _matches = new List<Match>();
+        public List<Match> _matches;
         #endregion
 
         #region Constructors
         public Volunteer()
-        { }
+        {
+            _matches = new List<Match>();
+        }
 
         public Volunteer(string username, string name = null, Location location = null, string email = null)
             : base(username, name, location, email)
-        { }
+        {
+            _matches = new List<Match>();
+        }
         #endregion
 
         #region Methods

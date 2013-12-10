@@ -53,10 +53,11 @@ namespace Model
         #endregion
 
         #region Methods
-        public void CreateProject(string title, Location location, DateTime time, List<Preference> topics, string description = "")
+        public VolunteerProject CreateProject(string title, Location location, DateTime time, List<Preference> topics, string description = "")
         {
             VolunteerProject newProject = new VolunteerProject(title, location, time, topics, this, description, true);
             _volunteerProjects.Add(newProject);
+            return newProject;
         }
 
         public List<VolunteerProject> GetProjects()
