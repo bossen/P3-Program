@@ -32,8 +32,7 @@ namespace TestWeb2.Controllers
             db.Volunteers.Add(v1);
             db.SaveChanges();
 
-            if (db.Volunteers.ToList().Where(v => v.UserName == WebSecurity.CurrentUserName).FirstOrDefault() != null)
-                ViewBag.Authenticated = WebSecurity.IsAuthenticated;
+            ViewBag.Authenticated = WebSecurity.IsAuthenticated;
 
             if (WebSecurity.IsAuthenticated)
             {
