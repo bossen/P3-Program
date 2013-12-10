@@ -10,6 +10,7 @@ using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
 using TestWeb2.Filters;
 using TestWeb2.Models;
+using Model;
 
 namespace TestWeb2.Controllers
 {
@@ -17,6 +18,7 @@ namespace TestWeb2.Controllers
     [InitializeSimpleMembership]
     public class AccountController : Controller
     {
+        private VolunteerOrgContext db = new VolunteerOrgContext();
         //
         // GET: /Account/Login
 
@@ -33,7 +35,7 @@ namespace TestWeb2.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(LoginModel model, string returnUrl)
+        public ActionResult Login(TestWeb2.Models.LoginModel model, string returnUrl)
         {
             if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
             {
@@ -72,7 +74,7 @@ namespace TestWeb2.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult Register(RegisterModel model)
+        public ActionResult Register(TestWeb2.Models.RegisterModel model)
         {
             if (ModelState.IsValid)
             {
@@ -81,6 +83,7 @@ namespace TestWeb2.Controllers
                 {
                     WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
                     WebSecurity.Login(model.UserName, model.Password);
+<<<<<<< HEAD
                     if (model.IsAdmin)
                     {
                         return RedirectToAction("CreateOrNot", "Home/Organization");
@@ -89,6 +92,12 @@ namespace TestWeb2.Controllers
                     {
                         return RedirectToAction("Index", "Home");
                     }
+=======
+                    Volunteer newVolunteer = new Volunteer(model.UserName);
+                    db.Volunteers.Add(newVolunteer);
+                    db.SaveChanges();
+                    return RedirectToAction("Index", "Home");
+>>>>>>> 4f54b626bacc9ddcd027f97ce972db807ed140d4
                 }
                 catch (MembershipCreateUserException e)
                 {

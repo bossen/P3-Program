@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Web.Security;
 using Model;
 using System.Data.Entity;
+using WebMatrix.WebData;
 
 namespace TestWeb2.Controllers
 {
@@ -26,7 +27,7 @@ namespace TestWeb2.Controllers
             db.SaveChanges();
 
 
-            Volunteer currentUser = db.Volunteers.ToList().Where(v => v.Name == "jack").FirstOrDefault();
+            Volunteer currentUser = db.Volunteers.ToList().Where(v => v.UserName == WebSecurity.CurrentUserName).FirstOrDefault();
 
             ViewBag.Message = currentUser.Name;
             //ViewBag.Suggestions = v1.GetSortMatches().Take(5);
