@@ -49,5 +49,15 @@ namespace TestWeb2.Controllers
 
             return View();
         }
+
+        public ActionResult Profile()
+        {
+            return View("Home/Profile/Index");
+        }
+
+        public ActionResult ProfileCreate()
+        {
+            return View("Home/Profile/Create");
+        }
     }
 }

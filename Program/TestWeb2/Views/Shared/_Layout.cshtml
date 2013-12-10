@@ -20,9 +20,19 @@
                     </section>
                     <nav>
                         <ul id="menu">
-                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                            <li>@Html.ActionLink("About", "About", "Home")</li>
-                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                            @if (HttpContext.Current.User.Identity.IsAuthenticated)
+                             {
+                                <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                                <li>@Html.ActionLink("About", "About", "Home")</li>
+                                <li>@Html.ActionLink("Profile", "Index", "Profile")</li>
+                                <li>@Html.ActionLink("Dashboard", "Dashboard", "User")</li>
+                             }   
+
+                             @if (HttpContext.Current.User.Identity.IsAuthenticated == false)
+                             {
+                                <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                                <li>@Html.ActionLink("About", "About", "Home")</li>
+                             }
                         </ul>
                     </nav>
                 </div>
