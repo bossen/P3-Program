@@ -24,6 +24,7 @@ namespace Model
         public Location Location { get; set; }
         public DateTime Time { get; set; }
         public List<Preference> Topics { get; set; }
+        [DataType(DataType.MultilineText)]
         public string Description { get; set; }
         public bool Signup { get; private set; }
         #endregion
