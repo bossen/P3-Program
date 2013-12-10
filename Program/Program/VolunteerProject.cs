@@ -9,6 +9,10 @@ namespace Model
 {
     public class VolunteerProject
     {
+        #region Private Variables
+        private int _Score;
+        #endregion
+
         #region Properties
         [Key]
         [Required()]
@@ -81,7 +85,9 @@ namespace Model
 
         private bool CheckVolunteerSuggest(Volunteer volunteer)
         {
-            return volunteer.Preferences.Intersect(this.Topics).Count() > 0 ? true : false;
+            if (volunteer.Preferences.Intersect(this.Topics).Count() > 0)
+                return false; //Return score
+            return true; //50 minus distance
         }
 
         private void SuggestVolunteers()
@@ -90,7 +96,7 @@ namespace Model
             {
                 foreach (Volunteer volunteer in db.Volunteers)
                 {
-                    if (CheckVolunteerSuggest(volunteer))
+                    if (CheckVolunteerSuggest(volunteer) == true)
                     {
                         Suggestion newSuggestion = volunteer.AddSuggestion(this);
                         Matches.Add(newSuggestion);

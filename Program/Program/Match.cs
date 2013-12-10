@@ -16,6 +16,7 @@ namespace Model
         public bool? Accepted { get; set; }
         public DateTime Expire { get; set; }
         public VolunteerProject Project { get; set; }
+        public int Score { get; set; }
         #endregion
 
         #region Constructors
@@ -25,6 +26,7 @@ namespace Model
             this.Project = project;
             this.Accepted = accepted;
             this.Expire = expire;
+            this.Score = 50;
         }
 
         public Match(Volunteer volunteer, VolunteerProject project, bool? accepted = null)
@@ -36,6 +38,11 @@ namespace Model
         public void AcceptMatch()
         {
             this.Accepted = true;
+        }
+
+        public void SetScore()
+        {
+            this.Score = Score; //todo.add(Minus distance calculated using google maps API)
         }
 
         public void DeleteMatch()
