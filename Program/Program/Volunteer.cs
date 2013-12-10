@@ -72,7 +72,7 @@ namespace Model
         //Returns all pending matches sorted by revelance (score)
         public IEnumerable<Match> GetSortMatches()
         {
-            return GetPendingMatches().Where(x => x.Score > 0).OrderBy<Match, int>(x => x.Score).ToList<Match>();
+            return GetPendingMatches().Where(x => x.Score > 0).OrderBy<Match, int>(x => x.Score);
         }
 
         public void RemoveProject(VolunteerProject project)
