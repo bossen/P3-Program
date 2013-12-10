@@ -104,7 +104,7 @@ namespace Model
             }
         }
 
-        public static double Calculate(VolunteerProject VpLoc, Volunteer VtLoc)
+        public double Calculate(VolunteerProject VpLoc, Volunteer VtLoc)
         {
 
             double Radius = 6372.8; // Radius of the earth
