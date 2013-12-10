@@ -19,6 +19,7 @@ namespace TestWeb2.Controllers
     public class AccountController : Controller
     {
         private VolunteerOrgContext db = new VolunteerOrgContext();
+        
         //
         // GET: /Account/Login
 
