@@ -66,13 +66,6 @@ namespace TestWeb2.Controllers
             return View();
         }
 
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
-
         public ActionResult Profile()
         {
             return View("Profile/Index");
