@@ -54,14 +54,6 @@ namespace ConsoleApplication5
             {
                 Console.WriteLine(p.Name);
             }
-
-            foreach (Person p in db.People)
-            {
-                foreach (Creature c in p.Pets)
-                {
-                    Console.WriteLine(c.Name);
-                }
-            }
         }
     }
 }

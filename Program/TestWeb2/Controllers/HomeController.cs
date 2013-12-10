@@ -14,11 +14,24 @@ namespace TestWeb2.Controllers
 
         public ActionResult Index()
         {
+            
+
             Volunteer v1 = new Volunteer("jack", "jack", new Location("råbaaavejen 22", "rødeskovkildelyst"), "nice@mail.dk");
             db.Volunteers.Add(v1);
             db.SaveChanges();
 
-            ViewBag.Message = db.Volunteers.ToList()[0].Name;
+
+            Volunteer currentUser = db.Volunteers.ToList().Where(v => v.Name == "jack").FirstOrDefault();
+
+            ViewBag.Message = currentUser.Name;
+            ViewBag.Suggestions = currentUser.GetPendingMatches().Take(5);
+
+            return View();
+        }
+
+        public ActionResult DashBoard()
+        {
+            
 
             return View();
         }
