@@ -81,7 +81,14 @@ namespace TestWeb2.Controllers
                 {
                     WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
                     WebSecurity.Login(model.UserName, model.Password);
-                    return RedirectToAction("Index", "Home");
+                    if (model.IsAdmin)
+                    {
+                        return RedirectToAction("CreateOrNot", "Home/Organization");
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
                 }
                 catch (MembershipCreateUserException e)
                 {
