@@ -59,5 +59,40 @@ namespace TestWeb2.Controllers
         {
             return View("Home/Profile/Create");
         }
+
+        public ActionResult ProfileEdit()
+        {
+            return View("Home/Profile/Edit");
+        }
+
+        public ActionResult ProfileDashboard()
+        {
+            return View("Home/Profile/Dashboard");
+        }
+
+        public ActionResult CreateOrNot()
+        {
+            return View("Home/Organization/CreateOrNot");
+        }
+
+        public ActionResult Organization()
+        {
+            return View("Home/Organization/Index");
+        }
+
+        public ActionResult OrganizationCreate()
+        {
+            return View("Home/Organization/Create");
+        }
+
+        public ActionResult OrganizationEdit()
+        {
+            return View("Home/Organization/Edit");
+        }
+
+        public ActionResult OrganizationDashboard()
+        {
+            return View("Home/Organization/Dashboard");
+        }
     }
 }
