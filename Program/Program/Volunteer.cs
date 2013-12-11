@@ -91,6 +91,18 @@ namespace Model
         {
             return _matches.OfType<Invite>();
         }
+
+        public string GetStatusOfProject(VolunteerProject project)
+        {
+            foreach (Match match in _matches)
+	        {
+                if (match.Project == project)
+                    return match is Invite ? "invited" : 
+                        match is WorkRequest ? "work requested" : 
+                        "join";
+	        }
+            return "join";
+        }
         #endregion
     }
 }
