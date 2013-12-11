@@ -20,11 +20,11 @@ namespace Model
 
         #region Constructors
         public Volunteer()
-        { }
+        { this.Matches = new List<Match>(); }
 
         public Volunteer(string username, string name = null, Location location = null, string email = null)
             : base(username, name, location, email)
-        { }
+        { this.Matches = new List<Match>(); }
         #endregion
 
         #region Methods
