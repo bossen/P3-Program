@@ -1,11 +1,14 @@
-﻿<hgroup class="title">
+﻿@model IEnumerable<Model.VolunteerProject>
+
+<hgroup class="title">
     <h1>@ViewBag.Title.</h1>
     <h2>@ViewBag.Message</h2>
 </hgroup>
 <ul>
-    @foreach (Model.VolunteerProject project in ViewBag.Projects)
+    @foreach (var item in Model)
     {
         <li>
+<<<<<<< HEAD
             @project.Title
             @project.Time
 <<<<<<< HEAD
@@ -14,6 +17,11 @@
 =======
             @*project.Owner.Name*@
 >>>>>>> 21f85cffe5ffe120b7a07d00026eda27ba21c2fb
+=======
+            @Html.DisplayFor(modelItem => item.Title)
+            @Html.DisplayFor(modelItem => item.Time)
+            @Html.DisplayFor(modelItem => item.Owner.Name)
+>>>>>>> 8252c162b36876d42cb4181afcaa303741aa33c5
         </li>
     }
 </ul>
