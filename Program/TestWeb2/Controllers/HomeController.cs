@@ -28,9 +28,9 @@ namespace TestWeb2.Controllers
             //Invite i1 = new Invite(ole, vp1);
             //ole.AddMatch(i1);
 
-            db.Organizations.Add(o1);
-            db.Volunteers.Add(v1);
-            db.SaveChanges();
+            //db.Organizations.Add(o1);
+            //db.Volunteers.Add(v1);
+            //db.SaveChanges();
 
             ViewBag.Authenticated = WebSecurity.IsAuthenticated;
 
