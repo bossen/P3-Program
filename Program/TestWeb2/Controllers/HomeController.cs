@@ -18,19 +18,19 @@ namespace TestWeb2.Controllers
         {
             
 
-            Volunteer v1 = new Volunteer("jack", "jack", new Location("råbaaavejen 22", "rødeskovkildelyst"), "nice@mail.dk");
-            Organization o1 = new Organization("green", new Location("address", "city"), "mail@mail.dk");
-            VolunteerProject vp1 = o1.CreateProject("title", new Location("address", "city"), DateTime.Now.AddDays(2), new List<Preference>() { Preference.Church }, "description");
-            Suggestion s1 = v1.AddSuggestion(vp1);
-            db.VolunteerProjects.Add(vp1);
-            Volunteer ole = db.Volunteers.ToList().Where(v => v.UserName == "ole1").FirstOrDefault();
-            ole.AddSuggestion(vp1);
-            Invite i1 = new Invite(ole, vp1);
-            ole.AddMatch(i1);
+            //Volunteer v1 = new Volunteer("jack", "jack", new Location("råbaaavejen 22", "rødeskovkildelyst"), "nice@mail.dk");
+            //Organization o1 = new Organization("green", new Location("address", "city"), "mail@mail.dk");
+            //VolunteerProject vp1 = o1.CreateProject("title", new Location("address", "city"), DateTime.Now.AddDays(2), new List<Preference>() { Preference.Church }, "description");
+            //Suggestion s1 = v1.AddSuggestion(vp1);
+            //db.VolunteerProjects.Add(vp1);
+            //Volunteer ole = db.Volunteers.ToList().Where(v => v.UserName == "ole1").FirstOrDefault();
+            //ole.AddSuggestion(vp1);
+            //Invite i1 = new Invite(ole, vp1);
+            //ole.AddMatch(i1);
 
-            db.Organizations.Add(o1);
-            db.Volunteers.Add(v1);
-            db.SaveChanges();
+            //db.Organizations.Add(o1);
+            //db.Volunteers.Add(v1);
+            //db.SaveChanges();
 
             ViewBag.Authenticated = WebSecurity.IsAuthenticated;
 
