@@ -42,12 +42,12 @@
     }
     <h3>We suggest the following:</h3>
     <ol class="round">
-        @foreach (Model.Match suggestion in ViewBag.Suggestions)
+        @foreach (Model.VolunteerProject suggestion in ViewBag.Suggestions)
         {
             <li>
-                @suggestion.Project.Title
-                @suggestion.Project.Time
-                @suggestion.Project.Owner.Name
+                @suggestion.Title
+                @suggestion.Time
+                @*@suggestion.Owner.Name*@
             </li>
         }
 
