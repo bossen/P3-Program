@@ -103,6 +103,30 @@ namespace Model
                 }
             }
         }
+
+        public double Calculate(VolunteerProject VpLoc, Volunteer VtLoc)
+        {
+
+            double Radius = 6372.8; // Radius of the earth
+            // Calculating Delta longitude and latitude in radians
+            double DeltaLat = ToRadians(VtLoc.Location.Lat - VpLoc.Location.Lat);
+            double DeltaLng = ToRadians(VtLoc.Location.Lng - VpLoc.Location.Lng);
+
+            VpLoc.Location.Lat = ToRadians(VpLoc.Location.Lat);
+            VpLoc.Location.Lng = ToRadians(VpLoc.Location.Lat);
+
+            //Haversine formular
+            double SideA = Math.Sin(DeltaLat / 2) * Math.Sin(DeltaLat / 2) + Math.Sin(DeltaLng / 2) * Math.Sin(DeltaLng / 2) * Math.Cos(VtLoc.Location.Lat) * Math.Cos(VpLoc.Location.Lat);
+            double SideC = 2 * Math.Asin(Math.Sqrt(SideA));
+
+            return Radius * 2 * Math.Asin(Math.Sqrt(SideA));
+        }
+
+        // Method for converting to radians.
+        public static double ToRadians(double alpha)
+        {
+            return Math.PI * alpha / 180;
+        }
         #endregion
     }
 }

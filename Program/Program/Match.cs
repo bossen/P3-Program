@@ -46,7 +46,7 @@ namespace Model
 
         public void SetScore()
         {
-            this.Score = Score; //todo.add(Minus distance calculated using google maps API)
+            this.Score = Score - (int)this.Project.Calculate(Project, Volunteer);
         }
 
         public void DeleteMatch()

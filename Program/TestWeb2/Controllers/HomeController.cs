@@ -18,12 +18,12 @@ namespace TestWeb2.Controllers
         {
             
 
-            Volunteer v1 = new Volunteer("jack", "jack", new Location("råbaaavejen 22", "rødeskovkildelyst"), "nice@mail.dk");
-            Organization o1 = new Organization("green", new Location("address", "city"), "mail@mail.dk");
-            VolunteerProject vp1 = o1.CreateProject("title", new Location("address", "city"), DateTime.Now.AddDays(2), new List<Preference>() { Preference.Church }, "description");
-            Suggestion s1 = v1.AddSuggestion(vp1);
-
-            //Volunteer ole = db.Volunteers.ToList().Where(v => v.UserName == "ole").FirstOrDefault();
+            //Volunteer v1 = new Volunteer("jack", "jack", new Location("råbaaavejen 22", "rødeskovkildelyst"), "nice@mail.dk");
+            //Organization o1 = new Organization("green", new Location("address", "city"), "mail@mail.dk");
+            //VolunteerProject vp1 = o1.CreateProject("title", new Location("address", "city"), DateTime.Now.AddDays(2), new List<Preference>() { Preference.Church }, "description");
+            //Suggestion s1 = v1.AddSuggestion(vp1);
+            //db.VolunteerProjects.Add(vp1);
+            //Volunteer ole = db.Volunteers.ToList().Where(v => v.UserName == "ole1").FirstOrDefault();
             //ole.AddSuggestion(vp1);
             //Invite i1 = new Invite(ole, vp1);
             //ole.AddMatch(i1);
@@ -41,7 +41,13 @@ namespace TestWeb2.Controllers
 
                 if (currentUser.GetInvites() != null)
                     ViewBag.Invites = currentUser.GetInvites();
-                ViewBag.Suggestions = currentUser.GetSortMatches();
+
+                List<VolunteerProject> projectSuggestions = new List<VolunteerProject>();
+                foreach (Match match in currentUser.GetSortMatches())
+	            {
+                    projectSuggestions.Add(match.Project);
+	            }
+                ViewBag.Suggestions = projectSuggestions;
             }
             else
             {
@@ -59,6 +65,13 @@ namespace TestWeb2.Controllers
             return View();
         }
 
+        public ViewResult Project(string projectName)
+        {
+            VolunteerProject project = db.VolunteerProjects.Where(p => p.Title == projectName).FirstOrDefault();
+
+            return View(project);
+        }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your app description page.";
@@ -66,56 +79,64 @@ namespace TestWeb2.Controllers
             return View();
         }
 
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
-
         public ActionResult Profile()
         {
-            return View("Profile/Index");
+            return View("~/Views/Home/Profile/Index.cshtml");
         }
 
         public ActionResult ProfileCreate()
         {
-            return View("Profile/Create");
+            return View("~/Views/Home/Profile/Create.cshtml");
         }
 
         public ActionResult ProfileEdit()
         {
-            return View("Profile/Edit");
+            return View("~/Views/Home/Profile/Edit.cshtml");
         }
 
         public ActionResult ProfileDashboard()
         {
-            return View("Profile/Dashboard");
+            return View("~/Views/Home/Profile/Dashboard.cshtml");
         }
 
         public ActionResult CreateOrNot()
         {
-            return View("Organization/CreateOrNot");
+            return View("~/Views/Home/Organization/CreateOrNot.cshtml");
         }
 
         public ActionResult Organization()
         {
-            return View("Organization/Index");
+            return View("~/Views/Home/Organization/Index.cshtml");
         }
 
         public ActionResult OrganizationCreate()
         {
-            return View("Organization/Create");
+            return View("~/Views/Home/Organization/Create.cshtml");
         }
 
         public ActionResult OrganizationEdit()
         {
-            return View("Organization/Edit");
+            return View("~/Views/Home/Organization/Edit.cshtml");
         }
 
         public ActionResult OrganizationDashboard()
         {
-            return View("Organization/Dashboard");
+            return View("~/Views/Home/Organization/Dashboard.cshtml");
+        }
+
+        public ActionResult OrganizationProjectAll()
+        {
+            return View("~/Views/Home/Organization/Project/All.cshtml");
+        }
+
+        public ActionResult OrganizationProjectCreate()
+        {
+            return View("~/Views/Home/Organization/Project/Create.cshtml");
+        }
+
+        public ActionResult OrganizationProjectEdit()
+        {
+            return View("~/Views/Home/Organization/Project/Edit.cshtml");
         }
     }
 }

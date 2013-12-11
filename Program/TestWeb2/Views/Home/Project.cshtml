@@ -1,0 +1,8 @@
+﻿@model Model.VolunteerProject
+@if (Model != null)
+{
+    <h2>@Model.Title</h2>   
+    <h3>@Model.Owner</h3>
+    <p>@Model.Description</p>
+    @Html.ActionLink("project","project?" + Model.Title,"home")
+}
