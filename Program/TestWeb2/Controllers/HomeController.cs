@@ -16,14 +16,12 @@ namespace TestWeb2.Controllers
 
         public ActionResult Index()
         {
-            
-
             //Volunteer v1 = new Volunteer("jack", "jack", new Location("råbaaavejen 22", "rødeskovkildelyst"), "nice@mail.dk");
             //Organization o1 = new Organization("green", new Location("address", "city"), "mail@mail.dk");
             //VolunteerProject vp1 = o1.CreateProject("title", new Location("address", "city"), DateTime.Now.AddDays(2), new List<Preference>() { Preference.Church }, "description");
             //Suggestion s1 = v1.AddSuggestion(vp1);
             //db.VolunteerProjects.Add(vp1);
-            //Volunteer ole = db.Volunteers.ToList().Where(v => v.UserName == "ole1").FirstOrDefault();
+            //Volunteer ole = db.Volunteers.ToList().Where(v => v.UserName.ToLower() == "spinkelben").FirstOrDefault();
             //ole.AddSuggestion(vp1);
             //Invite i1 = new Invite(ole, vp1);
             //ole.AddMatch(i1);
@@ -48,6 +46,7 @@ namespace TestWeb2.Controllers
                     projectSuggestions.Add(match.Project);
 	            }
                 ViewBag.Suggestions = projectSuggestions;
+                ViewBag.Accepted = currentUser.GetAcceptedMatches();
             }
             else
             {
@@ -65,43 +64,24 @@ namespace TestWeb2.Controllers
             return View(projects.ToList());
         }
 
-        public ViewResult Project(int id = 0)
+        public ActionResult Project(int id = 0)
         {
-            Organization o1 = new Organization("green", new Location("address", "city"), "mail@mail.dk");
-            VolunteerProject vp1 = o1.CreateProject("title", new Location("address", "city"), DateTime.Now.AddDays(2), new List<Preference>() { Preference.Church }, "description");
-            db.VolunteerProjects.Add(vp1);
-
-            Volunteer currentUser = GetCurrentUser();
             VolunteerProject project = db.VolunteerProjects.Find(id);
-
-            ViewBag.Joined = false;
-            foreach (Match match in currentUser.GetAcceptedMatches())
-            {
-                if (match.Project == project)
-                {
-                    ViewBag.Joined = true;
-                    break;
-                }
-            }
-
-
-            foreach (Match match in currentUser.GetInvites())
-            {
-                if (match.Project == project)
-                {
-                    ViewBag.Joined = true;
-                    break;
-                }
-            }
+            Volunteer currentUser = GetCurrentUser();
+            ViewBag.Status = currentUser != null ? currentUser.GetStatusOfProject(project) : null;
             return View(project);
         }
 
         public ActionResult JoinProject(int id)
         {
+            if (!WebSecurity.IsAuthenticated)
+                return RedirectToAction("index", "home");
+
             Volunteer currentUser = GetCurrentUser();
             VolunteerProject project = db.VolunteerProjects.Find(id);
 
             currentUser.AddWorkRequest(project);
+            db.SaveChanges();
             return RedirectToAction("project", "home", new { id = project.Id });
 
         }
@@ -175,7 +155,7 @@ namespace TestWeb2.Controllers
 
         private Volunteer GetCurrentUser()
         {
-            return db.Volunteers.ToList().Where(v => v.UserName == WebSecurity.CurrentUserName).FirstOrDefault();
+            return db.Volunteers.ToList().Where(v => v.UserName.ToLower() == WebSecurity.CurrentUserName.ToLower()).FirstOrDefault();
         }
     }
 }

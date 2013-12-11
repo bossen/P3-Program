@@ -27,6 +27,18 @@
 <div>
     @if (ViewBag.Authenticated)
     {
+        <h3>Accepted projects:</h3>
+        <ol class="round">
+            @foreach (Model.Match invite in ViewBag.Accepted)
+            {
+                <li>
+                    @invite.Project.Title
+                    @invite.Project.Time
+                    @invite.Project.Owner.Name
+                </li>
+            }
+        </ol>
+
         <h3>Your invites:</h3>
         <ol class="round">
             @foreach (Model.Invite invite in ViewBag.Invites)
@@ -37,7 +49,6 @@
                     @invite.Project.Owner.Name
                 </li>
             }
-
         </ol>
     }
     <h3>We suggest the following:</h3>
@@ -48,6 +59,7 @@
                 @suggestion.Title
                 @suggestion.Time
                 @*@suggestion.Owner.Name*@
+                @Html.ActionLink("details", "project", new { id = suggestion.Id })
             </li>
         }
 
