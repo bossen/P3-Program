@@ -28,6 +28,22 @@ namespace TestWeb2.Controllers
             return View();
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(Organization organization)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Organizations.Add(organization);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View(organization);
+        }
+
+
+
         public ActionResult Edit(int id = 0)
         {
             Organization organization = db.Organizations.Find(id);
