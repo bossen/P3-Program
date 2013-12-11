@@ -36,7 +36,7 @@ namespace TestWeb2.Controllers
 
             if (WebSecurity.IsAuthenticated)
             {
-                Volunteer currentUser = db.Volunteers.ToList().Where(v => v.UserName == WebSecurity.CurrentUserName).FirstOrDefault();
+                Volunteer currentUser = GetCurrentUser();
                 ViewBag.Title = "";
 
                 if (currentUser.GetInvites() != null)
@@ -61,15 +61,49 @@ namespace TestWeb2.Controllers
         public ActionResult Projects()
         {
             ViewBag.Title = "List of Volunteer Projects";
-            ViewBag.Projects = db.VolunteerProjects;
-            return View();
+            var projects = db.VolunteerProjects.Include(p => p.Owner);
+            return View(projects.ToList());
         }
 
-        public ViewResult Project(string projectName)
+        public ViewResult Project(int id = 0)
         {
-            VolunteerProject project = db.VolunteerProjects.Where(p => p.Title == projectName).FirstOrDefault();
+            Organization o1 = new Organization("green", new Location("address", "city"), "mail@mail.dk");
+            VolunteerProject vp1 = o1.CreateProject("title", new Location("address", "city"), DateTime.Now.AddDays(2), new List<Preference>() { Preference.Church }, "description");
+            db.VolunteerProjects.Add(vp1);
 
+            Volunteer currentUser = GetCurrentUser();
+            VolunteerProject project = db.VolunteerProjects.Find(id);
+
+            ViewBag.Joined = false;
+            foreach (Match match in currentUser.GetAcceptedMatches())
+            {
+                if (match.Project == project)
+                {
+                    ViewBag.Joined = true;
+                    break;
+                }
+            }
+
+
+            foreach (Match match in currentUser.GetInvites())
+            {
+                if (match.Project == project)
+                {
+                    ViewBag.Joined = true;
+                    break;
+                }
+            }
             return View(project);
+        }
+
+        public ActionResult JoinProject(int id)
+        {
+            Volunteer currentUser = GetCurrentUser();
+            VolunteerProject project = db.VolunteerProjects.Find(id);
+
+            currentUser.AddWorkRequest(project);
+            return RedirectToAction("project", "home", new { id = project.Id });
+
         }
 
         public ActionResult About()
@@ -114,6 +148,11 @@ namespace TestWeb2.Controllers
         public ActionResult OrganizationProjectEdit()
         {
             return View("~/Views/Home/Organization/Project/Edit.cshtml");
+        }
+
+        private Volunteer GetCurrentUser()
+        {
+            return db.Volunteers.ToList().Where(v => v.UserName == WebSecurity.CurrentUserName).FirstOrDefault();
         }
     }
 }

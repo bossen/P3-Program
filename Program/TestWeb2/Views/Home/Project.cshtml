@@ -3,6 +3,25 @@
 {
     <h2>@Model.Title</h2>   
     <h3>@Model.Owner</h3>
+    if (@ViewBag.Joined)
+    {
+        <p>Joined project!</p>
+    }
+    else
+    {
+        @Html.ActionLink("join", "JoinProject", new { id = Model.Id })
+    }
+
+    @Model.Time
+    @*@Model.Location.Address @Model.Location.City*@
+    @*<script>addMarker(@Model.Location.Address, @Model.Title)</script>*@
+    
     <p>@Model.Description</p>
-    @Html.ActionLink("project","project?" + Model.Title,"home")
+    if (Model.Topics != null)
+    {
+        foreach (Model.Preference topic in Model.Topics)
+        {
+                @Html.ActionLink(topic.ToString(), "projects")
+        }
+    }
 }
