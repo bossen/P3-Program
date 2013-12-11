@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "TestPage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model IEnumerable<Model.Volunteer>
+
+<h2>TestPage</h2>
+
+<p>Helle from the Test Index</p>
+
+<table>
+    <tr>
+        <th>Brugernavn</th>
+        <th>Navn</th>
+        <th>Location</th>
+        <th>E-mail</th>
+        <th>Options</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Location.Address)
+                <br />
+                @Html.DisplayFor(modelItem => item.Location.City)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "details", new { id = item.ID })
+            </td>
+        </tr>
+    }
+
+</table>
+
+
+
+

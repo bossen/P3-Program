@@ -16,6 +16,9 @@ namespace Model
         public double Lat { get; set; }
         public double Lng { get; set; }
 
+        public Location() { }
+
+
         public Location(string address, string city)
         {
             this.Address = address;
