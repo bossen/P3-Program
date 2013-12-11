@@ -26,7 +26,7 @@ namespace Model.Migrations
                     IsAdmin = false,
                     Location = new Location("blah gade 1", "Blah blah By"),
                     Preferences = new List<Preference>() {Preference.Church},
-                    _matches = new List<Match>()
+                    Matches = new List<Match>()
 
                 }
             };

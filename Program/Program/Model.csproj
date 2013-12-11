@@ -63,6 +63,14 @@
     <Compile Include="Migrations\201312111503135_ChangesConfigurationMethod.Designer.cs">
       <DependentUpon>201312111503135_ChangesConfigurationMethod.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201312111552026_TestMatches.cs" />
+    <Compile Include="Migrations\201312111552026_TestMatches.Designer.cs">
+      <DependentUpon>201312111552026_TestMatches.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201312111556145_ListAsPropertyVolunteer.cs" />
+    <Compile Include="Migrations\201312111556145_ListAsPropertyVolunteer.Designer.cs">
+      <DependentUpon>201312111556145_ListAsPropertyVolunteer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Organization.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -87,6 +95,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201312111503135_ChangesConfigurationMethod.resx">
       <DependentUpon>201312111503135_ChangesConfigurationMethod.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201312111552026_TestMatches.resx">
+      <DependentUpon>201312111552026_TestMatches.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201312111556145_ListAsPropertyVolunteer.resx">
+      <DependentUpon>201312111556145_ListAsPropertyVolunteer.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

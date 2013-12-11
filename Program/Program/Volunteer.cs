@@ -15,7 +15,7 @@ namespace Model
     {
         #region Properties
         public List<Preference> Preferences { get; set; }
-        public List<Match> _matches = new List<Match>();
+        public List<Match> Matches { get; set; }
         #endregion
 
         #region Constructors
@@ -31,19 +31,19 @@ namespace Model
 
         public void AddMatch(Match match)
         {
-            _matches.Add(match);
+            Matches.Add(match);
         }
 
         public void AddWorkRequest(VolunteerProject project)
         {
             WorkRequest newWorkRequest = new WorkRequest(this, project);
-            _matches.Add(newWorkRequest);
+            Matches.Add(newWorkRequest);
         }
 
         public Suggestion AddSuggestion(VolunteerProject project)
         {
             Suggestion newSuggestion = new Suggestion(this, project);
-            _matches.Add(newSuggestion);
+            Matches.Add(newSuggestion);
             return newSuggestion;
         }
 
@@ -51,7 +51,7 @@ namespace Model
         {
             List<Match> matches = new List<Match>();
 
-            foreach (Match match in _matches)
+            foreach (Match match in Matches)
             {
                 if (match.Accepted == input)
                     matches.Add(match);
@@ -77,11 +77,11 @@ namespace Model
 
         public void RemoveProject(VolunteerProject project)
         {
-            foreach (Match match in _matches)
+            foreach (Match match in Matches)
             {
                 if (match.Project == project)
                 {
-                    _matches.Remove(match);
+                    Matches.Remove(match);
                     break;
                 }
             }
@@ -89,12 +89,12 @@ namespace Model
 
         public IEnumerable<Invite> GetInvites()
         {
-            return _matches.OfType<Invite>();
+            return Matches.OfType<Invite>();
         }
 
         public string GetStatusOfProject(VolunteerProject project)
         {
-            foreach (Match match in _matches)
+            foreach (Match match in Matches)
 	        {
                 if (match.Project == project)
                     return match is Invite ? "invited" : 
