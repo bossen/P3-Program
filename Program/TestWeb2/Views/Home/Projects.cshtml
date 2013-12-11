@@ -8,7 +8,8 @@
         <li>
             @project.Title
             @project.Time
-            @project.Owner.Name
+            @*@project.Owner.Name*@
+            @Html.ActionLink("details", "project", new { id = project.Id })
         </li>
     }
 </ul>
