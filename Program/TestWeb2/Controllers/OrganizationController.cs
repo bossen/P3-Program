@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Model;
 
 namespace TestWeb2.Controllers
 {
     public class OrganizationController : Controller
     {
+        private VolunteerOrgContext db = new VolunteerOrgContext();
         //
         // GET: /Organization/
 
@@ -26,9 +28,14 @@ namespace TestWeb2.Controllers
             return View();
         }
 
-        public ActionResult Edit()
+        public ActionResult Edit(int id = 0)
         {
-            return View();
+            Organization organization = db.Organizations.Find(id);
+            if (organization == null)
+            {
+                return HttpNotFound();
+            }
+            return View(organization);
         }
 
         public ActionResult Dashboard()
@@ -46,9 +53,14 @@ namespace TestWeb2.Controllers
             return View();
         }
 
-        public ActionResult EditProject()
+        public ActionResult EditProject(int id = 0)
         {
-            return View();
+            VolunteerProject volunteerProject = db.VolunteerProjects.Find(id);
+            if (volunteerProject == null)
+            {
+                return HttpNotFound();
+            }
+            return View(volunteerProject);
         }
 
     }
