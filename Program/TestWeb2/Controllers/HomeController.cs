@@ -93,7 +93,7 @@ namespace TestWeb2.Controllers
             return View();
         }
 
-        public ActionResult Profile()
+        public ActionResult ProfileIndex()
         {
             return View("~/Views/Home/Profile/Index.cshtml");
         }
@@ -113,30 +113,7 @@ namespace TestWeb2.Controllers
             return View("~/Views/Home/Profile/Dashboard.cshtml");
         }
 
-        public ActionResult CreateOrNot()
-        {
-            return View("~/Views/Home/Organization/CreateOrNot.cshtml");
-        }
-
-        public ActionResult Organization()
-        {
-            return View("~/Views/Home/Organization/Index.cshtml");
-        }
-
-        public ActionResult OrganizationCreate()
-        {
-            return View("~/Views/Home/Organization/Create.cshtml");
-        }
-
-        public ActionResult OrganizationEdit()
-        {
-            return View("~/Views/Home/Organization/Edit.cshtml");
-        }
-
-        public ActionResult OrganizationDashboard()
-        {
-            return View("~/Views/Home/Organization/Dashboard.cshtml");
-        }
+        
 
         public ActionResult OrganizationProjectAll()
         {

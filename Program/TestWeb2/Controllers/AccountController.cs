@@ -90,7 +90,7 @@ namespace TestWeb2.Controllers
                         Admin newAdmin = new Admin(model.UserName);
                         db.Admins.Add(newAdmin);
                         db.SaveChanges();
-                        return RedirectToAction("CreateOrNot", "Home/Organization");
+                        return RedirectToAction("CreateOrNot", "Organization");
                     }
                     else
                     {
