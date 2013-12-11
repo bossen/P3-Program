@@ -8,20 +8,10 @@
     @foreach (var item in Model)
     {
         <li>
-<<<<<<< HEAD
-            @project.Title
-            @project.Time
-<<<<<<< HEAD
-            @*@project.Owner.Name*@
-            @Html.ActionLink("details", "project", new { id = project.Id })
-=======
-            @*project.Owner.Name*@
->>>>>>> 21f85cffe5ffe120b7a07d00026eda27ba21c2fb
-=======
             @Html.DisplayFor(modelItem => item.Title)
             @Html.DisplayFor(modelItem => item.Time)
             @Html.DisplayFor(modelItem => item.Owner.Name)
->>>>>>> 8252c162b36876d42cb4181afcaa303741aa33c5
+            @Html.ActionLink("details", "project", new { id = item.Id })
         </li>
     }
 </ul>
