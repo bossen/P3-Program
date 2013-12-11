@@ -73,47 +73,62 @@ namespace TestWeb2.Controllers
 
         public ActionResult Profile()
         {
-            return View("Profile/Index");
+            return View("~/Views/Home/Profile/Index.cshtml");
         }
 
         public ActionResult ProfileCreate()
         {
-            return View("Profile/Create");
+            return View("~/Views/Home/Profile/Create.cshtml");
         }
 
         public ActionResult ProfileEdit()
         {
-            return View("Profile/Edit");
+            return View("~/Views/Home/Profile/Edit.cshtml");
         }
 
         public ActionResult ProfileDashboard()
         {
-            return View("Profile/Dashboard");
+            return View("~/Views/Home/Profile/Dashboard.cshtml");
         }
 
         public ActionResult CreateOrNot()
         {
-            return View("Organization/CreateOrNot");
+            return View("~/Views/Home/Organization/CreateOrNot.cshtml");
         }
 
         public ActionResult Organization()
         {
-            return View("Organization/Index");
+            return View("~/Views/Home/Organization/Index.cshtml");
         }
 
         public ActionResult OrganizationCreate()
         {
-            return View("Organization/Create");
+            return View("~/Views/Home/Organization/Create.cshtml");
         }
 
         public ActionResult OrganizationEdit()
         {
-            return View("Organization/Edit");
+            return View("~/Views/Home/Organization/Edit.cshtml");
         }
 
         public ActionResult OrganizationDashboard()
         {
-            return View("Organization/Dashboard");
+            return View("~/Views/Home/Organization/Dashboard.cshtml");
+        }
+
+        public ActionResult OrganizationProjectAll()
+        {
+            return View("~/Views/Home/Organization/Project/All.cshtml");
+        }
+
+        public ActionResult OrganizationProjectCreate()
+        {
+            return View("~/Views/Home/Organization/Project/Create.cshtml");
+        }
+
+        public ActionResult OrganizationProjectEdit()
+        {
+            return View("~/Views/Home/Organization/Project/Edit.cshtml");
         }
     }
 }
