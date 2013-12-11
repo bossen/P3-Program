@@ -34,9 +34,9 @@ namespace TestWeb2.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Organizations.Add(organization);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                    db.Organizations.Add(organization);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
             }
 
             return View(organization);
