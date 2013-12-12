@@ -9,27 +9,32 @@ namespace Model
 {
     public class VolunteerProject
     {
+
+
         #region Properties
         [Key]
         [Required()]
         public int Id { get; set; }
-
         public Organization Owner { get; set; }
         public List<Match> Matches { get; set; }
         public string Title { get; set; }
         public Location Location { get; set; }
         public DateTime Time { get; set; }
-        public List<Preference> Topics { get; set; }
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
         public bool Signup { get; private set; }
+        public List<Tag> Topics { get; set ;}
+
+        public List<int> AwesomeList { get; set; }
         #endregion
 
         #region Constructors
         public VolunteerProject()
-        { }
+        {
+            Topics = new List<Tag>();
+        }
 
-        public VolunteerProject(string title, Location location, DateTime time, List<Preference> topics, Organization owner, string description, bool signup)
+        public VolunteerProject(string title, Location location, DateTime time, List<Tag> topics, Organization owner, string description, bool signup)
         {
             this.Title = title;
             this.Location = location;
@@ -44,6 +49,23 @@ namespace Model
         #endregion
 
         #region Methods
+        /// <summary>
+        /// Adds a topic to the list of topics
+        /// </summary>
+        /// <param name="topic">The topic to be added</param>
+        public void AddTopic(Tag topic)
+        {
+            Topics.Add(topic);
+        }
+        /// <summary>
+        /// Removes a topic from the list of topics
+        /// </summary>
+        /// <param name="topic">The topic to remove</param>
+        public void RemoveTopic(Tag topic)
+        {
+            Topics.Remove(topic);
+        }
+
         void RequestWork(Volunteer volunteer)
         {
             Invite newInvite = new Invite(volunteer, this);

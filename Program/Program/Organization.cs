@@ -30,7 +30,7 @@ namespace Model
         public string Email { get; set; }
 
 
-        private List<VolunteerProject> _volunteerProjects = new List<VolunteerProject>();
+        public List<VolunteerProject> VolunteerProjects { get; set; }
         #endregion
         
         #region Constructors
@@ -40,7 +40,7 @@ namespace Model
             this.Creation = DateTime.Now;
             this.Location = location;
             this.Email = email;
-
+            this.VolunteerProjects = new List<VolunteerProject>();
             /*using (var db = new VolunteerOrgContext())
             {
                 db.Organizations.Add(this);
@@ -49,20 +49,22 @@ namespace Model
         }
 
         public Organization()
-        { }
+        {
+            this.VolunteerProjects = new List<VolunteerProject>();
+        }
         #endregion
 
         #region Methods
-        public VolunteerProject CreateProject(string title, Location location, DateTime time, List<Preference> topics, string description = "")
+        public VolunteerProject CreateProject(string title, Location location, DateTime time, List<Tag> topics, string description = "")
         {
             VolunteerProject newProject = new VolunteerProject(title, location, time, topics, this, description, true);
-            _volunteerProjects.Add(newProject);
+            VolunteerProjects.Add(newProject);
             return newProject;
         }
 
         public List<VolunteerProject> GetProjects()
         {
-            return _volunteerProjects;
+            return VolunteerProjects;
         }
         #endregion
     }

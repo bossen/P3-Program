@@ -1,5 +1,6 @@
 namespace Model.Migrations
 {
+    using Model;
     using System;
     using System.Collections.Generic;
     using System.Data.Entity;
@@ -25,12 +26,11 @@ namespace Model.Migrations
                     Email = "hej@mail.dk",
                     IsAdmin = false,
                     Location = new Location("blah gade 1", "Blah blah By"),
-                    Preferences = new List<Preference>() {Preference.Church},
                     Matches = new List<Match>()
-
                 }
             };
-
+            
+           
             List<Organization> organizations = new List<Organization>()
             {
                 new Organization
@@ -50,12 +50,11 @@ namespace Model.Migrations
                     Title = "Kors Rotering",
                     Location = new Location("Main street 2", "Townsville"),
                     Time = DateTime.Parse("2013-12-25"),
-                    Topics = new List<Preference>() {Preference.Church},
                     Description = "Vi roterer kors på jesu fødselsdag"
 
                 }
             };
-            
+
             List<WorkRequest> workrequests = new List<WorkRequest>()
             {
                 new WorkRequest
