@@ -321,8 +321,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
-    <Content Include="Views\Home\Projects.cshtml" />
-    <Content Include="Views\General\Project.cshtml" />
+    <Content Include="Views\Home\Project.cshtml" />
     <Content Include="Views\Test\Details.cshtml" />
     <Content Include="Views\Test\Edit.cshtml" />
     <Content Include="Views\Volunteer\Create.cshtml" />
@@ -340,11 +339,11 @@
     <Content Include="Views\General\Index.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Volunteer\Projects.cshtml" />
-    <Content Include="Views\General\Organizations.cshtml" />
-    <Content Include="Views\General\Organization.cshtml" />
+    <Content Include="Views\Home\Organizations.cshtml" />
+    <Content Include="Views\Home\Organization.cshtml" />
     <Content Include="Views\Volunteer\Organizations.cshtml" />
     <Content Include="Views\Volunteer\Organization.cshtml" />
-    <Content Include="Views\General\Projects.cshtml" />
+    <Content Include="Views\Home\Projects.cshtml" />
     <Content Include="Views\Volunteer\Project.cshtml" />
   </ItemGroup>
   <ItemGroup>

@@ -1,0 +1,15 @@
+﻿@model Model.Organization
+@if (Model != null)
+{
+    <h2>@Model.Name</h2>
+    <h3>@Model.Location</h3>
+
+    foreach (var project in Model.GetProjects())
+    {
+        <li>
+            @Html.DisplayFor(modelItem => project.Title)
+            @Html.DisplayFor(modelItem => project.Time)
+            @Html.ActionLink("details", "project", new { id = project.Id })
+        </li>
+    }
+}
