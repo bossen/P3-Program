@@ -342,6 +342,10 @@
     <Content Include="Views\Volunteer\Projects.cshtml" />
     <Content Include="Views\General\Organizations.cshtml" />
     <Content Include="Views\General\Organization.cshtml" />
+    <Content Include="Views\Volunteer\Organizations.cshtml" />
+    <Content Include="Views\Volunteer\Organization.cshtml" />
+    <Content Include="Views\General\Projects.cshtml" />
+    <Content Include="Views\Volunteer\Project.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
