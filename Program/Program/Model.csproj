@@ -51,9 +51,35 @@
     <Compile Include="Location.cs" />
     <Compile Include="Mail.cs" />
     <Compile Include="Match.cs" />
+    <Compile Include="Migrations\201312110740330_InitialVolunteerOnly.cs" />
+    <Compile Include="Migrations\201312110740330_InitialVolunteerOnly.Designer.cs">
+      <DependentUpon>201312110740330_InitialVolunteerOnly.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201312110951106_AddedProjectOrganizationMatch.cs" />
+    <Compile Include="Migrations\201312110951106_AddedProjectOrganizationMatch.Designer.cs">
+      <DependentUpon>201312110951106_AddedProjectOrganizationMatch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201312111503135_ChangesConfigurationMethod.cs" />
+    <Compile Include="Migrations\201312111503135_ChangesConfigurationMethod.Designer.cs">
+      <DependentUpon>201312111503135_ChangesConfigurationMethod.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201312111552026_TestMatches.cs" />
+    <Compile Include="Migrations\201312111552026_TestMatches.Designer.cs">
+      <DependentUpon>201312111552026_TestMatches.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201312111556145_ListAsPropertyVolunteer.cs" />
+    <Compile Include="Migrations\201312111556145_ListAsPropertyVolunteer.Designer.cs">
+      <DependentUpon>201312111556145_ListAsPropertyVolunteer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201312121028037_PreferencesasInts.cs" />
+    <Compile Include="Migrations\201312121028037_PreferencesasInts.Designer.cs">
+      <DependentUpon>201312121028037_PreferencesasInts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Organization.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Suggestion.cs" />
+    <Compile Include="Tags.cs" />
     <Compile Include="User.cs" />
     <Compile Include="Preference.cs" />
     <Compile Include="Volunteer.cs" />
@@ -64,6 +90,26 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201312110740330_InitialVolunteerOnly.resx">
+      <DependentUpon>201312110740330_InitialVolunteerOnly.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201312110951106_AddedProjectOrganizationMatch.resx">
+      <DependentUpon>201312110951106_AddedProjectOrganizationMatch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201312111503135_ChangesConfigurationMethod.resx">
+      <DependentUpon>201312111503135_ChangesConfigurationMethod.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201312111552026_TestMatches.resx">
+      <DependentUpon>201312111552026_TestMatches.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201312111556145_ListAsPropertyVolunteer.resx">
+      <DependentUpon>201312111556145_ListAsPropertyVolunteer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201312121028037_PreferencesasInts.resx">
+      <DependentUpon>201312121028037_PreferencesasInts.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

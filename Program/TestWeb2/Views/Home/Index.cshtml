@@ -1,11 +1,11 @@
 ﻿@section featured {
-    <section class="featured">
-        <div class="content-wrapper">
-            <hgroup class="title">
-                <h1>@ViewBag.Title</h1>
-            </hgroup>
-            @if (!ViewBag.Authenticated)
-            {
+    @if (!ViewBag.Authenticated)
+    {
+        <section class="featured">
+            <div class="content-wrapper">
+                <hgroup class="title">
+                    <h1>@ViewBag.Title</h1>
+                </hgroup>
                 <p>
                     Do you want to help out in volunteer projects in your community, yet are having trouble finding them?
                     Or are there so many projects to choose from that you can hardly pick among them? Are you
@@ -19,32 +19,47 @@
                     <br />
                     <a href="http://localhost:2601/Account/Register">Register</a> your account or organization today.
                 </p>
-            }
 
-        </div>
-    </section>
+            </div>
+        </section>
+    }
 }
 <div>
-    <h3>Your invites:</h3>
-    <ol class="round">
-        @foreach (Model.Invite invite in ViewBag.Invites)
-        {
-            <li>
-                @invite.Project.Title
-                @invite.Project.Time
-                @invite.Project.Owner.Name
-            </li>
-        }
+    @if (ViewBag.Authenticated)
+    {
+        <h3>Accepted projects:</h3>
+        <ol class="round">
+            @foreach (Model.Match invite in ViewBag.Accepted)
+            {
+                <li>
+                    @invite.Project.Title
+                    @invite.Project.Time
+                    @invite.Project.Owner.Name
+                </li>
+            }
+        </ol>
 
-    </ol>
+        <h3>Your invites:</h3>
+        <ol class="round">
+            @foreach (Model.Invite invite in ViewBag.Invites)
+            {
+                <li>
+                    @invite.Project.Title
+                    @invite.Project.Time
+                    @invite.Project.Owner.Name
+                </li>
+            }
+        </ol>
+    }
     <h3>We suggest the following:</h3>
     <ol class="round">
-        @foreach (Model.Match suggestion in ViewBag.Suggestions)
+        @foreach (Model.VolunteerProject suggestion in ViewBag.Suggestions)
         {
             <li>
-                @suggestion.Project.Title
-                @suggestion.Project.Time
-                @suggestion.Project.Owner.Name
+                @suggestion.Title
+                @suggestion.Time
+                @*@suggestion.Owner.Name*@
+                @Html.ActionLink("details", "project", new { id = suggestion.Id })
             </li>
         }
 

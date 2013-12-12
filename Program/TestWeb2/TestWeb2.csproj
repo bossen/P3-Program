@@ -187,6 +187,9 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\TestController.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -266,6 +269,12 @@
     <Content Include="Scripts\knockout-2.2.0.debug.js" />
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Views\Test\Index.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Test\Welcome.cshtml">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -307,7 +316,6 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
-    <Content Include="Views\Home\DashBoard.cshtml" />
     <Content Include="Views\Home\Organization\Create.cshtml">
       <SubType>Code</SubType>
     </Content>
@@ -318,9 +326,12 @@
     <Content Include="Views\Home\Organization\Edit.cshtml" />
     <Content Include="Views\Home\Organization\Index.cshtml" />
     <Content Include="Views\Home\Profile\Create.cshtml" />
-    <Content Include="Views\Home\Profile\Dashboard.cshtml" />
     <Content Include="Views\Home\Profile\Edit.cshtml" />
     <Content Include="Views\Home\Profile\Index.cshtml" />
+    <Content Include="Views\Home\Projects.cshtml" />
+    <Content Include="Views\Home\Project.cshtml" />
+    <Content Include="Views\Test\Details.cshtml" />
+    <Content Include="Views\Test\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

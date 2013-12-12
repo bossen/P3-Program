@@ -1,0 +1,18 @@
+﻿@model Model.Admin
+
+@{
+    ViewBag.Title = "Organizations";
+}
+
+
+
+@if(Model.Association != null)
+{
+    <h1>You're already in an Organization</h1>
+    <p>Go to your organization here: @Html.ActionLink(Model.Association.Name, "Index", "Organization")</p>
+}
+
+@if (Model.Association == null)
+{ 
+    <h1>Organizations</h1>
+}

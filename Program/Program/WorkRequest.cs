@@ -10,6 +10,10 @@ namespace Model
     public class WorkRequest : Match
     {
         #region Constructors
+        public WorkRequest()
+            : base()
+        { }
+
         public WorkRequest(Volunteer volunteer, VolunteerProject project)
             : base(volunteer, project)
         { }

@@ -20,6 +20,10 @@ namespace Model
         #endregion
 
         #region Constructors
+        public Match()
+        {
+        }
+
         public Match(Volunteer volunteer, VolunteerProject project, DateTime expire, bool? accepted = null)
         {
             this.Volunteer = volunteer;
@@ -30,7 +34,7 @@ namespace Model
         }
 
         public Match(Volunteer volunteer, VolunteerProject project, bool? accepted = null)
-            :this(volunteer, project, project.Time, accepted)
+            : this(volunteer, project, project.Time, accepted)
         { }
         #endregion
 
@@ -42,7 +46,7 @@ namespace Model
 
         public void SetScore()
         {
-            this.Score = Score; //todo.add(Minus distance calculated using google maps API)
+            this.Score = Score - (int)this.Project.Calculate(Project, Volunteer);
         }
 
         public void DeleteMatch()
