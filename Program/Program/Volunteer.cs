@@ -13,21 +13,56 @@ namespace Model
     /// </summary>
     public class Volunteer : User
     {
+
         #region Properties
-        public List<Preference> Preferences { get; set; }
         public List<Match> Matches { get; set; }
+        public List<Tags> Preferences { get; set; }
         #endregion
 
         #region Constructors
         public Volunteer()
-        { this.Matches = new List<Match>(); }
+        { 
+            this.Matches = new List<Match>();
+            this.Preferences = new List<Tags>();
+        }
 
         public Volunteer(string username, string name = null, Location location = null, string email = null)
             : base(username, name, location, email)
-        { this.Matches = new List<Match>(); }
+        { 
+            this.Matches = new List<Match>();
+            this.Preferences = new List<Tags>();
+        }
         #endregion
 
         #region Methods
+        /// <summary>
+        /// Adds a preferences to the list of preferences
+        /// </summary>
+        /// <param name="preference">The preference to be added</param>
+        public void AddPreference(Preference preference)
+        {
+            _preferences.Add(preference);
+            _preferencesInt.Add((int)preference);
+        }
+        /// <summary>
+        /// Removes a preference from the list of preferences
+        /// </summary>
+        /// <param name="preference">The preference to remove</param>
+        public void RemovePreference(Preference preference) 
+        {
+            _preferences.Remove(preference);
+            _preferencesInt.Remove((int)preference);
+        }
+        /// <summary>
+        /// Removes a preference from the list of preferences
+        /// </summary>
+        /// <param name="preference">The preference to remove</param>
+        public void RemovePreference(int preference)
+        {
+            _preferencesInt.Remove(preference);
+            _preferences.Remove((Preference)preference);
+        }
+
 
         public void AddMatch(Match match)
         {

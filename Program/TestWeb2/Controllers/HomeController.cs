@@ -81,6 +81,8 @@ namespace TestWeb2.Controllers
             VolunteerProject project = db.VolunteerProjects.Find(id);
 
             currentUser.AddWorkRequest(project);
+            db.Entry(currentUser).State = EntityState.Modified;
+            db.Entry(project).State = EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("project", "home", new { id = project.Id });
 
