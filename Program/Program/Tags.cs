@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    public class Tag
+    public class Tags
     {
         #region Fields
         private List<string> _tagNames = new List<string>() { "Festival", "Church", "Culture", "Nature", "Sport", "Political" };
