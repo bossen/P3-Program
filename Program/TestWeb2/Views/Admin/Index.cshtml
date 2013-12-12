@@ -1,4 +1,4 @@
-﻿@model Model.Admin
+﻿@model TestWeb2.Models.MultiViewModel
 
 @{
     ViewBag.Title = "Index";
@@ -6,7 +6,7 @@
 
 <h2>Index</h2>
 
-@if (Model.Association == null)
+@if (Model.Admin.Association == null)
 { 
     <table border="1">
     <tr>
@@ -25,8 +25,11 @@
 </table>
 }
 
-<h2>Hi @Model.Name</h2>
+@if(Model.Admin.Association != null)
+{
+<h2>Hi @Model.Admin.UserName</h2>
 
-You have the following options:
+<p>You have the following options:</p>
 
-@Html.ActionLink("Your Organization", "Index", "Organization")
+@Html.ActionLink(Model.Admin.Association.Name, "Index", "Organization")
+}
