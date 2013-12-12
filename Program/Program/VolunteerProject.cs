@@ -9,10 +9,7 @@ namespace Model
 {
     public class VolunteerProject
     {
-        #region Fields
-        List<int> _topicsInt = new List<int>();
-        List<Preference> _topics = new List<Preference>();
-        #endregion
+
 
         #region Properties
         [Key]
@@ -26,39 +23,18 @@ namespace Model
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
         public bool Signup { get; private set; }
-        public List<Preference> Topics
-        {
-            get
-            {
-                return _topics;
-            }
-            private set
-            {
-                _topics = value;
-                _topicsInt = new List<int>();
-                value.ForEach(p => _topicsInt.Add((int)p));
-            }
-        }
-        public List<int> TopicsInt
-        {
-            get
-            {
-                return _topicsInt;
-            }
-            private set
-            {
-                _topicsInt = value;
-                value.ForEach(p => _topics.Add((Preference)p));
-            }
-        }
+        public List<Tag> Topics { get; set ;}
+
         public List<int> AwesomeList { get; set; }
         #endregion
 
         #region Constructors
         public VolunteerProject()
-        { }
+        {
+            Topics = new List<Tag>();
+        }
 
-        public VolunteerProject(string title, Location location, DateTime time, List<Preference> topics, Organization owner, string description, bool signup)
+        public VolunteerProject(string title, Location location, DateTime time, List<Tag> topics, Organization owner, string description, bool signup)
         {
             this.Title = title;
             this.Location = location;
@@ -77,37 +53,17 @@ namespace Model
         /// Adds a topic to the list of topics
         /// </summary>
         /// <param name="topic">The topic to be added</param>
-        public void AddTopic(Preference topic)
+        public void AddTopic(Tag topic)
         {
-            _topics.Add(topic);
-            _topicsInt.Add((int)topic);
-        }
-        /// <summary>
-        /// Adds a topic to the list of topics
-        /// </summary>
-        /// <param name="topic">The int representing a topic to be added</param>
-        public void AddTopic(int topic)
-        {
-            _topicsInt.Add(topic);
-            _topics.Add((Preference)topic);
+            Topics.Add(topic);
         }
         /// <summary>
         /// Removes a topic from the list of topics
         /// </summary>
         /// <param name="topic">The topic to remove</param>
-        public void RemoveTopic(Preference topic)
+        public void RemoveTopic(Tag topic)
         {
-            _topics.Remove(topic);
-            _topicsInt.Remove((int)topic);
-        }
-        /// <summary>
-        /// Removes a topic from the list of topics
-        /// </summary>
-        /// <param name="topic">The topic to remove</param>
-        public void RemoveTopic(int topic)
-        {
-            _topicsInt.Remove(topic);
-            _topics.Remove((Preference)topic);
+            Topics.Remove(topic);
         }
 
         void RequestWork(Volunteer volunteer)

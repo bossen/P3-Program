@@ -11,8 +11,6 @@
             @Html.DisplayFor(modelItem => item.Title)
             @Html.DisplayFor(modelItem => item.Time)
             @Html.DisplayFor(modelItem => item.Owner.Name)
-            Topics: 
-            @Html.DisplayFor(modelItem => item.TopicsInt)
             @Html.ActionLink("details", "project", new { id = item.Id })
         </li>
     }
