@@ -22,15 +22,17 @@
                         <ul id="menu">
                             @if (HttpContext.Current.User.Identity.IsAuthenticated)
                              {
-                                <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                                <li>@Html.ActionLink("About", "About", "Home")</li>
-                                <li>@Html.ActionLink("Profile", "Index", "Home/Profile")</li>
-                                <li>@Html.ActionLink("Projects", "Projects", "Home")</li>
+                                <li>@Html.ActionLink("Home", "Index", "Volunteer")</li>
+                                <li>@Html.ActionLink("Projects", "Projects", "Volunteer")</li>
+                                <li>@Html.ActionLink("Organizations", "Organizations", "Volunteer")</li>
+                                <li>@Html.ActionLink("About", "About", "Volunteer")</li>
+                                <li>@Html.ActionLink("Profile", "Index", "Volunteer/Profile")</li>
                              }   
 
                              @if (HttpContext.Current.User.Identity.IsAuthenticated == false)
                              {
                                 <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                                <li>@Html.ActionLink("Projects", "Projects", "Home")</li>
                                 <li>@Html.ActionLink("About", "About", "Home")</li>
                              }
                         </ul>

@@ -59,8 +59,18 @@ namespace Model
 
         public void AddWorkRequest(VolunteerProject project)
         {
-            WorkRequest newWorkRequest = new WorkRequest(this, project);
-            Matches.Add(newWorkRequest);
+            bool existing = false;
+            foreach (Match match in Matches)
+            {
+                if (match.Project == project)
+                    existing = true;
+            }
+
+            if (!existing)
+            {
+                WorkRequest newWorkRequest = new WorkRequest(this, project);
+                Matches.Add(newWorkRequest);
+            }
         }
 
         public Suggestion AddSuggestion(VolunteerProject project)

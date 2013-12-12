@@ -24,8 +24,6 @@ namespace Model
         public string Description { get; set; }
         public bool Signup { get; private set; }
         public List<Tag> Topics { get; set ;}
-
-        public List<int> AwesomeList { get; set; }
         #endregion
 
         #region Constructors

@@ -11,7 +11,7 @@
     <p>@Html.DisplayFor(modelItem => Model.Description)</p>
     if (Model.Topics != null)
     {
-        foreach (Model.Tag topic in Model.Topic)
+        foreach (Model.Tag topic in Model.Topics)
         {
                 @Html.ActionLink(topic.ToString(), "projects")
         }
