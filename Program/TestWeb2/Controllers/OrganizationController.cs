@@ -18,46 +18,8 @@ namespace TestWeb2.Controllers
             return View();
         }
 
-        public ActionResult CreateOrNot()
-        {
-            return View();
-        }
-
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(Organization organization)
-        {
-            if (ModelState.IsValid)
-            {
-                    db.Organizations.Add(organization);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
-            }
-
-            return View(organization);
-        }
 
 
-
-        public ActionResult Edit(int id = 0)
-        {
-            Organization organization = db.Organizations.Find(id);
-            if (organization == null)
-            {
-                return HttpNotFound();
-            }
-            return View(organization);
-        }
-
-        public ActionResult Dashboard()
-        {
-            return View();
-        }
 
         public ActionResult AllProjects()
         {

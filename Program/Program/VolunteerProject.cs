@@ -170,19 +170,19 @@ namespace Model
             }
         }
 
-        public double Calculate(VolunteerProject VpLoc, Volunteer VtLoc)
+        public double Calculate(VolunteerProject Volunteerproject, Volunteer Volunteer)
         {
 
             double Radius = 6372.8; // Radius of the earth
             // Calculating Delta longitude and latitude in radians
-            double DeltaLat = ToRadians(VtLoc.Location.Lat - VpLoc.Location.Lat);
-            double DeltaLng = ToRadians(VtLoc.Location.Lng - VpLoc.Location.Lng);
+            double DeltaLat = ToRadians(Volunteer.Location.Lat - Volunteerproject.Location.Lat);
+            double DeltaLng = ToRadians(Volunteer.Location.Lng - Volunteerproject.Location.Lng);
 
-            VpLoc.Location.Lat = ToRadians(VpLoc.Location.Lat);
-            VpLoc.Location.Lng = ToRadians(VpLoc.Location.Lat);
+            Volunteerproject.Location.Lat = ToRadians(Volunteerproject.Location.Lat);
+            Volunteerproject.Location.Lng = ToRadians(Volunteerproject.Location.Lat);
 
             //Haversine formular
-            double SideA = Math.Sin(DeltaLat / 2) * Math.Sin(DeltaLat / 2) + Math.Sin(DeltaLng / 2) * Math.Sin(DeltaLng / 2) * Math.Cos(VtLoc.Location.Lat) * Math.Cos(VpLoc.Location.Lat);
+            double SideA = Math.Sin(DeltaLat / 2) * Math.Sin(DeltaLat / 2) + Math.Sin(DeltaLng / 2) * Math.Sin(DeltaLng / 2) * Math.Cos(Volunteer.Location.Lat) * Math.Cos(Volunteerproject.Location.Lat);
             double SideC = 2 * Math.Asin(Math.Sqrt(SideA));
 
             return Radius * 2 * Math.Asin(Math.Sqrt(SideA));
