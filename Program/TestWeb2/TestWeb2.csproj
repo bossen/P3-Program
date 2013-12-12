@@ -315,7 +315,6 @@
     <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
@@ -328,12 +327,8 @@
     <Content Include="Views\Volunteer\Edit.cshtml" />
     <Content Include="Views\Volunteer\Index.cshtml" />
     <Content Include="Views\Organization\AllProjects.cshtml" />
-    <Content Include="Views\Organization\Create.cshtml" />
-    <Content Include="Views\Organization\CreateOrNot.cshtml" />
     <Content Include="Views\Organization\CreateProject.cshtml" />
-    <Content Include="Views\Organization\Dashboard.cshtml" />
     <Content Include="Views\Organization\DeleteProject.cshtml" />
-    <Content Include="Views\Organization\Edit.cshtml" />
     <Content Include="Views\Organization\EditProject.cshtml" />
     <Content Include="Views\Organization\Index.cshtml" />
     <Content Include="Views\General\Index.cshtml" />
