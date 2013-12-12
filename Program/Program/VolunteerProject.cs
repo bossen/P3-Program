@@ -23,27 +23,26 @@ namespace Model
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
         public bool Signup { get; private set; }
-        public List<Tag> Topics { get; set ;}
 
+        public List<Topic> ProjectTopics { get; set; }
         public List<int> AwesomeList { get; set; }
         #endregion
 
         #region Constructors
         public VolunteerProject()
         {
-            Topics = new List<Tag>();
+            ProjectTopics = new List<Topic>();
         }
 
-        public VolunteerProject(string title, Location location, DateTime time, List<Tag> topics, Organization owner, string description, bool signup)
+        public VolunteerProject(string title, Location location, DateTime time, List<Topic> topics, Organization owner, string description, bool signup)
         {
             this.Title = title;
             this.Location = location;
             this.Time = time;
-            this.Topics = topics;
+            this.ProjectTopics = topics;
             this.Owner = owner;
             this.Description = description;
             this.Signup = signup;
-
             //SuggestVolunteers();
         }
         #endregion
@@ -53,17 +52,17 @@ namespace Model
         /// Adds a topic to the list of topics
         /// </summary>
         /// <param name="topic">The topic to be added</param>
-        public void AddTopic(Tag topic)
+        public void AddTopic(Topic topic)
         {
-            Topics.Add(topic);
+            ProjectTopics.Add(topic);
         }
         /// <summary>
         /// Removes a topic from the list of topics
         /// </summary>
         /// <param name="topic">The topic to remove</param>
-        public void RemoveTopic(Tag topic)
+        public void RemoveTopic(Topic topic)
         {
-            Topics.Remove(topic);
+            ProjectTopics.Remove(topic);
         }
 
         void RequestWork(Volunteer volunteer)
@@ -106,7 +105,7 @@ namespace Model
         //Always returns true if the user has no set preferences.
         private bool CheckVolunteerSuggest(Volunteer volunteer)
         {
-            if (volunteer.Preferences.Intersect(this.Topics).Count() > 0 && volunteer.Preferences.Count != 0)
+            if (volunteer.VolunteerPreferences.Intersect(this.ProjectTopics).Count() > 0 && volunteer.VolunteerPreferences.Count != 0)
                 return false;
             return true;
         }
