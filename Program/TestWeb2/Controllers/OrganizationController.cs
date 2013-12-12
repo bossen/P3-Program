@@ -15,6 +15,7 @@ namespace TestWeb2.Controllers
 
         public ActionResult Index()
         {
+            
             return View();
         }
 

@@ -15,6 +15,7 @@ namespace TestWeb2.Controllers
         //
         // GET: /Admin/
 
+        [Authorize]
         public ActionResult Index()
         {
             Admin currentuser = GetCurrentUser();
@@ -70,9 +71,10 @@ namespace TestWeb2.Controllers
         }
 
         [Authorize]
-        public ActionResult Organization()
+        public ActionResult Organization(int id)
         {
-            return View();
+            Organization organization = db.Organizations.Find(id);
+            return View(organization);
         }
 
         private Admin GetCurrentUser()

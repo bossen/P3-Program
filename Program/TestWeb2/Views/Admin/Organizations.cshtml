@@ -11,10 +11,13 @@
 
     
 }
-<h1>Organizations</h1>
-@foreach (var item in Model)
-{ 
+@if(!ViewBag.Authenticated)
+{
+    <h1>Organizations</h1>
     <table>
+    @foreach(var item in Model)
+    { 
+    
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
@@ -23,10 +26,11 @@
                 @Html.DisplayFor(modelItem => item.Creation)
             </td>
             <td>
-                @Html.ActionLink("Join", "Index", "Organization")
                 @Html.ActionLink("Details", "Organization", new { id=item.Id }) 
             </td>
         </tr>
+    
+    }
     </table>
 }
 
