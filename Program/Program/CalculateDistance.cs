@@ -22,7 +22,7 @@ using System.Math;
                 double SideA = Math.Sin(DeltaLat / 2) * Math.Sin(DeltaLat / 2) + Math.Sin(DeltaLng / 2) * Math.Sin(DeltaLng / 2) * Math.Cos(VolunteerLat) * Math.Cos(EventLat);
                 double SideC = 2 * Math.Asin(Math.Sqrt(SideA));
 
-                return Radius * 2 * Math.Asin(Math.Sqrt(SideA));
+                return (int)Radius * 2 * Math.Asin(Math.Sqrt(SideA));
 
             }
 
