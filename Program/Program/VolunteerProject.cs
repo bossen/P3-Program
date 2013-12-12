@@ -23,9 +23,7 @@ namespace Model
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
         public bool Signup { get; private set; }
-
         public List<Topic> ProjectTopics { get; set; }
-        public List<int> AwesomeList { get; set; }
         #endregion
 
         #region Constructors

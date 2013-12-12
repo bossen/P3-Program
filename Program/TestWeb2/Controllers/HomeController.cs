@@ -57,6 +57,16 @@ namespace TestWeb2.Controllers
             return View();
         }
 
+        public ActionResult Project(int id = 0)
+        {
+            VolunteerProject project = db.VolunteerProjects.Find(id);
+            if (project == null)
+            {
+                return HttpNotFound();
+            }
+            return View(project);
+        }
+
         public ActionResult Projects()
         {
             ViewBag.Title = "List of Volunteer Projects";
@@ -65,12 +75,25 @@ namespace TestWeb2.Controllers
             return View(projects.ToList());
         }
 
-        public ActionResult Project(int id = 0)
+        public ActionResult Organization(int id = 0)
         {
-            VolunteerProject project = db.VolunteerProjects.Find(id);
-            Volunteer currentUser = GetCurrentUser();
-            ViewBag.Status = currentUser != null ? currentUser.GetStatusOfProject(project) : null;
-            return View(project);
+            var organization = db.Organizations
+                .Include("VolunteerProjects")
+                .Where(o => o.Id == id)
+                .FirstOrDefault();
+
+            if (organization == null)
+            {
+                return HttpNotFound();
+            }
+            return View(organization);
+        }
+
+        public ActionResult Organizations()
+        {
+            ViewBag.Title = "List of Organizations";
+            var organizations = db.Organizations;
+            return View(organizations.ToList());
         }
 
         public ActionResult JoinProject(int id)
