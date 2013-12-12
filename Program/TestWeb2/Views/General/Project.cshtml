@@ -3,10 +3,6 @@
 {
     <h2>@Model.Title</h2>   
     <h3>@Model.Owner</h3>
-    if (ViewBag.Status != null)
-    {
-        @Html.ActionLink((string)ViewBag.Status, "JoinProject", new { id = Model.Id })
-    }
 
     @Html.DisplayFor(modelItem => Model.Time)
     @*@Model.Location.Address @Model.Location.City*@
