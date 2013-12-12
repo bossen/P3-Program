@@ -18,9 +18,6 @@ namespace TestWeb2.Controllers
             return View();
         }
 
-
-
-
         public ActionResult AllProjects()
         {
             return View();

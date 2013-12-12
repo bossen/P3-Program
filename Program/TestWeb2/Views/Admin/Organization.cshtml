@@ -1,0 +1,31 @@
+﻿@model Model.Organization
+
+@{
+    ViewBag.Title = "OrganizationDetails";
+}
+
+<h2>Organization</h2>
+
+<table>
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.Name)
+        </td>
+        <td>
+            @Html.DisplayNameFor(model => model.Email)
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @Html.DisplayFor(model => model.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Email)
+        </td>
+        <td>
+            @Html.ActionLink("Join", "Index", "Organization")
+        </td>
+    </tr>
+
+
+</table>

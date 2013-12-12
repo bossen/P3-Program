@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TestWeb2.Models;
+using WebMatrix.WebData;
 
 namespace TestWeb2.Controllers
 {
@@ -15,6 +17,13 @@ namespace TestWeb2.Controllers
 
         public ActionResult Index()
         {
+            Admin currentuser = GetCurrentUser();
+
+            if (currentuser.Association == null)
+            {
+                ViewBag.Authenticated = false;
+            }
+            
             return View();
         }
 
@@ -37,6 +46,7 @@ namespace TestWeb2.Controllers
             return View(organization);
         }
 
+        [Authorize]
         public ActionResult Edit(int id = 0)
         {
             Organization organization = db.Organizations.Find(id);
@@ -47,14 +57,27 @@ namespace TestWeb2.Controllers
             return View(organization);
         }
 
+        [Authorize]
         public ActionResult Organizations()
+        {
+            Admin currentuser = GetCurrentUser();
+
+            if (currentuser.Association == null)
+            {
+                ViewBag.Authenticated = false;
+            }
+            return View(db.Organizations.ToList());
+        }
+
+        [Authorize]
+        public ActionResult Organization()
         {
             return View();
         }
 
-        public ActionResult OrganizationDetails()
+        private Admin GetCurrentUser()
         {
-            return View();
+            return db.Admins.ToList().Where(v => v.UserName.ToLower() == WebSecurity.CurrentUserName.ToLower()).FirstOrDefault();
         }
 
     }
