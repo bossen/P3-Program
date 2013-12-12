@@ -1,5 +1,6 @@
 namespace Model.Migrations
 {
+    using Model;
     using System;
     using System.Collections.Generic;
     using System.Data.Entity;
@@ -26,12 +27,10 @@ namespace Model.Migrations
                     IsAdmin = false,
                     Location = new Location("blah gade 1", "Blah blah By"),
                     Matches = new List<Match>()
-
                 }
             };
-            volunteers.Find(v => v.UserName == "Spinkelben").AddPreference(Preference.Church);
-
-
+            
+           
             List<Organization> organizations = new List<Organization>()
             {
                 new Organization
@@ -55,7 +54,6 @@ namespace Model.Migrations
 
                 }
             };
-            projects.Find(p => p.Title == "Kors Rotering").AddTopic(Preference.Church);
 
             List<WorkRequest> workrequests = new List<WorkRequest>()
             {

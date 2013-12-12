@@ -1,20 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Model
 {
-    class Tags
+    public class Tag
     {
         #region Fields
-        private List<string> _tagNames = new List<string>();
+        private List<string> _tagNames = new List<string>() { "Festival", "Church", "Culture", "Nature", "Sport", "Political" };
         private string _tag;
         #endregion
 
         #region Proterties
-        public string Tag 
+        public int ID { get; set; }
+        public string Name 
         {
             get
             {
@@ -31,11 +33,11 @@ namespace Model
         #endregion
 
         #region Contructors
-        public Tags() { }
+        public Tag() { }
 
-        public Tags(string tagname)
+        public Tag(string tagname)
         {
-            Tag = tagname;
+            Name = tagname;
         }
 
         #endregion

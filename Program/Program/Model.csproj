@@ -75,6 +75,10 @@
     <Compile Include="Migrations\201312121028037_PreferencesasInts.Designer.cs">
       <DependentUpon>201312121028037_PreferencesasInts.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201312121205303_Tag.cs" />
+    <Compile Include="Migrations\201312121205303_Tag.Designer.cs">
+      <DependentUpon>201312121205303_Tag.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Organization.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -109,6 +113,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201312121028037_PreferencesasInts.resx">
       <DependentUpon>201312121028037_PreferencesasInts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201312121205303_Tag.resx">
+      <DependentUpon>201312121205303_Tag.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
