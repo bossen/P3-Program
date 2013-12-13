@@ -20,7 +20,8 @@ namespace TestWeb2.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            return View();
+            Volunteer currentUser = GetCurrentUser();
+            return View(currentUser);
         }
 
         [Authorize]

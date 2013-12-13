@@ -1,28 +1,16 @@
 ﻿@model Model.Volunteer
 
+@{
+    ViewBag.Title = "My Profile";
+}
+<h2>Profile</h2>
 
-<h2>Index</h2>
+<p>
+    Hello @Html.DisplayFor(modelItem => Model.Name)! 
 
-
-    <fieldset>
-        <legend>Profile</legend>
-
-        
-        <div class="view-field">
-            
-        </div>
-        
-
-        @Html.DisplayFor(m => m.Name)
-        @Html.DisplayFor(m => m.Email)
-        @Html.DisplayFor(m => m.Creation)
-        @Html.DisplayFor(m => m.Location.Address)
-        @Html.DisplayFor(m => m.Location.City)
-        
-
-    </fieldset>
+</p>
 
 
 <input id="Button1" type="button" value="button" name="Test" onclick="javascript: window.open('/Profile/Edit',
                                        'Customer Search',
-                                       'height=' + (window.screen.height - 100) + ',width=200,left=' + (window.screen.width - 250) + ',top=10,status=no,toolbar=no,resizable=yes,scrollbars=yes');"/>
+                                       'height=' + (window.screen.height - 100) + ',width=200,left=' + (window.screen.width - 250) + ',top=10,status=no,toolbar=no,resizable=yes,scrollbars=yes');" />
