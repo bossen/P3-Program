@@ -72,9 +72,9 @@
                 @Html.DisplayFor(modelItem => item.Time)
             </td>
             <td>
-                @Html.ActionLink("Edit", "EditProject")
+                @Html.ActionLink("Edit", "EditProject", new { id = item.Id })
                 @Html.ActionLink("Cancel", "CancelProject")
-                @Html.ActionLink("Details", "DetailsProject") 
+                @Html.ActionLink("Details", "DetailsProject", new { id = item.Id }) 
             </td>
         </tr>
     

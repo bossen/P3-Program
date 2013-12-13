@@ -72,7 +72,7 @@ namespace TestWeb2.Controllers
             return View(volunteers.ToList());
         }
 
-        public ActionResult EditProject(int id = 0)
+        public ActionResult EditProject(int id)
         {
             VolunteerProject volunteerProject = db.VolunteerProjects.Find(id);
             if (volunteerProject == null)
@@ -82,9 +82,20 @@ namespace TestWeb2.Controllers
             return View(volunteerProject);
         }
 
-        public ActionResult DetailsProject()
+        public ActionResult DetailsProject(int id)
         {
-            return View();
+            Admin currentUser = GetCurrentUser();
+            VolunteerProject project = db.VolunteerProjects.Find(id);
+            var organization = db.Organizations
+                .Include("VolunteerProjects")
+                .Where(o => o.Id == id)
+                .FirstOrDefault();
+            
+            if (project == null)
+            {
+                return HttpNotFound();
+            }
+            return View(project);
         }
 
         public ActionResult CancelProject()

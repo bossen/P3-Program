@@ -1,5 +1,74 @@
-﻿@{
+﻿@model Model.VolunteerProject
+
+@{
     ViewBag.Title = "DetailsProject";
 }
 
-<h2>DetailsProject</h2>
+<h2>Details</h2>
+
+<table>
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Title)
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.Owner)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Owner.Name)
+        </td>
+    </tr>
+        <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.Location.Address)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Location.Address)
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.Location.City)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Location.City)
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.Time)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Time)
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.ProjectTopics)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.ProjectTopics)
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Description)
+        </td>
+    </tr>
+        <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.Signup)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Signup)
+        </td>
+    </tr>
+</table>
