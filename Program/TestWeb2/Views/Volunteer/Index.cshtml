@@ -72,22 +72,22 @@ else
         @foreach (Match match in Model.Matches.Where(m => m.Accepted == false && m.GetType() == typeof(Invite)))
         {
             <td>
-                    @Html.DisplayFor(modelitem => match.Project.Title)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => match.Project.Time)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => match.Project.Location.Address)
-                    @Html.DisplayFor(modelItem => match.Project.Location.City)
-                </td>
-                <td>
-                    @Html.ActionLink("Details", "Project", new { Id = match.Project.Id })
-                </td>
+                @Html.DisplayFor(modelitem => match.Project.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => match.Project.Time)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => match.Project.Location.Address)
+                @Html.DisplayFor(modelItem => match.Project.Location.City)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Project", new { Id = match.Project.Id })
+            </td>
         }
     </table>
 }
-else 
+else
 {
     <p>You have got no invites pending...</p>
 }
@@ -110,7 +110,8 @@ else
         </tr>
         @foreach (Match match in Model.Matches.Where(m => m.Accepted == false && m.GetType() == typeof(Suggestion)))
         {
-            <td>
+            <tr>
+                <td>
                     @Html.DisplayFor(modelitem => match.Project.Title)
                 </td>
                 <td>
@@ -123,11 +124,11 @@ else
                 <td>
                     @Html.ActionLink("Details", "Project", new { Id = match.Project.Id })
                 </td>
+            </tr>
         }
     </table>
 }
-else 
+else
 {
     <p>We do not have any suggestions for you right now, sorry :(</p>
 }
-            
