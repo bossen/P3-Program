@@ -20,7 +20,10 @@ namespace TestWeb2.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            Volunteer currentUser = GetCurrentUser();
+            Volunteer currentUser = db.Volunteers
+                .Include("Matches")
+                .Include("Matches.Project")
+                .Include("Matches.Project.Location").ToList().Where(u => u.ID == GetCurrentUser().ID).FirstOrDefault();
             return View(currentUser);
         }
 
@@ -117,7 +120,7 @@ namespace TestWeb2.Controllers
             return View(organizations.ToList());
         }
 
-        public ActionResult Volunteer(int id = 0)
+        public ActionResult Volunteer(int id)
         {
             Volunteer volunteer = db.Volunteers
                 .Include("Matches")
