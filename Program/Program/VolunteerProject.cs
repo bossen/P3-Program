@@ -15,14 +15,22 @@ namespace Model
         [Key]
         [Required()]
         public int Id { get; set; }
+
         public Organization Owner { get; set; }
+
         public List<Match> Matches { get; set; }
+
         public string Title { get; set; }
+
         public Location Location { get; set; }
+
         public DateTime Time { get; set; }
+        
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
-        public bool Signup { get; private set; }
+
+        public bool Signup { get; set; }
+
         public List<Topic> ProjectTopics { get; set; }
         #endregion
 

@@ -19,6 +19,7 @@ namespace Model.Migrations
             List<Volunteer> volunteers = new List<Volunteer>() {
                 new Volunteer
                 {
+                    ID = 1,
                     UserName = "Spinkelben",
                     Password = "123456",
                     Name = "Søren R",
@@ -36,6 +37,7 @@ namespace Model.Migrations
             {
                 new Organization
                 {
+                    Id = 1,
                     Name = "Omvendt Kors",
                     Creation = DateTime.Parse("1996-06-06"),
                     Location = new Location("Main street 1", "Townsville"),
@@ -47,7 +49,8 @@ namespace Model.Migrations
             {
                 new VolunteerProject
                 {
-                    Owner = organizations.Find(o => o.Name == "Omvendt Kors"),
+                    Id = 1,
+                    Owner = organizations.Find(o => o.Id == 1),
                     Title = "Kors Rotering",
                     Location = new Location("Main street 2", "Townsville"),
                     Time = DateTime.Parse("2013-12-25"),
@@ -64,64 +67,40 @@ namespace Model.Migrations
                     Id = 1,
                     Accepted = false,
                     Score = 50,
-                    Expire = projects.Find(p => p.Title == "Kors Rotering").Time,
-                    Project = projects.Find(p => p.Title == "Kors Rotering"),
-                    Volunteer = volunteers.Find(v => v.UserName == "Spinkelben")
+                    Expire = projects.Find(p => p.Id == 1).Time,
+                    Project = projects.Find(p => p.Id == 1),
+                    Volunteer = volunteers.Find(v => v.ID == 1)
                 }
             };
-            volunteers.Find(v => v.UserName == "Spinkelben").AddMatch(workrequests.Find(w => w.Id == 1));
+
+            List<Admin> admins = new List<Admin>()
+            {
+                new Admin 
+                {
+                    ID = 1,
+                    Association = organizations.Find(o => o.Id == 1),
+                    Creation = DateTime.Parse("2012-03-07"),
+                    Email = "John@kors.dk",
+                    IsAdmin = true,
+                    Location = new Location("Badehusvej 13","Aalborg"),
+                    Name = "John Andersen",
+                    UserName = "John9000"
+                }
+            };
+
+            volunteers.Find(v => v.ID == 1).AddMatch(workrequests.Find(w => w.Id == 1));
 
             volunteers.ForEach(v => context.Volunteers.AddOrUpdate(p => p.UserName, v));
             context.SaveChanges();
-            organizations.ForEach(o => context.Organizations.AddOrUpdate(p => p.Name));
+            organizations.ForEach(o => context.Organizations.AddOrUpdate(p => p.Name, o));
             context.SaveChanges();
-            projects.ForEach(p => context.VolunteerProjects.AddOrUpdate(q => q.Title));
+            projects.ForEach(p => context.VolunteerProjects.AddOrUpdate(q => q.Title, p));
             context.SaveChanges();
-            workrequests.ForEach(w => context.WorkRequest.AddOrUpdate(x => x.Id));
+            workrequests.ForEach(w => context.WorkRequest.AddOrUpdate(x => x.Id, w));
+            context.SaveChanges();
+            admins.ForEach(a => context.Admins.AddOrUpdate(b => b.UserName, a));
             context.SaveChanges();
 
-            //context.Organizations.AddOrUpdate(i => i.Name,
-            //    new Organization
-            //    {
-            //        Name = "Omvendt Kors",
-            //        Creation = DateTime.Parse("1996-06-06"),
-            //        Location = new Location("Main street 1", "Townsville"),
-            //        Email = "mail@kors.dk"
-            //    }
-            //);
-            //context.SaveChanges();
-            //context.VolunteerProjects.AddOrUpdate(i => i.Title,
-            //    new VolunteerProject
-            //    {
-            //        Owner = context.Organizations.FirstOrDefault(x => x.Name == "Omvendt Kors"),
-            //        Title = "Kors Rotering",
-            //        Location = new Location("Main street 2", "Townsville"),
-            //        Time = DateTime.Parse("2013-12-25"),
-            //        Topics = new List<Preference>(),
-            //        Description = "Vi roterer kors på jesu fødselsdag"
-
-            //    }
-            //);
-
-            //context.SaveChanges();
-            //context.WorkRequest.AddOrUpdate(i => i.Id,
-            //    new WorkRequest
-            //    {
-            //        Id = 1,
-            //        Accepted = false,
-            //        Score = 50,
-            //        Expire = context.VolunteerProjects.FirstOrDefault(vp => vp.Title == "Kors Rotering").Time,
-            //        Project = context.VolunteerProjects.FirstOrDefault(y => y.Title == "Kors Rotering"),
-            //        Volunteer = context.Volunteers.FirstOrDefault(x => x.UserName == "Spinkelben")
-            //    }
-            //);
-            //context.SaveChanges();
-            //context.Volunteers.AddOrUpdate(i => i.Name,
-            //    new Volunteer
-            //    {
-            //        _matches = new List<Match>() { context.WorkRequest.FirstOrDefault(x => x.Id == 1) }
-            //    }
-            //);
         }
     }
 }

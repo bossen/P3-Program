@@ -1,28 +1,134 @@
 ﻿@model Model.Volunteer
 
+@{
+    ViewBag.Title = "My Profile";
+}
+<h2>Profile</h2>
 
-<h2>Index</h2>
+<p>
+    Hello @Html.DisplayFor(modelItem => Model.Name)! This is your profile 
+    page where you can view the projects you have signed up for, your project invitations and
+    our project suggestions.  
 
-
-    <fieldset>
-        <legend>Profile</legend>
-
-        
-        <div class="view-field">
-            
-        </div>
-        
-
-        @Html.DisplayFor(m => m.Name)
-        @Html.DisplayFor(m => m.Email)
-        @Html.DisplayFor(m => m.Creation)
-        @Html.DisplayFor(m => m.Location.Address)
-        @Html.DisplayFor(m => m.Location.City)
-        
-
-    </fieldset>
-
-
-<input id="Button1" type="button" value="button" name="Test" onclick="javascript: window.open('/Profile/Edit',
-                                       'Customer Search',
-                                       'height=' + (window.screen.height - 100) + ',width=200,left=' + (window.screen.width - 250) + ',top=10,status=no,toolbar=no,resizable=yes,scrollbars=yes');"/>
+</p>
+<h2>Projects you've signed up for!</h2>
+@if (Model.Matches.ToList().Where(m => m.Accepted == true).Count() > 0)
+{
+    <table>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Matches.First().Project.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Matches.First().Project.Time)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Matches.First().Project.Location)
+            </th>
+            <th>Options
+            </th>
+        </tr>
+        <tr>
+            @foreach (Model.Match match in Model.Matches.Where(m => m.Accepted == true))
+            {
+                <td>
+                    @Html.DisplayFor(modelitem => match.Project.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => match.Project.Time)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => match.Project.Location.Address)
+                    @Html.DisplayFor(modelItem => match.Project.Location.City)
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "Project", new { Id = match.Project.Id })
+                </td>
+            }
+        </tr>
+    </table>
+}
+else
+{
+    <p>"None :'("</p>
+}
+<h2>Your Invites</h2>
+@if (Model.Matches.Where(m => m.Accepted == false && m.GetType() == typeof(Invite)).Count() > 0)
+{
+    <table>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Matches.First().Project.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Matches.First().Project.Time)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Matches.First().Project.Location)
+            </th>
+            <th>Options
+            </th>
+        </tr>
+        @foreach (Match match in Model.Matches.Where(m => m.Accepted == false && m.GetType() == typeof(Invite)))
+        {
+            <td>
+                @Html.DisplayFor(modelitem => match.Project.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => match.Project.Time)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => match.Project.Location.Address)
+                @Html.DisplayFor(modelItem => match.Project.Location.City)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Project", new { Id = match.Project.Id })
+            </td>
+        }
+    </table>
+}
+else
+{
+    <p>You have got no invites pending...</p>
+}
+<h2>Our Suggestions</h2>
+@if (Model.Matches.Where(m => m.Accepted == false && m.GetType() == typeof(Suggestion)).Count() > 0)
+{
+    <table>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Matches.First().Project.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Matches.First().Project.Time)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Matches.First().Project.Location)
+            </th>
+            <th>Options
+            </th>
+        </tr>
+        @foreach (Match match in Model.Matches.Where(m => m.Accepted == false && m.GetType() == typeof(Suggestion)))
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelitem => match.Project.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => match.Project.Time)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => match.Project.Location.Address)
+                    @Html.DisplayFor(modelItem => match.Project.Location.City)
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "Project", new { Id = match.Project.Id })
+                </td>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <p>We do not have any suggestions for you right now, sorry :(</p>
+}

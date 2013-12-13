@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Model;
 using WebMatrix.WebData;
+using System.Data.Entity;
 
 namespace TestWeb2.Controllers
 {
@@ -79,7 +80,28 @@ namespace TestWeb2.Controllers
             {
                 return HttpNotFound();
             }
+
             return View(volunteerProject);
+        }
+
+        [HttpPost]
+        public ActionResult EditProject(VolunteerProject volunteerproject, int id)
+        {
+            VolunteerProject project = db.VolunteerProjects.Find(id);
+            if (ModelState.IsValid && project != null)
+            {
+                project.Title = volunteerproject.Title;
+                //project.Time = volunteerproject.Time;
+                project.Signup = volunteerproject.Signup;
+                project.Description = volunteerproject.Description;
+                project.Location.Address = volunteerproject.Location.Address;
+                project.Location.City = volunteerproject.Location.City;
+                project.ProjectTopics = volunteerproject.ProjectTopics;
+                db.Entry(project).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("DetailsProject", "Organization");
+            }
+            return View(volunteerproject);
         }
 
         public ActionResult DetailsProject(int id)
