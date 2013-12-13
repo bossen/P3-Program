@@ -43,6 +43,10 @@ namespace TestWeb2.Controllers
                     ViewBag.Suggestions = new List<Model.Match>();
                     ViewBag.Accepted = new List<Model.Match>();
                 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4e453e4d887cd297a960f6edded6467d98032ca2
             }
             else
             {
