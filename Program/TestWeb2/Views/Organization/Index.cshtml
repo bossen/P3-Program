@@ -7,42 +7,52 @@
 <h1>Organization Dashboard</h1>
 
 
-<table>
+<table border="1">
     <tr>
         <td>
-            @Html.DisplayNameFor(model => model.Association.Name) |
+            @Html.DisplayNameFor(model => model.Association.Name):
+        </td>
+        <td>
             @Html.DisplayFor(model => model.Association.Name)
         </td>        
     </tr>
     <tr>
         <td>
-            @Html.DisplayNameFor(model => model.Association.Creation) |
+            @Html.DisplayNameFor(model => model.Association.Creation):
+        </td>
+        <td>
             @Html.DisplayFor(model => model.Association.Creation)
         </td>
     </tr>
     <tr>
         <td>
-            @Html.DisplayNameFor(model => model.Association.Email) |
+            @Html.DisplayNameFor(model => model.Association.Email):
+        </td>
+        <td>
             @Html.DisplayFor(model => model.Association.Email)
         </td>
     </tr>
     <tr>
         <td>
-            @Html.DisplayNameFor(model => model.Association.Location.Address) |
+            @Html.DisplayNameFor(model => model.Association.Location.Address):
+        </td>
+        <td>
             @Html.DisplayFor(model => model.Association.Location.Address)
         </td>
     </tr>
     <tr>
         <td>
-            @Html.DisplayNameFor(model => model.Location.City) |
+            @Html.DisplayNameFor(model => model.Location.City):
+        </td>
+        <td>
             @Html.DisplayFor(model => model.Association.Location.City)
         </td>
     </tr>
  
 </table>
 
-<table>
-    <h2>Currently Projects:</h2>
+<table border="1">
+    <h3>Current Active Projects:</h3>
     @if (ViewBag.projectNull)
     {
         <p>There's currently no projects associated with your organization.</p>
