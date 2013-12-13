@@ -50,9 +50,7 @@ namespace TestWeb2.Controllers
             return View();
         }
 
-<<<<<<< HEAD
         [Authorize]
-=======
         public ActionResult Volunteer(int id = 0)
         {
             Volunteer volunteer = db.Volunteers
@@ -74,7 +72,6 @@ namespace TestWeb2.Controllers
             return View(volunteers.ToList());
         }
 
->>>>>>> 3629d1743e7a4012dc536137dee911a8a7fb0a1b
         public ActionResult EditProject(int id = 0)
         {
             VolunteerProject volunteerProject = db.VolunteerProjects.Find(id);
