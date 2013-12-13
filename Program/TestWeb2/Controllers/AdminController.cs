@@ -10,15 +10,16 @@ using WebMatrix.WebData;
 
 namespace TestWeb2.Controllers
 {
+    [Authorize]
     public class AdminController : Controller
     {
         private VolunteerOrgContext db = new VolunteerOrgContext();
         //
         // GET: /Admin/
 
-        [Authorize]
         public ActionResult Index()
         {
+            ViewBag.IsAdmin = true;
             Admin currentuser = GetCurrentUser();
 
             if (currentuser.Association == null)
@@ -48,9 +49,9 @@ namespace TestWeb2.Controllers
             return View(organization);
         }
 
-        [Authorize]
         public ActionResult Edit(int id = 0)
         {
+            ViewBag.IsAdmin = true;
             Organization organization = db.Organizations.Find(id);
             if (organization == null)
             {
@@ -59,9 +60,9 @@ namespace TestWeb2.Controllers
             return View(organization);
         }
 
-        [Authorize]
         public ActionResult Organizations()
         {
+            ViewBag.IsAdmin = true;
             Admin currentuser = GetCurrentUser();
 
             if (currentuser.Association == null)
@@ -71,15 +72,16 @@ namespace TestWeb2.Controllers
             return View(db.Organizations.ToList());
         }
 
-        [Authorize]
         public ActionResult Organization(int id)
         {
+            ViewBag.IsAdmin = true;
             Organization organization = db.Organizations.Find(id);
             return View(organization);
         }
 
         public ActionResult JoinOrganization(int id)
         {
+            ViewBag.IsAdmin = true;
             Admin currentUser = GetCurrentUser();
             Organization organization = db.Organizations.Find(id);
 
