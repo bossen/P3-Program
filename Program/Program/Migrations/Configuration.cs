@@ -1,6 +1,5 @@
 namespace Model.Migrations
 {
-    using Model;
     using System;
     using System.Collections.Generic;
     using System.Data.Entity;
@@ -16,6 +15,7 @@ namespace Model.Migrations
 
         protected override void Seed(Model.VolunteerOrgContext context)
         {
+
             List<Volunteer> volunteers = new List<Volunteer>() {
                 new Volunteer
                 {
@@ -26,11 +26,12 @@ namespace Model.Migrations
                     Email = "hej@mail.dk",
                     IsAdmin = false,
                     Location = new Location("blah gade 1", "Blah blah By"),
-                    Matches = new List<Match>()
+                    Matches = new List<Match>(),
+                    VolunteerPreferences = new List<Topic> { new Topic { Name = "Church" }}
                 }
             };
-            
-           
+
+
             List<Organization> organizations = new List<Organization>()
             {
                 new Organization
@@ -50,7 +51,8 @@ namespace Model.Migrations
                     Title = "Kors Rotering",
                     Location = new Location("Main street 2", "Townsville"),
                     Time = DateTime.Parse("2013-12-25"),
-                    Description = "Vi roterer kors på jesu fødselsdag"
+                    Description = "Vi roterer kors på jesu fødselsdag",
+                    ProjectTopics = new List<Topic> { new Topic {Name = "Church" } }
 
                 }
             };

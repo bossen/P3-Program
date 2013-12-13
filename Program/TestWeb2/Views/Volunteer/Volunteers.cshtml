@@ -1,0 +1,17 @@
+﻿@model IEnumerable<Model.Volunteer>
+
+<hgroup class="title">
+    <h1>@ViewBag.Title.</h1>
+    <h2>@ViewBag.Message</h2>
+</hgroup>
+<ul>
+    @foreach (var item in Model)
+    {
+        <li>
+            @Html.DisplayFor(modelItem => item.UserName)
+            @Html.DisplayFor(modelItem => item.Name)
+            @Html.DisplayFor(modelItem => item.Location)
+            @Html.ActionLink("details", "volunteer", new { id = item.ID })
+        </li>
+    }
+</ul>

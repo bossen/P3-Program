@@ -29,6 +29,27 @@ namespace TestWeb2.Controllers
             return View();
         }
 
+        public ActionResult Volunteer(int id = 0)
+        {
+            Volunteer volunteer = db.Volunteers
+                .Include("Matches")
+                .Include("Matches.Project")
+                .Where(v => v.ID == id)
+                .FirstOrDefault();
+
+            if (volunteer == null)
+                return HttpNotFound();
+
+            return View(volunteer);
+        }
+
+        public ActionResult Volunteers()
+        {
+            ViewBag.Title = "List of Volunteers";
+            var volunteers = db.Volunteers;
+            return View(volunteers.ToList());
+        }
+
         public ActionResult EditProject(int id = 0)
         {
             VolunteerProject volunteerProject = db.VolunteerProjects.Find(id);

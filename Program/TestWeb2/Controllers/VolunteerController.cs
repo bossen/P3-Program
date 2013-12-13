@@ -10,6 +10,7 @@ using System.Data.Entity;
 
 namespace TestWeb2.Controllers
 {
+    [Authorize]
     public class VolunteerController : Controller
     {
         private VolunteerOrgContext db = new VolunteerOrgContext();
@@ -91,12 +92,32 @@ namespace TestWeb2.Controllers
             return View(organization);
         }
 
-        [Authorize]
         public ActionResult Organizations()
         {
             ViewBag.Title = "List of Organizations";
             var organizations = db.Organizations;
             return View(organizations.ToList());
+        }
+
+        public ActionResult Volunteer(int id = 0)
+        {
+            Volunteer volunteer = db.Volunteers
+                .Include("Matches")
+                .Include("Matches.Project")
+                .Where(v => v.ID == id)
+                .FirstOrDefault();
+
+            if (volunteer == null)
+                return HttpNotFound();
+
+            return View(volunteer);
+        }
+
+        public ActionResult Volunteers()
+        {
+            ViewBag.Title = "List of Volunteers";
+            var volunteers = db.Volunteers;
+            return View(volunteers.ToList());
         }
 
         [Authorize]

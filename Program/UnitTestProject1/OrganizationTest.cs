@@ -38,7 +38,7 @@ namespace UnitTestProject1
             Assert.AreEqual(title, o.GetProjects()[0].Title);
             Assert.AreEqual(location, o.GetProjects()[0].Location);
             Assert.AreEqual(time, o.GetProjects()[0].Time);
-            Assert.AreEqual(preferences, o.GetProjects()[0].Topics);
+            Assert.AreEqual(preferences, o.GetProjects()[0].ProjectTopics);
             Assert.AreEqual(description, o.GetProjects()[0].Description);
             Assert.AreEqual(o, o.GetProjects()[0].Owner);
             Assert.AreEqual(true, o.GetProjects()[0].Signup);

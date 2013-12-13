@@ -1,6 +1,7 @@
 ﻿using Model;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -75,6 +76,18 @@ namespace TestWeb2.Controllers
         {
             Organization organization = db.Organizations.Find(id);
             return View(organization);
+        }
+
+        public ActionResult JoinOrganization(int id)
+        {
+            Admin currentUser = GetCurrentUser();
+            Organization organization = db.Organizations.Find(id);
+
+            currentUser.AssociateOrganization(organization);
+            db.Entry(currentUser).State = EntityState.Modified;
+            db.Entry(organization).State = EntityState.Modified;
+            db.SaveChanges();
+            return View();
         }
 
         private Admin GetCurrentUser()

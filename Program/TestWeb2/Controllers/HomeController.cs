@@ -61,9 +61,8 @@ namespace TestWeb2.Controllers
         {
             VolunteerProject project = db.VolunteerProjects.Find(id);
             if (project == null)
-            {
                 return HttpNotFound();
-            }
+
             return View(project);
         }
 
@@ -71,6 +70,7 @@ namespace TestWeb2.Controllers
         {
             ViewBag.Title = "List of Volunteer Projects";
             var projects = db.VolunteerProjects.Include(p => p.Owner);
+            projects = projects.Include(p => p.ProjectTopics);
             return View(projects.ToList());
         }
 
@@ -82,9 +82,8 @@ namespace TestWeb2.Controllers
                 .FirstOrDefault();
 
             if (organization == null)
-            {
                 return HttpNotFound();
-            }
+
             return View(organization);
         }
 
@@ -108,7 +107,27 @@ namespace TestWeb2.Controllers
             db.Entry(project).State = EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("project", "home", new { id = project.Id });
+        }
 
+        public ActionResult Volunteer(int id = 0)
+        {
+            Volunteer volunteer = db.Volunteers
+                .Include("Matches")
+                .Include("Matches.Project")
+                .Where(v => v.ID == id)
+                .FirstOrDefault();
+
+            if (volunteer == null)
+                return HttpNotFound();
+
+            return View(volunteer);
+        }
+
+        public ActionResult Volunteers()
+        {
+            ViewBag.Title = "List of Volunteers";
+            var volunteers = db.Volunteers;
+            return View(volunteers.ToList());
         }
 
         public ActionResult About()
