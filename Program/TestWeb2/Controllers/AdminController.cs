@@ -85,7 +85,6 @@ namespace TestWeb2.Controllers
 
             currentUser.AssociateOrganization(organization);
             db.Entry(currentUser).State = EntityState.Modified;
-            db.Entry(organization).State = EntityState.Modified;
             db.SaveChanges();
             return View();
         }
