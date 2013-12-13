@@ -1,23 +1,86 @@
-﻿@model TestWeb2.Models.MultiViewModel
+﻿@model Model.Admin
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Organization</h2>
+<h1>Organization Dashboard</h1>
 
-@if (Model.Admin.Association != null)
-{ 
-    @Html.ActionLink("Create new Project", "CreateProject", "Organization")
 
-    @Html.ActionLink("Edit Organization Info", "Edit", "Organization")
+<table border="1">
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.Association.Name):
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Association.Name)
+        </td>        
+    </tr>
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.Association.Creation):
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Association.Creation)
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.Association.Email):
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Association.Email)
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.Association.Location.Address):
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Association.Location.Address)
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.Location.City):
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Association.Location.City)
+        </td>
+    </tr>
+ 
+</table>
 
-    @*@Html.ActionLink("Edit Organization", "Edit", new { id=Model.Id })*@
-}
+<table border="1">
+    <h3>Current Active Projects:</h3>
+    @if (ViewBag.projectNull)
+    {
+        <p>There's currently no projects associated with your organization.</p>
+        
+        @Html.ActionLink("Create new Project", "CreateProject", "Organization")
+    }
 
-@if (Model.Admin.Association == null)
-{ 
-    <p>Join Organization?</p>
-}
+    @if(!ViewBag.projectNull)
+    {
+        foreach(var item in Model.Association.VolunteerProjects.OrderBy(v => v.Time).Take(10))
+    { 
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Time)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "EditProject", new { id = item.Id })
+                @Html.ActionLink("Cancel", "CancelProject")
+                @Html.ActionLink("Details", "DetailsProject", new { id = item.Id }) 
+            </td>
+        </tr>
+    
+    }
+    }
+    </table>
 
-@Html.DisplayFor(model => model.Organization.Name)
+
+
