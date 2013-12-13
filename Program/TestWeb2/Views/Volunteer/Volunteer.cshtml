@@ -1,0 +1,19 @@
+﻿@model Model.Volunteer
+@if (Model != null)
+{
+    <hgroup class="title">
+        <h1>@Model.Name</h1>
+        <h2>@Model.Location.Address</h2>
+    </hgroup>
+    <ul>
+        @foreach (var match in Model.Matches)
+        {
+        <li>
+            @Html.DisplayFor(modelItem => match.Project.Title)
+            @Html.DisplayFor(modelItem => match.Project.Time)
+            @Html.ActionLink("details", "project", new { id = match.Project.Id })
+        </li>
+        }
+
+    </ul>
+}

@@ -13,7 +13,7 @@ namespace ConsoleApplication3
         {
             using (var db = new VolunteerOrgContext())
             {
-                Volunteer v1 = new Volunteer(1, "username") { Preferences = new List<Preference>() { Preference.Festival } };
+                Volunteer v1 = new Volunteer(1, "username") { VolunteerPreferences = new List<Preference>() { Preference.Festival } };
                 Organization o1 = new Organization("blue pills");
                 o1.CreateProject("cool stuff", new Location("11", "aalborg"), DateTime.Now.AddDays(2), new List<Preference>() { Preference.Culture, Preference.Festival }, "NOTHING HERE");
                 

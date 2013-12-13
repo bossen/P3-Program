@@ -43,7 +43,7 @@ namespace VolunteerOrganizator.Models
                     Id = 1,
                     Location = new Location("Volunteer Street 1", "Volunteertown"),
                     UserId = 1,
-                    Preferences = new List<Preference>() { Preference.Church, Preference.Festival, Preference.Sport },
+                    VolunteerPreferences = new List<Preference>() { Preference.Church, Preference.Festival, Preference.Sport },
                     IsAdmin = false
                 });
             context.Volunteers.Add(
@@ -57,7 +57,7 @@ namespace VolunteerOrganizator.Models
                     Id = 2,
                     Location = new Location("Volunteer Street 2", "Volunteertown"),
                     UserId = 2,
-                    Preferences = new List<Preference>() { Preference.Festival, Preference.Political },
+                    VolunteerPreferences = new List<Preference>() { Preference.Festival, Preference.Political },
                     IsAdmin = false
                 });
 
@@ -70,7 +70,7 @@ namespace VolunteerOrganizator.Models
                     Title = "Helping YOUNG People",
                     Location = new Location("Project Street 1", "Project city"),
                     Time = DateTime.Today,
-                    Topics = new List<Preference>() { Preference.Culture, Preference.Sport },
+                    ProjectTopics = new List<Preference>() { Preference.Culture, Preference.Sport },
                     //Matches needed----- ???
                 });
 
@@ -83,7 +83,7 @@ namespace VolunteerOrganizator.Models
                     Title = "Helping OLD People",
                     Location = new Location("Project Street 2", "Project city"),
                     Time = DateTime.Today,
-                    Topics = new List<Preference>() { Preference.Church, Preference.Nature }
+                    ProjectTopics = new List<Preference>() { Preference.Church, Preference.Nature }
                     //Matches = "", -------List of Matches?
                 });
 
@@ -96,7 +96,7 @@ namespace VolunteerOrganizator.Models
                     Title = "Helping Music",
                     Location = new Location("Project Street 3", "Project city"),
                     Time = DateTime.Today,
-                    Topics = new List<Preference>() { Preference.Culture, Preference.Festival }
+                    ProjectTopics = new List<Preference>() { Preference.Culture, Preference.Festival }
                     //Matches = "", -------List of Matches?
                 });
 
@@ -109,7 +109,7 @@ namespace VolunteerOrganizator.Models
                     Title = "Helping at a church",
                     Location = new Location("Project Street 4", "Project city"),
                     Time = DateTime.Today,
-                    Topics = new List<Preference>() { Preference.Festival, Preference.Political }
+                    ProjectTopics = new List<Preference>() { Preference.Festival, Preference.Political }
                     //Matches = "", -------List of Matches?
                 });
 
@@ -122,7 +122,7 @@ namespace VolunteerOrganizator.Models
                     Title = "Placeholder",
                     Location = new Location("Project Street 5", "Project city"),
                     Time = DateTime.Today,
-                    Topics = new List<Preference>() { Preference.Church, Preference.Culture, Preference.Festival, Preference.Nature, Preference.Political, Preference.Sport }
+                    ProjectTopics = new List<Preference>() { Preference.Church, Preference.Culture, Preference.Festival, Preference.Nature, Preference.Political, Preference.Sport }
                     //Matches = "", -------List of Matches?
                 });
 

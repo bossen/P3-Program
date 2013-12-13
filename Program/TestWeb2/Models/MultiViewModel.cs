@@ -11,5 +11,6 @@ namespace TestWeb2.Models
         public Admin Admin { get; private set; }
         public Organization Organization { get; private set; }
         public Volunteer Volunteer { get; private set; }
+        public VolunteerProject VolunteerProject { get; set; }
     }
 }

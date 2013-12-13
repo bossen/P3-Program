@@ -16,5 +16,6 @@ namespace Model
         public DbSet<VolunteerProject> VolunteerProjects { get; set; }
         public DbSet<Match> Matches { get; set; }
         public DbSet<WorkRequest> WorkRequest { get; set; }
+        public DbSet<Topic> Topic { get; set; }
     }
 }

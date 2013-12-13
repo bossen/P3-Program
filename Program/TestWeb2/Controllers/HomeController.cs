@@ -16,37 +16,34 @@ namespace TestWeb2.Controllers
 
         public ActionResult Index()
         {
-            //Volunteer v1 = new Volunteer("jack", "jack", new Location("råbaaavejen 22", "rødeskovkildelyst"), "nice@mail.dk");
-            //Organization o1 = new Organization("green", new Location("address", "city"), "mail@mail.dk");
-            //VolunteerProject vp1 = o1.CreateProject("title", new Location("address", "city"), DateTime.Now.AddDays(2), new List<Preference>() { Preference.Church }, "description");
-            //Suggestion s1 = v1.AddSuggestion(vp1);
-            //db.VolunteerProjects.Add(vp1);
-            //Volunteer ole = db.Volunteers.ToList().Where(v => v.UserName.ToLower() == "spinkelben").FirstOrDefault();
-            //ole.AddSuggestion(vp1);
-            //Invite i1 = new Invite(ole, vp1);
-            //ole.AddMatch(i1);
-
-            //db.Organizations.Add(o1);
-            //db.Volunteers.Add(v1);
-            //db.SaveChanges();
 
             ViewBag.Authenticated = WebSecurity.IsAuthenticated;
 
             if (WebSecurity.IsAuthenticated)
             {
-                Volunteer currentUser = GetCurrentUser();
+                User currentUser = GetCurrentUser();
                 ViewBag.Title = "";
+                if (currentUser.GetType() == typeof(Volunteer))
+                {
+                    Volunteer volunteerUser = currentUser as Volunteer;
+                    if (volunteerUser.GetInvites() != null)
+                        ViewBag.Invites = volunteerUser.GetInvites();
 
-                if (currentUser.GetInvites() != null)
-                    ViewBag.Invites = currentUser.GetInvites();
+                    List<VolunteerProject> projectSuggestions = new List<VolunteerProject>();
+                    foreach (Match match in volunteerUser.GetSortMatches())
+                    {
+                        projectSuggestions.Add(match.Project);
+                    }
+                    ViewBag.Suggestions = projectSuggestions;
+                    ViewBag.Accepted = volunteerUser.GetAcceptedMatches();
+                }
+                else
+                {
+                    ViewBag.Invites = new List<Model.Invite>();
+                    ViewBag.Suggestions = new List<Model.Match>();
+                    ViewBag.Accepted = new List<Model.Match>();
+                }
 
-                List<VolunteerProject> projectSuggestions = new List<VolunteerProject>();
-                foreach (Match match in currentUser.GetSortMatches())
-	            {
-                    projectSuggestions.Add(match.Project);
-	            }
-                ViewBag.Suggestions = projectSuggestions;
-                ViewBag.Accepted = currentUser.GetAcceptedMatches();
             }
             else
             {
@@ -57,35 +54,75 @@ namespace TestWeb2.Controllers
             return View();
         }
 
+        public ActionResult Project(int id = 0)
+        {
+            VolunteerProject project = db.VolunteerProjects.Find(id);
+            if (project == null)
+                return HttpNotFound();
+
+            return View(project);
+        }
+
         public ActionResult Projects()
         {
             ViewBag.Title = "List of Volunteer Projects";
             var projects = db.VolunteerProjects.Include(p => p.Owner);
+            projects = projects.Include(p => p.ProjectTopics);
             return View(projects.ToList());
         }
 
-        public ActionResult Project(int id = 0)
+        public ActionResult Organization(int id = 0)
         {
-            VolunteerProject project = db.VolunteerProjects.Find(id);
-            Volunteer currentUser = GetCurrentUser();
-            ViewBag.Status = currentUser != null ? currentUser.GetStatusOfProject(project) : null;
-            return View(project);
+            var organization = db.Organizations
+                .Include("VolunteerProjects")
+                .Where(o => o.Id == id)
+                .FirstOrDefault();
+
+            if (organization == null)
+                return HttpNotFound();
+
+            return View(organization);
         }
 
-        public ActionResult JoinProject(int id)
+        public ActionResult Organizations()
+        {
+            ViewBag.Title = "List of Organizations";
+            var organizations = db.Organizations;
+            return View(organizations.ToList());
+        }
+
+        /*public ActionResult JoinProject(int id)
         {
             if (!WebSecurity.IsAuthenticated)
                 return RedirectToAction("index", "home");
 
-            Volunteer currentUser = GetCurrentUser();
-            VolunteerProject project = db.VolunteerProjects.Find(id);
+            User tempUser = GetCurrentUser();
+            if (tempUser.GetType() == typeof(Volunteer))
+            {
 
-            currentUser.AddWorkRequest(project);
-            db.Entry(currentUser).State = EntityState.Modified;
-            db.Entry(project).State = EntityState.Modified;
-            db.SaveChanges();
-            return RedirectToAction("project", "home", new { id = project.Id });
+                Volunteer currentUser = tempUser as Volunteer;
+                VolunteerProject project = db.VolunteerProjects.Find(id);
+        }*/
 
+        public ActionResult Volunteer(int id = 0)
+        {
+            Volunteer volunteer = db.Volunteers
+                .Include("Matches")
+                .Include("Matches.Project")
+                .Where(v => v.ID == id)
+                .FirstOrDefault();
+
+            if (volunteer == null)
+                return HttpNotFound();
+
+            return View(volunteer);
+        }
+
+        public ActionResult Volunteers()
+        {
+            ViewBag.Title = "List of Volunteers";
+            var volunteers = db.Volunteers;
+            return View(volunteers.ToList());
         }
 
         public ActionResult About()
@@ -115,7 +152,7 @@ namespace TestWeb2.Controllers
             return View("~/Views/Home/Profile/Dashboard.cshtml");
         }
 
-        
+
 
         public ActionResult OrganizationProjectAll()
         {
@@ -132,9 +169,19 @@ namespace TestWeb2.Controllers
             return View("~/Views/Home/Organization/Project/Edit.cshtml");
         }
 
-        private Volunteer GetCurrentUser()
+        private User GetCurrentUser()
         {
-            return db.Volunteers.ToList().Where(v => v.UserName.ToLower() == WebSecurity.CurrentUserName.ToLower()).FirstOrDefault();
+            Volunteer hej = db.Volunteers.ToList().Where(v => v.UserName.ToLower() == WebSecurity.CurrentUserName.ToLower()).FirstOrDefault();
+            if (hej != null)
+            {
+                return hej as User;
+            }
+            Admin hej2 = db.Admins.ToList().Where(a => a.UserName.ToLower() == WebSecurity.CurrentUserName.ToLower()).FirstOrDefault();
+            if (hej2 != null)
+            {
+                return hej2 as User;
+            }
+            return null;
         }
     }
 }

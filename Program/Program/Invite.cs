@@ -12,6 +12,10 @@ namespace Model
         #endregion
 
         #region Constructors
+        public Invite()
+            : base()
+        { }
+
         public Invite(Volunteer volunteer, VolunteerProject project)
             : base(volunteer, project)
         { }

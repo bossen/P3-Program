@@ -26,7 +26,7 @@ namespace UnitTestProject1
             Assert.AreEqual(title, vp.Title);
             Assert.AreEqual(l.Address, vp.Location.Address);
             Assert.AreEqual(l.City, vp.Location.City);
-            Assert.AreEqual(preferences, vp.Topics);
+            Assert.AreEqual(preferences, vp.ProjectTopics);
             Assert.AreEqual(o, vp.Owner);
             Assert.AreEqual(description, vp.Description);
             Assert.AreEqual(true, vp.Signup);
