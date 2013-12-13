@@ -17,7 +17,6 @@ namespace TestWeb2.Controllers
         //
         // GET: /Volunteer/
 
-        [Authorize]
         public ActionResult Index()
         {
             Volunteer currentUser = db.Volunteers
@@ -27,13 +26,11 @@ namespace TestWeb2.Controllers
             return View(currentUser);
         }
 
-        [Authorize]
         public ActionResult Create()
         {
             return View();
         }
 
-        [Authorize]
         public ActionResult Edit()
         {
             ViewBag.Title = "Edit";
@@ -62,7 +59,6 @@ namespace TestWeb2.Controllers
             return View(volunteer);
         }
 
-        [Authorize]
         public ActionResult Project(int id = 0)
         {
             VolunteerProject project = db.VolunteerProjects
@@ -81,7 +77,6 @@ namespace TestWeb2.Controllers
             return View(project);
         }
 
-        [Authorize]
         public ActionResult Projects()
         {
             ViewBag.Title = "Volunteer Projects";
@@ -104,7 +99,6 @@ namespace TestWeb2.Controllers
             return RedirectToAction("project", "volunteer", new { id = project.Id });
         }
 
-        [Authorize]
         public ActionResult Organization(int id = 0)
         {
             var organization = db.Organizations
@@ -161,7 +155,6 @@ namespace TestWeb2.Controllers
             return View(volunteers.ToList());
         }
 
-        [Authorize]
         public ActionResult Dashboard()
         {
             return View();

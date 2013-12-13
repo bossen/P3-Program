@@ -24,6 +24,7 @@ namespace Model
 
         public Location Location { get; set; }
 
+        [DataType(DataType.Date)]
         public DateTime Time { get; set; }
         
         [DataType(DataType.MultilineText)]
