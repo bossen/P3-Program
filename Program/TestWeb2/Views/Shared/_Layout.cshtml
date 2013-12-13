@@ -21,12 +21,13 @@
                     <nav>
                         <ul id="menu">
                             @if (HttpContext.Current.User.Identity.IsAuthenticated)
-                             {
+                            {
                                 <li>@Html.ActionLink("Home", "Index", "Volunteer")</li>
                                 <li>@Html.ActionLink("Projects", "Projects", "Volunteer")</li>
                                 <li>@Html.ActionLink("Organizations", "Organizations", "Volunteer")</li>
-                                <li>@Html.ActionLink("About", "About", "Volunteer")</li>
-                                <li>@Html.ActionLink("Profile", "Index", "Volunteer/Profile")</li>
+                                <li>@Html.ActionLink("Volunteers", "Volunteers", "Volunteer")</li>
+                                <li>@Html.ActionLink("Profile", "Edit", "Volunteer")</li>
+                                <li>@Html.ActionLink("About", "About", "Home")</li>
                              }   
 
                              @if (HttpContext.Current.User.Identity.IsAuthenticated == false)

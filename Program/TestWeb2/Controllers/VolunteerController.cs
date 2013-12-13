@@ -10,6 +10,7 @@ using System.Data.Entity;
 
 namespace TestWeb2.Controllers
 {
+    [Authorize]
     public class VolunteerController : Controller
     {
         private VolunteerOrgContext db = new VolunteerOrgContext();
@@ -30,12 +31,29 @@ namespace TestWeb2.Controllers
         }
 
         [Authorize]
-        public ActionResult Edit(int id = 0)
+        public ActionResult Edit()
         {
-            Volunteer volunteer = db.Volunteers.Find(id);
+            ViewBag.Title = "Edit";
+            Volunteer volunteer = GetCurrentUser();
             if (volunteer == null)
             {
                 return HttpNotFound();
+            }
+            return View(volunteer);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Volunteer volunteer)
+        {
+            Volunteer currentUser = GetCurrentUser();
+            if (ModelState.IsValid && currentUser != null)
+            {
+                currentUser.Name = volunteer.Name;
+                currentUser.Email = volunteer.Email;
+                currentUser.Location = volunteer.Location;
+                db.Entry(currentUser).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
             return View(volunteer);
         }
@@ -92,12 +110,33 @@ namespace TestWeb2.Controllers
             return View(organization);
         }
 
-        [Authorize]
         public ActionResult Organizations()
         {
             ViewBag.Title = "List of Organizations";
             var organizations = db.Organizations;
             return View(organizations.ToList());
+        }
+
+        public ActionResult Volunteer(int id = 0)
+        {
+            Volunteer volunteer = db.Volunteers
+                .Include("Matches")
+                .Include("Matches.Project")
+                .Include("Location")
+                .Where(v => v.ID == id)
+                .FirstOrDefault();
+
+            if (volunteer == null)
+                return HttpNotFound();
+
+            return View(volunteer);
+        }
+
+        public ActionResult Volunteers()
+        {
+            ViewBag.Title = "List of Volunteers";
+            var volunteers = db.Volunteers;
+            return View(volunteers.ToList());
         }
 
         [Authorize]
@@ -111,6 +150,7 @@ namespace TestWeb2.Controllers
             int id =  db.Volunteers.ToList().Where(v => v.UserName.ToLower() == WebSecurity.CurrentUserName.ToLower()).FirstOrDefault().ID;
             var volunteer = db.Volunteers
                 .Include("Matches")
+                .Include("Location")
                 .Where(v => v.ID == id)
                 .FirstOrDefault();
 

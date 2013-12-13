@@ -58,9 +58,8 @@ namespace TestWeb2.Controllers
         {
             VolunteerProject project = db.VolunteerProjects.Find(id);
             if (project == null)
-            {
                 return HttpNotFound();
-            }
+
             return View(project);
         }
 
@@ -80,9 +79,8 @@ namespace TestWeb2.Controllers
                 .FirstOrDefault();
 
             if (organization == null)
-            {
                 return HttpNotFound();
-            }
+
             return View(organization);
         }
 
@@ -93,7 +91,7 @@ namespace TestWeb2.Controllers
             return View(organizations.ToList());
         }
 
-        public ActionResult JoinProject(int id)
+        /*public ActionResult JoinProject(int id)
         {
             if (!WebSecurity.IsAuthenticated)
                 return RedirectToAction("index", "home");
@@ -104,15 +102,27 @@ namespace TestWeb2.Controllers
 
                 Volunteer currentUser = tempUser as Volunteer;
                 VolunteerProject project = db.VolunteerProjects.Find(id);
+        }*/
 
-                currentUser.AddWorkRequest(project);
-                db.Entry(currentUser).State = EntityState.Modified;
-                db.Entry(project).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("project", "home", new { id = project.Id });
-            }
-            return HttpNotFound();
+        public ActionResult Volunteer(int id = 0)
+        {
+            Volunteer volunteer = db.Volunteers
+                .Include("Matches")
+                .Include("Matches.Project")
+                .Where(v => v.ID == id)
+                .FirstOrDefault();
 
+            if (volunteer == null)
+                return HttpNotFound();
+
+            return View(volunteer);
+        }
+
+        public ActionResult Volunteers()
+        {
+            ViewBag.Title = "List of Volunteers";
+            var volunteers = db.Volunteers;
+            return View(volunteers.ToList());
         }
 
         public ActionResult About()

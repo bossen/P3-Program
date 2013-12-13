@@ -10,9 +10,9 @@
     @*<script>addMarker(@Model.Location.Address, @Model.Title)</script>*@
     
     <p>@Html.DisplayFor(modelItem => Model.Description)</p>
-    if (Model.Topics != null)
+    if (Model.ProjectTopics != null)
     {
-        foreach (Model.Tag topic in Model.Topics)
+        foreach (Model.Topic topic in Model.ProjectTopics)
         {
                 @Html.ActionLink(topic.ToString(), "projects")
         }
