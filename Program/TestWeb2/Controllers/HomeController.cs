@@ -42,9 +42,9 @@ namespace TestWeb2.Controllers
 
                 List<VolunteerProject> projectSuggestions = new List<VolunteerProject>();
                 foreach (Match match in currentUser.GetSortMatches())
-	            {
+                {
                     projectSuggestions.Add(match.Project);
-	            }
+                }
                 ViewBag.Suggestions = projectSuggestions;
                 ViewBag.Accepted = currentUser.GetAcceptedMatches();
             }
@@ -59,7 +59,15 @@ namespace TestWeb2.Controllers
 
         public ActionResult Project(int id = 0)
         {
-            VolunteerProject project = db.VolunteerProjects.Find(id);
+            VolunteerProject project = db.VolunteerProjects
+                .Include("Owner")
+                .Include("Location")
+                .Include("ProjectTopics")
+                .Include("Matches")
+                .Include("Matches.Volunteer")
+                .Where(v => v.Id == id)
+                .FirstOrDefault();
+
             if (project == null)
                 return HttpNotFound();
 
@@ -78,6 +86,7 @@ namespace TestWeb2.Controllers
         {
             var organization = db.Organizations
                 .Include("VolunteerProjects")
+                .Include("Location")
                 .Where(o => o.Id == id)
                 .FirstOrDefault();
 
@@ -114,6 +123,8 @@ namespace TestWeb2.Controllers
             Volunteer volunteer = db.Volunteers
                 .Include("Matches")
                 .Include("Matches.Project")
+                .Include("Location")
+                .Include("VolunteerPreferences")
                 .Where(v => v.ID == id)
                 .FirstOrDefault();
 
@@ -157,7 +168,7 @@ namespace TestWeb2.Controllers
             return View("~/Views/Home/Profile/Dashboard.cshtml");
         }
 
-        
+
 
         public ActionResult OrganizationProjectAll()
         {

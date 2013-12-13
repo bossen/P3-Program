@@ -39,6 +39,14 @@
             @Html.EditorFor(model => model.Location.City)
             @Html.ValidationMessageFor(model => model.Location.City)
         </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.VolunteerPreferences)
+        </div>
+        <div class="editor-field">
+            @Html.ListBoxFor(model => model.VolunteerPreferences, new MultiSelectList(ViewBag.Topics))
+            @Html.ValidationMessageFor(model => model.VolunteerPreferences)
+        </div>
             
         <p>
             <input type="submit" value="Save" />

@@ -26,7 +26,7 @@
                                 <li>@Html.ActionLink("Projects", "Projects", "Volunteer")</li>
                                 <li>@Html.ActionLink("Organizations", "Organizations", "Volunteer")</li>
                                 <li>@Html.ActionLink("Volunteers", "Volunteers", "Volunteer")</li>
-                                <li>@Html.ActionLink("Profile", "Edit", "Volunteer")</li>
+                                <li>@Html.ActionLink("Profile", "Volunteer", "Volunteer", new { id = 0 })</li>
                                 <li>@Html.ActionLink("About", "About", "Home")</li>
                              }   
 
@@ -34,6 +34,8 @@
                              {
                                 <li>@Html.ActionLink("Home", "Index", "Home")</li>
                                 <li>@Html.ActionLink("Projects", "Projects", "Home")</li>
+                                <li>@Html.ActionLink("Organizations", "Organizations", "Home")</li>
+                                <li>@Html.ActionLink("Volunteers", "Volunteers", "Home")</li>
                                 <li>@Html.ActionLink("About", "About", "Home")</li>
                              }
                         </ul>

@@ -1,17 +1,22 @@
 ﻿@model IEnumerable<Model.Volunteer>
 
 <hgroup class="title">
-    <h1>@ViewBag.Title.</h1>
-    <h2>@ViewBag.Message</h2>
+    <h1>@ViewBag.Title</h1>
+    <h2>listing</h2>
 </hgroup>
-<ul>
+<table>
     @foreach (var item in Model)
     {
-        <li>
-            @Html.DisplayFor(modelItem => item.UserName)
-            @Html.DisplayFor(modelItem => item.Name)
-            @Html.DisplayFor(modelItem => item.Location)
-            @Html.ActionLink("details", "volunteer", new { id = item.ID })
-        </li>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.ActionLink("details", "volunteer", new { id = item.ID })
+            </td>
+        </tr>
     }
-</ul>
+</table>
