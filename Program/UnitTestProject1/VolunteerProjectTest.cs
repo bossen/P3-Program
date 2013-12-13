@@ -15,9 +15,10 @@ namespace UnitTestProject1
             string address = "address", city = "city", title = "title", description = "description";
             Location l = new Location(address, city);
             DateTime time = DateTime.Now;
-            List<Preference> preferences = new List<Preference>();
-            preferences.Add(Preference.Church);
-            preferences.Add(Preference.Festival);
+            List<Topic> preferences = new List<Topic>();
+            Topic Topics = new Topic();
+            Topics.Name = "Church";
+            preferences.Add(Topics);
 
             Organization o = new Organization();
 
@@ -45,6 +46,24 @@ namespace UnitTestProject1
 
             Assert.AreEqual(expected, output);
         }*/
-    }
 
+        [TestMethod]
+        public void TestCalculate()
+        {
+
+            VolunteerProject vp2 = new VolunteerProject();
+            Volunteer v = new Volunteer();
+
+            vp2.Location.Lat = 10;
+            vp2.Location.Lng = 57;
+
+            v.Location.Lat = 9;
+            v.Location.Lng = 56;
+
+            double output = vp2.Calculate(vp2, v);
+            double expected = 160;
+
+            Assert.AreEqual(expected, output, 1000);
+        }
+    }
 }
