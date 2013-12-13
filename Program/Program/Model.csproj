@@ -79,11 +79,39 @@
     <Compile Include="Migrations\201312121205303_Tag.Designer.cs">
       <DependentUpon>201312121205303_Tag.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201312121240455_Tag2.cs" />
+    <Compile Include="Migrations\201312121240455_Tag2.Designer.cs">
+      <DependentUpon>201312121240455_Tag2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201312121325473_TagwithTestName.cs" />
+    <Compile Include="Migrations\201312121325473_TagwithTestName.Designer.cs">
+      <DependentUpon>201312121325473_TagwithTestName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201312121341091_Topics.cs" />
+    <Compile Include="Migrations\201312121341091_Topics.Designer.cs">
+      <DependentUpon>201312121341091_Topics.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201312121415334_addtag.cs" />
+    <Compile Include="Migrations\201312121415334_addtag.Designer.cs">
+      <DependentUpon>201312121415334_addtag.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201312121427470_Willthishelp.cs" />
+    <Compile Include="Migrations\201312121427470_Willthishelp.Designer.cs">
+      <DependentUpon>201312121427470_Willthishelp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201312121430311_SomeNewMigration.cs" />
+    <Compile Include="Migrations\201312121430311_SomeNewMigration.Designer.cs">
+      <DependentUpon>201312121430311_SomeNewMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201312121433337_TooManyMigrations.cs" />
+    <Compile Include="Migrations\201312121433337_TooManyMigrations.Designer.cs">
+      <DependentUpon>201312121433337_TooManyMigrations.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Organization.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Suggestion.cs" />
-    <Compile Include="Tag.cs" />
+    <Compile Include="Topic.cs" />
     <Compile Include="User.cs" />
     <Compile Include="Preference.cs" />
     <Compile Include="Volunteer.cs" />
@@ -116,6 +144,27 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201312121205303_Tag.resx">
       <DependentUpon>201312121205303_Tag.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201312121240455_Tag2.resx">
+      <DependentUpon>201312121240455_Tag2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201312121325473_TagwithTestName.resx">
+      <DependentUpon>201312121325473_TagwithTestName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201312121341091_Topics.resx">
+      <DependentUpon>201312121341091_Topics.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201312121415334_addtag.resx">
+      <DependentUpon>201312121415334_addtag.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201312121427470_Willthishelp.resx">
+      <DependentUpon>201312121427470_Willthishelp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201312121430311_SomeNewMigration.resx">
+      <DependentUpon>201312121430311_SomeNewMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201312121433337_TooManyMigrations.resx">
+      <DependentUpon>201312121433337_TooManyMigrations.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
