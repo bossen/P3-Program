@@ -19,6 +19,13 @@ namespace TestWeb2.Controllers
         public ActionResult Index()
         {
             Admin currentUser = GetCurrentUser();
+            int id = currentUser.Association.Id;
+            var organization = db.Organizations
+                .Include("VolunteerProjects")
+                .Include("Location")
+                .Where(o => o.Id == id)
+                .FirstOrDefault();
+
             if (currentUser.Association == null)
             {
                 return RedirectToAction("Index", "Admin");
@@ -34,21 +41,49 @@ namespace TestWeb2.Controllers
                 {
                     ViewBag.projectNull = false;
                 }
-                return View(currentUser);
+                return View(organization);
             }
             
         }
 
         [Authorize]
-        public ActionResult AllProjects(int id)
+        public ActionResult AllProjects()
         {
-            return View();
+            Admin currentUser = GetCurrentUser();
+            int id = currentUser.Association.Id;
+
+            Organization organization = db.Organizations
+                .Include("VolunteerProjects")
+                .Include("Location")
+                .Where(v => v.Id == id)
+                .FirstOrDefault();
+            return View(organization.VolunteerProjects.ToList());
         }
 
         [Authorize]
         public ActionResult CreateProject()
         {
+            //This do not work yet! Problem with MultiSelectList!!!
+            ViewBag.MultiSelectTopics = new MultiSelectList(new List<string>() { "Festival", "Church", "Culture", "Nature", "Sport", "Political" });
             return View();
+        }
+
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateProject(VolunteerProject project)
+        {
+            Admin currentUser = GetCurrentUser();
+            
+            if (ModelState.IsValid && currentUser != null)
+            {
+                project.Owner = currentUser.Association;
+                db.VolunteerProjects.Add(project);
+                db.SaveChanges();
+                return RedirectToAction("Index", "Organization");
+            }
+
+            return View(project);
         }
 
         [Authorize]

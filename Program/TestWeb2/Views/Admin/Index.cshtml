@@ -7,7 +7,7 @@
 
 <h2>Administration:</h2>
 
-@if(!ViewBag.Authenticated)
+@if(ViewBag.Authenticated == false)
 {
     <table border="1">
     <tr>
@@ -27,11 +27,11 @@
 }
 
 
-@if(ViewBag.Authenticated)
+@if(ViewBag.Authenticated == true)
 {
 <h2>Hi </h2>
 
 <p>You have the following options:</p>
 
-@Html.ActionLink("Nothing", "Index", "Organization")
+@Html.ActionLink("Go to your organization", "Index", "Organization")
 }

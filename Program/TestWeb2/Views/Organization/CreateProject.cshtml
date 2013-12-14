@@ -46,11 +46,11 @@
         </div>
             
         <div class="editor-label">
-            @Html.LabelFor(model => model.Topics)
+            @Html.LabelFor(model => model.ProjectTopics)
         </div>
         <div class="editor-field">
-            @*@Html.ListBoxFor(model => model.Topics, new MultiSelectList(Model.Topics))*@
-            @Html.ValidationMessageFor(model => model.Topics)
+            @Html.ListBoxFor(model => model.ProjectTopics, new MultiSelectList(ViewBag.MultiSelectTopics))
+            @Html.ValidationMessageFor(model => model.ProjectTopics)
         </div>
 
         <div class="editor-label">

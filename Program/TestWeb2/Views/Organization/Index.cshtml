@@ -1,4 +1,4 @@
-﻿@model Model.Admin
+﻿@model Model.Organization
 
 @{
     ViewBag.Title = "Index";
@@ -10,34 +10,34 @@
 <table border="1">
     <tr>
         <td>
-            @Html.DisplayNameFor(model => model.Association.Name):
+            @Html.DisplayNameFor(model => model.Name):
         </td>
         <td>
-            @Html.DisplayFor(model => model.Association.Name)
+            @Html.DisplayFor(model => model.Name)
         </td>        
     </tr>
     <tr>
         <td>
-            @Html.DisplayNameFor(model => model.Association.Creation):
+            @Html.DisplayNameFor(model => model.Creation):
         </td>
         <td>
-            @Html.DisplayFor(model => model.Association.Creation)
-        </td>
-    </tr>
-    <tr>
-        <td>
-            @Html.DisplayNameFor(model => model.Association.Email):
-        </td>
-        <td>
-            @Html.DisplayFor(model => model.Association.Email)
+            @Html.DisplayFor(model => model.Creation)
         </td>
     </tr>
     <tr>
         <td>
-            @Html.DisplayNameFor(model => model.Association.Location.Address):
+            @Html.DisplayNameFor(model => model.Email):
         </td>
         <td>
-            @Html.DisplayFor(model => model.Association.Location.Address)
+            @Html.DisplayFor(model => model.Email)
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.Location.Address):
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Location.Address)
         </td>
     </tr>
     <tr>
@@ -45,10 +45,14 @@
             @Html.DisplayNameFor(model => model.Location.City):
         </td>
         <td>
-            @Html.DisplayFor(model => model.Association.Location.City)
+            @Html.DisplayFor(model => model.Location.City)
         </td>
     </tr>
- 
+    <tr>
+        <td>
+            @Html.ActionLink("Edit Organization", "Edit", "Admin", new { id = Model.Id })
+        </td>
+    </tr>
 </table>
 
 <table border="1">
@@ -62,7 +66,7 @@
 
     @if(!ViewBag.projectNull)
     {
-        foreach(var item in Model.Association.VolunteerProjects.OrderBy(v => v.Time).Take(10))
+        foreach(var item in Model.VolunteerProjects.OrderBy(v => v.Time).Take(10))
     { 
         <tr>
             <td>
@@ -73,14 +77,24 @@
             </td>
             <td>
                 @Html.ActionLink("Edit", "EditProject", new { id = item.Id })
-                @Html.ActionLink("Cancel", "CancelProject")
+                @Html.ActionLink("Cancel", "CancelProject", new { id = item.Id})
                 @Html.ActionLink("Details", "DetailsProject", new { id = item.Id }) 
             </td>
         </tr>
     
     }
     }
+        <tr>
+            <td>
+                @Html.ActionLink("Show all Projects", "AllProjects", "Organization")
+            </td>
+            <td>
+                @Html.ActionLink("Create new Project", "CreateProject", "Organization")
+            </td>
+        </tr>
     </table>
+
+
 
 
 
