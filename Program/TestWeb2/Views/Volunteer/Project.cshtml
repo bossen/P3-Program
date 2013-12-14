@@ -1,20 +1,85 @@
 ﻿@model Model.VolunteerProject
-@if (Model != null)
-{
-    <h2>@Model.Title</h2>   
-    <h3>@Model.Owner</h3>
-    @Html.ActionLink((string)ViewBag.Status, "JoinProject", new { id = Model.Id })
 
-    @Html.DisplayFor(modelItem => Model.Time)
-    @*@Model.Location.Address @Model.Location.City*@
-    @*<script>addMarker(@Model.Location.Address, @Model.Title)</script>*@
-    
-    <p>@Html.DisplayFor(modelItem => Model.Description)</p>
-    if (Model.ProjectTopics != null)
-    {
-        foreach (Model.Topic topic in Model.ProjectTopics)
-        {
-                @Html.ActionLink(topic.ToString(), "projects")
-        }
-    }
+<hgroup class="title">
+    <h1>@Html.DisplayFor(model => model.Title)</h1>
+    <h2>Details</h2>
+</hgroup>
+@if (Model.Signup)
+{
+    @Html.ActionLink((string)ViewBag.Status, "JoinProject", new { id = Model.Id })
 }
+else
+{
+    <strong>Not allowed to signup</strong>
+}
+
+<table>
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.Owner)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Owner.Name)
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.Location.Address)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Location.Address)
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.Location.City)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Location.City)
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.Time)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Time)
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.ProjectTopics)
+        </td>
+        <td>
+            @foreach (Model.Topic topic in Model.ProjectTopics)
+            {
+                @topic.Name
+            }
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Description)
+        </td>
+    </tr>
+</table>
+<h3>Participants</h3>
+<table>
+    @foreach (var match in Model.Matches)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => match.Volunteer.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => match.Volunteer.Name)
+            </td>
+            <td>
+                @Html.ActionLink("details", "volunteer", new { id = match.Id })
+            </td>
+        </tr>
+    }
+</table>

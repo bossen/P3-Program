@@ -22,18 +22,31 @@
                         <ul id="menu">
                             @if (HttpContext.Current.User.Identity.IsAuthenticated)
                             {
-                                <li>@Html.ActionLink("Home", "Index", "Volunteer")</li>
-                                <li>@Html.ActionLink("Projects", "Projects", "Volunteer")</li>
-                                <li>@Html.ActionLink("Organizations", "Organizations", "Volunteer")</li>
-                                <li>@Html.ActionLink("Volunteers", "Volunteers", "Volunteer")</li>
-                                <li>@Html.ActionLink("Profile", "Edit", "Volunteer")</li>
-                                <li>@Html.ActionLink("About", "About", "Home")</li>
+                                if (ViewBag.IsAdmin != null)
+                                {
+                                    <li>@Html.ActionLink("Home", "Index", "Organization")</li>
+                                    <li>@Html.ActionLink("Projects", "Projects", "Organization")</li>
+                                    <li>@Html.ActionLink("Organizations", "Organizations", "Organization")</li>
+                                    <li>@Html.ActionLink("Volunteers", "Volunteers", "Organization")</li>
+                                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                                }
+                                else
+                                {
+                                    <li>@Html.ActionLink("Home", "Index", "Volunteer")</li>
+                                    <li>@Html.ActionLink("Projects", "Projects", "Volunteer")</li>
+                                    <li>@Html.ActionLink("Organizations", "Organizations", "Volunteer")</li>
+                                    <li>@Html.ActionLink("Volunteers", "Volunteers", "Volunteer")</li>
+                                    <li>@Html.ActionLink("Profile", "Volunteer", "Volunteer", new { id = 0 })</li>
+                                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                                }
                              }   
 
                              @if (HttpContext.Current.User.Identity.IsAuthenticated == false)
                              {
                                 <li>@Html.ActionLink("Home", "Index", "Home")</li>
                                 <li>@Html.ActionLink("Projects", "Projects", "Home")</li>
+                                <li>@Html.ActionLink("Organizations", "Organizations", "Home")</li>
+                                <li>@Html.ActionLink("Volunteers", "Volunteers", "Home")</li>
                                 <li>@Html.ActionLink("About", "About", "Home")</li>
                              }
                         </ul>
@@ -50,7 +63,7 @@
         <footer>
             <div class="content-wrapper">
                 <div class="float-left">
-                    <p>&copy; @DateTime.Now.Year - Aalborg University Project</p>
+                    <p>&copy; @DateTime.Now.Year - Aalborg University - Student Project</p>
                 </div>
             </div>
         </footer>

@@ -25,24 +25,16 @@ namespace TestWeb2.Controllers
                 ViewBag.Title = "";
                 if (currentUser.GetType() == typeof(Volunteer))
                 {
-                    Volunteer volunteerUser = currentUser as Volunteer;
-                    if (volunteerUser.GetInvites() != null)
-                        ViewBag.Invites = volunteerUser.GetInvites();
-
-                    List<VolunteerProject> projectSuggestions = new List<VolunteerProject>();
-                    foreach (Match match in volunteerUser.GetSortMatches())
-                    {
-                        projectSuggestions.Add(match.Project);
-                    }
-                    ViewBag.Suggestions = projectSuggestions;
-                    ViewBag.Accepted = volunteerUser.GetAcceptedMatches();
+                    return RedirectToAction("index", "volunteer");
                 }
-                else
+                else if (currentUser.GetType() == typeof(Admin))
                 {
-                    ViewBag.Invites = new List<Model.Invite>();
-                    ViewBag.Suggestions = new List<Model.Match>();
-                    ViewBag.Accepted = new List<Model.Match>();
+                    return RedirectToAction("index", "admin");
                 }
+
+                ViewBag.Invites = new List<Model.Invite>();
+                ViewBag.Suggestions = new List<Model.Match>();
+                ViewBag.Accepted = new List<Model.Match>();
 
             }
             else
@@ -56,7 +48,15 @@ namespace TestWeb2.Controllers
 
         public ActionResult Project(int id = 0)
         {
-            VolunteerProject project = db.VolunteerProjects.Find(id);
+            VolunteerProject project = db.VolunteerProjects
+                .Include("Owner")
+                .Include("Location")
+                .Include("ProjectTopics")
+                .Include("Matches")
+                .Include("Matches.Volunteer")
+                .Where(v => v.Id == id)
+                .FirstOrDefault();
+
             if (project == null)
                 return HttpNotFound();
 
@@ -75,6 +75,7 @@ namespace TestWeb2.Controllers
         {
             var organization = db.Organizations
                 .Include("VolunteerProjects")
+                .Include("Location")
                 .Where(o => o.Id == id)
                 .FirstOrDefault();
 
@@ -109,6 +110,8 @@ namespace TestWeb2.Controllers
             Volunteer volunteer = db.Volunteers
                 .Include("Matches")
                 .Include("Matches.Project")
+                .Include("Location")
+                .Include("VolunteerPreferences")
                 .Where(v => v.ID == id)
                 .FirstOrDefault();
 

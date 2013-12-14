@@ -2,18 +2,59 @@
 @if (Model != null)
 {
     <hgroup class="title">
-        <h1>@Model.Name</h1>
-        <h2>@Model.Location</h2>
+        <h1>@Html.DisplayFor(model => model.Name)</h1>
+        <h2>Details</h2>
     </hgroup>
-    <ul>
-        @foreach (var project in Model.GetProjects())
-        {
-        <li>
-            @Html.DisplayFor(modelItem => project.Title)
-            @Html.DisplayFor(modelItem => project.Time)
-            @Html.ActionLink("details", "project", new { id = project.Id })
-        </li>
-        }
 
-    </ul>
+    <table>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.Location.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Location.Address)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.Location.City)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Location.City)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Email)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.Creation)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Creation)
+            </td>
+        </tr>
+    </table>
+    <h3>@Html.DisplayNameFor(model => model.VolunteerProjects)</h3>
+    <table>
+        @foreach (var item in Model.VolunteerProjects)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Time)
+                </td>
+                <td>
+                    @Html.ActionLink("details", "project", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    </table>
 }
