@@ -25,8 +25,8 @@
                                 if (ViewBag.IsAdmin != null)
                                 {
                                     <li>@Html.ActionLink("Home", "Index", "Organization")</li>
-                                    <li>@Html.ActionLink("Projects", "Projects", "Organization")</li>
-                                    <li>@Html.ActionLink("Organizations", "Organizations", "Organization")</li>
+                                    <li>@Html.ActionLink("Projects", "AllProjects", "Organization")</li>
+                                    <li>@Html.ActionLink("Organizations", "Organizations", "Admin")</li>
                                     <li>@Html.ActionLink("Volunteers", "Volunteers", "Organization")</li>
                                     <li>@Html.ActionLink("About", "About", "Home")</li>
                                 }
@@ -36,7 +36,7 @@
                                     <li>@Html.ActionLink("Projects", "Projects", "Volunteer")</li>
                                     <li>@Html.ActionLink("Organizations", "Organizations", "Volunteer")</li>
                                     <li>@Html.ActionLink("Volunteers", "Volunteers", "Volunteer")</li>
-                                    <li>@Html.ActionLink("Profile", "Volunteer", "Volunteer", new { id = 0 })</li>
+                                    <li>@Html.ActionLink("Profile", "Volunteer", new { id = 0 })</li>
                                     <li>@Html.ActionLink("About", "About", "Home")</li>
                                 }
                              }   

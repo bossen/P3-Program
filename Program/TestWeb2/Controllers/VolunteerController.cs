@@ -52,6 +52,7 @@ namespace TestWeb2.Controllers
                 currentUser.Name = volunteer.Name;
                 currentUser.Email = volunteer.Email;
                 currentUser.Location = volunteer.Location;
+                currentUser.VolunteerPreferences = volunteer.VolunteerPreferences;
                 db.Entry(currentUser).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

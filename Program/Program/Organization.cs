@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,7 @@ namespace Model
     {
         #region Properties
         [Key]
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         [Required(ErrorMessage="Name is required")]
@@ -18,6 +20,8 @@ namespace Model
         public string Name { get; set; }
 
         [Required()]
+        [DataType(DataType.Date)]
+        [Column(TypeName = "DateTime2")]
         [Display(Name = "Creation Date")]
         public DateTime Creation { get; set; }
 

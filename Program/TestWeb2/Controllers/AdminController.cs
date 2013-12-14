@@ -26,6 +26,10 @@ namespace TestWeb2.Controllers
             {
                 ViewBag.Authenticated = false;
             }
+            else
+            {
+                ViewBag.Authenticated = true;
+            }
             
             return View();
         }
@@ -39,11 +43,17 @@ namespace TestWeb2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Organization organization)
         {
-            if (ModelState.IsValid)
+            Admin currentUser = GetCurrentUser();
+
+            if (ModelState.IsValid && currentUser != null)
             {
+                
                 db.Organizations.Add(organization);
+                currentUser.AssociateOrganization(organization);
+                //db.Entry(organization).State = EntityState.Added;
+                db.Entry(currentUser).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Organization");
             }
 
             return View(organization);

@@ -107,6 +107,10 @@
     <Compile Include="Migrations\201312121433337_TooManyMigrations.Designer.cs">
       <DependentUpon>201312121433337_TooManyMigrations.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201312141442127_DatetimeChange.cs" />
+    <Compile Include="Migrations\201312141442127_DatetimeChange.Designer.cs">
+      <DependentUpon>201312141442127_DatetimeChange.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Organization.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -165,6 +169,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201312121433337_TooManyMigrations.resx">
       <DependentUpon>201312121433337_TooManyMigrations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201312141442127_DatetimeChange.resx">
+      <DependentUpon>201312141442127_DatetimeChange.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
