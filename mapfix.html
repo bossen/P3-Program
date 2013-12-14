@@ -20,13 +20,11 @@
       var location;
 
       function GetLocation(address) {
-
+        var returnvalue;
         GetGeocode(address, function(LocationData) {
-            location = LocationData;
-            while(LocationData != undefined) {
-                return location;
-            }
-        });
+            setTimeout( function() { returnvalue = LocationData } ,1000);        
+        })
+          return returnvalue;
       }
 
       function InsertMarker(address, name, infostring) {
@@ -114,8 +112,13 @@
             var b1 = "testnavn2";
             var c1 = "alot of text here, also link";
             //InsertMarker(a);
-            InsertMarker(a,b,c);
-            InsertMarker(a1,b1,c1);
+            //InsertMarker(a,b,c);
+            //InsertMarker(a1,b1,c1);
+
+            var test1;
+            var randomaddress = "Holstebro";
+            test1 = GetLocation(randomaddress);
+            alert(test1);
 
     </script>
   </head>
