@@ -12,16 +12,16 @@ namespace UnitTestProject1
         [TestMethod]
         public void WorkRequestConstructors()
         {
-            int userid = 1;
-            string username = "username", password = "password", name = "name", address = "address", city = "city", mail = "mail";
+            string username = "username", name = "name", address = "address", city = "city", mail = "mail";
             string title = "title", description = "description";
             Location l = new Location(address, city);
             DateTime time = DateTime.Now.AddDays(1);
-            List<Preference> preferences = new List<Preference>();
-            preferences.Add(Preference.Church);
-            preferences.Add(Preference.Festival);
+            List<Topic> preferences = new List<Topic>();
+            Topic Topics = new Topic();
+            Topics.Name = "Church";
+            preferences.Add(Topics);
 
-            Volunteer v = new Volunteer(userid, username, name, l, mail);
+            Volunteer v = new Volunteer(username, name, l, mail);
             Organization o = new Organization();
             VolunteerProject vp = new VolunteerProject(title, l, time, preferences, o, description, true);
 
@@ -36,16 +36,16 @@ namespace UnitTestProject1
         [TestMethod]
         public void WorkRequestMethods()
         {
-            int userid = 1;
-            string username = "username", password = "password", name = "name", address = "address", city = "city", mail = "mail";
+            string username = "username", name = "name", address = "address", city = "city", mail = "mail";
             string title = "title", description = "description";
             Location l = new Location(address, city);
             DateTime time = DateTime.Now;
-            List<Preference> preferences = new List<Preference>();
-            preferences.Add(Preference.Church);
-            preferences.Add(Preference.Festival);
+            List<Topic> preferences = new List<Topic>();
+            Topic Topics = new Topic();
+            Topics.Name = "Church";
+            preferences.Add(Topics);
 
-            Volunteer v = new Volunteer(userid, name, l, mail);
+            Volunteer v = new Volunteer(username, name, l, mail);
             Organization o = new Organization();
             VolunteerProject vp = new VolunteerProject(title, l, time, preferences, o, description, true);
 

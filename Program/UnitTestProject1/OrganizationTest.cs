@@ -26,9 +26,10 @@ namespace UnitTestProject1
         {
             string name = "name", email = "email", title = "title", description = "description";
             DateTime time = DateTime.Now;
-            List<Preference> preferences = new List<Preference>();
-            preferences.Add(Preference.Church);
-            preferences.Add(Preference.Festival);
+            List<Topic> preferences = new List<Topic>();
+            Topic Topics = new Topic();
+            Topics.Name = "Church";
+            preferences.Add(Topics);
             Location location = new Location("address", "city");
             Organization o = new Organization(name, location, email);
 
