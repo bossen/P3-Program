@@ -91,15 +91,14 @@ namespace TestWeb2.Controllers
             if (ModelState.IsValid && project != null)
             {
                 project.Title = volunteerproject.Title;
-                //project.Time = volunteerproject.Time;
+                project.Time = volunteerproject.Time;
                 project.Signup = volunteerproject.Signup;
                 project.Description = volunteerproject.Description;
-                project.Location.Address = volunteerproject.Location.Address;
-                project.Location.City = volunteerproject.Location.City;
+                project.Location = volunteerproject.Location;
                 project.ProjectTopics = volunteerproject.ProjectTopics;
                 db.Entry(project).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("DetailsProject", "Organization");
+                return RedirectToAction("DetailsProject", "Organization", new { id = project.Id });
             }
             return View(volunteerproject);
         }
@@ -107,7 +106,13 @@ namespace TestWeb2.Controllers
         public ActionResult DetailsProject(int id)
         {
             Admin currentUser = GetCurrentUser();
-            VolunteerProject project = db.VolunteerProjects.Find(id);
+            VolunteerProject project = db.VolunteerProjects
+                .Include("Owner")
+                .Include("Location")
+                .Include("ProjectTopics")
+                .Include("Matches")
+                .Where(v => v.Id == id)
+                .FirstOrDefault();
             var organization = db.Organizations
                 .Include("VolunteerProjects")
                 .Where(o => o.Id == id)
