@@ -135,43 +135,6 @@ namespace TestWeb2.Controllers
             return View();
         }
 
-        public ActionResult ProfileIndex()
-        {
-            return View("~/Views/Home/Profile/Index.cshtml");
-        }
-
-        public ActionResult ProfileCreate()
-        {
-            return View("~/Views/Home/Profile/Create.cshtml");
-        }
-
-        public ActionResult ProfileEdit()
-        {
-            return View("~/Views/Home/Profile/Edit.cshtml");
-        }
-
-        public ActionResult ProfileDashboard()
-        {
-            return View("~/Views/Home/Profile/Dashboard.cshtml");
-        }
-
-
-
-        public ActionResult OrganizationProjectAll()
-        {
-            return View("~/Views/Home/Organization/Project/All.cshtml");
-        }
-
-        public ActionResult OrganizationProjectCreate()
-        {
-            return View("~/Views/Home/Organization/Project/Create.cshtml");
-        }
-
-        public ActionResult OrganizationProjectEdit()
-        {
-            return View("~/Views/Home/Organization/Project/Edit.cshtml");
-        }
-
         private User GetCurrentUser()
         {
             Volunteer hej = db.Volunteers.ToList().Where(v => v.UserName.ToLower() == WebSecurity.CurrentUserName.ToLower()).FirstOrDefault();
