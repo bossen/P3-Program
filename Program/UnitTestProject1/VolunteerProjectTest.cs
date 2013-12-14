@@ -50,7 +50,6 @@ namespace UnitTestProject1
         [TestMethod]
         public void TestCalculate()
         {
-
             VolunteerProject vp2 = new VolunteerProject();
             Volunteer v = new Volunteer();
 
