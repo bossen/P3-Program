@@ -110,13 +110,19 @@ namespace TestWeb2.Controllers
 
         public ActionResult EditProject(int id)
         {
-            VolunteerProject volunteerProject = db.VolunteerProjects.Find(id);
-            if (volunteerProject == null)
+            VolunteerProject project = db.VolunteerProjects
+                .Include("Owner")
+                .Include("Location")
+                .Include("ProjectTopics")
+                .Include("Matches")
+                .Where(v => v.Id == id)
+                .FirstOrDefault();
+            if (project == null)
             {
                 return HttpNotFound();
             }
 
-            return View(volunteerProject);
+            return View(project);
         }
 
         [HttpPost]
