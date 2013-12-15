@@ -108,9 +108,10 @@ namespace TestWeb2.Controllers
             return View(volunteers.ToList());
         }
 
-        public ActionResult EditProject(int id)
+        public ActionResult EditProject(int id, Topic getTopic)
         {
             VolunteerProject volunteerProject = db.VolunteerProjects.Find(id);
+            List<string> topics = getTopic.GetValidTopics();
             if (volunteerProject == null)
             {
                 return HttpNotFound();
@@ -177,5 +178,6 @@ namespace TestWeb2.Controllers
 
             return admin;
         }
+
     }
 }

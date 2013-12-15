@@ -27,5 +27,13 @@ namespace Model
                 }
             }
         }
+
+        public List<String> GetValidTopics() 
+        {
+            return _topicNames;
+        }
+         
+            
+        
     }
 }
