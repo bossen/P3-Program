@@ -116,12 +116,9 @@ namespace TestWeb2.Controllers
 
         public ActionResult EditProject(int id)
         {
-<<<<<<< HEAD
             ViewBag.IsAdmin = true;
-            VolunteerProject volunteerProject = db.VolunteerProjects.Find(id);
-            List<string> topics = getTopic.GetValidTopics();
-            if (volunteerProject == null)
-=======
+            //List<string> topics = getTopic.GetValidTopics();
+
             VolunteerProject project = db.VolunteerProjects
                 .Include("Owner")
                 .Include("Location")
@@ -129,8 +126,8 @@ namespace TestWeb2.Controllers
                 .Include("Matches")
                 .Where(v => v.Id == id)
                 .FirstOrDefault();
+
             if (project == null)
->>>>>>> 11a340908dfd0fdd727c94ff3dc9ad42432edee0
             {
                 return HttpNotFound();
             }
