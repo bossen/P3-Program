@@ -50,7 +50,7 @@
 }
 else
 {
-    <p>"None :'("</p>
+    <p>None :'(</p>
 }
 <h2>Your Invites</h2>
 @if (Model.Matches.Where(m => m.Accepted == false && m.GetType() == typeof(Invite)).Count() > 0)

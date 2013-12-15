@@ -7,13 +7,13 @@ namespace Model.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.0.1-21010")]
-    public sealed partial class InitialVolunteerOnly : IMigrationMetadata
+    public sealed partial class newTopic : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialVolunteerOnly));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(newTopic));
         
         string IMigrationMetadata.Id
         {
-            get { return "201312110740330_InitialVolunteerOnly"; }
+            get { return "201312151947585_newTopic"; }
         }
         
         string IMigrationMetadata.Source

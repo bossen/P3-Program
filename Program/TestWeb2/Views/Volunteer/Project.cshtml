@@ -51,9 +51,35 @@ else
             @Html.DisplayNameFor(model => model.ProjectTopics)
         </td>
         <td>
-            @foreach (Model.Topic topic in Model.ProjectTopics)
+            @if (Model.ProjectTopics.Church == true)
             {
-                @topic.Name
+                @Html.DisplayNameFor(model => model.ProjectTopics.Church);
+                <br />
+            }
+            @if (Model.ProjectTopics.Culture == true)
+            {
+                @Html.DisplayNameFor(model => model.ProjectTopics.Culture);
+                <br />
+            }
+            @if (Model.ProjectTopics.Festival == true)
+            {
+                @Html.DisplayNameFor(model => model.ProjectTopics.Festival);
+                <br />
+            }
+            @if (Model.ProjectTopics.Nature == true)
+            {
+                @Html.DisplayNameFor(model => model.ProjectTopics.Nature);
+                <br />
+            }
+            @if (Model.ProjectTopics.Political == true)
+            {
+                @Html.DisplayNameFor(model => model.ProjectTopics.Political);
+                <br />
+            }
+            @if (Model.ProjectTopics.Sport == true)
+            {
+                @Html.DisplayNameFor(model => model.ProjectTopics.Sport);
+                <br />
             }
         </td>
     </tr>

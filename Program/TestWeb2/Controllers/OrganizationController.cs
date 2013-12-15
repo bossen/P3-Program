@@ -83,7 +83,7 @@ namespace TestWeb2.Controllers
                 return RedirectToAction("Index", "Organization");
             }
 
-            return View(project);
+            return RedirectToAction("index");
         }
 
         [Authorize]
@@ -110,7 +110,7 @@ namespace TestWeb2.Controllers
 
         public ActionResult EditProject(int id)
         {
-            VolunteerProject volunteerProject = db.VolunteerProjects.Find(id);
+            VolunteerProject volunteerProject = db.VolunteerProjects.Include("ProjectTopics").Where(p => p.Id == id).FirstOrDefault();
             if (volunteerProject == null)
             {
                 return HttpNotFound();
@@ -131,8 +131,10 @@ namespace TestWeb2.Controllers
                 project.Signup = volunteerproject.Signup;
                 project.Description = volunteerproject.Description;
                 project.Location = volunteerproject.Location;
+                project.ProjectTopics = volunteerproject.ProjectTopics;
 
                 db.Entry(project).State = EntityState.Modified;
+                db.Entry(project.ProjectTopics).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("DetailsProject", "Organization", new { id = project.Id });
             }
