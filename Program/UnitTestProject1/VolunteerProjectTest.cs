@@ -32,7 +32,8 @@ namespace UnitTestProject1
             Assert.AreEqual(description, vp.Description);
             Assert.AreEqual(true, vp.Signup);
         }
-        /* CheckVolunteerSuggest method is private and can't be accessed
+        /* 
+        CheckVolunteerSuggest method is private and can't be accessed
         [TestMethod]
         public void TestCheckVolunteerSuggest()
         {
@@ -45,24 +46,7 @@ namespace UnitTestProject1
             output = vp2.CheckVolunteerSuggest(tester);
 
             Assert.AreEqual(expected, output);
-        }*/
-
-        [TestMethod]
-        public void TestCalculate()
-        {
-            VolunteerProject vp2 = new VolunteerProject();
-            Volunteer v = new Volunteer();
-
-            vp2.Location.Lat = 10;
-            vp2.Location.Lng = 57;
-
-            v.Location.Lat = 9;
-            v.Location.Lng = 56;
-
-            double output = vp2.Calculate(vp2, v);
-            double expected = 160;
-
-            Assert.AreEqual(expected, output, 1000);
         }
+        */
     }
 }
