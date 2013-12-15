@@ -116,8 +116,10 @@ namespace TestWeb2.Controllers
 
         public ActionResult EditProject(int id)
         {
+
             ViewBag.IsAdmin = true;
             //List<string> topics = getTopic.GetValidTopics();
+
 
             VolunteerProject project = db.VolunteerProjects
                 .Include("Owner")
