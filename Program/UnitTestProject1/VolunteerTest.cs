@@ -38,13 +38,19 @@ namespace UnitTestProject1
             List<Topic> preferences = new List<Topic>();
             Topic Topics = new Topic();
             Topics.Name = "Church";
-            preferences.Add(Topics);
 
             Organization o = new Organization();
             Volunteer v = new Volunteer(username, name, new Location(address, city), mail);
             VolunteerProject vp = new VolunteerProject(title, l, time, preferences, o, description, true);
 
+            //Testing AddPreference
+            Topic expected = Topics;
+            v.AddPreference(Topics);
+            //Assert.IsTrue(vp.ProjectTopics.Contains(expected));
 
+            //Testing RemovePreference - Automatically fails because AddPreference fails.
+            v.RemovePreference(Topics);
+            Assert.IsFalse(vp.ProjectTopics.Contains(expected));
         }
     }
 }

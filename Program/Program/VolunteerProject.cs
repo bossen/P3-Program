@@ -118,20 +118,20 @@ namespace Model
 
         public double Calculate(VolunteerProject Volunteerproject, Volunteer Volunteer)
         {
-
             double Radius = 6372.8; // Radius of the earth
+
             // Calculating Delta longitude and latitude in radians
             double DeltaLat = ToRadians(Volunteer.Location.Lat - Volunteerproject.Location.Lat);
             double DeltaLng = ToRadians(Volunteer.Location.Lng - Volunteerproject.Location.Lng);
 
-            Volunteerproject.Location.Lat = ToRadians(Volunteerproject.Location.Lat);
-            Volunteerproject.Location.Lng = ToRadians(Volunteerproject.Location.Lat);
+            //Volunteerproject.Location.Lat = ToRadians(Volunteerproject.Location.Lat);
+            //Volunteerproject.Location.Lng = ToRadians(Volunteerproject.Location.Lat);
 
             //Haversine formular
-            double SideA = Math.Sin(DeltaLat / 2) * Math.Sin(DeltaLat / 2) + Math.Sin(DeltaLng / 2) * Math.Sin(DeltaLng / 2) * Math.Cos(Volunteer.Location.Lat) * Math.Cos(Volunteerproject.Location.Lat);
-            double SideC = 2 * Math.Asin(Math.Sqrt(SideA));
+            double SideA = Math.Sin(DeltaLat / 2) * Math.Sin(DeltaLat / 2) + Math.Cos(ToRadians(Volunteer.Location.Lat) / 2) * Math.Cos(ToRadians(Volunteerproject.Location.Lat) / 2) * Math.Sin(DeltaLng / 2) * Math.Sin(DeltaLng / 2);
+            double SideC = 2 * Math.Asin(Math.Min(1, Math.Sqrt(SideA)));
 
-            return Radius * 2 * Math.Asin(Math.Sqrt(SideA));
+            return Radius * SideC;
         }
 
         // Method for converting to radians.
