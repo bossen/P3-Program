@@ -32,21 +32,22 @@ namespace UnitTestProject1
             Assert.AreEqual(description, vp.Description);
             Assert.AreEqual(true, vp.Signup);
         }
-        /* 
-        CheckVolunteerSuggest method is private and can't be accessed
+        
+        //Test
         [TestMethod]
-        public void TestCheckVolunteerSuggest()
+        public void TestAddRemoveTopic()
         {
             Volunteer tester = new Volunteer("username", null, null, null);
             VolunteerProject vp2 = new VolunteerProject();
+            Topic Topics = new Topic();
+            Topics.Name = "Church";
 
-            bool? output = null;
-            bool expected = true;
+            vp2.AddTopic(Topics);
+            Topic expected = Topics;
+            Assert.IsTrue(vp2.ProjectTopics.Contains(expected));
 
-            output = vp2.CheckVolunteerSuggest(tester);
-
-            Assert.AreEqual(expected, output);
+            vp2.RemoveTopic(Topics);
+            Assert.IsFalse(vp2.ProjectTopics.Contains(expected));
         }
-        */
     }
 }
