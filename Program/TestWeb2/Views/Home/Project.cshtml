@@ -14,7 +14,89 @@
         <strong>Not allowed to signup</strong>
     }
 
-    <table>
+<table>
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.Owner)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Owner.Name)
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.Location.Address)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Location.Address)
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.Location.City)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Location.City)
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.Time)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Time)
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.ProjectTopics)
+        </td>
+        <td>
+            @if (Model.ProjectTopics.Church == true)
+            {
+                @Html.DisplayNameFor(model => model.ProjectTopics.Church);
+                <br />
+            }
+            @if (Model.ProjectTopics.Culture == true)
+            {
+                @Html.DisplayNameFor(model => model.ProjectTopics.Culture);
+                <br />
+            }
+            @if (Model.ProjectTopics.Festival == true)
+            {
+                @Html.DisplayNameFor(model => model.ProjectTopics.Festival);
+                <br />
+            }
+            @if (Model.ProjectTopics.Nature == true)
+            {
+                @Html.DisplayNameFor(model => model.ProjectTopics.Nature);
+                <br />
+            }
+            @if (Model.ProjectTopics.Political == true)
+            {
+                @Html.DisplayNameFor(model => model.ProjectTopics.Political);
+                <br />
+            }
+            @if (Model.ProjectTopics.Sport == true)
+            {
+                @Html.DisplayNameFor(model => model.ProjectTopics.Sport);
+                <br />
+            }
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Description)
+        </td>
+    </tr>
+</table>
+<h3>Participants</h3>
+<table>
+    @foreach (var match in Model.Matches)
+    {
         <tr>
             <td>
                 @Html.DisplayNameFor(model => model.Owner)

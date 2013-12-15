@@ -16,42 +16,25 @@ namespace Model
 
         #region Properties
         public List<Match> Matches { get; set; }
-        public List<Topic> VolunteerPreferences { get; set; }
+        public Topic VolunteerPreferences { get; set; }
         #endregion
 
         #region Constructors
         public Volunteer()
         {
             this.Matches = new List<Match>();
-            this.VolunteerPreferences = new List<Topic>();
+            this.VolunteerPreferences = new Topic();
         }
 
         public Volunteer(string username, string name = null, Location location = null, string email = null)
             : base(username, name, location, email)
         {
             this.Matches = new List<Match>();
-            this.VolunteerPreferences = new List<Topic>();
+            this.VolunteerPreferences= new Topic();
         }
         #endregion
 
-        #region Methods
-        /// <summary>
-        /// Adds a preferences to the list of preferences
-        /// </summary>
-        /// <param name="preference">The preference to be added</param>
-        public void AddPreference(Topic preference)
-        {
-            VolunteerPreferences.Add(preference);
-        }
-        /// <summary>
-        /// Removes a preference from the list of preferences
-        /// </summary>
-        /// <param name="preference">The preference to remove</param>
-        public void RemovePreference(Topic preference)
-        {
-            VolunteerPreferences.Remove(preference);
-        }
-
+        #region Methods      
         public void AddMatch(Match match)
         {
             Matches.Add(match);

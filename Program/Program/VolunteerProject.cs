@@ -32,16 +32,16 @@ namespace Model
 
         public bool Signup { get; set; }
 
-        public List<Topic> ProjectTopics { get; set; }
+        public Topic ProjectTopics { get; set; }
         #endregion
 
         #region Constructors
         public VolunteerProject()
         {
-            ProjectTopics = new List<Topic>();
+            ProjectTopics = new Topic();
         }
 
-        public VolunteerProject(string title, Location location, DateTime time, List<Topic> topics, Organization owner, string description, bool signup)
+        public VolunteerProject(string title, Location location, DateTime time, Topic topics, Organization owner, string description, bool signup)
         {
             this.Title = title;
             this.Location = location;
@@ -55,22 +55,6 @@ namespace Model
         #endregion
 
         #region Methods
-        /// <summary>
-        /// Adds a topic to the list of topics
-        /// </summary>
-        /// <param name="topic">The topic to be added</param>
-        public void AddTopic(Topic topic)
-        {
-            ProjectTopics.Add(topic);
-        }
-        /// <summary>
-        /// Removes a topic from the list of topics
-        /// </summary>
-        /// <param name="topic">The topic to remove</param>
-        public void RemoveTopic(Topic topic)
-        {
-            ProjectTopics.Remove(topic);
-        }
 
         void RequestWork(Volunteer volunteer)
         {
@@ -112,7 +96,7 @@ namespace Model
         //Always returns true if the user has no set preferences.
         private bool CheckVolunteerSuggest(Volunteer volunteer)
         {
-            if (volunteer.VolunteerPreferences.Intersect(this.ProjectTopics).Count() > 0 && volunteer.VolunteerPreferences.Count != 0)
+            if (volunteer.VolunteerPreferences.CompareTopics(this.ProjectTopics) == 0)
                 return false;
             return true;
         }

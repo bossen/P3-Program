@@ -9,31 +9,101 @@ namespace Model
 {
     public class Topic
     {
-        private List<string> _topicNames = new List<string>() { "Festival", "Church", "Culture", "Nature", "Sport", "Political" };
-        private string _name;
+        #region Fields
 
+        #endregion
+
+        #region Properties
         [Key]
         public int TopicID { get; set; }
-        public string Name { 
-            get 
-            {
-                return _name;
-            }
-            set
-            {
-                if (_topicNames.Contains(value))
-                {
-                    _name = value;
-                }
-            }
+        [Display(Name="Festival")]
+        public bool Festival { get; set; }
+        [Display(Name = "Church")]
+        public bool Church { get; set; }
+        [Display(Name = "Culture")]
+        public bool Culture { get; set; }
+        [Display(Name = "Nature")]
+        public bool Nature { get; set; }
+        [Display(Name = "Sport")]
+        public bool Sport { get; set; }
+        [Display(Name = "Political")]
+        public bool Political { get; set; }
+
+        #endregion
+
+        #region Constructors
+        public Topic()
+        {
+            Festival = false;
+            Church = false;
+            Culture = false;
+            Nature = false;
+            Sport = false;
+            Political = false;
         }
 
-        public List<String> GetValidTopics() 
+        #endregion
+
+        #region Methods
+        public int CompareTopics(Topic that)
         {
-            return _topicNames;
+            int likeness = 0;
+            if (this.Church == that.Church)
+            {
+                likeness++;
+            }
+            if (this.Festival == that.Festival)
+            {
+                likeness++;
+            }
+            if (this.Culture == that.Culture)
+            {
+                likeness++;
+            }
+            if (this.Nature == that.Nature)
+            {
+                likeness++;
+            }
+            if (this.Sport == that.Sport)
+            {
+                likeness++;
+            }
+            if (this.Political == that.Political)
+            {
+                likeness++;
+            }
+            return likeness;
         }
-         
-            
-        
+
+        public void QuickSetProperties(Topic topic)
+        {
+            this.Church = topic.Church;
+            this.Culture = topic.Culture;
+            this.Festival = topic.Festival;
+            this.Nature = topic.Nature;
+            this.Political = topic.Political;
+            this.Sport = topic.Sport;
+        }
+        /// <summary>
+        /// A quick way to load some values into the properties
+        /// </summary>
+        /// <param name="church">Church setting</param>
+        /// <param name="culture">Culture setting</param>
+        /// <param name="festival">Festival setting</param>
+        /// <param name="nature">Nature setting</param>
+        /// <param name="political">Political setting</param>
+        /// <param name="sport">Sport setting</param>
+        public void QuickSetProperties(bool church, bool culture, bool festival, bool nature, bool political, bool sport)
+        {
+            this.Church = church;
+            this.Culture = culture;
+            this.Festival = festival;
+            this.Nature = nature;
+            this.Political = political;
+            this.Sport = sport;
+        }
+        #endregion
+
+
     }
 }

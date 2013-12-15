@@ -28,7 +28,7 @@ namespace Model.Migrations
                     IsAdmin = false,
                     Location = new Location("blah gade 1", "Blah blah By"),
                     Matches = new List<Match>(),
-                    VolunteerPreferences = new List<Topic> { new Topic { Name = "Church" }}
+                    VolunteerPreferences = new Topic { Church = true }
                 }
             };
 
@@ -55,7 +55,7 @@ namespace Model.Migrations
                     Location = new Location("Main street 2", "Townsville"),
                     Time = DateTime.Parse("2013-12-25"),
                     Description = "Vi roterer kors på jesu fødselsdag",
-                    ProjectTopics = new List<Topic> { new Topic {Name = "Church" } }
+                    ProjectTopics = new Topic { Church = true }
 
                 }
             };

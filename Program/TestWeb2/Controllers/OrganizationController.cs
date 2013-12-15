@@ -87,7 +87,7 @@ namespace TestWeb2.Controllers
                 return RedirectToAction("Index", "Organization");
             }
 
-            return View(project);
+            return RedirectToAction("index");
         }
 
         [Authorize]
@@ -119,6 +119,7 @@ namespace TestWeb2.Controllers
             ViewBag.IsAdmin = true;
             //List<string> topics = getTopic.GetValidTopics();
 
+
             VolunteerProject project = db.VolunteerProjects
                 .Include("Owner")
                 .Include("Location")
@@ -148,8 +149,10 @@ namespace TestWeb2.Controllers
                 project.Signup = volunteerproject.Signup;
                 project.Description = volunteerproject.Description;
                 project.Location = volunteerproject.Location;
+                project.ProjectTopics = volunteerproject.ProjectTopics;
 
                 db.Entry(project).State = EntityState.Modified;
+                db.Entry(project.ProjectTopics).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("DetailsProject", "Organization", new { id = project.Id });
             }

@@ -49,7 +49,7 @@
             @Html.LabelFor(model => model.ProjectTopics)
         </div>
         <div class="editor-field">
-            @Html.ListBox("Topics", (MultiSelectList)ViewBag.TopicList)
+            @Html.EditorFor(model => model.ProjectTopics)
             @Html.ValidationMessageFor(model => model.ProjectTopics)
         </div>*@
 

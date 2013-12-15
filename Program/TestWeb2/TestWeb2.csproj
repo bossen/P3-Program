@@ -349,6 +349,8 @@
     <Content Include="Views\Organization\Volunteer.cshtml" />
     <Content Include="Views\Organization\CancelProject.cshtml" />
     <Content Include="Views\Organization\DetailsProject.cshtml" />
+    <Content Include="Views\Organization\EditorTemplates\Topic.cshtml" />
+    <Content Include="Views\Volunteer\EditorTemplates\Topic.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
