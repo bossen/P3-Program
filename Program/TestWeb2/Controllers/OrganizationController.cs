@@ -18,6 +18,7 @@ namespace TestWeb2.Controllers
         [Authorize]
         public ActionResult Index()
         {
+            ViewBag.IsAdmin = true;
             Admin currentUser = GetCurrentUser();
             int id = currentUser.Association.Id;
             var organization = db.Organizations
@@ -49,6 +50,7 @@ namespace TestWeb2.Controllers
         [Authorize]
         public ActionResult AllProjects()
         {
+            ViewBag.IsAdmin = true;
             Admin currentUser = GetCurrentUser();
             int id = currentUser.Association.Id;
 
@@ -63,6 +65,7 @@ namespace TestWeb2.Controllers
         [Authorize]
         public ActionResult CreateProject()
         {
+            ViewBag.IsAdmin = true;
 
             var topics = new List<Topic>();
             return View();
@@ -73,6 +76,7 @@ namespace TestWeb2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CreateProject(VolunteerProject project)
         {
+            ViewBag.IsAdmin = true;
             Admin currentUser = GetCurrentUser();
             
             if (ModelState.IsValid && currentUser != null)
@@ -89,6 +93,7 @@ namespace TestWeb2.Controllers
         [Authorize]
         public ActionResult Volunteer(int id = 0)
         {
+            ViewBag.IsAdmin = true;
             Volunteer volunteer = db.Volunteers
                 .Include("Matches")
                 .Include("Matches.Project")
@@ -103,35 +108,50 @@ namespace TestWeb2.Controllers
 
         public ActionResult Volunteers()
         {
+            ViewBag.IsAdmin = true;
             ViewBag.Title = "List of Volunteers";
             var volunteers = db.Volunteers;
             return View(volunteers.ToList());
         }
 
-        public ActionResult EditProject(int id, Topic getTopic)
+        public ActionResult EditProject(int id)
         {
+<<<<<<< HEAD
+            ViewBag.IsAdmin = true;
             VolunteerProject volunteerProject = db.VolunteerProjects.Find(id);
             List<string> topics = getTopic.GetValidTopics();
             if (volunteerProject == null)
+=======
+            VolunteerProject project = db.VolunteerProjects
+                .Include("Owner")
+                .Include("Location")
+                .Include("ProjectTopics")
+                .Include("Matches")
+                .Where(v => v.Id == id)
+                .FirstOrDefault();
+            if (project == null)
+>>>>>>> 11a340908dfd0fdd727c94ff3dc9ad42432edee0
             {
                 return HttpNotFound();
             }
 
-            return View(volunteerProject);
+            return View(project);
         }
 
         [HttpPost]
         public ActionResult EditProject(VolunteerProject volunteerproject, int id)
         {
+            ViewBag.IsAdmin = true;
             VolunteerProject project = db.VolunteerProjects.Find(id);
             if (ModelState.IsValid && project != null)
             {
+                
                 project.Title = volunteerproject.Title;
                 project.Time = volunteerproject.Time;
                 project.Signup = volunteerproject.Signup;
                 project.Description = volunteerproject.Description;
                 project.Location = volunteerproject.Location;
-                project.ProjectTopics = volunteerproject.ProjectTopics;
+
                 db.Entry(project).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("DetailsProject", "Organization", new { id = project.Id });
@@ -141,6 +161,7 @@ namespace TestWeb2.Controllers
 
         public ActionResult DetailsProject(int id)
         {
+            ViewBag.IsAdmin = true;
             Admin currentUser = GetCurrentUser();
             VolunteerProject project = db.VolunteerProjects
                 .Include("Owner")
@@ -163,6 +184,7 @@ namespace TestWeb2.Controllers
 
         public ActionResult CancelProject()
         {
+            ViewBag.IsAdmin = true;
             return View();
         }
 

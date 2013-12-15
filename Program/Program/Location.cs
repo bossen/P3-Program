@@ -24,5 +24,10 @@ namespace Model
             this.Address = address;
             this.City = city;
         }
+
+        public string GetAddress()
+        {
+            return this.Address + " " + this.City;
+        }
     }
 }

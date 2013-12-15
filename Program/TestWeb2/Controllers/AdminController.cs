@@ -36,6 +36,7 @@ namespace TestWeb2.Controllers
 
         public ActionResult Create()
         {
+            ViewBag.IsAdmin = true;
             return View();
         }
 
@@ -43,6 +44,7 @@ namespace TestWeb2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Organization organization)
         {
+            ViewBag.IsAdmin = true;
             Admin currentUser = GetCurrentUser();
 
             if (ModelState.IsValid && currentUser != null)
@@ -62,7 +64,12 @@ namespace TestWeb2.Controllers
         public ActionResult Edit(int id)
         {
             ViewBag.IsAdmin = true;
-            Organization organization = db.Organizations.Find(id);
+            var organization = db.Organizations
+                .Include("VolunteerProjects")
+                .Include("Location.Address")
+                .Include("Location.City")
+                .Where(o => o.Id == id)
+                .FirstOrDefault();
             if (organization == null)
             {
                 return HttpNotFound();
@@ -73,6 +80,7 @@ namespace TestWeb2.Controllers
         [HttpPost]
         public ActionResult Edit(Organization organization, int id)
         {
+            ViewBag.IsAdmin = true;
             var neworganization = db.Organizations
                 .Include("VolunteerProjects")
                 .Include("Location.Address")

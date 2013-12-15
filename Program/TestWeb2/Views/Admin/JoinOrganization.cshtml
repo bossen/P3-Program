@@ -13,14 +13,12 @@
 
             You're about to join @Html.DisplayFor(model => model.Name)
 
-            You have to following two options below.
+            You have the two following options:
         </td>
     </tr>
     <tr>
         <td>
             <button onclick="location.href='@Url.Action("Index", "Organization")';return false;">Join</button>
-        </td>
-        <td>
             <button onclick="location.href='@Url.Action("Organizations", "Admin")';return false;">Cancel</button>
         </td>
     </tr>
