@@ -40,16 +40,16 @@ namespace TestWeb2.Controllers
                 return HttpNotFound();
             }
 
-            Topic tmp = new Topic();
-            ViewBag.Topics = tmp.GetValidTopics();
+            //Topic tmp = new Topic();
+            //ViewBag.Topics = tmp.GetValidTopics();
             return View(volunteer);
         }
 
         [HttpPost]
         public ActionResult Edit(Volunteer volunteer)
         {
-            Topic tmp = new Topic();
-            ViewBag.Topics = tmp.GetValidTopics();
+            //Topic tmp = new Topic();
+            //ViewBag.Topics = tmp.GetValidTopics();
             Volunteer currentUser = GetCurrentUser();
             if (ModelState.IsValid && currentUser != null)
             {
@@ -76,7 +76,7 @@ namespace TestWeb2.Controllers
 
             if (project == null)
                 return HttpNotFound();
-            
+
             Volunteer currentUser = GetCurrentUser();
             ViewBag.Status = currentUser.GetStatusOfProject(project);
             return View(project);
@@ -95,7 +95,7 @@ namespace TestWeb2.Controllers
         {
             Volunteer currentUser = GetCurrentUser();
             VolunteerProject project = db.VolunteerProjects.Find(id);
-            
+
             Match newMatch = currentUser.AddWorkRequest(project);
             db.Entry(currentUser).State = EntityState.Modified;
             db.Entry(project).State = EntityState.Modified;
@@ -166,7 +166,7 @@ namespace TestWeb2.Controllers
 
         private Volunteer GetCurrentUser()
         {
-            int id =  db.Volunteers.ToList().Where(v => v.UserName.ToLower() == WebSecurity.CurrentUserName.ToLower()).FirstOrDefault().ID;
+            int id = db.Volunteers.ToList().Where(v => v.UserName.ToLower() == WebSecurity.CurrentUserName.ToLower()).FirstOrDefault().ID;
             var volunteer = db.Volunteers
                 .Include("Matches")
                 .Include("Matches.Project")

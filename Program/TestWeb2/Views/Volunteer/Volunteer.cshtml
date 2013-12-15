@@ -57,9 +57,35 @@
                     @Html.DisplayNameFor(model => model.VolunteerPreferences)
                 </td>
                 <td>
-                    @foreach (Model.Topic topic in Model.VolunteerPreferences)
+                    @if (Model.VolunteerPreferences.Church == true)
                     {
-                        @topic.Name
+                        @Html.DisplayNameFor(model => model.VolunteerPreferences.Church);
+                        <br />
+                    }
+                    @if (Model.VolunteerPreferences.Culture == true)
+                    {
+                        @Html.DisplayNameFor(model => model.VolunteerPreferences.Culture);
+                        <br />
+                    }
+                    @if (Model.VolunteerPreferences.Festival == true)
+                    {
+                        @Html.DisplayNameFor(model => model.VolunteerPreferences.Festival);
+                        <br />
+                    }
+                    @if (Model.VolunteerPreferences.Nature == true)
+                    {
+                        @Html.DisplayNameFor(model => model.VolunteerPreferences.Nature);
+                        <br />
+                    }
+                    @if (Model.VolunteerPreferences.Political == true)
+                    {
+                        @Html.DisplayNameFor(model => model.VolunteerPreferences.Political);
+                        <br />
+                    }
+                    @if (Model.VolunteerPreferences.Sport == true)
+                    {
+                        @Html.DisplayNameFor(model => model.VolunteerPreferences.Sport);
+                        <br />
                     }
                 </td>
             </tr>
@@ -89,10 +115,10 @@
         {
             @if (Model.Location != null)
             {
-                <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyACnSnrj-Vzj_6ZEeVpAFTtuuXOsXVRaO0&sensor=true"></script>
-                <script type="text/javascript" src="@Url.Content("~/Map/map.js")"></script>
-                <link href="~/Map/map.css" rel="stylesheet" />
-                <script type="text/javascript">setTimeout(function () { InsertMarker("@Model.Location.GetAddress()"); }, 1000);</script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyACnSnrj-Vzj_6ZEeVpAFTtuuXOsXVRaO0&sensor=true"></script>
+<script type="text/javascript" src="@Url.Content("~/Map/map.js")"></script>
+<link href="~/Map/map.css" rel="stylesheet" />
+<script type="text/javascript">setTimeout(function () { InsertMarker("@Model.Location.GetAddress()"); }, 1000);</script>
             }
         }
     </div>

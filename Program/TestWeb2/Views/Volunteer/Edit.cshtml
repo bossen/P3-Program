@@ -44,7 +44,7 @@
             @Html.LabelFor(model => model.VolunteerPreferences)
         </div>
         <div class="editor-field">
-            @Html.ListBoxFor(model => model.VolunteerPreferences, new MultiSelectList(ViewBag.Topics))
+            @Html.EditorFor(model => model.VolunteerPreferences)
             @Html.ValidationMessageFor(model => model.VolunteerPreferences)
         </div>
             

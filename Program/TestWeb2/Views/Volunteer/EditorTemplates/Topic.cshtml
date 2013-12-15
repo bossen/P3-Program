@@ -1,0 +1,56 @@
+﻿@model Model.Topic
+
+<p>
+    <table>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(m => m.Church)
+            </td>
+            <td>
+                @Html.CheckBoxFor(m => m.Church)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(m => m.Culture)
+            </td>
+            <td>
+                @Html.CheckBoxFor(m => m.Culture)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(m => m.Festival)
+            </td>
+            <td>
+                @Html.CheckBoxFor(m => m.Festival)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(m => m.Nature)
+            </td>
+            <td>
+                @Html.CheckBoxFor(m => m.Nature)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(m => m.Political)
+            </td>
+            <td>
+                @Html.CheckBoxFor(m => m.Political)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(m => m.Sport)
+            </td>
+            <td>
+                @Html.CheckBoxFor(m => m.Sport)
+            </td>
+        </tr>
+    </table>
+
+    @Html.HiddenFor(m => m.TopicID)
+</p>
