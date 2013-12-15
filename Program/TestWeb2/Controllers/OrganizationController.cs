@@ -108,10 +108,9 @@ namespace TestWeb2.Controllers
             return View(volunteers.ToList());
         }
 
-        public ActionResult EditProject(int id, Topic getTopic)
+        public ActionResult EditProject(int id)
         {
             VolunteerProject volunteerProject = db.VolunteerProjects.Find(id);
-            List<string> topics = getTopic.GetValidTopics();
             if (volunteerProject == null)
             {
                 return HttpNotFound();
@@ -126,12 +125,13 @@ namespace TestWeb2.Controllers
             VolunteerProject project = db.VolunteerProjects.Find(id);
             if (ModelState.IsValid && project != null)
             {
+                
                 project.Title = volunteerproject.Title;
                 project.Time = volunteerproject.Time;
                 project.Signup = volunteerproject.Signup;
                 project.Description = volunteerproject.Description;
                 project.Location = volunteerproject.Location;
-                project.ProjectTopics = volunteerproject.ProjectTopics;
+
                 db.Entry(project).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("DetailsProject", "Organization", new { id = project.Id });

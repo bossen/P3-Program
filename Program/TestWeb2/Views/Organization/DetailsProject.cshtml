@@ -52,7 +52,10 @@
             @Html.DisplayNameFor(model => model.ProjectTopics)
         </td>
         <td>
-            @Html.DisplayFor(model => model.ProjectTopics)
+            @foreach (var item in Model.ProjectTopics)
+            { 
+                @Html.DisplayFor(modelItem => item.Name)
+            }
         </td>
     </tr>
     <tr>
