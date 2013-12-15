@@ -8,11 +8,11 @@ namespace Model
 {
     public enum Preference
     {
-        Festival,
-        Church,
-        Culture,
-        Nature,
-        Sport,
-        Political
+        Festival    = 0,
+        Church      = 1,
+        Culture     = 2,
+        Nature      = 3,
+        Sport       = 4,
+        Political   = 5
     };
 }

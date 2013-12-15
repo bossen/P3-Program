@@ -71,4 +71,12 @@
             @Html.DisplayFor(model => model.Signup)
         </td>
     </tr>
+    <tr>
+        <td>
+            @Html.ActionLink("Edit", "EditProject", new { id = Model.Id })
+        </td>
+        <td>
+            @Html.ActionLink("Back", "AllProjects")
+        </td>
+    </tr>
 </table>

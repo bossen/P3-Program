@@ -63,8 +63,8 @@ namespace TestWeb2.Controllers
         [Authorize]
         public ActionResult CreateProject()
         {
-            //This do not work yet! Problem with MultiSelectList!!!
-            ViewBag.MultiSelectTopics = new MultiSelectList(new List<string>() { "Festival", "Church", "Culture", "Nature", "Sport", "Political" });
+
+            var topics = new List<Topic>();
             return View();
         }
 

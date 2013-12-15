@@ -59,7 +59,7 @@ namespace TestWeb2.Controllers
             return View(organization);
         }
 
-        public ActionResult Edit(int id = 0)
+        public ActionResult Edit(int id)
         {
             ViewBag.IsAdmin = true;
             Organization organization = db.Organizations.Find(id);
@@ -67,6 +67,31 @@ namespace TestWeb2.Controllers
             {
                 return HttpNotFound();
             }
+            return View(organization);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Organization organization, int id)
+        {
+            var neworganization = db.Organizations
+                .Include("VolunteerProjects")
+                .Include("Location.Address")
+                .Include("Location.City")
+                .Where(o => o.Id == id)
+                .FirstOrDefault();
+            if (ModelState.IsValid && neworganization != null)
+            {
+                neworganization.Name = organization.Name;
+                neworganization.Location = organization.Location;
+                neworganization.Email = organization.Email;
+
+                db.Entry(neworganization).State = EntityState.Modified;
+                db.SaveChanges();
+
+                return RedirectToAction("Index", "Organization", new { id = neworganization.Id });
+            }
+
+
             return View(organization);
         }
 
@@ -98,7 +123,7 @@ namespace TestWeb2.Controllers
             currentUser.AssociateOrganization(organization);
             db.Entry(currentUser).State = EntityState.Modified;
             db.SaveChanges();
-            return View();
+            return View(organization);
         }
 
         private Admin GetCurrentUser()

@@ -1,11 +1,29 @@
-﻿@{
+﻿@model Model.Organization
+
+@{
     ViewBag.Title = "JoinOrganization";
 }
 
-<h2>JoinOrganization</h2>
 
-You've just joined a new organization.
 
-Go to your new organization now.
+<table>
+    <tr>
+        <td>
+            <h2>Almost done!</h2>
 
-@Html.ActionLink("Organization", "Index", "Organization")
+            You're about to join @Html.DisplayFor(model => model.Name)
+
+            You have to following two options below.
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <button onclick="location.href='@Url.Action("Index", "Organization")';return false;">Join</button>
+        </td>
+        <td>
+            <button onclick="location.href='@Url.Action("Organizations", "Admin")';return false;">Cancel</button>
+        </td>
+    </tr>
+</table>
+
+
