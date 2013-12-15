@@ -62,7 +62,12 @@ namespace TestWeb2.Controllers
         public ActionResult Edit(int id)
         {
             ViewBag.IsAdmin = true;
-            Organization organization = db.Organizations.Find(id);
+            var organization = db.Organizations
+                .Include("VolunteerProjects")
+                .Include("Location.Address")
+                .Include("Location.City")
+                .Where(o => o.Id == id)
+                .FirstOrDefault();
             if (organization == null)
             {
                 return HttpNotFound();
