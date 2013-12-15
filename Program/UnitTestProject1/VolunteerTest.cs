@@ -44,24 +44,7 @@ namespace UnitTestProject1
             Volunteer v = new Volunteer(username, name, new Location(address, city), mail);
             VolunteerProject vp = new VolunteerProject(title, l, time, preferences, o, description, true);
 
-            /* DOESN'T WORK!
-            //Test workrequests
-            v.AddWorkRequest(vp);
-            Match tmpMatch1 = v.GetPendingMatches()[0];
-            Assert.AreEqual(vp, tmpMatch1.Project);
 
-            //Test accept match
-            tmpMatch1.AcceptMatch();
-            Assert.AreEqual(vp, v.GetAcceptedMatches()[0].Project);
-
-            //Test add match
-            Match tmpMatch2 = new WorkRequest(v, vp);
-            v.AddMatch(tmpMatch2);
-            Assert.AreEqual(vp, v.GetPendingMatches()[0].Project);
-
-            //Test Remove Project
-            v.RemoveProject(vp);
-            */
         }
     }
 }

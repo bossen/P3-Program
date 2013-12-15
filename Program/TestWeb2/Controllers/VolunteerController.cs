@@ -39,13 +39,17 @@ namespace TestWeb2.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.Topics = new List<string>() { "Festival", "Church", "Culture", "Nature", "Sport", "Political" };
+
+            Topic tmp = new Topic();
+            ViewBag.Topics = tmp.GetValidTopics();
             return View(volunteer);
         }
 
         [HttpPost]
         public ActionResult Edit(Volunteer volunteer)
         {
+            Topic tmp = new Topic();
+            ViewBag.Topics = tmp.GetValidTopics();
             Volunteer currentUser = GetCurrentUser();
             if (ModelState.IsValid && currentUser != null)
             {
@@ -85,7 +89,6 @@ namespace TestWeb2.Controllers
             return View(projects.ToList());
         }
 
-        //[Authorize]
         //[HttpPost]
         //[ValidateAntiForgeryToken]
         public ActionResult JoinProject(int id)
@@ -93,7 +96,7 @@ namespace TestWeb2.Controllers
             Volunteer currentUser = GetCurrentUser();
             VolunteerProject project = db.VolunteerProjects.Find(id);
             
-            currentUser.AddWorkRequest(project);
+            Match newMatch = currentUser.AddWorkRequest(project);
             db.Entry(currentUser).State = EntityState.Modified;
             db.Entry(project).State = EntityState.Modified;
             db.SaveChanges();

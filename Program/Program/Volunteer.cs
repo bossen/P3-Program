@@ -21,14 +21,14 @@ namespace Model
 
         #region Constructors
         public Volunteer()
-        { 
+        {
             this.Matches = new List<Match>();
             this.VolunteerPreferences = new Topic();
         }
 
         public Volunteer(string username, string name = null, Location location = null, string email = null)
             : base(username, name, location, email)
-        { 
+        {
             this.Matches = new List<Match>();
             this.VolunteerPreferences= new Topic();
         }
@@ -40,20 +40,19 @@ namespace Model
             Matches.Add(match);
         }
 
-        public void AddWorkRequest(VolunteerProject project)
+        public Match AddWorkRequest(VolunteerProject project)
         {
-            bool existing = false;
+            //return existing match, if already in matches
             foreach (Match match in Matches)
             {
                 if (match.Project == project)
-                    existing = true;
+                    return match;
             }
 
-            if (!existing)
-            {
-                WorkRequest newWorkRequest = new WorkRequest(this, project);
-                Matches.Add(newWorkRequest);
-            }
+            WorkRequest newWorkRequest = new WorkRequest(this, project);
+            Matches.Add(newWorkRequest);
+
+            return newWorkRequest;
         }
 
         public Suggestion AddSuggestion(VolunteerProject project)
@@ -111,12 +110,12 @@ namespace Model
         public string GetStatusOfProject(VolunteerProject project)
         {
             foreach (Match match in Matches)
-	        {
+            {
                 if (match.Project == project)
-                    return match is Invite ? "invited" : 
-                        match is WorkRequest ? "work requested" : 
+                    return match is Invite ? "invited" :
+                        match is WorkRequest ? "work requested" :
                         "join";
-	        }
+            }
             return "join";
         }
         #endregion
