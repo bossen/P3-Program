@@ -29,30 +29,30 @@ namespace TestWeb2.Controllers
 
             ViewBag.Authenticated = _secWrap.IsAuthenticated();
 
-            if (_secWrap.IsAuthenticated())
-            {
-                User currentUser = GetCurrentUser();
-                ViewBag.Title = "";
-                if (currentUser.GetType() == typeof(Volunteer))
-                {
-                    return RedirectToAction("index", "volunteer");
-                }
-                else if (currentUser.GetType() == typeof(Admin))
-                {
-                    return RedirectToAction("index", "admin");
-                }
+            //if (_secWrap.IsAuthenticated())
+            //{
+            //    User currentUser = GetCurrentUser();
+            //    ViewBag.Title = "";
+            //    if (currentUser.GetType() == typeof(Volunteer))
+            //    {
+            //        return RedirectToAction("index", "volunteer");
+            //    }
+            //    else if (currentUser.GetType() == typeof(Admin))
+            //    {
+            //        return RedirectToAction("index", "admin");
+            //    }
 
-                ViewBag.Invites = new List<Model.Invite>();
-                ViewBag.Suggestions = new List<Model.Match>();
-                ViewBag.Accepted = new List<Model.Match>();
+            //    ViewBag.Invites = new List<Model.Invite>();
+            //    ViewBag.Suggestions = new List<Model.Match>();
+            //    ViewBag.Accepted = new List<Model.Match>();
 
-            }
-            else
-            {
+            //}
+            //else
+            //{
                 ViewBag.Title = "Welcome";
                 ViewBag.Suggestions = _repository.GetAllProjects().OrderBy(p => p.Time).Take(5);
 
-            }
+            //}
 
             return View();
         }

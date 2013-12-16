@@ -86,10 +86,10 @@ namespace TestWeb2.Tests.Controllers
             HomeController controller = GetHomeController(new MocModelRepository(), new MocWebSecurity(false));
 
             // Act
-            ActionResult result = controller.Index();
+            ViewResult result = controller.Index() as ViewResult;
 
             // Assert
-            Assert.AreEqual(0, result.ViewBag.Suggestion.Count());
+            Assert.AreEqual(0, result.ViewBag.Count());
         }
 
         [TestMethod]
