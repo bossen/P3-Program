@@ -137,15 +137,15 @@ namespace TestWeb2.Controllers
 
         private User GetCurrentUser()
         {
-            Volunteer hej = db.Volunteers.ToList().Where(v => v.UserName.ToLower() == WebSecurity.CurrentUserName.ToLower()).FirstOrDefault();
-            if (hej != null)
+            Volunteer user = db.Volunteers.ToList().Where(v => v.UserName.ToLower() == WebSecurity.CurrentUserName.ToLower()).FirstOrDefault();
+            if (user != null)
             {
-                return hej as User;
+                return user as User;
             }
-            Admin hej2 = db.Admins.ToList().Where(a => a.UserName.ToLower() == WebSecurity.CurrentUserName.ToLower()).FirstOrDefault();
-            if (hej2 != null)
+            Admin user2 = db.Admins.ToList().Where(a => a.UserName.ToLower() == WebSecurity.CurrentUserName.ToLower()).FirstOrDefault();
+            if (user2 != null)
             {
-                return hej2 as User;
+                return user2 as User;
             }
             return null;
         }

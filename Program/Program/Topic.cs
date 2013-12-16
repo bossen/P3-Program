@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Reflection;
 
 namespace Model
 {
@@ -104,6 +105,21 @@ namespace Model
         }
         #endregion
 
-
+        public string Print()
+        {
+            string result = "";
+            foreach (PropertyInfo prop in this.GetType().GetProperties())
+            {
+                object value = prop.GetValue(this);
+                if (value.GetType() == typeof(bool))
+                {
+                    if ((bool)value)
+                    {
+                        result += prop.Name + " ";
+                    }
+                }
+            }
+            return result;
+        }
     }
 }

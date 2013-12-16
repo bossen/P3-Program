@@ -53,10 +53,7 @@
                     @Html.DisplayNameFor(model => model.VolunteerPreferences)
                 </td>
                 <td>
-                    @foreach (Model.Topic topic in Model.VolunteerPreferences)
-                    {
-                        @topic.Name
-                    }
+                    @Model.VolunteerPreferences.Print()
                 </td>
             </tr>
         </table>

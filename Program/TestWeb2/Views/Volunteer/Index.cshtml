@@ -6,9 +6,9 @@
 <h2>Profile</h2>
 
 <p>
-    Hello @Html.DisplayFor(modelItem => Model.Name)! This is your profile 
+    Hello @Html.DisplayFor(modelItem => Model.Name)! This is your profile
     page where you can view the projects you have signed up for, your project invitations and
-    our project suggestions.  
+    our project suggestions.
 
 </p>
 <h2>Projects you've signed up for!</h2>
@@ -25,7 +25,8 @@
             <th>
                 @Html.DisplayNameFor(model => model.Matches.First().Project.Location)
             </th>
-            <th>Options
+            <th>
+                Options
             </th>
         </tr>
         <tr>
@@ -66,25 +67,28 @@ else
             <th>
                 @Html.DisplayNameFor(model => model.Matches.First().Project.Location)
             </th>
-            <th>Options
+            <th>
+                Options
             </th>
         </tr>
-        @foreach (Match match in Model.Matches.Where(m => m.Accepted == false && m.GetType() == typeof(Invite)))
-        {
-            <td>
-                @Html.DisplayFor(modelitem => match.Project.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => match.Project.Time)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => match.Project.Location.Address)
-                @Html.DisplayFor(modelItem => match.Project.Location.City)
-            </td>
-            <td>
-                @Html.ActionLink("Details", "Project", new { Id = match.Project.Id })
-            </td>
-        }
+        <tr>
+            @foreach (Match match in Model.Matches.Where(m => m.Accepted == false && m.GetType() == typeof(Invite)))
+            {
+                <td>
+                    @Html.DisplayFor(modelitem => match.Project.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => match.Project.Time)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => match.Project.Location.Address)
+                    @Html.DisplayFor(modelItem => match.Project.Location.City)
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "Project", new { Id = match.Project.Id })
+                </td>
+            }
+        </tr>
     </table>
 }
 else
@@ -105,7 +109,8 @@ else
             <th>
                 @Html.DisplayNameFor(model => model.Matches.First().Project.Location)
             </th>
-            <th>Options
+            <th>
+                Options
             </th>
         </tr>
         @foreach (Match match in Model.Matches.Where(m => m.Accepted == false && m.GetType() == typeof(Suggestion)))

@@ -134,10 +134,7 @@
                 @Html.DisplayNameFor(model => model.ProjectTopics)
             </td>
             <td>
-                @foreach (Model.Topic topic in Model.ProjectTopics)
-                {
-                    @topic.Name
-                }
+                @Model.ProjectTopics.Print()
             </td>
         </tr>
         <tr>
@@ -148,6 +145,7 @@
                 @Html.DisplayFor(model => model.Description)
             </td>
         </tr>
+    }
     </table>
     <h3>Participants</h3>
     <table>

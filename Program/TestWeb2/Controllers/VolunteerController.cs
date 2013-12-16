@@ -85,7 +85,9 @@ namespace TestWeb2.Controllers
         public ActionResult Projects()
         {
             ViewBag.Title = "Volunteer Projects";
-            var projects = db.VolunteerProjects.Include("Owner");
+            var projects = db.VolunteerProjects
+                .Include("Owner")
+                .Include("Location");
             return View(projects.ToList());
         }
 
