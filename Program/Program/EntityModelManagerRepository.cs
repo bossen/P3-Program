@@ -34,5 +34,25 @@ namespace Model
                 .Include("Association")
                 .Include("Location").ToList();
         }
+
+        public IEnumerable<Match> GetAllMatches()
+        {
+            return db.Matches
+                .Include("Volunteer")
+                .Include("Project").ToList();
+
+        }
+
+        public VolunteerProject GetProject(int id)
+        {
+            return db.VolunteerProjects
+                .Include("Owner")
+                .Include("Location")
+                .Include("ProjectTopics")
+                .Include("Matches")
+                .Include("Matches.Volunteer")
+                .Where(v => v.Id == id)
+                .FirstOrDefault();
+        }
     }
 }

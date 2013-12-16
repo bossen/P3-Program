@@ -12,6 +12,8 @@ namespace Model
         IEnumerable<VolunteerProject> GetAllProjects();
         IEnumerable<Volunteer> GetAllVolunteers();
         IEnumerable<Admin> GetAllAdmins();
+        IEnumerable<Match> GetAllMatches();
+        VolunteerProject GetProject(int id);
 
     }
 

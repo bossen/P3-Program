@@ -51,10 +51,14 @@ namespace TestWeb2.Tests.Controllers
 
         private Model.VolunteerProject GetAProject() 
         {
-            return GetAProject("Project title", new Model.Location("street", "City"),
-                DateTime.Parse("1996-6-6"), new Model.Topic() { Church = true }, null, "A project", false); 
+            return GetAProject("Project title",  "A project"); 
         }
 
+        private Model.VolunteerProject GetAProject(string title, string description) 
+        {
+            return GetAProject(title, new Model.Location("street", "City"),
+                DateTime.Parse("1996-6-6"), new Model.Topic() { Church = true }, null, description, false);
+        }
 
         private Model.VolunteerProject GetAProject(string title, Model.Location location, 
             DateTime time, Model.Topic topics, Model.Organization owner, string description, bool signup)
@@ -64,7 +68,7 @@ namespace TestWeb2.Tests.Controllers
 
         private Model.Admin GetAAdmin()
         {
-            return GetAAdmin("Username", "Name", new Model.Location("streeet", "city"), "EMAIL@host.dk");
+            return GetAAdmin("Username");
         }
         private Model.Admin GetAAdmin(string username)
         {
@@ -78,7 +82,7 @@ namespace TestWeb2.Tests.Controllers
 
         private Model.Volunteer GetAVolunteer()
         {
-            return GetAVolunteer("Username", "Name", new Model.Location("streeet", "city"), "EMAIL@host.dk");
+            return GetAVolunteer("Username");
         }
         private Model.Volunteer GetAVolunteer(string username)
         {
@@ -88,6 +92,23 @@ namespace TestWeb2.Tests.Controllers
         private Model.Volunteer GetAVolunteer(string username, string name, Model.Location location, string email)
         {
             return new Model.Volunteer(username, name, location, email);
+        }
+
+        private Model.Organization GetAOrganization()
+        {
+            return GetAOrganization("Some organization", "some@email.dk");
+        }
+
+        private Model.Organization GetAOrganization(string name, string email)
+        {
+            return GetAOrganization(name, DateTime.Parse("1996-04-02"),
+                new Model.Location("street", "chitty"), email);
+        }
+
+
+        private Model.Organization GetAOrganization(string name, DateTime creation, Model.Location location, string email) 
+        {
+            return new Model.Organization() { Name = name, Creation = creation, Email = email, Location = location };
         }
         #endregion
 
@@ -112,6 +133,8 @@ namespace TestWeb2.Tests.Controllers
             // Arrange
             MocModelRepository repository = new MocModelRepository();
             Model.VolunteerProject project = GetAProject();
+            Model.VolunteerProject project2 = GetAProject("Another Project", "Just a test");
+            repository.CreateProject(project);
             repository.CreateProject(project);
             HomeController controller = GetHomeController(repository, new MocWebSecurity(false));
 
@@ -121,12 +144,13 @@ namespace TestWeb2.Tests.Controllers
             // Assert
             var model = (IEnumerable<Model.VolunteerProject>)result.ViewData.Model;
             CollectionAssert.Contains(model.ToList(),project);
+            CollectionAssert.Contains(model.ToList(), project2);
         }
         #endregion
 
         #region Index view
         [TestMethod]
-        public void Home_Index_Not_Logged_In_No_Projects()
+        public void Home_Index_Not_Logged_In_displays_No_Projects()
         {
             // Arrange
             HomeController controller = GetHomeController(new MocModelRepository(), new MocWebSecurity(false));
@@ -139,7 +163,7 @@ namespace TestWeb2.Tests.Controllers
         }
 
         [TestMethod]
-        public void Home_Index_Not_Logged_In_With_Projects()
+        public void Home_Index_Not_Logged_In_With_Projects_displays()
         {
             // Arrange
             MocModelRepository repository = new MocModelRepository();
@@ -201,6 +225,31 @@ namespace TestWeb2.Tests.Controllers
             Assert.AreEqual(result.RouteValues["Controller"], "volunteer");
             Assert.AreEqual(result.RouteValues["Action"], "index");
         }
+        #endregion
+
+        #region Project View
+
+        [TestMethod]
+        public void Home_Project_Get_Finds_all_Project_data()
+        {
+            //Arrange
+            Model.VolunteerProject project = GetAProject("The Project", "Should have a lot of stuff");
+            Model.Organization organization = GetAOrganization("Fisher", "shop@scam.com");
+            project.Owner = organization;
+            project.Id = 1;
+            MocModelRepository repository = new MocModelRepository();
+            repository.CreateOrganization(organization);
+            repository.CreateProject(project);
+            HomeController controller = GetHomeController(repository, new MocWebSecurity(false));
+
+            //Act
+            ViewResult result = controller.Project(1) as ViewResult;
+
+            //Assert
+            var model = (Model.VolunteerProject)result.ViewData.Model;
+            Assert.AreEqual(project, model);//Need to overwrite equals
+        }
+
         #endregion
 
         [TestMethod]

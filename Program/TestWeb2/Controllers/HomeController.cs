@@ -59,14 +59,15 @@ namespace TestWeb2.Controllers
 
         public ActionResult Project(int id = 0)
         {
-            VolunteerProject project = db.VolunteerProjects
-                .Include("Owner")
-                .Include("Location")
-                .Include("ProjectTopics")
-                .Include("Matches")
-                .Include("Matches.Volunteer")
-                .Where(v => v.Id == id)
-                .FirstOrDefault();
+            //VolunteerProject project = db.VolunteerProjects
+            //    .Include("Owner")
+            //    .Include("Location")
+            //    .Include("ProjectTopics")
+            //    .Include("Matches")
+            //    .Include("Matches.Volunteer")
+            //    .Where(v => v.Id == id)
+            //    .FirstOrDefault();
+            var project = _repository.GetProject(id);
 
             if (project == null)
                 return HttpNotFound();
