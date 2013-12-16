@@ -4,7 +4,7 @@
     ViewBag.Title = "Organizations";
 }
 
-@if(ViewBag.Authenticated == false)
+@if(ViewBag.Authenticated == true)
 {
     <h1>Organizations</h1>
     <table>
@@ -27,7 +27,7 @@
     }
     </table>
 }
-@if(ViewBag.Authenticated == true)
+@if(ViewBag.Authenticated == false)
 {
     <h1>Organizations</h1>
     <table>
