@@ -30,5 +30,17 @@ namespace UnitTestProject1
             int expected = 2;
             Assert.AreEqual(expected, output);
         }
+        [TestMethod]
+        public void TestPrint()
+        {
+            Topic Topics = new Topic();
+            Topics.QuickSetProperties(true, true, false, false, false, false);
+
+            Volunteer v = new Volunteer();
+            string expected = "Church Culture ";
+            v.VolunteerPreferences = Topics;
+            string output = v.VolunteerPreferences.Print();
+            Assert.AreEqual(expected, output);
+        }
     }
 }
