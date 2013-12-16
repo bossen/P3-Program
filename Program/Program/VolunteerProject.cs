@@ -62,11 +62,6 @@ namespace Model
             volunteer.AddMatch(newInvite);
         }
 
-        void CloseProject()
-        {
-            throw new NotImplementedException();
-        }
-
         void CancelProject()
         {
             Signup = false;
