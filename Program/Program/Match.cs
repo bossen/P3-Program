@@ -46,7 +46,8 @@ namespace Model
 
         public void SetScore()
         {
-            this.Score = 50 - (int)this.Project.Calculate(Project, Volunteer);
+            double calc = this.Project.Calculate(Project, Volunteer);
+            this.Score = 50 - calc != -1 ? (int)calc : 0;
         }
 
         public void DeleteMatch()

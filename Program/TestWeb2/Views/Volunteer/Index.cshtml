@@ -82,7 +82,7 @@
                 }
             </td>
             <td>
-                @if (Model.Matches.Where(m => m.Accepted == false && m.GetType() == typeof(Invite)).Count() > 0)
+                @if (Model.Matches.Where(m => m.Accepted == null && m.GetType() == typeof(Invite)).Count() > 0)
                 {
                 <table>
                     <tr>
@@ -97,7 +97,7 @@
                         </th>
                     </tr>
                     <tr>
-                    @foreach (Match match in Model.Matches.Where(m => m.Accepted == false && m.GetType() == typeof(Invite)))
+                    @foreach (Match match in Model.Matches.Where(m => m.Accepted == null && m.GetType() == typeof(Invite)))
                     {
                         <td>
                             @Html.DisplayFor(modelitem => match.Project.Title)
@@ -122,7 +122,7 @@
             }
             </td>
             <td>
-            @if (Model.Matches.Where(m => m.Accepted == false && m.GetType() == typeof(Suggestion)).Count() > 0)
+            @if (Model.Matches.Where(m => m.Accepted == null && m.GetType() == typeof(Suggestion)).Count() > 0)
             {
                 <table>
                     <tr>
@@ -136,7 +136,7 @@
                             @Html.DisplayNameFor(model => model.Matches.First().Project.Location)
                         </th>
                     </tr>
-                    @foreach (Match match in Model.Matches.Where(m => m.Accepted == false && m.GetType() == typeof(Suggestion)))
+                    @foreach (Match match in Model.Matches.Where(m => m.Accepted == null && m.GetType() == typeof(Suggestion)))
                     {
                         <tr>
                             <td>

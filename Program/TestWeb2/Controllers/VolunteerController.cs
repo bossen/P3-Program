@@ -60,10 +60,9 @@ namespace TestWeb2.Controllers
 
                 foreach (VolunteerProject project in db.VolunteerProjects.Include("ProjectTopics"))
                 {
-                    int res = volunteer.VolunteerPreferences.CompareTopics(project.ProjectTopics);
-                    if (res > 0)
+                    if (volunteer.VolunteerPreferences.CompareTopics(project.ProjectTopics) > 0)
                     {
-                        volunteer.AddSuggestion(project);
+                        currentUser.AddSuggestion(project);
                     }
                 }
 

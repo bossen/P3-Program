@@ -114,6 +114,7 @@ namespace Model
                 if (match.Project == project)
                     return match is Invite ? "invited" :
                         match is WorkRequest ? "work requested" :
+                        match is Suggestion ? "suggested" :
                         "join";
             }
             return "join";
