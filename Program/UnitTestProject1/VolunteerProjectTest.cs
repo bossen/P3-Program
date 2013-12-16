@@ -38,12 +38,14 @@ namespace UnitTestProject1
             Volunteer tester = new Volunteer("username", null, null, null);
             VolunteerProject vp2 = new VolunteerProject();
             Topic Topics = new Topic();
-            
-            Topics.Church = true;
-            Assert.IsTrue(Topics.Church);
 
+            vp2.ProjectTopics = Topics;
+            Topics.Church = true;
+            Assert.AreEqual(Topics.Church, vp2.ProjectTopics.Church);
+
+            vp2.ProjectTopics = Topics;
             Topics.Church = false;
-            Assert.IsFalse(Topics.Church);
+            Assert.AreEqual(Topics.Church, vp2.ProjectTopics.Church);
         }
 
         [TestMethod]

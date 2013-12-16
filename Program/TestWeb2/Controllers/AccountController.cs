@@ -95,6 +95,15 @@ namespace TestWeb2.Controllers
                     else
                     {
                         Volunteer newVolunteer = new Volunteer(model.UserName);
+
+                        foreach (VolunteerProject project in db.VolunteerProjects.Include("ProjectTopics"))
+                        {
+                            if (newVolunteer.VolunteerPreferences.CompareTopics(project.ProjectTopics) > 0)
+                            {
+                                newVolunteer.AddSuggestion(project);
+                            }
+                        }
+
                         db.Volunteers.Add(newVolunteer);
                         db.SaveChanges();
                         return RedirectToAction("Index", "Home");

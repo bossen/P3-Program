@@ -63,6 +63,7 @@ namespace Model
         {
             VolunteerProject newProject = new VolunteerProject(title, location, time, topics, this, description, true);
             VolunteerProjects.Add(newProject);
+
             return newProject;
         }
 

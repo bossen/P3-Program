@@ -38,11 +38,12 @@ namespace Model.Migrations
                 new Organization
                 {
                     Id = 1,
-                    Name = "Omvendt Kors",
-                    Creation = DateTime.Parse("1996-06-06"),
-                    Location = new Location("Main street 1", "Townsville"),
-                    Email = "mail@kors.dk"
+                    Name = "Aalborg Fodbold",
+                    Creation = DateTime.Parse("2012-06-06"),
+                    Location = new Location("Christiansgade 10", "Aalborg"),
+                    Email = "email@bold.dk"
                 }
+ 
             };
 
             List<VolunteerProject> projects = new List<VolunteerProject>()
@@ -51,10 +52,34 @@ namespace Model.Migrations
                 {
                     Id = 1,
                     Owner = organizations.Find(o => o.Id == 1),
-                    Title = "Kors Rotering",
-                    Location = new Location("Main street 2", "Townsville"),
+                    Title = "Fodbold For 12-15 årige",
+                    Location = new Location("Torvegade 3", "Aalborg"),
                     Time = DateTime.Parse("2013-12-25"),
-                    Description = "Vi roterer kors på jesu fødselsdag",
+                    Description = "Vi søger to fodbold trænere til dette hold.",
+                    ProjectTopics = new Topic { Church = true }
+
+                },
+
+                new VolunteerProject
+                {
+                    Id = 2,
+                    Owner = organizations.Find(o => o.Id == 1),
+                    Title = "Vild i dag, syg i morgen",
+                    Location = new Location("Christansgade 10", "Aalborg"),
+                    Time = DateTime.Parse("2013-12-25"),
+                    Description = "Det er her det sker.",
+                    ProjectTopics = new Topic { Church = true }
+
+                },
+
+                new VolunteerProject
+                {
+                    Id = 3,
+                    Owner = organizations.Find(o => o.Id == 1),
+                    Title = "Lukas svømmer",
+                    Location = new Location("Lollandsgade 17", "Aalborg"),
+                    Time = DateTime.Parse("2013-12-25"),
+                    Description = "Hjælp jeg er en fisk.",
                     ProjectTopics = new Topic { Church = true }
 
                 }

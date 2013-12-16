@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<Model.Volunteer>
 
+
 <div id="content">
     <hgroup class="title">
         <h1>@ViewBag.Title</h1>
@@ -29,9 +30,13 @@
             <link href="~/Map/map.css" rel="stylesheet" />
             foreach (var volunteer in Model)
             {
-                <script type="text/javascript">setTimeout(function () { InsertMarker("@volunteer.Location.GetAddress()"); }, 1000);</script>
+                if (volunteer.Location != null)
+                {
+                    <script type="text/javascript">setTimeout(function () { InsertMarker("@volunteer.Location.GetAddress()"); }, 1000);</script>
+                }
             }
         }
     }
 </div>
 <div id="map-canvas" />
+

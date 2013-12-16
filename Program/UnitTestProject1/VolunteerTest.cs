@@ -29,7 +29,7 @@ namespace UnitTestProject1
         }
 
         [TestMethod]
-        public void VolunteerMethods()
+        public void TestSuggestion()
         {
             string username = "username", name = "name", address = "address", city = "city", mail = "mail";
             string title = "title", description = "description";
@@ -42,7 +42,30 @@ namespace UnitTestProject1
             Volunteer v = new Volunteer(username, name, new Location(address, city), mail);
             VolunteerProject vp = new VolunteerProject(title, l, time, Topics, o, description, true);
 
-            //Insert a test here!
+            Suggestion Expected = new Suggestion();
+            Expected.Volunteer = v;
+            Suggestion output = v.AddSuggestion(vp);
+            Assert.AreEqual(Expected.Volunteer, output.Volunteer);
+
+            Expected.Project = vp;
+            Assert.AreEqual(Expected.Project, output.Project);
+        }
+
+        [TestMethod]
+        public void TestWorkRequest()
+        {
+            string username = "username", name = "name", address = "address", city = "city", mail = "mail";
+            string title = "title", description = "description";
+            Location l = new Location(address, city);
+            DateTime time = DateTime.Now;
+            Topic Topics = new Topic();
+            Topics.Church = true;
+
+            Organization o = new Organization();
+            Volunteer v = new Volunteer(username, name, new Location(address, city), mail);
+            VolunteerProject vp = new VolunteerProject(title, l, time, Topics, o, description, true);
+
+            v.AddWorkRequest(vp);
         }
     }
 }

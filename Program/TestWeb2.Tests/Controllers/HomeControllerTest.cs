@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TestWeb2;
 using TestWeb2.Controllers;
+using System.Diagnostics;
 using TestWeb2.Tests.Models;
 using System.Web.Routing;
 using System.Web;
@@ -109,7 +110,20 @@ namespace TestWeb2.Tests.Controllers
         }
 
         [TestMethod]
-        public void About()
+        public void HomeOrganization()
+        {
+            // Arrange
+            HomeController controller = new HomeController();
+
+            // Act
+            ViewResult result = controller.Organization() as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+        }
+
+        [TestMethod]
+        public void HomeAbout()
         {
             // Arrange
             HomeController controller = new HomeController();
