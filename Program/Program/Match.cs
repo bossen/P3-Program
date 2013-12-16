@@ -30,7 +30,7 @@ namespace Model
             this.Project = project;
             this.Accepted = accepted;
             this.Expire = expire;
-            this.Score = 50;
+            SetScore();
         }
 
         public Match(Volunteer volunteer, VolunteerProject project, bool? accepted = null)
@@ -46,7 +46,7 @@ namespace Model
 
         public void SetScore()
         {
-            this.Score = Score - (int)this.Project.Calculate(Project, Volunteer);
+            this.Score = 50 - (int)this.Project.Calculate(Project, Volunteer);
         }
 
         public void DeleteMatch()
