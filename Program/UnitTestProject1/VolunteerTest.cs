@@ -42,7 +42,13 @@ namespace UnitTestProject1
             Volunteer v = new Volunteer(username, name, new Location(address, city), mail);
             VolunteerProject vp = new VolunteerProject(title, l, time, Topics, o, description, true);
 
-            //Insert a test here!
+            Suggestion Expected = new Suggestion();
+            Expected.Volunteer = v;
+            Suggestion output = v.AddSuggestion(vp);
+            Assert.AreEqual(Expected.Volunteer, output.Volunteer);
+
+            Expected.Project = vp;
+            Assert.AreEqual(Expected.Project, output.Project);
         }
     }
 }
