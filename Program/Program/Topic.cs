@@ -49,27 +49,27 @@ namespace Model
         public int CompareTopics(Topic that)
         {
             int likeness = 0;
-            if (this.Church == that.Church)
+            if (this.Church == that.Church && this.Church == true)
             {
                 likeness++;
             }
-            if (this.Festival == that.Festival)
+            if (this.Festival == that.Festival && this.Festival == true)
             {
                 likeness++;
             }
-            if (this.Culture == that.Culture)
+            if (this.Culture == that.Culture && this.Culture == true)
             {
                 likeness++;
             }
-            if (this.Nature == that.Nature)
+            if (this.Nature == that.Nature && this.Nature == true)
             {
                 likeness++;
             }
-            if (this.Sport == that.Sport)
+            if (this.Sport == that.Sport && this.Sport == true)
             {
                 likeness++;
             }
-            if (this.Political == that.Political)
+            if (this.Political == that.Political && this.Political == true)
             {
                 likeness++;
             }
