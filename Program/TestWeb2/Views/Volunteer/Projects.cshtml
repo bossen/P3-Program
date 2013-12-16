@@ -34,7 +34,10 @@
             <link href="~/Map/map.css" rel="stylesheet" />
             foreach (var project in Model)
             {
-                <script type="text/javascript">setTimeout(function () { InsertMarker("@project.Location.GetAddress()"); }, 1000);</script>
+                if (project.Location != null)
+                {
+                    <script type="text/javascript">setTimeout(function () { InsertMarker("@project.Location.GetAddress()"); }, 1000);</script>
+                }
             }
         }
     }

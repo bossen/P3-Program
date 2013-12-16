@@ -68,7 +68,9 @@ namespace TestWeb2.Controllers
         {
             ViewBag.Title = "List of Volunteer Projects";
             var projects = db.VolunteerProjects.Include(p => p.Owner);
-            projects = projects.Include(p => p.ProjectTopics);
+            projects = projects
+                .Include(p => p.ProjectTopics)
+                .Include("Location");
             return View(projects.ToList());
         }
 
@@ -89,7 +91,7 @@ namespace TestWeb2.Controllers
         public ActionResult Organizations()
         {
             ViewBag.Title = "List of Organizations";
-            var organizations = db.Organizations;
+            var organizations = db.Organizations.Include("Location");
             return View(organizations.ToList());
         }
 
@@ -125,7 +127,8 @@ namespace TestWeb2.Controllers
         public ActionResult Volunteers()
         {
             ViewBag.Title = "List of Volunteers";
-            var volunteers = db.Volunteers;
+            var volunteers = db.Volunteers
+                .Include("Location");
             return View(volunteers.ToList());
         }
 
