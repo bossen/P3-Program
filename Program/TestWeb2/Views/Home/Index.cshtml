@@ -53,10 +53,6 @@
     }
     <h3>We suggest the following:</h3>
     <ol class="round">
-        @if (ViewBag.Empty)
-        { 
-            <p>There's currently no projects.</p>
-        }
         @foreach (Model.VolunteerProject suggestion in ViewBag.Suggestions)
         {
             <li>

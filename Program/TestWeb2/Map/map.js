@@ -95,4 +95,3 @@ function AddMarkers(location, name, infostring) {
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);
-InsertMarker("aalborg");
