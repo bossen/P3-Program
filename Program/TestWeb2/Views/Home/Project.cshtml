@@ -7,14 +7,6 @@
         <h1>@Html.DisplayFor(model => model.Title)</h1>
         <div class="fb-share-button" data-href="http://www.knowlee.dk/Home/Project/@Model.Id" data-width="20" data-type="button_count"></div>
     </hgroup>
-    @if (Model.Signup)
-    {
-        @Html.ActionLink((string)ViewBag.Status, "JoinProject", new { id = Model.Id })
-    }
-    else
-    {
-        <strong>Not allowed to signup</strong>
-    }
 
     <h3>Details:</h3>
     <table>

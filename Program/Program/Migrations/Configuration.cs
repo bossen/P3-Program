@@ -38,7 +38,7 @@ namespace Model.Migrations
                 new Organization
                 {
                     Id = 1,
-                    Name = "Aalborg Fodbold",
+                    Name = "Aalborg Eventclub",
                     Creation = DateTime.Parse("2012-06-06"),
                     Location = new Location("Christiansgade 10", "Aalborg"),
                     Email = "email@bold.dk"
@@ -56,7 +56,7 @@ namespace Model.Migrations
                     Location = new Location("Torvegade 3", "Aalborg"),
                     Time = DateTime.Parse("2013-12-25"),
                     Description = "Vi søger to fodbold trænere til dette hold.",
-                    ProjectTopics = new Topic { Church = true }
+                    ProjectTopics = new Topic { Sport = true }
 
                 },
 
@@ -64,7 +64,7 @@ namespace Model.Migrations
                 {
                     Id = 2,
                     Owner = organizations.Find(o => o.Id == 1),
-                    Title = "Vild i dag, syg i morgen",
+                    Title = "Kirkegang",
                     Location = new Location("Christansgade 10", "Aalborg"),
                     Time = DateTime.Parse("2013-12-25"),
                     Description = "Det er her det sker.",
@@ -76,11 +76,11 @@ namespace Model.Migrations
                 {
                     Id = 3,
                     Owner = organizations.Find(o => o.Id == 1),
-                    Title = "Lukas svømmer",
+                    Title = "Svømmetime",
                     Location = new Location("Lollandsgade 17", "Aalborg"),
                     Time = DateTime.Parse("2013-12-25"),
                     Description = "Hjælp jeg er en fisk.",
-                    ProjectTopics = new Topic { Church = true }
+                    ProjectTopics = new Topic { Sport = true }
 
                 }
             };

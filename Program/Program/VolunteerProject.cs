@@ -96,6 +96,11 @@ namespace Model
         //Always returns true if the user has no set preferences.
         private bool CheckVolunteerSuggest(Volunteer volunteer)
         {
+            Topic tmp = new Topic();
+            tmp.QuickSetProperties(true, true, true, true, true, true);
+            if (volunteer.VolunteerPreferences.CompareTopics(tmp) == 0)
+                return true;
+
             if (volunteer.VolunteerPreferences.CompareTopics(this.ProjectTopics) == 0)
                 return false;
             return true;
@@ -118,6 +123,15 @@ namespace Model
 
         public double Calculate(VolunteerProject pos1, Volunteer pos2)
         {
+            if (pos1.Location == null || 
+                pos1.Location.Lat == null || 
+                pos1.Location.Lng == null || 
+                pos2.Location == null ||
+                pos2.Location.Lat == null || 
+                pos2.Location.Lng == null)
+            {
+                return -1;
+            }
             double Radius = 6371; //Mean radius of the earth in kilometers
 
             //Finds the delta longitude and latitude of the positions.
