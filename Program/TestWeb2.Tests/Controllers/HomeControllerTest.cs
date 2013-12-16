@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TestWeb2;
 using TestWeb2.Controllers;
+using System.Diagnostics;
 
 namespace TestWeb2.Tests.Controllers
 {
@@ -13,7 +14,7 @@ namespace TestWeb2.Tests.Controllers
     public class HomeControllerTest
     {
         [TestMethod]
-        public void Index()
+        public void HomeIndex()
         {
             // Arrange
             HomeController controller = new HomeController();
@@ -22,11 +23,24 @@ namespace TestWeb2.Tests.Controllers
             ViewResult result = controller.Index() as ViewResult;
 
             // Assert
-            Assert.AreEqual("Welcome", result.ViewBag.Title);
+            Assert.IsNotNull(result);
         }
 
         [TestMethod]
-        public void About()
+        public void HomeOrganization()
+        {
+            // Arrange
+            HomeController controller = new HomeController();
+
+            // Act
+            ViewResult result = controller.Organization() as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+        }
+
+        [TestMethod]
+        public void HomeAbout()
         {
             // Arrange
             HomeController controller = new HomeController();

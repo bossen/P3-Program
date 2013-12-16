@@ -1,5 +1,20 @@
-﻿@{
+﻿@model Model.VolunteerProject
+
+@{
     ViewBag.Title = "Delete";
 }
 
 <h2>Cancel this Project</h2>
+
+<p>Are you sure you wish to cancel this project?</p>
+<table>
+    <tr>
+        <td>
+            @Html.ActionLink("Yes", "Index", new { id = Model.Id})
+            @Html.ActionLink("Cancel", "Index")
+        </td>
+        <td>
+
+        </td>
+    </tr>
+</table>
