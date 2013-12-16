@@ -8,7 +8,7 @@ namespace TestWeb2.Tests.Models
 {
     public class MocWebSecurity : TestWeb2.Models.ISecurityWrap
     {
-        string Username { get; set; }
+        public string Username { get; set; }
         bool Authenticated { get; set; }
         public bool IsAuthenticated()
         {

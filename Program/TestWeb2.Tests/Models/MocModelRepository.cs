@@ -34,5 +34,15 @@ namespace TestWeb2.Tests.Models
         {
             return _admins;
         }
+
+        public void CreateAdmin(Admin admin)
+        {
+            _admins.Add(admin);
+        }
+
+        public void CreateVolunteer(Volunteer volunteer)
+        {
+            _vounteers.Add(volunteer);
+        }
     }
 }

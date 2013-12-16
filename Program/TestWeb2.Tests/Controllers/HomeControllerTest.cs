@@ -17,6 +17,7 @@ namespace TestWeb2.Tests.Controllers
     public class HomeControllerTest
     {
 
+        #region Non test methods
         private static HomeController GetHomeController(Model.IModelRepository repository, TestWeb2.Models.ISecurityWrap security)
         {
             HomeController controller = new HomeController(repository, security);
@@ -48,6 +49,49 @@ namespace TestWeb2.Tests.Controllers
             }
         }
 
+        private Model.VolunteerProject GetAProject() 
+        {
+            return GetAProject("Project title", new Model.Location("street", "City"),
+                DateTime.Parse("1996-6-6"), new Model.Topic() { Church = true }, null, "A project", false); 
+        }
+
+
+        private Model.VolunteerProject GetAProject(string title, Model.Location location, 
+            DateTime time, Model.Topic topics, Model.Organization owner, string description, bool signup)
+        {
+            return new Model.VolunteerProject(title, location, time, topics, owner, description, signup);
+        }
+
+        private Model.Admin GetAAdmin()
+        {
+            return GetAAdmin("Username", "Name", new Model.Location("streeet", "city"), "EMAIL@host.dk");
+        }
+        private Model.Admin GetAAdmin(string username)
+        {
+            return GetAAdmin(username, "Name", new Model.Location("streeet", "city"), "EMAIL@host.dk");
+        }
+
+        private Model.Admin GetAAdmin(string username, string name, Model.Location location, string email)
+        {
+            return new Model.Admin(username, name, location, email);
+        }
+
+        private Model.Volunteer GetAVolunteer()
+        {
+            return GetAVolunteer("Username", "Name", new Model.Location("streeet", "city"), "EMAIL@host.dk");
+        }
+        private Model.Volunteer GetAVolunteer(string username)
+        {
+            return GetAVolunteer(username, "Name", new Model.Location("streeet", "city"), "EMAIL@host.dk");
+        }
+
+        private Model.Volunteer GetAVolunteer(string username, string name, Model.Location location, string email)
+        {
+            return new Model.Volunteer(username, name, location, email);
+        }
+        #endregion
+
+        #region Projects View
         [TestMethod]
         public void Home_Projects_With_No_Projects()
         {
@@ -67,7 +111,7 @@ namespace TestWeb2.Tests.Controllers
         {
             // Arrange
             MocModelRepository repository = new MocModelRepository();
-            Model.VolunteerProject project = new Model.VolunteerProject("Fisk", new Model.Location("somewhere", "sometowen"), DateTime.Parse("1999-12-19"), new Model.Topic(), null, "Hello", false);
+            Model.VolunteerProject project = GetAProject();
             repository.CreateProject(project);
             HomeController controller = GetHomeController(repository, new MocWebSecurity(false));
 
@@ -78,35 +122,86 @@ namespace TestWeb2.Tests.Controllers
             var model = (IEnumerable<Model.VolunteerProject>)result.ViewData.Model;
             CollectionAssert.Contains(model.ToList(),project);
         }
+        #endregion
 
+        #region Index view
         [TestMethod]
-        public void Index_Not_Logged_In_No_Projects()
+        public void Home_Index_Not_Logged_In_No_Projects()
         {
             // Arrange
             HomeController controller = GetHomeController(new MocModelRepository(), new MocWebSecurity(false));
 
             // Act
             ViewResult result = controller.Index() as ViewResult;
-
+            IEnumerable<Model.VolunteerProject> resList = (IEnumerable<Model.VolunteerProject>)result.ViewBag.Suggestions;
             // Assert
-            Assert.AreEqual(0, result.ViewBag.Count());
+            Assert.AreEqual(0, resList.Count());
         }
 
         [TestMethod]
-        public void Index_Not_Logged_In_With_Projects()
+        public void Home_Index_Not_Logged_In_With_Projects()
         {
             // Arrange
             MocModelRepository repository = new MocModelRepository();
-            Model.VolunteerProject project = new Model.VolunteerProject("Fisk", new Model.Location("somewhere", "sometowen"), DateTime.Parse("1999-12-19"), new Model.Topic(), null, "Hello", false);
+            Model.VolunteerProject project = GetAProject();
             repository.CreateProject(project);
             HomeController controller = GetHomeController(repository, new MocWebSecurity(false));
             
             // Act
             ViewResult result = controller.Index() as ViewResult;
+            var suggestionList = (IEnumerable<Model.VolunteerProject>)result.ViewBag.Suggestions;
 
             // Assert
-            Assert.AreEqual(0, result.ViewBag.Suggestion.Count());
+            CollectionAssert.Contains(suggestionList.ToList(), project);
         }
+
+        [TestMethod]
+        public void Home_Index_loggedIn_Admin_Redirects_to_Admin_index()
+        {
+            // Arrange
+            MocWebSecurity auth = new MocWebSecurity(true);
+            auth.Username = "SomeAdmin";
+            MocModelRepository repository = new MocModelRepository();
+            Model.Admin admin = new Model.Admin("SomeAdmin");
+            repository.CreateAdmin(admin);
+            HomeController controller = GetHomeController(repository, auth);
+
+            // Act
+            var result = controller.Index() as RedirectToRouteResult;
+
+            // Assert
+            if (result == null)
+            {
+                Assert.Fail("Should have redirected");
+            }
+            Assert.AreEqual(result.RouteValues["Controller"], "admin");
+            Assert.AreEqual(result.RouteValues["Action"], "index");
+                 
+        }
+
+        [TestMethod]
+        public void Home_Index_loggedIn_Volunteer_redirects_to_Volunteer_Index()
+        {
+            //Arrange 
+            MocWebSecurity auth = new MocWebSecurity(true);
+            auth.Username = "SomeVolunteer";
+            MocModelRepository repository = new MocModelRepository();
+            Model.Volunteer volunteer = new Model.Volunteer("SomeVolunteer");
+            repository.CreateVolunteer(volunteer);
+            HomeController controller = GetHomeController(repository, auth);
+
+            //Act
+            var result = controller.Index() as RedirectToRouteResult;
+
+            //Assert
+            if (result == null)
+            {
+                Assert.Fail("Should have redirected");
+            }
+            Assert.AreEqual(result.RouteValues["Controller"], "volunteer");
+            Assert.AreEqual(result.RouteValues["Action"], "index");
+        }
+        #endregion
 
         [TestMethod]
         public void About()
