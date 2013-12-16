@@ -1,5 +1,11 @@
 ﻿@model IEnumerable<Model.Volunteer>
 
+@if (ViewBag.NotInOrganization == true)
+{ 
+    <p>You're not part of an organization yet, please go @Html.ActionLink("Here", "Index", "Admin")</p>
+}
+@if (ViewBag.NotInOrganization == false)
+{
 <hgroup class="title">
     <h1>@ViewBag.Title.</h1>
     <h2>@ViewBag.Message</h2>
@@ -15,3 +21,4 @@
         </li>
     }
 </ul>
+}

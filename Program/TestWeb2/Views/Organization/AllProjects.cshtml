@@ -4,6 +4,12 @@
     ViewBag.Title = "All";
 }
 
+@if (ViewBag.NotInOrganization == true)
+{ 
+    <p>You're not part of an organization yet, please go @Html.ActionLink("Here", "Index", "Admin")</p>
+}
+@if (ViewBag.NotInOrganization == false)
+{
 <h2>All Projects</h2>
 
 <table border="1">
@@ -40,3 +46,4 @@
 }
 
 </table>
+}

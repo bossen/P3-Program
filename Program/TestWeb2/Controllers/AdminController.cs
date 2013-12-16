@@ -108,7 +108,7 @@ namespace TestWeb2.Controllers
 
             if (currentuser.Association == null)
             {
-                ViewBag.Authenticated = false;
+                ViewBag.Authenticated = true;
             }
             return View(db.Organizations.ToList());
         }
