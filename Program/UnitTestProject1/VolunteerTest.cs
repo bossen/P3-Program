@@ -54,5 +54,17 @@ namespace UnitTestProject1
 
             CollectionAssert.Contains(v.Matches, wr);
         }
+
+        [TestMethod]
+        public void TestSortMatches()
+        {
+            Volunteer v = (Utility.GetVolunteer());
+            VolunteerProject vp = (Utility.GetVolunteerProject());
+
+            v.AddWorkRequest(vp);
+            v.AddWorkRequest(vp).AcceptMatch();
+
+            CollectionAssert.Contains(v.Matches, v.GetAcceptedMatches());
+        }
     }
 }

@@ -35,8 +35,8 @@ namespace UnitTestProject1
         [TestMethod]
         public void TestAddRemoveTopic()
         {
-            Volunteer tester = new Volunteer("username", null, null, null);
-            VolunteerProject vp2 = new VolunteerProject();
+            Volunteer tester = Utility.GetVolunteer();
+            VolunteerProject vp2 = Utility.GetVolunteerProject();
             Topic Topics = new Topic();
 
             vp2.ProjectTopics = Topics;
@@ -51,36 +51,23 @@ namespace UnitTestProject1
         [TestMethod]
         public void TestCalculate()
         {
-        Topic Topics = new Topic();
-        
-        Organization o = new Organization();
+            VolunteerProject vp2 = Utility.GetVolunteerProject();
+            Volunteer v = Utility.GetVolunteer();
 
-        Location lvp = new Location();
-        Location lv = new Location();
+            vp2.Location.Lat = 50.0;
+            vp2.Location.Lng = 15.0;
 
-        VolunteerProject vp2 = new VolunteerProject("title", lvp, DateTime.Now, Topics, o, "description", true);
-        Volunteer v = new Volunteer("username", null, lv, null);
-        
-        lvp.Lat = 50.0;
-        lvp.Lng = 15.0;
-        
-        lv.Lat = 55.0;
-        lv.Lng = 10.0;
-        double output = vp2.Calculate(vp2, v);
-        double expected = 651.43;
+            v.Location.Lat = 55.0;
+            v.Location.Lng = 10.0;
+            double output = vp2.Calculate(vp2, v);
+            double expected = 651.43;
 
-        Assert.AreEqual(expected, output, 1.0);
+            Assert.AreEqual(expected, output, 1.0);
 
-        //Test for wrong value        
-        lvp.Lat = 50.0;
-        lvp.Lng = 15.0;
+            //Test for wrong value
+            double expected2 = 10; //Wrong value
 
-        lv.Lat = 55.0;
-        lv.Lng = 10.0;
-        double output2 = vp2.Calculate(vp2, v);
-        double expected2 = 10; //Wrong value
-
-        Assert.AreNotEqual(expected2, output2, 1.0);
+            Assert.AreNotEqual(expected2, output, 1.0);
         }
     }
 }
