@@ -47,6 +47,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Admin.cs" />
+    <Compile Include="EntityModelManagerRepository.cs" />
+    <Compile Include="IModelRepository.cs" />
     <Compile Include="Invite.cs" />
     <Compile Include="Location.cs" />
     <Compile Include="Mail.cs" />
@@ -54,6 +56,10 @@
     <Compile Include="Migrations\201312151947585_newTopic.cs" />
     <Compile Include="Migrations\201312151947585_newTopic.Designer.cs">
       <DependentUpon>201312151947585_newTopic.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201312161717588_WRAPPERS.cs" />
+    <Compile Include="Migrations\201312161717588_WRAPPERS.Designer.cs">
+      <DependentUpon>201312161717588_WRAPPERS.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Organization.cs" />
@@ -74,6 +80,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201312151947585_newTopic.resx">
       <DependentUpon>201312151947585_newTopic.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201312161717588_WRAPPERS.resx">
+      <DependentUpon>201312161717588_WRAPPERS.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

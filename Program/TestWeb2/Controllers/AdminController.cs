@@ -24,11 +24,11 @@ namespace TestWeb2.Controllers
 
             if (currentuser.Association == null)
             {
-                ViewBag.Authenticated = false;
+                ViewBag.Authenticated = true;
             }
             else
             {
-                ViewBag.Authenticated = true;
+                ViewBag.Authenticated = false;
             }
             
             return View();
@@ -104,11 +104,15 @@ namespace TestWeb2.Controllers
         public ActionResult Organizations()
         {
             ViewBag.IsAdmin = true;
-            Admin currentuser = GetCurrentUser();
+            Admin currentUser = GetCurrentUser();
 
-            if (currentuser.Association == null)
+            if (currentUser.Association == null)
             {
                 ViewBag.Authenticated = true;
+            }
+            else 
+            {
+                ViewBag.Authenticated = false;
             }
             return View(db.Organizations.ToList());
         }

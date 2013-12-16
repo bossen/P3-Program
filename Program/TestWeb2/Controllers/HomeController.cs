@@ -7,19 +7,29 @@ using System.Web.Security;
 using Model;
 using System.Data.Entity;
 using WebMatrix.WebData;
+using TestWeb2.Models;
 
 namespace TestWeb2.Controllers
 {
     public class HomeController : Controller
     {
+        IModelRepository _repository;
+        ISecurityWrap _secWrap;
+        public HomeController() : this(new EntityModelManagerRepository(), new WebSecurityProvider()) { }
+        public HomeController(IModelRepository repository, ISecurityWrap secWrap)
+        {
+            _repository = repository;
+            _secWrap = secWrap;
+        }
+
         private VolunteerOrgContext db = new VolunteerOrgContext();
 
         public ActionResult Index()
         {
 
-            ViewBag.Authenticated = WebSecurity.IsAuthenticated;
+            ViewBag.Authenticated = _secWrap.IsAuthenticated();
 
-            if (WebSecurity.IsAuthenticated)
+            if (_secWrap.IsAuthenticated())
             {
                 User currentUser = GetCurrentUser();
                 ViewBag.Title = "";
@@ -40,7 +50,7 @@ namespace TestWeb2.Controllers
             else
             {
                 ViewBag.Title = "Welcome";
-                ViewBag.Suggestions = db.VolunteerProjects.OrderBy(p => p.Time).Take(5);
+                ViewBag.Suggestions = _repository.GetAllProjects().OrderBy(p => p.Time).Take(5);
 
             }
 
@@ -67,10 +77,11 @@ namespace TestWeb2.Controllers
         public ActionResult Projects()
         {
             ViewBag.Title = "List of Volunteer Projects";
-            var projects = db.VolunteerProjects.Include(p => p.Owner);
-            projects = projects
-                .Include(p => p.ProjectTopics)
-                .Include("Location");
+            //var projects = db.VolunteerProjects.Include(p => p.Owner);
+            //projects = projects
+            //    .Include(p => p.ProjectTopics)
+            //    .Include("Location");
+            var projects = _repository.GetAllProjects();
             return View(projects.ToList());
         }
 
@@ -134,6 +145,7 @@ namespace TestWeb2.Controllers
 
         public ActionResult About()
         {
+            
             ViewBag.Message = "Your app description page.";
 
             return View();
@@ -141,12 +153,12 @@ namespace TestWeb2.Controllers
 
         private User GetCurrentUser()
         {
-            Volunteer user = db.Volunteers.ToList().Where(v => v.UserName.ToLower() == WebSecurity.CurrentUserName.ToLower()).FirstOrDefault();
+            Volunteer user = _repository.GetAllVolunteers().Where(v => v.UserName.ToLower() == _secWrap.GetCurrentUserName().ToLower()).FirstOrDefault();
             if (user != null)
             {
                 return user as User;
             }
-            Admin user2 = db.Admins.ToList().Where(a => a.UserName.ToLower() == WebSecurity.CurrentUserName.ToLower()).FirstOrDefault();
+            Admin user2 = _repository.GetAllAdmins().Where(a => a.UserName.ToLower() == _secWrap.GetCurrentUserName().ToLower()).FirstOrDefault();
             if (user2 != null)
             {
                 return user2 as User;

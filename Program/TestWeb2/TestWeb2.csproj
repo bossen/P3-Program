@@ -200,6 +200,8 @@
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\MultiViewModel.cs" />
+    <Compile Include="Models\ISecurityWrap.cs" />
+    <Compile Include="Models\WebSecurityProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

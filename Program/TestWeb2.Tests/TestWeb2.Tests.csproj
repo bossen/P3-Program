@@ -113,6 +113,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\MocModelRepository.cs" />
+    <Compile Include="Models\MocWebSecurity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeControllerTest.cs" />
   </ItemGroup>
@@ -123,6 +125,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Program\Model.csproj">
+      <Project>{9433356b-dd7f-42c2-ba9a-616c3dc68c12}</Project>
+      <Name>Model</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TestWeb2\TestWeb2.csproj">
       <Project>{BEC18081-605C-4BE6-9343-EB742451F42B}</Project>
       <Name>TestWeb2</Name>
