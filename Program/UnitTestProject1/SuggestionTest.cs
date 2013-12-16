@@ -12,16 +12,8 @@ namespace UnitTestProject1
         [TestMethod]
         public void SuggestionConstructors()
         {
-            string username = "username", name = "name", address = "address", city = "city", mail = "mail";
-            string title = "title", description = "description";
-            Location l = new Location(address, city);
-            DateTime time = DateTime.Now.AddDays(1);
-            Topic Topics = new Topic();
-            Topics.Church = true;
-
-            Volunteer v = new Volunteer(username, name, l, mail);
-            Organization o = new Organization();
-            VolunteerProject vp = new VolunteerProject(title, l, time, Topics, o, description, true);
+            Volunteer v = (Utility.GetVolunteer());
+            VolunteerProject vp = (Utility.GetVolunteerProject());
 
             Suggestion s = new Suggestion(v, vp);
 
@@ -34,16 +26,8 @@ namespace UnitTestProject1
         [TestMethod]
         public void SuggestionMethods()
         {
-            string username = "username", name = "name", address = "address", city = "city", mail = "mail";
-            string title = "title", description = "description";
-            Location l = new Location(address, city);
-            DateTime time = DateTime.Now;
-            Topic Topics = new Topic();
-            Topics.Church = true;
-
-            Volunteer v = new Volunteer(username, name, l, mail);
-            Organization o = new Organization();
-            VolunteerProject vp = new VolunteerProject(title, l, time, Topics, o, description, true);
+            Volunteer v = (Utility.GetVolunteer());
+            VolunteerProject vp = (Utility.GetVolunteerProject());
 
             Suggestion s = new Suggestion(v, vp);
 
