@@ -1,22 +1,37 @@
 ﻿@model IEnumerable<Model.Volunteer>
 
-<hgroup class="title">
-    <h1>@ViewBag.Title</h1>
-    <h2>listing</h2>
-</hgroup>
-<table>
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.ActionLink("details", "volunteer", new { id = item.ID })
-            </td>
-        </tr>
+<div id="content">
+    <hgroup class="title">
+        <h1>@ViewBag.Title</h1>
+        <h2>listing</h2>
+    </hgroup>
+    <table>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.ActionLink("details", "volunteer", new { id = item.ID })
+                </td>
+            </tr>
+        }
+    </table>@section map
+        {
+        @if (Model.First().Location != null)
+        {
+            <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyACnSnrj-Vzj_6ZEeVpAFTtuuXOsXVRaO0&sensor=true"></script>
+            <script type="text/javascript" src="@Url.Content("~/Map/map.js")"></script>
+            <link href="~/Map/map.css" rel="stylesheet" />
+            foreach (var volunteer in Model)
+            {
+                <script type="text/javascript">setTimeout(function () { InsertMarker("@volunteer.Location.GetAddress()"); }, 1000);</script>
+            }
+        }
     }
-</table>
+</div>
+<div id="map-canvas" />

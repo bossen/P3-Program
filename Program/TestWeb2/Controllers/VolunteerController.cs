@@ -157,7 +157,8 @@ namespace TestWeb2.Controllers
         public ActionResult Volunteers()
         {
             ViewBag.Title = "Volunteer";
-            var volunteers = db.Volunteers;
+            var volunteers = db.Volunteers
+                .Include("Location");
             return View(volunteers.ToList());
         }
 
