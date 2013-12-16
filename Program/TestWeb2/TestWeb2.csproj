@@ -351,6 +351,11 @@
     <Content Include="Views\Organization\DetailsProject.cshtml" />
     <Content Include="Views\Organization\EditorTemplates\Topic.cshtml" />
     <Content Include="Views\Volunteer\EditorTemplates\Topic.cshtml" />
+    <Content Include="Views\Admin\Create.cshtml" />
+    <Content Include="Views\Admin\Edit.cshtml" />
+    <Content Include="Views\Admin\JoinOrganization.cshtml" />
+    <Content Include="Views\Admin\Organization.cshtml" />
+    <Content Include="Views\Admin\Organizations.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

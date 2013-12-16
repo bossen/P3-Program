@@ -40,7 +40,14 @@ namespace TestWeb2.Controllers
             else
             {
                 ViewBag.Title = "Welcome";
-                ViewBag.Suggestions = db.VolunteerProjects.OrderBy(p => p.Time).Take(5);
+                if (db.VolunteerProjects != null)
+                {
+                    ViewBag.Suggestions = db.VolunteerProjects.OrderBy(p => p.Time).Take(5);
+                }
+                else
+                {
+                    ViewBag.Empty = true;
+                }
             }
 
             return View();

@@ -94,7 +94,18 @@
         </tr>
     </table>
 
-
+@section map
+        {
+    @if (Model.Location != null)
+    {
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyACnSnrj-Vzj_6ZEeVpAFTtuuXOsXVRaO0&sensor=true"></script>
+        <script type="text/javascript" src="@Url.Content("~/Map/map.js")"></script>
+        <link href="~/Map/map.css" rel="stylesheet" />
+        <script type="text/javascript">setTimeout(function () { InsertMarker("@Model.Location.GetAddress()"); }, 1000);</script>
+    }
+}
+    
+    <div id="map-canvas" />
 
 
 
