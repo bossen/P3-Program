@@ -56,6 +56,8 @@ function GetGeocode(address, callback) {
     })
 }
 
+
+
 //Function for creating a single marker.
 function CreateSingleMarker(location, name) {
     var marker = new google.maps.Marker({
@@ -63,6 +65,8 @@ function CreateSingleMarker(location, name) {
         map: map,
         title: name
     })
+
+    map.setCenter(location);
 
     MarkerArray.push(marker);
 }
@@ -81,6 +85,12 @@ function AddMarkers(location, name, infostring) {
         info: infostring
     })
 
+    var bounds = new google.maps.LatLngBounds();
+    for (i = 0; i < MarkerArray.length; i++) {
+        bounds.extend(MarkerArray[i].getPosition());
+    }
+
+    map.fitBounds(bounds);
 
     google.maps.event.addListener(marker, "click", function () {
         infoWindow.setContent(this.info);
@@ -95,4 +105,3 @@ function AddMarkers(location, name, infostring) {
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);
-InsertMarker("aalborg");

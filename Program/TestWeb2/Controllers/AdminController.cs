@@ -66,8 +66,7 @@ namespace TestWeb2.Controllers
             ViewBag.IsAdmin = true;
             var organization = db.Organizations
                 .Include("VolunteerProjects")
-                .Include("Location.Address")
-                .Include("Location.City")
+                .Include("Location")
                 .Where(o => o.Id == id)
                 .FirstOrDefault();
             if (organization == null)
@@ -83,8 +82,7 @@ namespace TestWeb2.Controllers
             ViewBag.IsAdmin = true;
             var neworganization = db.Organizations
                 .Include("VolunteerProjects")
-                .Include("Location.Address")
-                .Include("Location.City")
+                .Include("Location")
                 .Where(o => o.Id == id)
                 .FirstOrDefault();
             if (ModelState.IsValid && neworganization != null)

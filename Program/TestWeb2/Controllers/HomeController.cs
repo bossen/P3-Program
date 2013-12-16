@@ -41,6 +41,7 @@ namespace TestWeb2.Controllers
             {
                 ViewBag.Title = "Welcome";
                 ViewBag.Suggestions = db.VolunteerProjects.OrderBy(p => p.Time).Take(5);
+
             }
 
             return View();

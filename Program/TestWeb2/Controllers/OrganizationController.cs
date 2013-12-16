@@ -78,7 +78,6 @@ namespace TestWeb2.Controllers
         {
             ViewBag.IsAdmin = true;
             Admin currentUser = GetCurrentUser();
-            
             if (ModelState.IsValid && currentUser != null)
             {
                 project.Owner = currentUser.Association;
@@ -87,7 +86,7 @@ namespace TestWeb2.Controllers
                 return RedirectToAction("Index", "Organization");
             }
 
-            return RedirectToAction("index");
+            return View(project);
         }
 
         [Authorize]
