@@ -213,14 +213,14 @@ namespace TestWeb2.Controllers
             return View(project);
         }
 
-        public ActionResult CancelProject()
-        {
-            ViewBag.IsAdmin = true;
+        //public ActionResult CancelProject()
+        //{
+        //    ViewBag.IsAdmin = true;
 
-            return View();
-        }
+        //    return View();
+        //}
 
-        [HttpPost]
+        //[HttpPost]
         public ActionResult CancelProject(int id)
         {
             VolunteerProject project = db.VolunteerProjects.Find(id);

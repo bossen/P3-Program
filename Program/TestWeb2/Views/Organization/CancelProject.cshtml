@@ -6,11 +6,11 @@
 
 <h2>Cancel this Project</h2>
 
-<p>Are you sure you wish to cancel this project?</p>
+<p>Are you sure you wish to cancel project: @Model.Title ?</p>
 <table>
     <tr>
         <td>
-            @Html.ActionLink("Yes", "Index", new { id = Model.Id})
+            @Html.ActionLink("Yes", "Index", new { id = Model.Id })
             @Html.ActionLink("Cancel", "Index")
         </td>
         <td>
