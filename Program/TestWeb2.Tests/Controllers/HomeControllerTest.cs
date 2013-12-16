@@ -6,7 +6,6 @@ using System.Web.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TestWeb2;
 using TestWeb2.Controllers;
-using System.Diagnostics;
 using TestWeb2.Tests.Models;
 using System.Web.Routing;
 using System.Web;
@@ -87,7 +86,7 @@ namespace TestWeb2.Tests.Controllers
             HomeController controller = GetHomeController(new MocModelRepository(), new MocWebSecurity(false));
 
             // Act
-            ViewResult result = controller.Index() as ViewResult;
+            ActionResult result = controller.Index();
 
             // Assert
             Assert.AreEqual(0, result.ViewBag.Suggestion.Count());
@@ -110,20 +109,7 @@ namespace TestWeb2.Tests.Controllers
         }
 
         [TestMethod]
-        public void HomeOrganization()
-        {
-            // Arrange
-            HomeController controller = new HomeController();
-
-            // Act
-            ViewResult result = controller.Organization() as ViewResult;
-
-            // Assert
-            Assert.IsNotNull(result);
-        }
-
-        [TestMethod]
-        public void HomeAbout()
+        public void About()
         {
             // Arrange
             HomeController controller = new HomeController();

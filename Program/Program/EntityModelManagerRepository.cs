@@ -32,7 +32,6 @@ namespace Model
         {
             return db.Admins
                 .Include("Association")
-                .Include("_volunteerProjects")
                 .Include("Location").ToList();
         }
     }
