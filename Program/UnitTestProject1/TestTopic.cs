@@ -30,6 +30,7 @@ namespace UnitTestProject1
             int expected = 2;
             Assert.AreEqual(expected, output);
         }
+
         [TestMethod]
         public void TestPrint()
         {
