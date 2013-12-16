@@ -24,7 +24,7 @@ namespace UnitTestProject1
         [TestMethod]
         public void OrganizationMethods()
         {
-            string name = "name", email = "email", title = "title", description = "description";
+            string name = "name", email = "mail", title = "title", description = "description";
             DateTime time = DateTime.Now;
             Topic Topics = new Topic();
             Topics.Church = true;

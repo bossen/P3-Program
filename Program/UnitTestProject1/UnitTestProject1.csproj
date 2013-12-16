@@ -57,6 +57,7 @@
     <Compile Include="InviteTest.cs" />
     <Compile Include="OrganizationTest.cs" />
     <Compile Include="TestTopic.cs" />
+    <Compile Include="Utility.cs" />
     <Compile Include="VolunteerProjectTest.cs" />
     <Compile Include="WorkRequestTest.cs" />
     <Compile Include="VolunteerTest.cs" />
