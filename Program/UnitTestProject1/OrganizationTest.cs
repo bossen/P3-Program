@@ -22,14 +22,14 @@ namespace UnitTestProject1
         }
 
         [TestMethod]
-        public void OrganizationMethods()
+        public void TestCreateProject()
         {
-            string name = "name", email = "mail", title = "title", description = "description";
+            string title = "title", description = "description";
             DateTime time = DateTime.Now;
             Topic Topics = new Topic();
             Topics.Church = true;
             Location location = new Location("address", "city");
-            Organization o = new Organization(name, location, email);
+            Organization o = Utility.GetOrganization();
 
             //Test CreateProject
             o.CreateProject(title, location, time, Topics, description);
