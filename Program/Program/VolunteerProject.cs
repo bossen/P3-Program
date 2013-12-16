@@ -116,28 +116,29 @@ namespace Model
             }
         }
 
-        public double Calculate(VolunteerProject Volunteerproject, Volunteer Volunteer)
+        public double Calculate(VolunteerProject pos1, Volunteer pos2)
         {
-            double Radius = 6372.8; // Radius of the earth
+            double Radius = 6371; //Mean radius of the earth in kilometers
 
-            // Calculating Delta longitude and latitude in radians
-            double DeltaLat = ToRadians(Volunteer.Location.Lat - Volunteerproject.Location.Lat);
-            double DeltaLng = ToRadians(Volunteer.Location.Lng - Volunteerproject.Location.Lng);
+            //Finds the delta longitude and latitude of the positions.
+            double dLat = ToRadians(pos2.Location.Lat - pos1.Location.Lat);
+            double dLon = ToRadians(pos2.Location.Lng - pos1.Location.Lng);
+            
+            double lat1 = ToRadians(pos1.Location.Lat);
+            double lat2 = ToRadians(pos2.Location.Lat);
 
-            //Volunteerproject.Location.Lat = ToRadians(Volunteerproject.Location.Lat);
-            //Volunteerproject.Location.Lng = ToRadians(Volunteerproject.Location.Lat);
+            //Haversine Formula
+            double a = Math.Sin(dLat / 2) * Math.Sin(dLat / 2) +
+                    Math.Sin(dLon / 2) * Math.Sin(dLon / 2) * Math.Cos(lat1) * Math.Cos(lat2);
+            double c = 2 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a));
 
-            //Haversine formular
-            double SideA = Math.Sin(DeltaLat / 2) * Math.Sin(DeltaLat / 2) + Math.Cos(ToRadians(Volunteer.Location.Lat) / 2) * Math.Cos(ToRadians(Volunteerproject.Location.Lat) / 2) * Math.Sin(DeltaLng / 2) * Math.Sin(DeltaLng / 2);
-            double SideC = 2 * Math.Asin(Math.Min(1, Math.Sqrt(SideA)));
-
-            return Radius * SideC;
+            return Radius * c;
         }
 
         // Method for converting to radians.
         public static double ToRadians(double alpha)
         {
-            return Math.PI * alpha / 180;
+            return (Math.PI / 180) * alpha;
         }
         #endregion
     }

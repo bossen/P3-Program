@@ -26,20 +26,18 @@ namespace UnitTestProject1
         {
             string name = "name", email = "email", title = "title", description = "description";
             DateTime time = DateTime.Now;
-            List<Topic> preferences = new List<Topic>();
             Topic Topics = new Topic();
-            Topics.Name = "Church";
-            preferences.Add(Topics);
+            Topics.Church = true;
             Location location = new Location("address", "city");
             Organization o = new Organization(name, location, email);
 
             //Test CreateProject
-            o.CreateProject(title, location, time, preferences, description);
+            o.CreateProject(title, location, time, Topics, description);
 
             Assert.AreEqual(title, o.GetProjects()[0].Title);
             Assert.AreEqual(location, o.GetProjects()[0].Location);
             Assert.AreEqual(time, o.GetProjects()[0].Time);
-            Assert.AreEqual(preferences, o.GetProjects()[0].ProjectTopics);
+            Assert.AreEqual(Topics.Church, o.GetProjects()[0].ProjectTopics.Church);
             Assert.AreEqual(description, o.GetProjects()[0].Description);
             Assert.AreEqual(o, o.GetProjects()[0].Owner);
             Assert.AreEqual(true, o.GetProjects()[0].Signup);

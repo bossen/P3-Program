@@ -35,14 +35,14 @@ namespace UnitTestProject1
             string title = "title", description = "description";
             Location l = new Location(address, city);
             DateTime time = DateTime.Now;
-            List<Topic> preferences = new List<Topic>();
             Topic Topics = new Topic();
-            Topics.Name = "Church";
+            Topics.Church = true;
 
             Organization o = new Organization();
             Volunteer v = new Volunteer(username, name, new Location(address, city), mail);
-            VolunteerProject vp = new VolunteerProject(title, l, time, preferences, o, description, true);
-
+            VolunteerProject vp = new VolunteerProject(title, l, time, Topics, o, description, true);
+            
+            /* Obsolete Tests
             //Testing AddPreference
             Topic expected = Topics;
             v.AddPreference(Topics);
@@ -51,6 +51,7 @@ namespace UnitTestProject1
             //Testing RemovePreference - Automatically fails because AddPreference fails.
             v.RemovePreference(Topics);
             Assert.IsFalse(vp.ProjectTopics.Contains(expected));
+            */
         }
     }
 }
