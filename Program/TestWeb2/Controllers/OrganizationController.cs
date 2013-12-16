@@ -20,6 +20,12 @@ namespace TestWeb2.Controllers
         {
             ViewBag.IsAdmin = true;
             Admin currentUser = GetCurrentUser();
+
+            if (currentUser.Association == null)
+            {
+                return RedirectToAction("Index", "Admin");
+            }
+
             int id = currentUser.Association.Id;
             var organization = db.Organizations
                 .Include("VolunteerProjects")
@@ -52,6 +58,12 @@ namespace TestWeb2.Controllers
         {
             ViewBag.IsAdmin = true;
             Admin currentUser = GetCurrentUser();
+            if (currentUser.Association == null)
+            {
+                ViewBag.NotInOrganization = true;
+                return View();
+            }
+            ViewBag.NotInOrganization = false;
             int id = currentUser.Association.Id;
 
             Organization organization = db.Organizations
@@ -78,9 +90,19 @@ namespace TestWeb2.Controllers
         {
             ViewBag.IsAdmin = true;
             Admin currentUser = GetCurrentUser();
+            ModelState.Remove("ProjectTopics.TopicID");
             if (ModelState.IsValid && currentUser != null)
             {
                 project.Owner = currentUser.Association;
+
+                foreach (Volunteer volunteer in db.Volunteers)
+                {
+                    if (volunteer.VolunteerPreferences.CompareTopics(project.ProjectTopics) > 0)
+                    {
+                        volunteer.AddSuggestion(project);
+                    }
+                }
+
                 db.VolunteerProjects.Add(project);
                 db.SaveChanges();
                 return RedirectToAction("Index", "Organization");
@@ -108,6 +130,14 @@ namespace TestWeb2.Controllers
         public ActionResult Volunteers()
         {
             ViewBag.IsAdmin = true;
+            Admin currentUser = GetCurrentUser();
+            if (currentUser.Association == null)
+            {
+                ViewBag.NotInOrganization = true;
+                return View();
+            }
+
+            ViewBag.NotInOrganization = false;
             ViewBag.Title = "List of Volunteers";
             var volunteers = db.Volunteers;
             return View(volunteers.ToList());
@@ -149,6 +179,14 @@ namespace TestWeb2.Controllers
                 project.Description = volunteerproject.Description;
                 project.Location = volunteerproject.Location;
                 project.ProjectTopics = volunteerproject.ProjectTopics;
+
+                foreach (Volunteer volunteer in db.Volunteers)
+                {
+                    if (volunteer.VolunteerPreferences.CompareTopics(project.ProjectTopics) > 0)
+                    {
+                        volunteer.AddSuggestion(project);
+                    }
+                }
 
                 db.Entry(project).State = EntityState.Modified;
                 db.Entry(project.ProjectTopics).State = EntityState.Modified;

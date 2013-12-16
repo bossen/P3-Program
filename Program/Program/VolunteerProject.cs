@@ -105,7 +105,7 @@ namespace Model
         {
             using (var db = new VolunteerOrgContext())
             {
-                foreach (Volunteer volunteer in db.Volunteers)
+                foreach (Volunteer volunteer in db.Volunteers.Include("Location"))
                 {
                     if (CheckVolunteerSuggest(volunteer) == true)
                     {

@@ -57,6 +57,16 @@ namespace TestWeb2.Controllers
                 currentUser.Email = volunteer.Email;
                 currentUser.Location = volunteer.Location;
                 currentUser.VolunteerPreferences = volunteer.VolunteerPreferences;
+
+                foreach (VolunteerProject project in db.VolunteerProjects.Include("ProjectTopics"))
+                {
+                    int res = volunteer.VolunteerPreferences.CompareTopics(project.ProjectTopics);
+                    if (res > 0)
+                    {
+                        volunteer.AddSuggestion(project);
+                    }
+                }
+
                 db.Entry(currentUser).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
