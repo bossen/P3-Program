@@ -6,10 +6,26 @@
 
 @if(ViewBag.Authenticated == false)
 {
-    <h1>You're already in an Organization</h1>
-    <p>Go to your organization here: @Html.ActionLink("Your Organization", "Index", "Organization")</p>
-
+    <h1>Organizations</h1>
+    <table>
+    @foreach(var item in Model)
+    { 
     
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Creation)
+            </td>
+            <td>
+                @Html.ActionLink("Join", "JoinOrganization", new { id = item.Id })
+                @Html.ActionLink("Details", "Organization", new { id = item.Id }) 
+            </td>
+        </tr>
+    
+    }
+    </table>
 }
 @if(ViewBag.Authenticated == true)
 {
@@ -26,7 +42,6 @@
                 @Html.DisplayFor(modelItem => item.Creation)
             </td>
             <td>
-                @Html.ActionLink("Join", "JoinOrganization", new { id = item.Id })
                 @Html.ActionLink("Details", "Organization", new { id = item.Id }) 
             </td>
         </tr>

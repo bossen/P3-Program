@@ -33,13 +33,7 @@ namespace TestWeb2.Controllers
                 .Where(o => o.Id == id)
                 .FirstOrDefault();
 
-            if (currentUser.Association == null)
-            {
-                return RedirectToAction("Index", "Admin");
-            }
-                
-            else
-            {
+           
                 if (currentUser.Association.VolunteerProjects == null)
                 {
                     ViewBag.projectNull = true;
@@ -49,7 +43,7 @@ namespace TestWeb2.Controllers
                     ViewBag.projectNull = false;
                 }
                 return View(organization);
-            }
+            
             
         }
 
@@ -204,6 +198,24 @@ namespace TestWeb2.Controllers
         public ActionResult CancelProject()
         {
             ViewBag.IsAdmin = true;
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CancelProject(int id)
+        {
+            VolunteerProject project = db.VolunteerProjects.Find(id);
+            db.VolunteerProjects.Remove(project);
+            db.SaveChanges();
+            return RedirectToAction("Index", "Organization");
+        }
+
+        public ActionResult About()
+        {
+            ViewBag.IsAdmin = true;
+            ViewBag.Message = "Your app description page.";
+
             return View();
         }
 
