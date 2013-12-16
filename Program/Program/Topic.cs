@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Reflection;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Model
 {
@@ -16,6 +17,7 @@ namespace Model
 
         #region Properties
         [Key]
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int TopicID { get; set; }
         [Display(Name="Festival")]
         public bool Festival { get; set; }

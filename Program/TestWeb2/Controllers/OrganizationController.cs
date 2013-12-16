@@ -78,9 +78,19 @@ namespace TestWeb2.Controllers
         {
             ViewBag.IsAdmin = true;
             Admin currentUser = GetCurrentUser();
+            ModelState.Remove("ProjectTopics.TopicID");
             if (ModelState.IsValid && currentUser != null)
             {
                 project.Owner = currentUser.Association;
+
+                foreach (Volunteer volunteer in db.Volunteers)
+                {
+                    if (volunteer.VolunteerPreferences.CompareTopics(project.ProjectTopics) > 0)
+                    {
+                        volunteer.AddSuggestion(project);
+                    }
+                }
+
                 db.VolunteerProjects.Add(project);
                 db.SaveChanges();
                 return RedirectToAction("Index", "Organization");
@@ -149,6 +159,14 @@ namespace TestWeb2.Controllers
                 project.Description = volunteerproject.Description;
                 project.Location = volunteerproject.Location;
                 project.ProjectTopics = volunteerproject.ProjectTopics;
+
+                foreach (Volunteer volunteer in db.Volunteers)
+                {
+                    if (volunteer.VolunteerPreferences.CompareTopics(project.ProjectTopics) > 0)
+                    {
+                        volunteer.AddSuggestion(project);
+                    }
+                }
 
                 db.Entry(project).State = EntityState.Modified;
                 db.Entry(project.ProjectTopics).State = EntityState.Modified;
