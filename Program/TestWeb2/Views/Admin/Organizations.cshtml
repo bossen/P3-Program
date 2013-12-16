@@ -4,14 +4,14 @@
     ViewBag.Title = "Organizations";
 }
 
-@if(ViewBag.Authenticated)
+@if(ViewBag.Authenticated == false)
 {
     <h1>You're already in an Organization</h1>
     <p>Go to your organization here: @Html.ActionLink("Your Organization", "Index", "Organization")</p>
 
     
 }
-@if(!ViewBag.Authenticated)
+@if(ViewBag.Authenticated == true)
 {
     <h1>Organizations</h1>
     <table>

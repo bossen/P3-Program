@@ -1,9 +1,11 @@
 ﻿@model Model.VolunteerProject
 
+<script src="@Url.Content("/social/facebookshare.js")" type="text/javascript"></script>
+
 <div id="content">
     <hgroup class="title">
         <h1>@Html.DisplayFor(model => model.Title)</h1>
-        <h2>Details</h2>
+        <div class="fb-share-button" data-href="http://www.knowlee.dk/Home/Project/@Model.Id" data-width="20" data-type="button_count"></div>
     </hgroup>
     @if (Model.Signup)
     {
@@ -13,6 +15,7 @@
     {
         <strong>Not allowed to signup</strong>
     }
+    <h3>Details:</h3>
     <table>
         <tr>
             <td>
