@@ -41,17 +41,8 @@ namespace UnitTestProject1
             Organization o = new Organization();
             Volunteer v = new Volunteer(username, name, new Location(address, city), mail);
             VolunteerProject vp = new VolunteerProject(title, l, time, Topics, o, description, true);
-            
-            /* Obsolete Tests
-            //Testing AddPreference
-            Topic expected = Topics;
-            v.AddPreference(Topics);
-            //Assert.IsTrue(vp.ProjectTopics.Contains(expected));
 
-            //Testing RemovePreference - Automatically fails because AddPreference fails.
-            v.RemovePreference(Topics);
-            Assert.IsFalse(vp.ProjectTopics.Contains(expected));
-            */
+            //Insert a test here!
         }
     }
 }
