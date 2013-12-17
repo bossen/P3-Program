@@ -218,14 +218,6 @@ namespace TestWeb2.Controllers
             return View(project);
         }
 
-        //public ActionResult CancelProject()
-        //{
-        //    ViewBag.IsAdmin = true;
-
-        //    return View();
-        //}
-
-        //[HttpPost]
         public ActionResult AcceptVolunteer(int id)
         {
             Match match = db.Matches
