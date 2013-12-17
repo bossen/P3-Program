@@ -56,8 +56,8 @@ namespace Model.Migrations
                     Location = new Location("Torvegade 3", "Aalborg"),
                     Time = DateTime.Parse("2013-12-25"),
                     Description = "Vi søger to fodbold trænere til dette hold.",
-                    ProjectTopics = new Topic { Sport = true }
-
+                    ProjectTopics = new Topic { Sport = true },
+                    Signup = true
                 },
 
                 new VolunteerProject
@@ -68,8 +68,8 @@ namespace Model.Migrations
                     Location = new Location("Christansgade 10", "Aalborg"),
                     Time = DateTime.Parse("2013-12-25"),
                     Description = "Det er her det sker.",
-                    ProjectTopics = new Topic { Church = true }
-
+                    ProjectTopics = new Topic { Church = true },
+                    Signup = true
                 },
 
                 new VolunteerProject
@@ -80,8 +80,8 @@ namespace Model.Migrations
                     Location = new Location("Lollandsgade 17", "Aalborg"),
                     Time = DateTime.Parse("2013-12-25"),
                     Description = "Hjælp jeg er en fisk.",
-                    ProjectTopics = new Topic { Sport = true }
-
+                    ProjectTopics = new Topic { Sport = true },
+                    Signup = true
                 }
             };
 
