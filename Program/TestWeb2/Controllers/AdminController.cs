@@ -139,25 +139,31 @@ namespace TestWeb2.Controllers
         public ActionResult JoinOrganization(int id)
         {
             ViewBag.IsAdmin = true;
-            Admin currentUser = GetCurrentUser();
+            Admin currentUser = OldGetCurrentUser();
             Organization organization = db.Organizations.Find(id);
 
-            //currentUser.AssociateOrganization(organization);
-            //db.Entry(currentUser).State = EntityState.Modified;
-            //db.SaveChanges();
+            currentUser.AssociateOrganization(organization);
+            db.Entry(currentUser).State = EntityState.Modified;
+            db.SaveChanges();
             return View(organization);
         }
-        [HttpPost]
-        public ActionResult JoinOrganization(Organization organization)
+        //[HttpPost]
+        //public ActionResult JoinOrganization(Organization organization)
+        //{
+        //    ViewBag.IsAdmin = true;
+        //    Admin currentUser = GetCurrentUser();
+
+        //    currentUser.AssociateOrganization(organization);
+        //    _repository.CreateOrganization(organization);
+        //    _repository.AdminEdited(currentUser);
+
+        //    return RedirectToAction("index", "Organization");
+        //}
+
+        private Admin OldGetCurrentUser()
         {
-            ViewBag.IsAdmin = true;
-            Admin currentUser = GetCurrentUser();
-
-            currentUser.AssociateOrganization(organization);
-            _repository.CreateOrganization(organization);
-            _repository.AdminEdited(currentUser);
-
-            return RedirectToAction("index", "Organization");
+            string currentUsername = WebSecurity.CurrentUserName.ToLower();
+            return db.Admins.Where(a => a.UserName.ToLower() == currentUsername).FirstOrDefault();
         }
 
         private Admin GetCurrentUser()
