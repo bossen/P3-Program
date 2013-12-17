@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    public class EntityModelManagerRepository : Model.IModelRepository 
+    public class EntityModelManagerRepository : Model.IModelRepository
     {
         private VolunteerOrgContext db = new VolunteerOrgContext();
         public IEnumerable<VolunteerProject> GetAllProjects()
@@ -43,6 +43,13 @@ namespace Model
 
         }
 
+        public IEnumerable<Organization> GetAllOrganizations()
+        {
+            return db.Organizations
+                .Include("VolunteerProjects")
+                .Include("Location").ToList();
+        }
+
         public VolunteerProject GetProject(int id)
         {
             return db.VolunteerProjects
@@ -52,6 +59,24 @@ namespace Model
                 .Include("Matches")
                 .Include("Matches.Volunteer")
                 .Where(v => v.Id == id)
+                .FirstOrDefault();
+        }
+
+        public Organization GetOrganization(int id)
+        {
+            return db.Organizations
+                .Include("VolunteerProjects")
+                .Include("Location").FirstOrDefault(o => o.Id == id);
+        }
+
+        public Volunteer GetVolunteer(int id)
+        {
+            return db.Volunteers
+                .Include("Matches")
+                .Include("Matches.Project")
+                .Include("Location")
+                .Include("VolunteerPreferences")
+                .Where(v => v.ID == id)
                 .FirstOrDefault();
         }
     }

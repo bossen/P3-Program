@@ -36,7 +36,30 @@ namespace TestWeb2.Tests.Models
         {
             return _matches;
         }
+
+        public IEnumerable<Organization> GetAllOrganizations()
+        {
+            return _organizations;
+        }
         #endregion
+
+        #region GetOne...
+        public Model.VolunteerProject GetProject(int id)
+        {
+            return _projects.FirstOrDefault(p => p.Id == id);
+        }
+
+        public Organization GetOrganization(int id)
+        {
+            return _organizations.FirstOrDefault(o => o.Id == id);
+        }
+
+        public Volunteer GetVolunteer(int id)
+        {
+            return _vounteers.FirstOrDefault(v => v.ID == id);
+        }
+        #endregion
+
 
         #region Create Methods
         public void CreateProject(VolunteerProject project)
@@ -44,10 +67,7 @@ namespace TestWeb2.Tests.Models
             _projects.Add(project);
         }
 
-        public Model.VolunteerProject GetProject(int id)
-        {
-            return _projects.FirstOrDefault(p => p.Id == id);
-        }
+
 
         public void CreateAdmin(Admin admin)
         {
@@ -58,7 +78,7 @@ namespace TestWeb2.Tests.Models
         {
             _organizations.Add(organization);
         }
-        
+
         public void CreateVolunteer(Volunteer volunteer)
         {
             _vounteers.Add(volunteer);

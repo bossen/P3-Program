@@ -88,11 +88,12 @@ namespace TestWeb2.Controllers
 
         public ActionResult Organization(int id = 0)
         {
-            var organization = db.Organizations
-                .Include("VolunteerProjects")
-                .Include("Location")
-                .Where(o => o.Id == id)
-                .FirstOrDefault();
+            //var organization = db.Organizations
+            //    .Include("VolunteerProjects")
+            //    .Include("Location")
+            //    .Where(o => o.Id == id)
+            //    .FirstOrDefault();
+            Organization organization = _repository.GetOrganization(id);
 
             if (organization == null)
                 return HttpNotFound();
@@ -103,8 +104,8 @@ namespace TestWeb2.Controllers
         public ActionResult Organizations()
         {
             ViewBag.Title = "Organizations";
-            var organizations = db.Organizations.Include("Location");
-            return View(organizations.ToList());
+            var organizations = _repository.GetAllOrganizations();
+            return View(organizations);
         }
 
         /*public ActionResult JoinProject(int id)
@@ -122,14 +123,14 @@ namespace TestWeb2.Controllers
 
         public ActionResult Volunteer(int id = 0)
         {
-            Volunteer volunteer = db.Volunteers
-                .Include("Matches")
-                .Include("Matches.Project")
-                .Include("Location")
-                .Include("VolunteerPreferences")
-                .Where(v => v.ID == id)
-                .FirstOrDefault();
-
+            //Volunteer volunteer = db.Volunteers
+            //    .Include("Matches")
+            //    .Include("Matches.Project")
+            //    .Include("Location")
+            //    .Include("VolunteerPreferences")
+            //    .Where(v => v.ID == id)
+            //    .FirstOrDefault();
+            Volunteer volunteer = _repository.GetVolunteer(id);
             if (volunteer == null)
                 return HttpNotFound();
 
@@ -139,14 +140,13 @@ namespace TestWeb2.Controllers
         public ActionResult Volunteers()
         {
             ViewBag.Title = "Volunteers";
-            var volunteers = db.Volunteers
-                .Include("Location");
-            return View(volunteers.ToList());
+            var volunteers = _repository.GetAllVolunteers();
+            return View(volunteers);
         }
 
         public ActionResult About()
         {
-            
+
             ViewBag.Message = "Your app description page.";
 
             return View();
