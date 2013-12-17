@@ -26,11 +26,6 @@ namespace TestWeb2.Controllers
             return View(currentUser);
         }
 
-        public ActionResult Create()
-        {
-            return View();
-        }
-
         public ActionResult Edit()
         {
             ViewBag.Title = "Edit";
@@ -169,11 +164,6 @@ namespace TestWeb2.Controllers
             var volunteers = db.Volunteers
                 .Include("Location");
             return View(volunteers.ToList());
-        }
-
-        public ActionResult Dashboard()
-        {
-            return View();
         }
 
         private Volunteer GetCurrentUser()
