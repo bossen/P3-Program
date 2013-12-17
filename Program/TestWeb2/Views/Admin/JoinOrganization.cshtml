@@ -5,7 +5,6 @@
 }
 
 
-
 <table>
     <tr>
         <td>
@@ -18,8 +17,10 @@
     </tr>
     <tr>
         <td>
-            <button onclick="location.href='@Url.Action("Index", "Organization")';return false;">Join</button>
-            <button onclick="location.href='@Url.Action("Organizations", "Admin")';return false;">Cancel</button>
+            @using (Html.BeginForm()) {
+                <button type="submit" >Join</button>
+                <button onclick="location.href='@Url.Action("Index")';return false;">Cancel</button>
+            }
         </td>
     </tr>
 </table>

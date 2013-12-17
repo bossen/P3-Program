@@ -60,11 +60,13 @@ namespace TestWeb2.Controllers
             if (ModelState.IsValid && currentUser != null)
             {
                 
-                db.Organizations.Add(organization);
+                //db.Organizations.Add(organization);
+                _repository.CreateOrganization(organization);
                 currentUser.AssociateOrganization(organization);
+                _repository.AdminEdited(currentUser);
                 //db.Entry(organization).State = EntityState.Added;
-                db.Entry(currentUser).State = EntityState.Modified;
-                db.SaveChanges();
+                //db.Entry(currentUser).State = EntityState.Modified;
+                //db.SaveChanges();
                 return RedirectToAction("Index", "Organization");
             }
 
@@ -140,10 +142,22 @@ namespace TestWeb2.Controllers
             Admin currentUser = GetCurrentUser();
             Organization organization = db.Organizations.Find(id);
 
-            currentUser.AssociateOrganization(organization);
-            db.Entry(currentUser).State = EntityState.Modified;
-            db.SaveChanges();
+            //currentUser.AssociateOrganization(organization);
+            //db.Entry(currentUser).State = EntityState.Modified;
+            //db.SaveChanges();
             return View(organization);
+        }
+        [HttpPost]
+        public ActionResult JoinOrganization(Organization organization)
+        {
+            ViewBag.IsAdmin = true;
+            Admin currentUser = GetCurrentUser();
+
+            currentUser.AssociateOrganization(organization);
+            _repository.CreateOrganization(organization);
+            _repository.AdminEdited(currentUser);
+
+            return RedirectToAction("index", "Organization");
         }
 
         private Admin GetCurrentUser()

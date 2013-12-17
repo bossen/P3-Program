@@ -18,6 +18,11 @@ namespace Model
         VolunteerProject GetProject(int id);
         Organization GetOrganization(int id);
         Volunteer GetVolunteer(int id);
+
+        void CreateOrganization(Organization organization);
+
+        void VolunteerEdited(Volunteer volunteer);
+        void AdminEdited(Admin admin);
     }
 
 }

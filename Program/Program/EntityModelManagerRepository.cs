@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.ModelBinding;
 
 
 
@@ -78,6 +80,24 @@ namespace Model
                 .Include("VolunteerPreferences")
                 .Where(v => v.ID == id)
                 .FirstOrDefault();
+        }
+
+        public void CreateOrganization(Organization organization)
+        {
+            db.Organizations.Add(organization);
+        }
+
+        public void VolunteerEdited(Volunteer volunteer)
+        {
+            db.Entry(volunteer).State = EntityState.Modified;
+            db.SaveChanges();
+        }
+        public void AdminEdited(Admin admin)
+        {
+            
+                db.Entry(admin).State = EntityState.Modified;
+                db.SaveChanges();
+            
         }
     }
 }
