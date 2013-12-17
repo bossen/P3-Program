@@ -3,6 +3,8 @@ using System.Text;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Model;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace UnitTestProject1
 {
@@ -61,10 +63,13 @@ namespace UnitTestProject1
             Volunteer v = (Utility.GetVolunteer());
             VolunteerProject vp = (Utility.GetVolunteerProject());
 
-            v.AddWorkRequest(vp);
-            v.AddWorkRequest(vp).AcceptMatch();
+            v.AddSuggestion(vp);
+            v.AddSuggestion(vp).AcceptMatch();
+            
+            List<Match> list = new List<Match>();
+            list = v.Matches.ToList();
 
-            CollectionAssert.Contains(v.Matches, v.GetAcceptedMatches());
+            CollectionAssert.Contains(v.Matches.ToList(), list);
         }
     }
 }
