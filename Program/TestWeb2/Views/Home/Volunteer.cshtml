@@ -61,6 +61,8 @@
         <table>
             @foreach (var match in Model.Matches)
             {
+                if (match.Accepted == true)
+                {
                 <tr>
                     <td>
                         @Html.DisplayFor(modelItem => match.Project.Title)
@@ -75,6 +77,7 @@
                         @Html.ActionLink("details", "project", new { id = match.Project.Id })
                     </td>
                 </tr>
+                }
             }
         </table>
 

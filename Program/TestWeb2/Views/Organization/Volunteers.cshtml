@@ -1,24 +1,49 @@
 ﻿@model IEnumerable<Model.Volunteer>
 
 @if (ViewBag.NotInOrganization == true)
-{ 
+{
     <p>You're not part of an organization yet, please go @Html.ActionLink("Here", "Index", "Admin")</p>
 }
 @if (ViewBag.NotInOrganization == false)
 {
-<hgroup class="title">
-    <h1>@ViewBag.Title.</h1>
-    <h2>@ViewBag.Message</h2>
-</hgroup>
-<ul>
-    @foreach (var item in Model)
-    {
-        <li>
-            @Html.DisplayFor(modelItem => item.UserName)
-            @Html.DisplayFor(modelItem => item.Name)
-            @Html.DisplayFor(modelItem => item.Location)
-            @Html.ActionLink("details", "volunteer", new { id = item.ID })
-        </li>
-    }
-</ul>
+    <div id="content">
+        <hgroup class="title">
+            <h1>@ViewBag.Title</h1>
+            <h2>listing</h2>
+        </hgroup>
+        <table>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.ActionLink("details", "volunteer", new { id = item.ID })
+                    </td>
+                </tr>
+            }
+        </table>
+
+        @section map
+        {
+            @if (Model.First().Location != null)
+            {
+                <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyACnSnrj-Vzj_6ZEeVpAFTtuuXOsXVRaO0&sensor=true"></script>
+                <script type="text/javascript" src="@Url.Content("~/Map/map.js")"></script>
+                <link href="~/Map/map.css" rel="stylesheet" />
+                foreach (var volunteer in Model)
+                {
+                    if (volunteer.Location != null)
+                    {
+                        <script type="text/javascript">setTimeout(function () { InsertMarker("@volunteer.Location.GetAddress()"); }, 1000);</script>
+                    }
+                }
+            }
+        }
+    </div>
+    <div id="map-canvas" />
 }
