@@ -44,6 +44,11 @@ namespace Model
             this.Accepted = true;
         }
 
+        public void LeaveMatch()
+        {
+            this.Accepted = false;
+        }
+
         public void SetScore()
         {
             double calc = this.Project.Calculate(Project, Volunteer);

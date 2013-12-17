@@ -56,7 +56,7 @@
                 @Html.DisplayNameFor(model => model.ProjectTopics)
             </td>
             <td>
-                @Model.VolunteerPreferences.Print()
+                @Model.ProjectTopics.Print()
             </td>
         </tr>
         <tr>
@@ -118,11 +118,11 @@
                     <td>
                         @Html.DisplayFor(modelItem => match.Volunteer.Name)
                     </td>
-                    @*<td>
-                        @Html.ActionLink("details", "volunteer", new { id = match.Volunteer.ID })
-                    </td>*@
                     <td>
-                        @Html.ActionLink("accept", "acceptvolunteer", new { id = match.Id })
+                        @Html.ActionLink("details", "volunteer", new { id = match.Volunteer.ID })
+                    </td>
+                    <td>
+                        @Html.ActionLink("accept", "acceptvolunteer", new { id = match.Volunteer.ID })
                     </td>
                 </tr>
             }

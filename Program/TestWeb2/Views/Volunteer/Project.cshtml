@@ -9,7 +9,14 @@
     </hgroup>
     @if (Model.Signup)
     {
-        @Html.ActionLink((string)ViewBag.Status, "JoinProject", new { id = Model.Id })
+        if ((string)ViewBag.Status == "leave")
+        {
+            @Html.ActionLink((string)ViewBag.Status, "LeaveProject", new { id = Model.Id })
+        }
+        else
+        {
+            @Html.ActionLink((string)ViewBag.Status, "JoinProject", new { id = Model.Id })
+        }
     }
     else
     {
@@ -72,17 +79,17 @@
         {
             if (match.Accepted == true)
             {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => match.Volunteer.UserName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => match.Volunteer.Name)
-                </td>
-                <td>
-                    @Html.ActionLink("details", "volunteer", new { id = match.Id })
-                </td>
-            </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => match.Volunteer.UserName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => match.Volunteer.Name)
+                    </td>
+                    <td>
+                        @Html.ActionLink("details", "volunteer", new { id = match.Id })
+                    </td>
+                </tr>
             }
         }
     </table>

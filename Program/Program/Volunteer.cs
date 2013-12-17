@@ -46,6 +46,11 @@ namespace Model
             {
                 if (match.Project == project)
                 {
+                    if (match.GetType() == typeof(Invite))
+                    {
+                        match.AcceptMatch();
+                        return match;
+                    }
                     if (match.GetType() == typeof(WorkRequest))
                     {
                         return match;
@@ -60,6 +65,29 @@ namespace Model
             Matches.Add(newWorkRequest);
 
             return newWorkRequest;
+        }
+
+        public Match AddInvite(VolunteerProject project)
+        {
+            foreach (Match match in Matches)
+            {
+                if (match.Project == project)
+                {
+                    if (match.GetType() == typeof(WorkRequest))
+                    {
+                        match.AcceptMatch();
+                        return match;
+                    }
+
+                    if (match.GetType() == typeof(Invite))
+                        return match;
+                }
+            }
+
+            Invite newInvite = new Invite(this, project);
+            Matches.Add(newInvite);
+
+            return newInvite;
         }
 
         public Suggestion AddSuggestion(VolunteerProject project)
@@ -119,9 +147,10 @@ namespace Model
             foreach (Match match in Matches)
             {
                 if (match.Project == project)
-                    return match is Invite ? "invited" :
+                    return match.Accepted == true ? "leave" :
+                        match is Invite ? "accept invite" :
                         match is WorkRequest ? "work requested" :
-                        match is Suggestion ? "suggested" :
+                        match is Suggestion ? "join suggested" :
                         "join";
             }
             return "join";
