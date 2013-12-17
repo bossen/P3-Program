@@ -10,6 +10,7 @@
 }
 @if (ViewBag.NotInOrganization == false)
 {
+<div id="content">
 <h2>All Projects</h2>
 
 <table border="1">
@@ -46,4 +47,23 @@
 }
 
 </table>
+
+@section map
+        {
+        @if (Model.First().Location != null)
+        {
+            <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyACnSnrj-Vzj_6ZEeVpAFTtuuXOsXVRaO0&sensor=true"></script>
+            <script type="text/javascript" src="@Url.Content("~/Map/map.js")"></script>
+            <link href="~/Map/map.css" rel="stylesheet" />
+            foreach (var project in Model)
+            {
+                if (project.Location.City != null)
+                {
+                    <script type="text/javascript">setTimeout(function () { InsertMarker('@project.Location.GetAddress()', '@project.Location.GetAddress()', '@Html.ActionLink(project.Title, "project", new { id = project.Id })'); }, 1000);</script>
+                }
+            }
+        }
+    }
+</div>
+<div id="map-canvas" />
 }

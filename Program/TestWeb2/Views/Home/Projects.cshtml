@@ -3,7 +3,6 @@
 <div id="content">
     <hgroup class="title">
         <h1>@ViewBag.Title</h1>
-        <h2>listing</h2>
     </hgroup>
     <table>
         @foreach (var item in Model)
@@ -23,7 +22,9 @@
                 </td>
             </tr>
         }
-    </table>@section map
+    </table>
+
+@section map
         {
         @if (Model.First().Location != null)
         {
@@ -32,9 +33,9 @@
             <link href="~/Map/map.css" rel="stylesheet" />
             foreach (var project in Model)
             {
-                if (project.Location != null)
+                if (project.Location.City != null)
                 {
-                    <script type="text/javascript">setTimeout(function () { InsertMarker("@project.Location.GetAddress()"); }, 1000);</script>
+                    <script type="text/javascript">setTimeout(function () { InsertMarker('@project.Location.GetAddress()', '@project.Location.GetAddress()', '@Html.ActionLink(project.Title, "project", new { id = project.Id })'); }, 1000);</script>
                 }
             }
         }

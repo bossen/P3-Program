@@ -17,7 +17,7 @@ function GetLocation(address) {
 
 //Function for adding markers
 function InsertMarker(address, name, infostring) {
-
+    infostring = '<span min-width="20px">' + infostring + '</span>';
     //Call the geocode function
     GetGeocode(address, function (LocationData) {
 
@@ -85,12 +85,12 @@ function AddMarkers(location, name, infostring) {
         info: infostring
     })
 
-    var bounds = new google.maps.LatLngBounds();
-    for (i = 0; i < MarkerArray.length; i++) {
-        bounds.extend(MarkerArray[i].getPosition());
-    }
+    //var bounds = new google.maps.LatLngBounds();
+    //for (i = 0; i < MarkerArray.length; i++) {
+    //    bounds.extend(MarkerArray[i].getPosition());
+    //}
 
-    map.fitBounds(bounds);
+    //map.fitBounds(bounds);
 
     google.maps.event.addListener(marker, "click", function () {
         infoWindow.setContent(this.info);

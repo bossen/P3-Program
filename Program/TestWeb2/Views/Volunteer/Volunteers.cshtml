@@ -3,7 +3,6 @@
 <div id="content">
     <hgroup class="title">
         <h1>@ViewBag.Title</h1>
-        <h2>listing</h2>
     </hgroup>
     <table>
         @foreach (var item in Model)
@@ -31,11 +30,11 @@
             <link href="~/Map/map.css" rel="stylesheet" />
             foreach (var volunteer in Model)
             {
-                if(volunteer.Location != null)
+                if (volunteer.Location.City != null)
                 {
-                    <script type="text/javascript">setTimeout(function () { InsertMarker("@volunteer.Location.GetAddress()"); }, 1000);</script>
+                    <script type="text/javascript">setTimeout(function () { InsertMarker('@volunteer.Location.GetAddress()', '@volunteer.Location.GetAddress()', '@Html.ActionLink(volunteer.UserName, "volunteer", new { id = volunteer.ID })'); }, 1000);</script>
                 }
-             }
+            }
         }
     }
 </div>
