@@ -6,6 +6,12 @@
             <h1>@Html.DisplayFor(model => model.UserName)</h1>
             <h2>Details</h2>
         </hgroup>
+        <select onchange="window.open(this.value, '', '');">
+            @foreach (VolunteerProject project in ViewBag.Projects)
+            {
+                <option value="@Html.ActionLink("link", "invitevolunteer", new { volid = Model.ID, proid = project.Id })">@project.Title</option>
+            }
+        </select>
 
         <table>
             <tr>

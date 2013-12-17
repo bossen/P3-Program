@@ -124,7 +124,7 @@ namespace TestWeb2.Controllers
             {
                 ViewBag.Authenticated = false;
             }
-            return View(db.Organizations.ToList());
+            return View(db.Organizations.Include("Location").ToList());
         }
 
         public ActionResult Organization(int id)
