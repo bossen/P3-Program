@@ -34,7 +34,8 @@ namespace Model
         {
             return db.Admins
                 .Include("Association")
-                .Include("Location").ToList();
+                .Include("Location")
+                .Include("Association.VolunteerProjects").ToList();
         }
 
         public IEnumerable<Match> GetAllMatches()

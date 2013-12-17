@@ -140,6 +140,17 @@ namespace TestWeb2.Controllers
             return View(volunteers.ToList());
         }
 
+        public ActionResult InviteVolunteer(int volid, int proid)
+        {
+            Volunteer volunteer = db.Volunteers.Find(volid);
+            VolunteerProject project = db.VolunteerProjects.Find(proid);
+            Invite newInvite = new Invite(volunteer, project);
+            db.Entry(newInvite).State = EntityState.Added;
+            db.Entry(volunteer).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Volunteer", "Organization", new { id = volunteer.ID });
+        }
+
         public ActionResult EditProject(int id)
         {
             ViewBag.IsAdmin = true;
