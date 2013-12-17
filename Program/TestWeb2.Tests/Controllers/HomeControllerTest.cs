@@ -10,6 +10,7 @@ using TestWeb2.Tests.Models;
 using System.Web.Routing;
 using System.Web;
 using System.Security.Principal;
+using Model;
 
 namespace TestWeb2.Tests.Controllers
 {
@@ -18,7 +19,7 @@ namespace TestWeb2.Tests.Controllers
     {
 
         #region Non test methods
-        private static HomeController GetHomeController(Model.IModelRepository repository, TestWeb2.Models.ISecurityWrap security)
+        private static HomeController GetHomeController(IModelRepository repository, TestWeb2.Models.ISecurityWrap security)
         {
             HomeController controller = new HomeController(repository, security);
 
@@ -49,66 +50,66 @@ namespace TestWeb2.Tests.Controllers
             }
         }
 
-        private Model.VolunteerProject GetAProject() 
+        private VolunteerProject GetAProject() 
         {
             return GetAProject("Project title",  "A project"); 
         }
 
-        private Model.VolunteerProject GetAProject(string title, string description) 
+        private VolunteerProject GetAProject(string title, string description) 
         {
-            return GetAProject(title, new Model.Location("street", "City"),
-                DateTime.Parse("1996-6-6"), new Model.Topic() { Church = true }, null, description, false);
+            return GetAProject(title, new Location("street", "City"),
+                DateTime.Parse("1996-6-6"), new Topic() { Church = true }, null, description, false);
         }
 
-        private Model.VolunteerProject GetAProject(string title, Model.Location location, 
-            DateTime time, Model.Topic topics, Model.Organization owner, string description, bool signup)
+        private VolunteerProject GetAProject(string title, Location location, 
+            DateTime time, Topic topics, Organization owner, string description, bool signup)
         {
-            return new Model.VolunteerProject(title, location, time, topics, owner, description, signup);
+            return new VolunteerProject(title, location, time, topics, owner, description, signup);
         }
 
-        private Model.Admin GetAAdmin()
+        private Admin GetAAdmin()
         {
             return GetAAdmin("Username");
         }
-        private Model.Admin GetAAdmin(string username)
+        private Admin GetAAdmin(string username)
         {
-            return GetAAdmin(username, "Name", new Model.Location("streeet", "city"), "EMAIL@host.dk");
+            return GetAAdmin(username, "Name", new Location("streeet", "city"), "EMAIL@host.dk");
         }
 
-        private Model.Admin GetAAdmin(string username, string name, Model.Location location, string email)
+        private Admin GetAAdmin(string username, string name, Location location, string email)
         {
-            return new Model.Admin(username, name, location, email);
+            return new Admin(username, name, location, email);
         }
 
-        private Model.Volunteer GetAVolunteer()
+        private Volunteer GetAVolunteer()
         {
             return GetAVolunteer("Username");
         }
-        private Model.Volunteer GetAVolunteer(string username)
+        private Volunteer GetAVolunteer(string username)
         {
-            return GetAVolunteer(username, "Name", new Model.Location("streeet", "city"), "EMAIL@host.dk");
+            return GetAVolunteer(username, "Name", new Location("streeet", "city"), "EMAIL@host.dk");
         }
 
-        private Model.Volunteer GetAVolunteer(string username, string name, Model.Location location, string email)
+        private Volunteer GetAVolunteer(string username, string name, Location location, string email)
         {
-            return new Model.Volunteer(username, name, location, email);
+            return new Volunteer(username, name, location, email);
         }
 
-        private Model.Organization GetAOrganization()
+        private Organization GetAOrganization()
         {
             return GetAOrganization("Some organization", "some@email.dk");
         }
 
-        private Model.Organization GetAOrganization(string name, string email)
+        private Organization GetAOrganization(string name, string email)
         {
             return GetAOrganization(name, DateTime.Parse("1996-04-02"),
-                new Model.Location("street", "chitty"), email);
+                new Location("street", "chitty"), email);
         }
 
 
-        private Model.Organization GetAOrganization(string name, DateTime creation, Model.Location location, string email) 
+        private Organization GetAOrganization(string name, DateTime creation, Location location, string email) 
         {
-            return new Model.Organization() { Name = name, Creation = creation, Email = email, Location = location };
+            return new Organization() { Name = name, Creation = creation, Email = email, Location = location };
         }
         #endregion
 
@@ -123,8 +124,8 @@ namespace TestWeb2.Tests.Controllers
             ViewResult result = controller.Projects() as ViewResult;
 
             // Assert
-            var model = (IEnumerable<Model.VolunteerProject>)result.ViewData.Model;
-            CollectionAssert.AreEqual(new List<Model.VolunteerProject>(), model.ToList());
+            var model = (IEnumerable<VolunteerProject>)result.ViewData.Model;
+            CollectionAssert.AreEqual(new List<VolunteerProject>(), model.ToList());
         }
 
         [TestMethod]
@@ -132,17 +133,17 @@ namespace TestWeb2.Tests.Controllers
         {
             // Arrange
             MocModelRepository repository = new MocModelRepository();
-            Model.VolunteerProject project = GetAProject();
-            Model.VolunteerProject project2 = GetAProject("Another Project", "Just a test");
+            VolunteerProject project = GetAProject("Some Project", "Testing testing");
+            VolunteerProject project2 = GetAProject("Another Project", "Just a test");
             repository.CreateProject(project);
-            repository.CreateProject(project);
+            repository.CreateProject(project2);
             HomeController controller = GetHomeController(repository, new MocWebSecurity(false));
 
             // Act
             ViewResult result = controller.Projects() as ViewResult;
 
             // Assert
-            var model = (IEnumerable<Model.VolunteerProject>)result.ViewData.Model;
+            var model = (IEnumerable<VolunteerProject>)result.ViewData.Model;
             CollectionAssert.Contains(model.ToList(),project);
             CollectionAssert.Contains(model.ToList(), project2);
         }
@@ -157,7 +158,7 @@ namespace TestWeb2.Tests.Controllers
 
             // Act
             ViewResult result = controller.Index() as ViewResult;
-            IEnumerable<Model.VolunteerProject> resList = (IEnumerable<Model.VolunteerProject>)result.ViewBag.Suggestions;
+            IEnumerable<VolunteerProject> resList = (IEnumerable<VolunteerProject>)result.ViewBag.Suggestions;
             // Assert
             Assert.AreEqual(0, resList.Count());
         }
@@ -167,13 +168,13 @@ namespace TestWeb2.Tests.Controllers
         {
             // Arrange
             MocModelRepository repository = new MocModelRepository();
-            Model.VolunteerProject project = GetAProject();
+            VolunteerProject project = GetAProject();
             repository.CreateProject(project);
             HomeController controller = GetHomeController(repository, new MocWebSecurity(false));
             
             // Act
             ViewResult result = controller.Index() as ViewResult;
-            var suggestionList = (IEnumerable<Model.VolunteerProject>)result.ViewBag.Suggestions;
+            var suggestionList = (IEnumerable<VolunteerProject>)result.ViewBag.Suggestions;
 
             // Assert
             CollectionAssert.Contains(suggestionList.ToList(), project);
@@ -186,7 +187,7 @@ namespace TestWeb2.Tests.Controllers
             MocWebSecurity auth = new MocWebSecurity(true);
             auth.Username = "SomeAdmin";
             MocModelRepository repository = new MocModelRepository();
-            Model.Admin admin = new Model.Admin("SomeAdmin");
+            Admin admin = new Admin("SomeAdmin");
             repository.CreateAdmin(admin);
             HomeController controller = GetHomeController(repository, auth);
 
@@ -210,7 +211,7 @@ namespace TestWeb2.Tests.Controllers
             MocWebSecurity auth = new MocWebSecurity(true);
             auth.Username = "SomeVolunteer";
             MocModelRepository repository = new MocModelRepository();
-            Model.Volunteer volunteer = new Model.Volunteer("SomeVolunteer");
+            Volunteer volunteer = new Volunteer("SomeVolunteer");
             repository.CreateVolunteer(volunteer);
             HomeController controller = GetHomeController(repository, auth);
 
@@ -228,13 +229,12 @@ namespace TestWeb2.Tests.Controllers
         #endregion
 
         #region Project View
-
         [TestMethod]
-        public void Home_Project_Get_Finds_all_Project_data()
+        public void Home_Project_Finds_all_Project_data()
         {
             //Arrange
-            Model.VolunteerProject project = GetAProject("The Project", "Should have a lot of stuff");
-            Model.Organization organization = GetAOrganization("Fisher", "shop@scam.com");
+            VolunteerProject project = GetAProject("The Project", "Should have a lot of stuff");
+            Organization organization = GetAOrganization("Fisher", "shop@scam.com");
             project.Owner = organization;
             project.Id = 1;
             MocModelRepository repository = new MocModelRepository();
@@ -246,12 +246,181 @@ namespace TestWeb2.Tests.Controllers
             ViewResult result = controller.Project(1) as ViewResult;
 
             //Assert
-            var model = (Model.VolunteerProject)result.ViewData.Model;
-            Assert.AreEqual(project, model);//Need to overwrite equals
+            var model = (VolunteerProject)result.ViewData.Model;
+            Assert.AreEqual(project, model);//Uses reference equals beware!
+        }
+
+        [TestMethod]
+        public void HomeProject_Returns_404_if_id_not_found()
+        {
+            //Arrange
+            HomeController controller = GetHomeController(new MocModelRepository(), new MocWebSecurity(false));
+
+            //Act
+            var result = (HttpNotFoundResult)controller.Project(1);
+
+            //Assert
+            Assert.AreEqual(new HttpNotFoundResult().StatusCode, result.StatusCode);
+
+        }
+        #endregion
+
+        #region Organization View
+        [TestMethod]
+        public void Home_Organization_Finds_all_Organization_Data()
+        {
+            //Arrange
+            VolunteerProject project1 = GetAProject("Project one of SuperOrg", "Fishing");
+            VolunteerProject project2 = GetAProject("Project two if Super rg", "cooking");
+            Organization organization = GetAOrganization("SuperOrg", "orgsaregreat@mail.com");
+            project1.Owner = organization;
+            project2.Owner = organization;
+            organization.Id = 1;
+
+            MocModelRepository repository = new MocModelRepository();
+            repository.CreateOrganization(organization);
+            repository.CreateProject(project1);
+            repository.CreateProject(project2);
+
+            HomeController controller = GetHomeController(repository, new MocWebSecurity(false));
+
+            //Act
+            var result = controller.Organization(organization.Id) as ViewResult;
+
+            //Assert
+            var model = (Organization)result.ViewData.Model;
+            Assert.AreEqual(organization,model);
+
+        }
+
+        [TestMethod]
+        public void Home_Organization_returns_404_if_id_not_found()
+        {
+            //Arrange
+            HomeController controller = GetHomeController(new MocModelRepository(), new MocWebSecurity(false));
+
+            //Act
+            var result = (HttpNotFoundResult)controller.Organization(666);
+
+            //Assert
+            Assert.AreEqual(new HttpNotFoundResult().StatusCode, result.StatusCode);
+
         }
 
         #endregion
 
+        #region Organizations View
+        [TestMethod]
+        public void Home_Organizations_Returns_OrganizationList_when_they_exist()
+        {
+            //Arrange
+            MocModelRepository repository = new MocModelRepository();
+            Organization orgnaization1 = GetAOrganization("Organization 1 - Vi har kager", "cake@email.com");
+            Organization orgnaization2 = GetAOrganization("organization 2 - vi har ikke kager", "nocake@mail.com");
+            repository.CreateOrganization(orgnaization1);
+            repository.CreateOrganization(orgnaization2);
+            HomeController controller = GetHomeController(repository, new MocWebSecurity(false));
+
+            //Act
+            var result = controller.Organizations() as ViewResult;
+
+            //Assert
+            var model = (IEnumerable<Organization>)result.ViewData.Model;
+            CollectionAssert.Contains(model.ToList(), orgnaization1);
+            CollectionAssert.Contains(model.ToList(), orgnaization2);
+
+        }
+
+        [TestMethod]
+        public void Home_Organizations_Return_EmptyList_When_No_Organizations_Exist()
+        {
+            //Arrange
+            HomeController controller = GetHomeController(new MocModelRepository(), new MocWebSecurity(false));
+
+            //Act
+            var result = controller.Organizations() as ViewResult;
+
+            //Assert
+            var model = (IEnumerable<Organization>)result.ViewData.Model;
+            CollectionAssert.AreEqual(new List<Organization>(), model.ToList());
+        }
+        #endregion
+
+        #region Volunteer View
+        [TestMethod]
+        public void Home_Volunteer_Return_Volunteer()
+        {
+            //Arrange
+            Volunteer volunteer = GetAVolunteer("bent");
+            VolunteerProject project = GetAProject("kage", "chokolade");
+            Invite invite = new Invite(volunteer, project);
+            MocModelRepository repository = new MocModelRepository();
+            volunteer.ID = 1;
+            repository.CreateVolunteer(volunteer);
+            repository.CreateProject(project);
+            HomeController controller = GetHomeController(repository, new MocWebSecurity(false));
+
+            //Act
+            var result = controller.Volunteer(volunteer.ID) as ViewResult;
+
+            //Assert
+            var model = (Volunteer)result.ViewData.Model;
+            Assert.AreEqual(volunteer, model);
+            
+        }
+
+        [TestMethod]
+        public void Home_Volunteer_Returns_404_if_Id_Not_Found()
+        {
+            //Arrange
+            HomeController controller = GetHomeController(new MocModelRepository() , new MocWebSecurity(false));
+ 
+           //Act
+            var result = (HttpNotFoundResult)controller.Volunteer(123);
+
+            //Assert
+            Assert.AreEqual(new HttpNotFoundResult().StatusCode, result.StatusCode);
+        }
+        #endregion
+
+        #region Volunteers
+        [TestMethod]
+        public void Home_Volunteers_Return_VolunteerList_When_They_Exsist()
+        {
+            //Arrange
+            MocModelRepository repository = new MocModelRepository();
+            Volunteer volunteer1 = GetAVolunteer("bent");
+            Volunteer volunteer2 = GetAVolunteer("ole");
+            repository.CreateVolunteer(volunteer1);
+            repository.CreateVolunteer(volunteer2);
+            HomeController controller = GetHomeController(repository, new MocWebSecurity(false));
+
+            //Act
+            var result = controller.Volunteers() as ViewResult;
+
+            //Assert
+            var model = (IEnumerable<Volunteer>)result.ViewData.Model;
+            CollectionAssert.Contains(model.ToList(), volunteer1);
+            CollectionAssert.Contains(model.ToList(), volunteer2);
+
+        }
+
+        [TestMethod]
+        public void Home_Volunteers_return_EmptyList_when_no_Volunteers_Exist()
+        {
+            //Arrange
+            HomeController controller = GetHomeController(new MocModelRepository(), new MocWebSecurity(false));
+
+            //Act
+            var result = controller.Volunteers() as ViewResult;
+
+            //Assert
+            var model = (IEnumerable<Volunteer>)result.ViewData.Model;
+            CollectionAssert.AreEqual(new List<Volunteer>(), model.ToList());
+        }
+
+        #endregion
+        
         [TestMethod]
         public void About()
         {
@@ -262,7 +431,7 @@ namespace TestWeb2.Tests.Controllers
             ViewResult result = controller.About() as ViewResult;
 
             // Assert
-            Assert.IsNotNull(result);
+            Assert.AreEqual("About", result.ViewName);
         }
     }
 }

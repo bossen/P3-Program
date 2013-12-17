@@ -8,11 +8,21 @@ using System.Web.Mvc;
 using TestWeb2.Models;
 using WebMatrix.WebData;
 
+
 namespace TestWeb2.Controllers
 {
     [Authorize]
     public class AdminController : Controller
     {
+        IModelRepository _repository;
+        ISecurityWrap _secWrap;
+        public AdminController() : this (new EntityModelManagerRepository(), new WebSecurityProvider()) {}
+        public AdminController(IModelRepository repository, ISecurityWrap secWrap)
+        {
+            _repository = repository;
+            _secWrap = secWrap;
+        }
+
         private VolunteerOrgContext db = new VolunteerOrgContext();
         //
         // GET: /Admin/
@@ -138,7 +148,7 @@ namespace TestWeb2.Controllers
 
         private Admin GetCurrentUser()
         {
-            return db.Admins.ToList().Where(v => v.UserName.ToLower() == WebSecurity.CurrentUserName.ToLower()).FirstOrDefault();
+            return _repository.GetAllAdmins().Where(v => v.UserName.ToLower() == _secWrap.GetCurrentUserName().ToLower()).FirstOrDefault();
         }
 
     }
