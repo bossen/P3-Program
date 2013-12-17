@@ -90,10 +90,23 @@ namespace Model.Migrations
                 new WorkRequest
                 {
                     Id = 1,
-                    Accepted = false,
+                    Accepted = true,
                     Score = 50,
                     Expire = projects.Find(p => p.Id == 1).Time,
                     Project = projects.Find(p => p.Id == 1),
+                    Volunteer = volunteers.Find(v => v.ID == 1)
+                }
+            };
+
+            List<Invite> invites = new List<Invite>()
+            {
+                new Invite
+                {
+                    Id = 2,
+                    Accepted = null,
+                    Score = 50,
+                    Expire = projects.Find(p => p.Id == 2).Time,
+                    Project = projects.Find(p => p.Id == 2),
                     Volunteer = volunteers.Find(v => v.ID == 1)
                 }
             };
@@ -122,6 +135,8 @@ namespace Model.Migrations
             projects.ForEach(p => context.VolunteerProjects.AddOrUpdate(q => q.Title, p));
             context.SaveChanges();
             workrequests.ForEach(w => context.WorkRequest.AddOrUpdate(x => x.Id, w));
+            context.SaveChanges();
+            invites.ForEach(i => context.Matches.AddOrUpdate(x => x.Id, i));
             context.SaveChanges();
             admins.ForEach(a => context.Admins.AddOrUpdate(b => b.UserName, a));
             context.SaveChanges();
