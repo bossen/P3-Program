@@ -1,19 +1,96 @@
 ﻿@model Model.Volunteer
 @if (Model != null)
 {
-    <hgroup class="title">
-        <h1>@Model.Name</h1>
-        <h2>@Model.Location</h2>
-    </hgroup>
-    <ul>
-        @foreach (var match in Model.Matches)
-        {
-        <li>
-            @Html.DisplayFor(modelItem => match.Project.Title)
-            @Html.DisplayFor(modelItem => match.Project.Time)
-            @Html.ActionLink("details", "project", new { id = match.Project.Id })
-        </li>
-        }
+    <div id="content">
+        <hgroup class="title">
+            <h1>@Html.DisplayFor(model => model.UserName)</h1>
+            <h2>Details</h2>
+        </hgroup>
 
-    </ul>
+        <table>
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Name)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.Location.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Location.Address)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.Location.City)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Location.City)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Email)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.Creation)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Creation)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.VolunteerPreferences)
+                </td>
+                <td>
+                    @Model.VolunteerPreferences.Print()
+                </td>
+            </tr>
+        </table>
+        <h3>@Html.DisplayNameFor(model => model.Matches)</h3>
+        <table>
+            @foreach (var match in Model.Matches)
+            {
+                if (match.Accepted == true)
+                {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => match.Project.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => match.Project.Time)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => match.Project.Owner.Name)
+                    </td>
+                    <td>
+                        @Html.ActionLink("details", "project", new { id = match.Project.Id })
+                    </td>
+                </tr>
+                }
+            }
+        </table>
+
+        @section map
+        {
+    @if (Model.Location != null)
+    {
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyACnSnrj-Vzj_6ZEeVpAFTtuuXOsXVRaO0&sensor=true"></script>
+        <script type="text/javascript" src="@Url.Content("~/Map/map.js")"></script>
+        <link href="~/Map/map.css" rel="stylesheet" />
+        <script type="text/javascript">setTimeout(function () { InsertMarker("@Model.Location.GetAddress()"); }, 1000);</script>
+    }
+}
+    </div>
+    <div id="map-canvas" />
 }

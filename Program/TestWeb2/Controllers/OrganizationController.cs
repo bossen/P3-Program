@@ -89,7 +89,7 @@ namespace TestWeb2.Controllers
             {
                 project.Owner = currentUser.Association;
 
-                foreach (Volunteer volunteer in db.Volunteers)
+                foreach (Volunteer volunteer in db.Volunteers.Include("VolunteerPreferences"))
                 {
                     if (volunteer.VolunteerPreferences.CompareTopics(project.ProjectTopics) > 0)
                     {
@@ -112,6 +112,8 @@ namespace TestWeb2.Controllers
             Volunteer volunteer = db.Volunteers
                 .Include("Matches")
                 .Include("Matches.Project")
+                .Include("Location")
+                .Include("VolunteerPreferences")
                 .Where(v => v.ID == id)
                 .FirstOrDefault();
 
@@ -133,7 +135,8 @@ namespace TestWeb2.Controllers
 
             ViewBag.NotInOrganization = false;
             ViewBag.Title = "List of Volunteers";
-            var volunteers = db.Volunteers;
+            var volunteers = db.Volunteers
+                .Include("Location");
             return View(volunteers.ToList());
         }
 
@@ -199,8 +202,10 @@ namespace TestWeb2.Controllers
                 .Include("Location")
                 .Include("ProjectTopics")
                 .Include("Matches")
+                .Include("Matches.Volunteer")
                 .Where(v => v.Id == id)
                 .FirstOrDefault();
+
             var organization = db.Organizations
                 .Include("VolunteerProjects")
                 .Where(o => o.Id == id)
@@ -219,6 +224,19 @@ namespace TestWeb2.Controllers
 
         //    return View();
         //}
+
+        //[HttpPost]
+        public ActionResult AcceptVolunteer(int id)
+        {
+            Match match = db.Matches
+                .Include("Project")
+                .Where(m => m.Id == id)
+                .First();
+            match.AcceptMatch();
+            db.Entry(match).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("DetailsProject", "Organization", new { id = match.Project.Id });
+        }
 
         //[HttpPost]
         public ActionResult CancelProject(int id)

@@ -4,6 +4,8 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
+using System.Web.UI;
 
 namespace Model
 {
@@ -26,7 +28,7 @@ namespace Model
 
         [DataType(DataType.Date)]
         public DateTime Time { get; set; }
-        
+
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
 
@@ -118,21 +120,20 @@ namespace Model
 
         public double Calculate(VolunteerProject pos1, Volunteer pos2)
         {
-            if (pos1.Location == null || 
-                pos1.Location.Lat == null || 
-                pos1.Location.Lng == null || 
-                pos2.Location == null ||
-                pos2.Location.Lat == null || 
-                pos2.Location.Lng == null)
+            if (pos1.Location == null || pos2.Location == null)
             {
                 return -1;
+            }
+            if (pos1.Location.Lat == null || pos1.Location.Lng == null)
+            {
+
             }
             double Radius = 6371; //Mean radius of the earth in kilometers
 
             //Finds the delta longitude and latitude of the positions.
             double dLat = ToRadians(pos2.Location.Lat - pos1.Location.Lat);
             double dLon = ToRadians(pos2.Location.Lng - pos1.Location.Lng);
-            
+
             double lat1 = ToRadians(pos1.Location.Lat);
             double lat2 = ToRadians(pos2.Location.Lat);
 

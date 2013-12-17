@@ -42,11 +42,18 @@ namespace Model
 
         public Match AddWorkRequest(VolunteerProject project)
         {
-            //return existing match, if already in matches
             foreach (Match match in Matches)
             {
                 if (match.Project == project)
-                    return match;
+                {
+                    if (match.GetType() == typeof(WorkRequest))
+                    {
+                        return match;
+                    }
+
+                    Matches.Remove(match);
+                    break;
+                }
             }
 
             WorkRequest newWorkRequest = new WorkRequest(this, project);
