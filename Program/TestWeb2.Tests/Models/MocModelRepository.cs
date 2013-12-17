@@ -11,7 +11,7 @@ namespace TestWeb2.Tests.Models
     class MocModelRepository : Model.IModelRepository
     {
         private List<Model.VolunteerProject> _projects = new List<Model.VolunteerProject>();
-        private List<Model.Volunteer> _vounteers = new List<Volunteer>();
+        private List<Model.Volunteer> _volunteers = new List<Volunteer>();
         private List<Model.Admin> _admins = new List<Admin>();
         private List<Model.Match> _matches = new List<Match>();
         private List<Model.Organization> _organizations = new List<Organization>();
@@ -24,7 +24,7 @@ namespace TestWeb2.Tests.Models
 
         public IEnumerable<Volunteer> GetAllVolunteers()
         {
-            return _vounteers;
+            return _volunteers;
         }
 
         public IEnumerable<Admin> GetAllAdmins()
@@ -56,7 +56,7 @@ namespace TestWeb2.Tests.Models
 
         public Volunteer GetVolunteer(int id)
         {
-            return _vounteers.FirstOrDefault(v => v.ID == id);
+            return _volunteers.FirstOrDefault(v => v.ID == id);
         }
         #endregion
 
@@ -81,8 +81,25 @@ namespace TestWeb2.Tests.Models
 
         public void CreateVolunteer(Volunteer volunteer)
         {
-            _vounteers.Add(volunteer);
+            _volunteers.Add(volunteer);
         }
         #endregion
+
+        #region Edit functions
+        public void VolunteerEdited(Volunteer volunteer)
+        {
+            Volunteer temp = _volunteers.FirstOrDefault(v => v.ID == volunteer.ID);
+            _volunteers.Remove(temp);
+            _volunteers.Add(volunteer);
+        }
+
+        public void AdminEdited(Admin admin)
+        {
+            Admin temp = _admins.FirstOrDefault(v => v.ID == admin.ID);
+            _admins.Remove(temp);
+            _admins.Add(admin);
+        }
+        #endregion
+
     }
 }

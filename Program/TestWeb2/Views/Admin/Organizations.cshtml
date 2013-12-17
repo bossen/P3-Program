@@ -1,28 +1,27 @@
 ﻿@model IEnumerable<Model.Organization>
 
-<div id="content">
-    <hgroup class="title">
-        <h1>@ViewBag.Title</h1>
-    </hgroup>
+    <div id="content">
+    <h1>Organizations</h1>
     <table>
         @foreach (var item in Model)
         {
+
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Location.Address)
+                    @Html.DisplayFor(modelItem => item.Creation)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Location.City)
-                </td>
-                <td>
-                    @Html.ActionLink("details", "organization", new { id = item.Id })
+                    @Html.ActionLink("Join", "JoinOrganization", new { id = item.Id })
+                    @Html.ActionLink("Details", "Organization", new { id = item.Id })
                 </td>
             </tr>
+
         }
-    </table>@section map
+    </table>
+    @section map
         {
         @if (Model.First().Location != null)
         {
@@ -38,5 +37,5 @@
             }
         }
     }
-</div>
-<div id="map-canvas" />
+    </div>
+    <div id="map-canvas" />

@@ -56,36 +56,7 @@
                 @Html.DisplayNameFor(model => model.ProjectTopics)
             </td>
             <td>
-                @if (Model.ProjectTopics.Church == true)
-                {
-                    @Html.DisplayNameFor(model => model.ProjectTopics.Church);
-                    <br />
-                }
-                @if (Model.ProjectTopics.Culture == true)
-                {
-                    @Html.DisplayNameFor(model => model.ProjectTopics.Culture);
-                    <br />
-                }
-                @if (Model.ProjectTopics.Festival == true)
-                {
-                    @Html.DisplayNameFor(model => model.ProjectTopics.Festival);
-                    <br />
-                }
-                @if (Model.ProjectTopics.Nature == true)
-                {
-                    @Html.DisplayNameFor(model => model.ProjectTopics.Nature);
-                    <br />
-                }
-                @if (Model.ProjectTopics.Political == true)
-                {
-                    @Html.DisplayNameFor(model => model.ProjectTopics.Political);
-                    <br />
-                }
-                @if (Model.ProjectTopics.Sport == true)
-                {
-                    @Html.DisplayNameFor(model => model.ProjectTopics.Sport);
-                    <br />
-                }
+                @Model.VolunteerPreferences.Print()
             </td>
         </tr>
         <tr>

@@ -26,16 +26,16 @@ namespace TestWeb2
             return new VolunteerProject(title, location, time, topics, owner, description, signup);
         }
 
-        public static Admin GetAAdmin()
+        public static Admin GetAnAdmin()
         {
-            return GetAAdmin("Username");
+            return GetAnAdmin("Username");
         }
-        public static Admin GetAAdmin(string username)
+        public static Admin GetAnAdmin(string username)
         {
-            return GetAAdmin(username, "Name", new Location("streeet", "city"), "EMAIL@host.dk");
+            return GetAnAdmin(username, "Name", new Location("streeet", "city"), "EMAIL@host.dk");
         }
 
-        public static Admin GetAAdmin(string username, string name, Location location, string email)
+        public static Admin GetAnAdmin(string username, string name, Location location, string email)
         {
             return new Admin(username, name, location, email);
         }
@@ -54,18 +54,18 @@ namespace TestWeb2
             return new Volunteer(username, name, location, email);
         }
 
-        public static Organization GetAOrganization()
+        public static Organization GetAnOrganization()
         {
-            return GetAOrganization("Some organization", "some@email.dk");
+            return GetAnOrganization("Some organization", "some@email.dk");
         }
 
-        public static Organization GetAOrganization(string name, string email)
+        public static Organization GetAnOrganization(string name, string email)
         {
-            return GetAOrganization(name, DateTime.Parse("1996-04-02"),
+            return GetAnOrganization(name, DateTime.Parse("1996-04-02"),
                 new Location("street", "chitty"), email);
         }
         
-        public static Organization GetAOrganization(string name, DateTime creation, Location location, string email)
+        public static Organization GetAnOrganization(string name, DateTime creation, Location location, string email)
         {
             return new Organization() { Name = name, Creation = creation, Email = email, Location = location };
         }
