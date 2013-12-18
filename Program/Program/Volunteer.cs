@@ -147,18 +147,11 @@ namespace Model
             foreach (Match match in Matches)
             {
                 if (match.Project == project)
-<<<<<<< HEAD
-                    return match is Invite ? "You have been invited" :
-                        match is WorkRequest ? "You have requested work" :
-                        match is Suggestion ? "Event has been suggested" :
+                    return match.Accepted == true ? "Leave" :
+                        match is Invite ? "Accept invite" :
+                        match is WorkRequest ? "Work requested" :
+                        match is Suggestion ? "Join suggested" :
                         "Join";
-=======
-                    return match.Accepted == true ? "leave" :
-                        match is Invite ? "accept invite" :
-                        match is WorkRequest ? "work requested" :
-                        match is Suggestion ? "join suggested" :
-                        "join";
->>>>>>> 5984b04078bd7abc077ea44db620fc24fcb49960
             }
             return "Join";
         }
