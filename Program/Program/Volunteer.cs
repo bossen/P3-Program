@@ -46,6 +46,11 @@ namespace Model
             {
                 if (match.Project == project)
                 {
+                    if (match.GetType() == typeof(Invite))
+                    {
+                        match.AcceptMatch();
+                        return match;
+                    }
                     if (match.GetType() == typeof(WorkRequest))
                     {
                         return match;
@@ -60,6 +65,29 @@ namespace Model
             Matches.Add(newWorkRequest);
 
             return newWorkRequest;
+        }
+
+        public Match AddInvite(VolunteerProject project)
+        {
+            foreach (Match match in Matches)
+            {
+                if (match.Project == project)
+                {
+                    if (match.GetType() == typeof(WorkRequest))
+                    {
+                        match.AcceptMatch();
+                        return match;
+                    }
+
+                    if (match.GetType() == typeof(Invite))
+                        return match;
+                }
+            }
+
+            Invite newInvite = new Invite(this, project);
+            Matches.Add(newInvite);
+
+            return newInvite;
         }
 
         public Suggestion AddSuggestion(VolunteerProject project)
@@ -119,12 +147,13 @@ namespace Model
             foreach (Match match in Matches)
             {
                 if (match.Project == project)
-                    return match is Invite ? "invited" :
-                        match is WorkRequest ? "work requested" :
-                        match is Suggestion ? "suggested" :
-                        "join";
+                    return match.Accepted == true ? "Leave" :
+                        match is Invite ? "Accept invite" :
+                        match is WorkRequest ? "Work requested" :
+                        match is Suggestion ? "Join suggested" :
+                        "Join";
             }
-            return "join";
+            return "Join";
         }
         #endregion
     }

@@ -36,7 +36,7 @@
                 <link href="~/Map/map.css" rel="stylesheet" />
                 foreach (var volunteer in Model)
                 {
-                    if (volunteer.Location.City != null)
+                    if (volunteer.Location != null && volunteer.Location.City != null)
                     {
                         <script type="text/javascript">setTimeout(function () { InsertMarker('@volunteer.Location.GetAddress()', '@volunteer.Location.GetAddress()', '@Html.ActionLink(volunteer.UserName, "volunteer", new { id = volunteer.ID })'); }, 1000);</script>
                     }
