@@ -91,6 +91,11 @@ namespace Model
         public void VolunteerEdited(Volunteer volunteer)
         {
             db.Entry(volunteer).State = EntityState.Modified;
+            foreach (Match match in volunteer.Matches)
+            {
+                db.Entry(match).State = EntityState.Modified;
+            }
+            db.Entry(volunteer.Location).State = EntityState.Modified;
             db.SaveChanges();
         }
         public void AdminEdited(Admin admin)

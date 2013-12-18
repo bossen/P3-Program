@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Model;
+using System.Data.Entity;
 
 
 namespace TestWeb2.Tests.Models
@@ -40,6 +41,11 @@ namespace TestWeb2.Tests.Models
         public IEnumerable<Organization> GetAllOrganizations()
         {
             return _organizations;
+        }
+
+        public IEnumerable<Admin> Desperation()
+        {
+            return _admins;
         }
         #endregion
 

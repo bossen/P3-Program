@@ -117,6 +117,8 @@ namespace TestWeb2.Controllers
                 .Where(v => v.ID == id)
                 .FirstOrDefault();
 
+            ViewBag.Projects = GetCurrentUser().Association.VolunteerProjects;
+
             if (volunteer == null)
                 return HttpNotFound();
 
@@ -144,8 +146,8 @@ namespace TestWeb2.Controllers
         {
             Volunteer volunteer = db.Volunteers.Find(volid);
             VolunteerProject project = db.VolunteerProjects.Find(proid);
-            Invite newInvite = new Invite(volunteer, project);
-            db.Entry(newInvite).State = EntityState.Added;
+            volunteer.AddInvite(project);
+            db.Entry(project).State = EntityState.Modified;
             db.Entry(volunteer).State = EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("Volunteer", "Organization", new { id = volunteer.ID });

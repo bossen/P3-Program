@@ -109,6 +109,25 @@ namespace TestWeb2.Controllers
             return RedirectToAction("project", "volunteer", new { id = project.Id });
         }
 
+        public ActionResult LeaveProject(int id)
+        {
+            Volunteer currentUser = GetCurrentUser();
+            VolunteerProject project = db.VolunteerProjects.Find(id);
+
+            foreach (Match match in currentUser.GetAcceptedMatches())
+            {
+                if (match.Project == project)
+                {
+                    match.LeaveMatch();
+                    db.Entry(project).State = EntityState.Modified;
+                    db.Entry(currentUser).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+            }
+
+            return RedirectToAction("project", "volunteer", new { id = project.Id });
+        }
+
         public ActionResult Organization(int id = 0)
         {
             var organization = db.Organizations
