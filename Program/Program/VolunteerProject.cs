@@ -120,13 +120,15 @@ namespace Model
 
         public double Calculate(VolunteerProject pos1, Volunteer pos2)
         {
-            if (pos1.Location == null || pos2.Location == null)
+            //Returning 1 because the javascript cannot find the locations
+            //from the users, which gives our doubles the default value.
+            if (pos2.Location.Lat == 0.0 && pos2.Location.Lng == 0.0)
             {
-                return -1;
+                return 1;
             }
-            if (pos1.Location.Lat == null || pos1.Location.Lng == null)
+            if (pos1.Location.Lat == 0.0 && pos1.Location.Lng == 0.0)
             {
-
+                return 1;
             }
             double Radius = 6371; //Mean radius of the earth in kilometers
 

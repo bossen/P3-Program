@@ -119,12 +119,12 @@ namespace Model
             foreach (Match match in Matches)
             {
                 if (match.Project == project)
-                    return match is Invite ? "invited" :
-                        match is WorkRequest ? "work requested" :
-                        match is Suggestion ? "suggested" :
-                        "join";
+                    return match is Invite ? "You have been invited" :
+                        match is WorkRequest ? "You have requested work" :
+                        match is Suggestion ? "Event has been suggested" :
+                        "Join";
             }
-            return "join";
+            return "Join";
         }
         #endregion
     }

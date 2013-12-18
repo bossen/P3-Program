@@ -11,7 +11,6 @@ namespace Model
     public class Admin : User
     {
         #region Properties
-        private List<VolunteerProject> _volunteerProjects = new List<VolunteerProject>();
         public Organization Association { get; set; }
         #endregion
 
