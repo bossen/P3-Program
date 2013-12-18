@@ -30,7 +30,7 @@ namespace TestWeb2.Controllers
         public ActionResult Index()
         {
             ViewBag.IsAdmin = true;
-            Admin currentuser = GetCurrentUser();
+            Admin currentuser = GetCurrentUserWithRep();
 
             if (currentuser.Association == null)
             {
@@ -115,8 +115,9 @@ namespace TestWeb2.Controllers
 
         public ActionResult Organizations()
         {
+            
             ViewBag.IsAdmin = true;
-            Admin currentUser = GetCurrentUser();
+            Admin currentUser = GetCurrentUserWithRep();
 
             if (currentUser.Association == null)
             {
@@ -143,14 +144,11 @@ namespace TestWeb2.Controllers
             Organization organization = db.Organizations.Find(id);
 
             currentUser.AssociateOrganization(organization);
-            var hej2 = db.Entry(currentUser);
+            
             db.Entry(currentUser).State = EntityState.Modified;
-            var stuf = db.Entry(currentUser);
-
-            bool hej = ModelState.IsValid;
 
             db.SaveChanges();
-            return View(organization);
+            return RedirectToAction("index", "organization");
         }
         //[HttpPost]
         //public ActionResult JoinOrganization(Organization organization)
@@ -171,7 +169,7 @@ namespace TestWeb2.Controllers
             return db.Admins.Where(a => a.UserName.ToLower() == currentUsername).FirstOrDefault();
         }
 
-        private Admin NotFunctioningGetCurrentUser()
+        private Admin GetCurrentUserWithRep()
         {
             return _repository.GetAllAdmins().Where(v => v.UserName.ToLower() == _secWrap.GetCurrentUserName().ToLower()).FirstOrDefault();
         }

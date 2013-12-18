@@ -28,8 +28,7 @@ namespace TestWeb2.Tests.Controllers
             };
             return controller;
         }
-
-
+        
         private class MockHttpContext : HttpContextBase
         {
             private readonly IPrincipal _user = new GenericPrincipal(
@@ -94,35 +93,23 @@ namespace TestWeb2.Tests.Controllers
         #endregion
 
         [TestMethod]
-        public void Admin_Create_Organization_returns_index_if_modelstate_invalid() 
-        {
-            //Arrange
-            AdminController controller = GetAdminController(new MocModelRepository(), new MocWebSecurity(true));
-            // Simply executing a method during a unit test does just that - executes a method, and no more. 
-            // The MVC pipeline doesn't run, so binding and validation don't run.
-            controller.ModelState.AddModelError("", "Mock error. Haha! I Mock you, error.");
-            Organization organization = Utility.GetAnOrganization();
-            //Act
-            var result = (ViewResult)controller.Create(organization);
-
-            //Assert
-            Assert.AreEqual("", result.ViewName);//The "" indicates that it should return to the index
-        }
-
-        [TestMethod]
-        public void Admin_Create_Adds_A_Organisation_to_the_list()
+        public void Admin_Organizations_All_Added()
         {
             //Arrange
             MocModelRepository repository = new MocModelRepository();
-            AdminController controller = GetAdminController(repository, new MocWebSecurity(true));
-            Organization organization = Utility.GetAnOrganization("Orgname", "mail@stuf.dk");
+            //Organization orgnaization1 = Utility.GetAnOrganization("Organization 1 - Vi har kager", "cake@email.com");
+            //Organization orgnaization2 = Utility.GetAnOrganization("organization 2 - vi har ikke kager", "nocake@mail.com");
+            //repository.CreateOrganization(orgnaization1);
+            //repository.CreateOrganization(orgnaization2);
+            AdminController controller = GetAdminController(repository, new MocWebSecurity(false));
 
             //Act
-            controller.Create(organization);
+            var result = controller.Organizations() as ViewResult;
 
             //Assert
-            CollectionAssert.Contains(repository.GetAllOrganizations().ToList(), organization);
-
+            //var model = (IEnumerable<Organization>)result.ViewData.Model;
+            //CollectionAssert.Contains(model.ToList(), orgnaization1);
+            //CollectionAssert.Contains(model.ToList(), orgnaization2);
         }
 
     }

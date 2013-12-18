@@ -50,7 +50,7 @@ namespace UnitTestProject1
         {
             Volunteer v = (Utility.GetVolunteer());
             VolunteerProject vp = (Utility.GetVolunteerProject());
-            
+
             WorkRequest wr = new WorkRequest();
             wr = (WorkRequest)v.AddWorkRequest(vp);
 
@@ -60,16 +60,18 @@ namespace UnitTestProject1
         [TestMethod]
         public void TestSortMatches()
         {
+            //Arrange
             Volunteer v = (Utility.GetVolunteer());
             VolunteerProject vp = (Utility.GetVolunteerProject());
-
-            v.AddSuggestion(vp);
-            v.AddSuggestion(vp).AcceptMatch();
+            Suggestion suggestion1 = v.AddSuggestion(vp);
             
-            List<Match> list = new List<Match>();
-            list = v.Matches.ToList();
+            //Act
+            List<Match> result = v.GetSortMatches().ToList();
 
-            CollectionAssert.Contains(v.Matches.ToList(), list);
+            //Assert
+            CollectionAssert.Contains(result, suggestion1);
+                
+                
         }
     }
 }

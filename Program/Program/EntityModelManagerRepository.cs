@@ -46,6 +46,7 @@ namespace Model
 
         }
 
+
         public IEnumerable<Organization> GetAllOrganizations()
         {
             return db.Organizations
