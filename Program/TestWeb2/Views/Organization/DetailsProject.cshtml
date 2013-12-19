@@ -98,7 +98,7 @@
                         @Html.DisplayFor(modelItem => match.Volunteer.Name)
                     </td>
                     <td>
-                        @Html.ActionLink("details", "volunteer", new { id = match.Id })
+                        @Html.ActionLink("details", "volunteer", new { id = match.Volunteer.ID })
                     </td>
                 </tr>
             }
@@ -109,7 +109,7 @@
     <table>
         @foreach (var match in Model.Matches)
         {
-            if (match.Accepted == null)
+            if (match.Volunteer != null && match.GetType() == typeof(WorkRequest) && match.Accepted == null)
             {
                 <tr>
                     <td>
@@ -122,7 +122,7 @@
                         @Html.ActionLink("details", "volunteer", new { id = match.Volunteer.ID })
                     </td>
                     <td>
-                        @Html.ActionLink("accept", "acceptvolunteer", new { id = match.Volunteer.ID })
+                        @Html.ActionLink("accept", "acceptvolunteer", new { id = match.Id })
                     </td>
                 </tr>
             }

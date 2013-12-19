@@ -235,9 +235,18 @@ namespace TestWeb2.Controllers
         {
             Match match = db.Matches
                 .Include("Project")
+                .Include("Volunteer")
                 .Where(m => m.Id == id)
                 .First();
             match.AcceptMatch();
+
+            if (!string.IsNullOrEmpty(match.Volunteer.Email))
+            {
+                Mail mail = new Mail();
+                string textbody = "Your workrequest to " + match.Project.Title + " has been accepted!";
+                mail.SendMail(match.Volunteer.Email, "Workrequest accepted", textbody);
+            }
+
             db.Entry(match).State = EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("DetailsProject", "Organization", new { id = match.Project.Id });

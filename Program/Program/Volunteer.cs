@@ -30,11 +30,11 @@ namespace Model
             : base(username, name, location, email)
         {
             this.Matches = new List<Match>();
-            this.VolunteerPreferences= new Topic();
+            this.VolunteerPreferences = new Topic();
         }
         #endregion
 
-        #region Methods      
+        #region Methods
         public void AddMatch(Match match)
         {
             Matches.Add(match);
@@ -86,6 +86,13 @@ namespace Model
 
             Invite newInvite = new Invite(this, project);
             Matches.Add(newInvite);
+
+            if (!string.IsNullOrEmpty(this.Email))
+            {
+                Mail mail = new Mail();
+                string textbody = "You have been invited to " + project.Title + "!";
+                mail.SendMail(this.Email, "Invitation", textbody);
+            }
 
             return newInvite;
         }

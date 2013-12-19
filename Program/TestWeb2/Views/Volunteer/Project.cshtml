@@ -9,7 +9,7 @@
     </hgroup>
     @if (Model.Signup)
     {
-        if ((string)ViewBag.Status == "leave")
+        if (((string)ViewBag.Status).ToLower() == "leave")
         {
             @Html.ActionLink((string)ViewBag.Status, "LeaveProject", new { id = Model.Id })
         }
@@ -87,7 +87,7 @@
                         @Html.DisplayFor(modelItem => match.Volunteer.Name)
                     </td>
                     <td>
-                        @Html.ActionLink("details", "volunteer", new { id = match.Id })
+                        @Html.ActionLink("details", "volunteer", new { id = match.Volunteer.ID })
                     </td>
                 </tr>
             }

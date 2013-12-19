@@ -41,7 +41,7 @@ namespace Model
             {
                 if (!ValidateEmail(receiverMail))
                     throw new ArgumentException("Not a valid email!");
-                MailMessage message = new MailMessage(this.senderMail, receiverMail, subject, body);
+                MailMessage message = new MailMessage(this.senderMail, receiverMail, "[ROBOT] " + subject, body);
                 this.Client.Send(message);
             }
         }

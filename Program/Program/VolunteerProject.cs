@@ -120,6 +120,10 @@ namespace Model
 
         public double Calculate(VolunteerProject pos1, Volunteer pos2)
         {
+            if (pos1.Location == null || pos2.Location == null)
+            {
+                return 1;
+            }
             //Returning 1 because the javascript cannot find the locations
             //from the users, which gives our doubles the default value.
             if (pos2.Location.Lat == 0.0 && pos2.Location.Lng == 0.0)
